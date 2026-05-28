@@ -1,0 +1,13 @@
+.env
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+data/cache/
+models/
+reports/*.html
+reports/*.csv
+logs/
+*.parquet
+.DS_Store
