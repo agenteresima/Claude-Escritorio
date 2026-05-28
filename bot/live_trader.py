@@ -1,12 +1,14 @@
 """
-Live / paper trading executor.
-Uses CCXT unified API so swapping exchanges requires only a config change.
-Always starts in dry_run=True mode — set dry_run=False only after
-extensive paper trading and backtesting.
+Live / paper trading executor — upgraded with:
+  - PositionManager (partial TPs, break-even, time exits)
+  - CorrelationFilter (no concurrent correlated positions)
+  - Sentiment gate (Fear & Greed + funding rate)
+  - Telegram notifications
 """
 import time
 from datetime import datetime
 from typing import Optional
+
 import ccxt
 import pandas as pd
 from loguru import logger
@@ -15,7 +17,10 @@ from config import CONFIG
 from risk.manager import RiskManager, TradeSignal
 from strategies import STRATEGIES
 from data.fetcher import fetch_ohlcv_ccxt
-from utils.indicators import add_all_indicators
+from bot.position_manager import PositionManager
+from bot.notifier import notify_startup, notify_drawdown_alert
+from utils.correlation import CorrelationFilter
+from utils.sentiment import get_current_fng, get_funding_rate, sentiment_gate
 
 
 class LiveTrader:
@@ -23,115 +28,134 @@ class LiveTrader:
         self.cfg     = config
         self.dry_run = config.dry_run
 
-        # Exchange setup
+        # Exchange
         exchange_cls = getattr(ccxt, config.exchange.name)
-        creds = {}
+        creds: dict  = {"enableRateLimit": True}
         if config.exchange.api_key:
-            creds = {
-                "apiKey":    config.exchange.api_key,
-                "secret":    config.exchange.api_secret,
-                "enableRateLimit": True,
-            }
-        if config.exchange.sandbox:
-            creds["options"] = {"defaultType": "future"}
-
+            creds["apiKey"]  = config.exchange.api_key
+            creds["secret"]  = config.exchange.api_secret
         self.exchange = exchange_cls(creds)
         if config.exchange.sandbox:
             self.exchange.set_sandbox_mode(True)
 
-        # Strategy
-        self.risk     = RiskManager(initial_capital=10_000)
-        StratCls      = STRATEGIES[config.active_strategy]
-        self.strategy = StratCls(self.risk)
+        self.risk       = RiskManager(initial_capital=10_000)
+        StratCls        = STRATEGIES[config.active_strategy]
+        self.strategy   = StratCls(self.risk)
+        self.pos_mgr    = PositionManager(dry_run=self.dry_run)
+        self.corr_filter = CorrelationFilter(threshold=0.80)
 
-        self.open_positions: dict[str, dict] = {}
+        # Sentiment refresh every 4h
+        self._last_sentiment_ts = 0.0
+        self._sentiment_gate    = {"allow_long": True, "allow_short": True, "reason": "ok"}
+
+        notify_startup(config.active_strategy, config.pairs, self.dry_run)
         logger.info(
-            f"LiveTrader init | strategy={config.active_strategy} "
-            f"| dry_run={self.dry_run} | exchange={config.exchange.name}"
+            f"LiveTrader ready | strategy={config.active_strategy} "
+            f"| dry_run={self.dry_run} | pairs={config.pairs}"
         )
 
     # ------------------------------------------------------------------
+
+    def _refresh_sentiment(self):
+        if time.time() - self._last_sentiment_ts < 4 * 3600:
+            return
+        fng = get_current_fng()
+        fr  = get_funding_rate("BTC/USDT:USDT", self.cfg.exchange.name)
+        self._sentiment_gate    = sentiment_gate(fng["value"] if fng else None, fr)
+        self._last_sentiment_ts = time.time()
+        logger.info(f"Sentiment gate: {self._sentiment_gate}")
 
     def fetch_latest(self, symbol: str) -> pd.DataFrame:
         df = fetch_ohlcv_ccxt(
             symbol, self.cfg.timeframe, use_cache=False,
             exchange_name=self.cfg.exchange.name,
         )
-        return df.iloc[-500:]  # last 500 bars is enough for all indicators
+        return df.iloc[-500:]
 
     def get_balance(self) -> float:
         if self.dry_run:
             return self.risk.portfolio.capital
-        balance = self.exchange.fetch_balance()
-        return float(balance["USDT"]["free"])
+        bal = self.exchange.fetch_balance()
+        return float(bal["USDT"]["free"])
 
-    def place_order(self, symbol: str, side: str, amount: float,
-                    stop_loss: float, take_profit: float):
+    def _last_price(self, symbol: str) -> float:
+        return float(self.exchange.fetch_ticker(symbol)["last"])
+
+    def _place_order(self, symbol: str, side: str, amount: float,
+                     stop: float, tp1: float, tp2: float):
+        entry = self._last_price(symbol)
         if self.dry_run:
-            price = self._last_price(symbol)
-            logger.info(
-                f"[DRY RUN] {side.upper()} {amount:.4f} {symbol} @ {price:.2f} "
-                f"| SL={stop_loss:.2f} TP={take_profit:.2f}"
-            )
-            self.open_positions[symbol] = {
-                "side": side, "amount": amount, "entry": price,
-                "sl": stop_loss, "tp": take_profit, "time": datetime.utcnow(),
-            }
+            logger.info(f"[DRY] {side} {amount:.4f} {symbol} @ {entry:.4f} | SL={stop:.4f} TP1={tp1:.4f}")
+            self.pos_mgr.open_position(symbol, side, entry, amount, stop, tp1, tp2)
             return
 
         order = self.exchange.create_order(symbol, "market", side, amount)
-        logger.info(f"Order placed: {order['id']} | {side} {amount} {symbol}")
-
-        # OCO stop-limit + take-profit (Binance-specific)
-        self.exchange.create_order(
-            symbol, "STOP_MARKET", "sell" if side == "buy" else "buy",
-            amount, None, {"stopPrice": stop_loss}
-        )
-
-    def _last_price(self, symbol: str) -> float:
-        ticker = self.exchange.fetch_ticker(symbol)
-        return float(ticker["last"])
+        logger.info(f"Order: {order['id']} | {side} {amount} {symbol}")
+        self.pos_mgr.open_position(symbol, side, entry, amount, stop, tp1, tp2)
 
     # ------------------------------------------------------------------
 
     def tick(self, symbol: str):
-        """Process one trading cycle for a symbol."""
         try:
-            df       = self.fetch_latest(symbol)
+            df  = self.fetch_latest(symbol)
+            self.corr_filter.update(symbol, df["close"])
+
             sig_df   = self.strategy.run(df)
             last_row = sig_df.iloc[-1]
             signal   = int(last_row.get("signal", 0))
             price    = float(last_row["close"])
 
-            # --- Manage existing position ---
-            if symbol in self.open_positions:
-                pos = self.open_positions[symbol]
-                new_sl = self.risk.update_trailing_stop(price, pos["entry"], pos["sl"])
-                self.open_positions[symbol]["sl"] = new_sl
+            # Manage open position via PositionManager
+            if symbol in self.pos_mgr.positions:
+                actions = self.pos_mgr.update(symbol, price)
 
-                if price <= new_sl or price >= pos["tp"] or signal == -1:
-                    reason = "sl" if price <= new_sl else ("tp" if price >= pos["tp"] else "signal")
-                    logger.info(f"Closing {symbol} @ {price:.2f} | reason={reason}")
-                    del self.open_positions[symbol]
+                dd = self.risk.portfolio.current_drawdown()
+                if dd > self.cfg.risk.max_drawdown_pct * 0.80:
+                    notify_drawdown_alert(dd, self.risk.portfolio.capital)
 
-            # --- Open new position ---
-            elif signal == 1 and symbol not in self.open_positions:
-                sl  = float(last_row.get("stop_loss",   price * 0.97))
-                tp  = float(last_row.get("take_profit", price * 1.06))
-                sig = TradeSignal(symbol, "long", price, sl, tp)
+                # Override close if strategy says exit
+                if signal == -1 and symbol in self.pos_mgr.positions:
+                    self.pos_mgr._close(symbol, price, "signal_exit")
+                return
 
-                if self.risk.validate_signal(sig):
-                    atr    = float(last_row.get("atr_14", price * 0.02))
-                    size   = self.risk.atr_size(price, atr)
-                    balance= self.get_balance()
-                    amount = min(size, balance * self.risk.cfg.max_position_size_pct / price)
-                    self.place_order(symbol, "buy", amount, sl, tp)
+            # Open new position
+            if signal != 1:
+                return
+
+            self._refresh_sentiment()
+            gate = self._sentiment_gate
+
+            if not gate["allow_long"]:
+                logger.debug(f"Sentiment gate blocks long on {symbol}: {gate['reason']}")
+                return
+
+            open_pairs = list(self.pos_mgr.positions.keys())
+            if self.corr_filter.is_correlated_with_open(symbol, open_pairs):
+                logger.debug(f"Correlation filter skipped {symbol}")
+                return
+
+            sl   = float(last_row.get("stop_loss",   price * 0.97))
+            tp1  = price + (price - sl) * self.cfg.risk.risk_reward_ratio
+            tp2  = price + (price - sl) * self.cfg.risk.risk_reward_ratio * 2
+            sig  = TradeSignal(symbol, "long", price, sl, tp2)
+
+            if not self.risk.validate_signal(sig):
+                return
+
+            atr    = float(last_row.get("atr_14", price * 0.02))
+            size   = self.risk.atr_size(price, atr)
+            bal    = self.get_balance()
+            amount = min(size, bal * self.cfg.risk.max_position_size_pct / price)
+
+            if amount * price < 10:   # minimum order size guard
+                return
+
+            self._place_order(symbol, "buy", amount, sl, tp1, tp2)
 
         except Exception as e:
-            logger.error(f"Tick error for {symbol}: {e}")
+            logger.error(f"Tick error {symbol}: {e}")
 
     def run(self):
-        """Main loop — iterates over all pairs on each timeframe close."""
         logger.info("Starting trading loop...")
         while True:
             for symbol in self.cfg.pairs:
@@ -141,10 +165,7 @@ class LiveTrader:
             time.sleep(wait)
 
     def _seconds_to_next_close(self) -> int:
-        tf_seconds = {
-            "1m": 60, "5m": 300, "15m": 900, "30m": 1800,
-            "1h": 3600, "4h": 14400, "1d": 86400,
-        }
-        period = tf_seconds.get(self.cfg.timeframe, 3600)
-        now    = int(time.time())
-        return period - (now % period) + 5  # +5s buffer
+        tf_map = {"1m": 60, "5m": 300, "15m": 900, "30m": 1800,
+                  "1h": 3600, "4h": 14400, "1d": 86400}
+        period = tf_map.get(self.cfg.timeframe, 3600)
+        return period - (int(time.time()) % period) + 5

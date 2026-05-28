@@ -2,11 +2,13 @@
 Main entry point — CLI interface for the professional trading bot.
 
 Usage examples:
-  python main.py backtest --strategy trend_ema --pair BTC/USDT
-  python main.py compare  --pair BTC/USDT
-  python main.py optimize --strategy trend_ema --pair BTC/USDT
-  python main.py train    --pair BTC/USDT
-  python main.py live     --dry-run
+  python main.py backtest  --strategy trend_ema --pair BTC/USDT
+  python main.py compare   --pair BTC/USDT
+  python main.py portfolio --pairs BTC/USDT ETH/USDT SOL/USDT
+  python main.py optimize  --strategy trend_ema --pair BTC/USDT
+  python main.py train     --pair BTC/USDT
+  python main.py sentiment
+  python main.py live      --dry-run
   python main.py dashboard
 """
 import sys
@@ -60,11 +62,15 @@ def backtest(strategy, pair, start, end, capital, source):
 
     click.echo(result.summary())
 
-    # Save equity curve
+    # Save equity curve + HTML report
     out = CONFIG.reports_dir / f"{pair.replace('/','_')}_{strategy}_equity.csv"
     out.parent.mkdir(parents=True, exist_ok=True)
     result.equity_curve.to_csv(out)
     click.echo(f"\nEquity curve saved to {out}")
+
+    from reports.report_generator import generate_report
+    report_path = generate_report(result, strategy, pair)
+    click.echo(f"HTML report    : {report_path}")
 
 
 @cli.command()
@@ -85,6 +91,7 @@ def compare(pair, start, end, source):
 
     cmp = compare_strategies(df, symbol=pair)
     click.echo("\n" + cmp.to_string(index=False))
+    click.echo(f"\nHTML comparison report saved in {CONFIG.reports_dir}")
 
 
 @cli.command()
@@ -136,6 +143,63 @@ def train(pair, start):
     report = strat.train(df_ind)
     if report:
         click.echo(f"\nML Training complete. Accuracy: {report.get('accuracy', 0):.2%}")
+
+
+@cli.command()
+@click.argument("pairs", nargs=-1)
+@click.option("--strategy", "-s", default="regime_adaptive",
+              type=click.Choice(list(__import__("strategies", fromlist=["STRATEGIES"]).STRATEGIES.keys())))
+@click.option("--start",          default="2021-01-01")
+@click.option("--capital",        default=10_000.0, type=float)
+def portfolio(pairs, strategy, start, capital):
+    """Portfolio backtest across multiple pairs simultaneously."""
+    from data.fetcher import fetch_ohlcv_ccxt
+    from backtesting.portfolio_backtest import PortfolioBacktester
+    from strategies import STRATEGIES
+    from config import CONFIG
+
+    pair_list = list(pairs) or CONFIG.pairs
+    click.echo(f"Portfolio backtest: {strategy} on {', '.join(pair_list)}")
+
+    data = {}
+    for p in pair_list:
+        try:
+            data[p] = fetch_ohlcv_ccxt(p, CONFIG.timeframe, start)
+        except Exception as e:
+            click.echo(f"  Skip {p}: {e}")
+
+    bt      = PortfolioBacktester(CONFIG.backtest)
+    result  = bt.run(data, STRATEGIES[strategy])
+    result.summary()
+
+    from reports.report_generator import generate_report
+    for pair, res in result.pair_results.items():
+        generate_report(res, strategy, pair)
+    click.echo(f"\nReports saved to {CONFIG.reports_dir}")
+
+
+@cli.command()
+def sentiment():
+    """Show current market sentiment (Fear & Greed + funding rates)."""
+    from utils.sentiment import get_current_fng, get_funding_rate, sentiment_gate
+
+    fng = get_current_fng()
+    if fng:
+        click.echo(f"Fear & Greed Index : {fng['value']} — {fng['classification']}")
+        click.echo(f"Date               : {fng['timestamp'].strftime('%Y-%m-%d')}")
+    else:
+        click.echo("Fear & Greed       : unavailable")
+
+    fr = get_funding_rate("BTC/USDT:USDT")
+    if fr is not None:
+        click.echo(f"BTC Funding Rate   : {fr:.6f} ({fr*100:.4f}%/8h)")
+
+    gate = sentiment_gate(fng["value"] if fng else None, fr)
+    click.echo(f"\nTrading Gate:")
+    click.echo(f"  Allow longs  : {'✅' if gate['allow_long']  else '🚫'}")
+    click.echo(f"  Allow shorts : {'✅' if gate['allow_short'] else '🚫'}")
+    if gate["reason"] != "ok":
+        click.echo(f"  Reason       : {gate['reason']}")
 
 
 @cli.command()
