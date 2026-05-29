@@ -1,0 +1,55 @@
+# Trading Bot Configuration
+# Copy to config.local.yaml and override what you need.
+# Settings here are loaded after settings.py defaults.
+
+exchange:
+  name: binance
+  sandbox: true        # ALWAYS start with sandbox=true
+
+risk:
+  max_open_trades: 5
+  stake_amount_pct: 0.02      # 2% per trade
+  max_drawdown_pct: 0.15      # pause if DD > 15%
+  risk_reward_ratio: 2.0      # minimum 1:2 R/R
+  trailing_stop_pct: 0.03     # 3% trailing
+  hard_stop_pct: 0.05         # 5% hard stop
+  take_profit_pct: 0.06       # 6% baseline target
+  max_position_size_pct: 0.10 # never > 10% in one asset
+
+backtest:
+  start_date: "2021-01-01"
+  end_date:   "2024-12-31"
+  initial_capital: 10000.0
+  commission: 0.001    # 0.1%
+  slippage:   0.0005   # 0.05%
+
+trading:
+  pairs:
+    - BTC/USDT
+    - ETH/USDT
+    - BNB/USDT
+    - SOL/USDT
+    - ADA/USDT
+  timeframe: 1h
+  higher_timeframe: 4h
+  dry_run: true
+  active_strategy: regime_adaptive   # recommended for live
+
+filters:
+  correlation_threshold: 0.80        # skip if corr > this with open positions
+  sentiment_enabled: true            # Fear & Greed filter
+  events_filter_enabled: true        # macro news blackout
+  min_volume_ratio: 1.0              # candle volume vs 20-bar avg
+
+notifications:
+  telegram_enabled: false            # set TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID in .env
+
+api:
+  enabled: true
+  host: 0.0.0.0
+  port: 8000
+  # set BOT_API_KEY in .env
+
+dashboard:
+  enabled: true
+  port: 8050

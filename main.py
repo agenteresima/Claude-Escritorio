@@ -203,6 +203,99 @@ def sentiment():
 
 
 @cli.command()
+@click.option("--strategy", "-s", default="trend_ema",
+              type=click.Choice(["trend_ema", "mean_reversion", "breakout",
+                                 "supertrend", "ichimoku", "regime_adaptive"]))
+@click.option("--pair",  "-p", default="BTC/USDT")
+@click.option("--start",       default="2021-01-01")
+@click.option("--sims",        default=1000, type=int)
+def montecarlo(strategy, pair, start, sims):
+    """Monte Carlo robustness test — is the strategy statistically significant?"""
+    from data.fetcher import fetch_ohlcv_ccxt
+    from risk.manager import RiskManager
+    from backtesting.engine import BacktestEngine
+    from backtesting.monte_carlo import run_monte_carlo
+    from strategies import STRATEGIES
+    from config import CONFIG
+
+    df      = fetch_ohlcv_ccxt(pair, CONFIG.timeframe, start)
+    rm      = RiskManager()
+    strat   = STRATEGIES[strategy](rm)
+    sig_df  = strat.run(df)
+    engine  = BacktestEngine(CONFIG.backtest, rm)
+    result  = engine.run(sig_df, symbol=pair)
+
+    click.echo(f"\nReal strategy: {result.summary()}")
+    mc = run_monte_carlo(result, n_simulations=sims, strategy_name=f"{strategy}_{pair.replace('/','_')}")
+    mc.summary()
+
+
+@cli.command()
+@click.option("--strategy", "-s", default="trend_ema")
+def feature_importance(strategy):
+    """Show which features drive the ML model."""
+    from utils.feature_importance import plot_feature_importance
+    from config import CONFIG
+    imps = plot_feature_importance()
+    if imps:
+        click.echo("\nTop 10 features by gain:")
+        for i, (feat, val) in enumerate(list(imps.items())[:10], 1):
+            click.echo(f"  {i:2}. {feat:<25} {val:.4f}")
+        click.echo(f"\nFull chart: {CONFIG.reports_dir}/feature_importance.html")
+    else:
+        click.echo("No trained model found. Run: python main.py train")
+
+
+@cli.command()
+def events():
+    """Show upcoming high-impact macro events."""
+    from utils.events_filter import EventsFilter
+    ef = EventsFilter()
+    safe, reason = ef.is_safe_to_trade()
+    status = "SAFE" if safe else f"BLOCKED — {reason}"
+    click.echo(f"Trading status : {status}")
+    upcoming = ef.upcoming_events(hours_ahead=48)
+    if upcoming:
+        click.echo(f"\nUpcoming events (next 48h):")
+        for ev in upcoming:
+            click.echo(f"  {ev['datetime'].strftime('%Y-%m-%d %H:%M UTC')}  {ev['title']}")
+    else:
+        click.echo("No high-impact events in the next 48h.")
+
+
+@cli.command()
+def api():
+    """Start the REST control API (FastAPI)."""
+    import uvicorn
+    click.echo("API running at http://localhost:8000/docs")
+    uvicorn.run("bot.api:app", host="0.0.0.0", port=8000, reload=False)
+
+
+@cli.command()
+def stats():
+    """Show live trade statistics from the database."""
+    from data.database import trade_stats, get_open_trades
+    from rich.console import Console
+    from rich.table import Table
+    console = Console()
+    s = trade_stats()
+    if not s:
+        click.echo("No closed trades in database yet.")
+    else:
+        console.print(f"\n[bold cyan]Trade Statistics[/bold cyan]")
+        console.print(f"  Total trades : {s['total_trades']}")
+        console.print(f"  Win rate     : [green]{s['win_rate']:.1f}%[/green]")
+        console.print(f"  Total PnL    : {'[green]' if s['total_pnl'] >= 0 else '[red]'}{s['total_pnl']:+.2f}[/]")
+        console.print(f"  Avg trade    : {s['avg_pnl']:+.2f}")
+        console.print(f"  Best trade   : [green]{s['best_trade']:+.2f}[/green]")
+        console.print(f"  Worst trade  : [red]{s['worst_trade']:+.2f}[/red]")
+    open_ = get_open_trades()
+    console.print(f"\n  Open positions: {len(open_)}")
+    for p in open_:
+        console.print(f"    {p['symbol']} {p['direction']} @ {p['entry_price']:.4f}")
+
+
+@cli.command()
 @click.option("--dry-run/--live", default=True)
 def live(dry_run):
     """Start the live trading loop."""

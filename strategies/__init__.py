@@ -7,6 +7,7 @@ from .mtf import MultiTimeframeStrategy
 from .vwap_bounce import VWAPBounceStrategy
 from .ichimoku import IchimokuStrategy
 from .regime_adaptive import RegimeAdaptiveStrategy
+from .ensemble import EnsembleStrategy
 
 STRATEGIES = {
     "trend_ema":       TrendEMAStrategy,
@@ -18,4 +19,5 @@ STRATEGIES = {
     "vwap_bounce":     VWAPBounceStrategy,
     "ichimoku":        IchimokuStrategy,
     "regime_adaptive": RegimeAdaptiveStrategy,
+    "ensemble":        EnsembleStrategy,
 }

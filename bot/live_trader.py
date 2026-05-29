@@ -1,9 +1,13 @@
 """
-Live / paper trading executor — upgraded with:
+Live / paper trading executor — full production stack:
   - PositionManager (partial TPs, break-even, time exits)
   - CorrelationFilter (no concurrent correlated positions)
   - Sentiment gate (Fear & Greed + funding rate)
+  - EventsFilter (macro news blackout)
+  - Candle pattern confirmation
+  - DB persistence (survives restarts)
   - Telegram notifications
+  - REST API state reads (pause/resume/force-close)
 """
 import time
 from datetime import datetime
@@ -17,10 +21,16 @@ from config import CONFIG
 from risk.manager import RiskManager, TradeSignal
 from strategies import STRATEGIES
 from data.fetcher import fetch_ohlcv_ccxt
+from data.database import (
+    init_db, insert_trade, close_trade as db_close_trade,
+    get_open_trades, save_equity, log_signal, get_state,
+)
 from bot.position_manager import PositionManager
 from bot.notifier import notify_startup, notify_drawdown_alert
 from utils.correlation import CorrelationFilter
 from utils.sentiment import get_current_fng, get_funding_rate, sentiment_gate
+from utils.events_filter import EventsFilter
+from utils.candle_patterns import add_candle_patterns
 
 
 class LiveTrader:
@@ -38,23 +48,59 @@ class LiveTrader:
         if config.exchange.sandbox:
             self.exchange.set_sandbox_mode(True)
 
-        self.risk       = RiskManager(initial_capital=10_000)
-        StratCls        = STRATEGIES[config.active_strategy]
-        self.strategy   = StratCls(self.risk)
-        self.pos_mgr    = PositionManager(dry_run=self.dry_run)
+        init_db()
+        self.risk        = RiskManager(initial_capital=10_000)
+        active_strategy  = get_state("active_strategy", config.active_strategy)
+        StratCls         = STRATEGIES[active_strategy]
+        self.strategy    = StratCls(self.risk)
+        self.pos_mgr     = PositionManager(dry_run=self.dry_run)
         self.corr_filter = CorrelationFilter(threshold=0.80)
+        self.events      = EventsFilter()
 
         # Sentiment refresh every 4h
         self._last_sentiment_ts = 0.0
         self._sentiment_gate    = {"allow_long": True, "allow_short": True, "reason": "ok"}
 
-        notify_startup(config.active_strategy, config.pairs, self.dry_run)
+        # Restore open positions from DB (survives restarts)
+        self._restore_positions()
+
+        notify_startup(active_strategy, config.pairs, self.dry_run)
         logger.info(
             f"LiveTrader ready | strategy={config.active_strategy} "
             f"| dry_run={self.dry_run} | pairs={config.pairs}"
         )
 
     # ------------------------------------------------------------------
+
+    def _restore_positions(self):
+        """Re-populate PositionManager from DB after a restart."""
+        for trade in get_open_trades():
+            from bot.position_manager import OpenPosition
+            self.pos_mgr.positions[trade["symbol"]] = OpenPosition(
+                symbol       = trade["symbol"],
+                direction    = trade["direction"],
+                entry_price  = trade["entry_price"],
+                size         = trade["size"],
+                stop_loss    = trade["stop_loss"],
+                take_profit1 = trade["take_profit"],
+                take_profit2 = trade["take_profit"] * 1.5,
+            )
+        if self.pos_mgr.positions:
+            logger.info(f"Restored {len(self.pos_mgr.positions)} open positions from DB.")
+
+    def _check_api_commands(self):
+        """Check for commands issued via REST API (pause, force-close, strategy switch)."""
+        if get_state("paused", False):
+            return False   # signal caller to skip this tick
+
+        new_strat = get_state("active_strategy", self.cfg.active_strategy)
+        if new_strat != self.strategy.name:
+            StratCls      = STRATEGIES.get(new_strat)
+            if StratCls:
+                self.strategy = StratCls(self.risk)
+                logger.info(f"Strategy switched to: {new_strat}")
+
+        return True
 
     def _refresh_sentiment(self):
         if time.time() - self._last_sentiment_ts < 4 * 3600:
@@ -97,6 +143,17 @@ class LiveTrader:
 
     def tick(self, symbol: str):
         try:
+            if not self._check_api_commands():
+                return   # bot is paused
+
+            # Force-close command from API
+            if get_state(f"force_close_{symbol}", False):
+                price = self._last_price(symbol)
+                self.pos_mgr._close(symbol, price, "api_force_close")
+                from data.database import set_state
+                set_state(f"force_close_{symbol}", False)
+                return
+
             df  = self.fetch_latest(symbol)
             self.corr_filter.update(symbol, df["close"])
 
@@ -119,7 +176,23 @@ class LiveTrader:
                 return
 
             # Open new position
+            log_signal(symbol, self.strategy.name, signal, price,
+                       float(last_row.get("ml_confidence", 1.0)))
+
             if signal != 1:
+                return
+
+            # ── Events filter ──
+            safe, reason = self.events.is_safe_to_trade()
+            if not safe:
+                logger.info(f"Events filter blocked {symbol}: {reason}")
+                return
+
+            # ── Candle pattern confirmation ──
+            df_pat = add_candle_patterns(df)
+            candle_score = float(df_pat["candle_score"].iloc[-1])
+            if candle_score < 0:
+                logger.debug(f"Candle patterns negative ({candle_score}) — skipping {symbol}")
                 return
 
             self._refresh_sentiment()
@@ -151,6 +224,16 @@ class LiveTrader:
                 return
 
             self._place_order(symbol, "buy", amount, sl, tp1, tp2)
+
+            # Persist to DB
+            insert_trade(
+                symbol, "long", self.strategy.name, price, amount,
+                sl, tp2, dry_run=self.dry_run,
+            )
+
+            # Equity snapshot
+            save_equity(self.strategy.name, self.risk.portfolio.capital,
+                        self.risk.portfolio.current_drawdown())
 
         except Exception as e:
             logger.error(f"Tick error {symbol}: {e}")
