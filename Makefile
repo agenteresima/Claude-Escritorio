@@ -7,7 +7,7 @@ PAIR       ?= BTC/USDT
 STRATEGY   ?= regime_adaptive
 START      ?= 2021-01-01
 
-.PHONY: help install test backtest compare optimize train live dashboard api benchmark backup lint
+.PHONY: help install test test-fast test-cov backtest compare optimize train live dashboard api benchmark backup restore export weekly lint clean
 
 help:
 	@echo ""
@@ -41,8 +41,16 @@ help:
 	@echo ""
 	@echo "  Dev:"
 	@echo "    make test          Run all tests"
-	@echo "    make lint          Check code style"
-	@echo "    make weekly        Send weekly performance report now"
+	@echo "    make test-fast     Skip slow/integration/ml tests"
+	@echo "    make test-cov      Coverage report → htmlcov/index.html"
+	@echo "    make lint          Check code style (flake8)"
+	@echo "    make health        Quick API health check"
+	@echo "    make weekly        Send weekly performance report"
+	@echo ""
+	@echo "  Docker:"
+	@echo "    make docker-up     Build and start all services"
+	@echo "    make docker-down   Stop all services"
+	@echo "    make docker-logs   Tail live trader logs"
 	@echo ""
 
 install:
@@ -53,7 +61,12 @@ test:
 	pytest tests/ -v --tb=short -q
 
 test-fast:
-	pytest tests/ -v --tb=short -q -m "not slow"
+	pytest tests/ -v --tb=short -q -m "not slow and not integration and not ml"
+
+test-cov:
+	pytest tests/ --cov=. --cov-report=html --cov-report=term-missing \
+	  -m "not slow and not integration and not ml" -q
+	@echo "Coverage report: htmlcov/index.html"
 
 backtest:
 	$(PYTHON) main.py backtest --strategy $(STRATEGY) --pair "$(PAIR)" --start $(START)
@@ -114,13 +127,22 @@ stats:
 	$(PYTHON) main.py stats
 
 weekly:
-	$(PYTHON) reports/weekly_report.py --now
+	$(PYTHON) main.py weekly-report
 
 backup:
-	@$(PYTHON) -c "from data.backup import backup; p=backup(); print(f'Backup: {p}')"
+	$(PYTHON) main.py backup
+
+restore:
+	$(PYTHON) main.py restore --list-backups
 
 export:
-	@$(PYTHON) -c "from data.backup import export_trades_excel; p=export_trades_excel(); print(f'Excel: {p}')"
+	$(PYTHON) main.py export --format excel
+
+benchmark:
+	$(PYTHON) main.py benchmark --strategy $(STRATEGY) --pair "$(PAIR)" --start $(START)
+
+health:
+	@bash scripts/health_check.sh
 
 lint:
 	@$(PYTHON) -m flake8 strategies/ risk/ bot/ utils/ data/ --max-line-length=100 --ignore=E501,W503 2>/dev/null || echo "Install flake8: pip install flake8"
