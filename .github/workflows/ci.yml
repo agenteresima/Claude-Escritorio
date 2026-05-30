@@ -39,15 +39,22 @@ jobs:
           echo "EXCHANGE_API_KEY=test" >> .env
           echo "EXCHANGE_API_SECRET=test" >> .env
 
-      - name: Run tests (fast — no slow/integration/ml)
-        run: pytest tests/ -q --tb=short -m "not slow and not integration and not ml" --timeout=60
+      - name: Run tests with coverage
+        run: |
+          pytest tests/ -q --tb=short \
+            -m "not slow and not integration and not ml" \
+            --timeout=120 \
+            --cov=. \
+            --cov-report=xml \
+            --cov-report=term-missing \
+            --cov-omit="tests/*,*/__pycache__/*,setup.py"
 
       - name: Upload coverage report
         if: matrix.python-version == '3.11'
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
-          path: .pytest_cache/
+          name: coverage-report
+          path: coverage.xml
 
   lint:
     name: Lint
