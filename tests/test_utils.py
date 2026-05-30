@@ -5,6 +5,8 @@ Tests for utils modules lacking coverage:
   - utils/events_filter.py (unit, no network)
   - utils/sentiment.py    (unit, no network)
   - utils/correlation.py
+  - utils/orderbook.py
+  - utils/feature_importance.py
 """
 import pytest
 import numpy as np
@@ -272,3 +274,157 @@ class TestCorrelationFilter:
         mat = cf_with_data.correlation_matrix(["BTC/USDT", "ETH/USDT"])
         assert isinstance(mat, pd.DataFrame)
         assert mat.shape == (2, 2)
+
+
+# ── Order book snapshot and filter ───────────────────────────────────────────
+
+def _make_ob(imbalance_pct: float = 0.0,
+             spread_pct: float = 0.0005,
+             large_ask_wall: float | None = None,
+             large_bid_wall: float | None = None):
+    """Helper to build a fake OrderBookSnapshot for testing."""
+    from utils.orderbook import OrderBookSnapshot
+    mid = 40_000.0
+    best_bid = mid * (1 - spread_pct / 2)
+    best_ask = mid * (1 + spread_pct / 2)
+    bid_depth = 1_000_000 * (1 + imbalance_pct)
+    ask_depth = 1_000_000 * (1 - imbalance_pct)
+    total = bid_depth + ask_depth + 1e-9
+    return OrderBookSnapshot(
+        symbol="BTC/USDT",
+        bids=[[best_bid, 1.0]],
+        asks=[[best_ask, 1.0]],
+        bid_ask_spread=best_ask - best_bid,
+        spread_pct=spread_pct,
+        bid_depth=bid_depth,
+        ask_depth=ask_depth,
+        imbalance=(bid_depth - ask_depth) / total,
+        best_bid=best_bid,
+        best_ask=best_ask,
+        mid_price=mid,
+        large_bid_wall=large_bid_wall,
+        large_ask_wall=large_ask_wall,
+    )
+
+
+class TestOrderBookSnapshot:
+    def test_is_bid_heavy_positive_imbalance(self):
+        ob = _make_ob(imbalance_pct=0.25)   # imbalance > 0.20 → bid heavy
+        assert ob.is_bid_heavy is True
+
+    def test_is_ask_heavy_negative_imbalance(self):
+        ob = _make_ob(imbalance_pct=-0.25)  # imbalance < -0.20 → ask heavy
+        assert ob.is_ask_heavy is True
+
+    def test_balanced_not_heavy(self):
+        ob = _make_ob(imbalance_pct=0.0)
+        assert ob.is_bid_heavy is False
+        assert ob.is_ask_heavy is False
+
+    def test_is_liquid_tight_spread(self):
+        ob = _make_ob(spread_pct=0.0005)
+        assert ob.is_liquid is True
+
+    def test_is_illiquid_wide_spread(self):
+        ob = _make_ob(spread_pct=0.002)     # 0.2%
+        assert ob.is_liquid is False
+
+    def test_has_resistance_wall(self):
+        ob = _make_ob(large_ask_wall=40_100.0)
+        assert ob.has_resistance_wall is True
+        assert ob.has_support_wall is False
+
+    def test_has_support_wall(self):
+        ob = _make_ob(large_bid_wall=39_900.0)
+        assert ob.has_support_wall is True
+        assert ob.has_resistance_wall is False
+
+
+class TestOrderBookFilter:
+    def test_no_data_always_allows(self):
+        from utils.orderbook import orderbook_filter
+        allow, reason = orderbook_filter(None, "long")
+        assert allow is True
+        assert reason == "no_data"
+
+    def test_illiquid_blocks_long(self):
+        from utils.orderbook import orderbook_filter
+        ob = _make_ob(spread_pct=0.002)
+        allow, reason = orderbook_filter(ob, "long")
+        assert allow is False
+        assert "spread" in reason.lower() or "illiquid" in reason.lower()
+
+    def test_ask_heavy_blocks_long(self):
+        from utils.orderbook import orderbook_filter
+        ob = _make_ob(imbalance_pct=-0.25)
+        allow, reason = orderbook_filter(ob, "long")
+        assert allow is False
+
+    def test_bid_heavy_confirms_long(self):
+        from utils.orderbook import orderbook_filter
+        ob = _make_ob(imbalance_pct=0.25)
+        allow, reason = orderbook_filter(ob, "long")
+        assert allow is True
+        assert "bid" in reason.lower() or "confirmed" in reason.lower() or reason == "ok"
+
+    def test_resistance_wall_blocks_long(self):
+        from utils.orderbook import orderbook_filter
+        ob = _make_ob(large_ask_wall=40_100.0)
+        allow, reason = orderbook_filter(ob, "long")
+        assert allow is False
+        assert "wall" in reason.lower()
+
+    def test_bid_heavy_blocks_short(self):
+        from utils.orderbook import orderbook_filter
+        ob = _make_ob(imbalance_pct=0.25)
+        allow, reason = orderbook_filter(ob, "short")
+        assert allow is False
+
+    def test_support_wall_blocks_short(self):
+        from utils.orderbook import orderbook_filter
+        ob = _make_ob(large_bid_wall=39_900.0)
+        allow, reason = orderbook_filter(ob, "short")
+        assert allow is False
+
+    def test_neutral_ob_allows_long(self):
+        from utils.orderbook import orderbook_filter
+        ob = _make_ob(imbalance_pct=0.05)  # slightly bid-heavy but < threshold
+        allow, _ = orderbook_filter(ob, "long")
+        assert allow is True
+
+
+# ── Feature importance ────────────────────────────────────────────────────────
+
+class TestFeatureImportance:
+    def test_no_model_returns_empty(self, tmp_path):
+        from utils.feature_importance import plot_feature_importance
+        result = plot_feature_importance(
+            model_path=tmp_path / "nonexistent.pkl",
+            output_dir=tmp_path,
+        )
+        assert result == {}
+
+    def test_recommend_pruning_low_importance(self):
+        from utils.feature_importance import recommend_feature_pruning
+        importances = {
+            "rsi_14": 100.0,
+            "atr_pct": 50.0,
+            "cmf": 0.5,      # very low
+            "willr": 0.3,    # very low
+        }
+        to_prune = recommend_feature_pruning(importances, threshold=0.01)
+        total = sum(importances.values())
+        for f in to_prune:
+            assert importances[f] / total < 0.01
+
+    def test_recommend_pruning_empty(self):
+        from utils.feature_importance import recommend_feature_pruning
+        result = recommend_feature_pruning({})
+        assert result == []
+
+    def test_recommend_pruning_all_equal(self):
+        from utils.feature_importance import recommend_feature_pruning
+        importances = {"a": 25.0, "b": 25.0, "c": 25.0, "d": 25.0}
+        to_prune = recommend_feature_pruning(importances, threshold=0.20)
+        # All equal at 25% each — none should be below 20%
+        assert to_prune == []
