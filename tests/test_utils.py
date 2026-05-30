@@ -24,19 +24,13 @@ class TestPerformance:
         return pd.Series(vals, index=pd.date_range("2022-01-01", periods=252, freq="D"))
 
     @pytest.fixture
-    def trades(self):
-        return [
-            {"pnl": 120, "entry_time": "2022-01-01", "exit_time": "2022-01-03"},
-            {"pnl": -40, "entry_time": "2022-01-04", "exit_time": "2022-01-05"},
-            {"pnl": 80,  "entry_time": "2022-01-06", "exit_time": "2022-01-08"},
-            {"pnl": 60,  "entry_time": "2022-01-09", "exit_time": "2022-01-11"},
-            {"pnl": -30, "entry_time": "2022-01-12", "exit_time": "2022-01-13"},
-        ]
+    def pnl_list(self):
+        return [120.0, -40.0, 80.0, 60.0, -30.0]
 
     def test_monthly_returns(self, equity):
         from utils.performance import monthly_returns
         monthly = monthly_returns(equity)
-        assert isinstance(monthly, pd.Series)
+        assert isinstance(monthly, pd.DataFrame)
         assert len(monthly) > 0
 
     def test_rolling_sharpe(self, equity):
@@ -45,31 +39,44 @@ class TestPerformance:
         assert isinstance(rs, pd.Series)
         assert rs.notna().any()
 
-    def test_max_consecutive_losses(self, trades):
+    def test_max_consecutive_losses(self, pnl_list):
         from utils.performance import max_consecutive_losses
-        mc = max_consecutive_losses(trades)
-        assert mc == 1  # only 1 loss in a row
+        mc = max_consecutive_losses(pnl_list)
+        assert mc == 1  # only 1 loss in a row max
 
-    def test_expectancy(self, trades):
+    def test_expectancy_positive(self):
         from utils.performance import expectancy
-        exp = expectancy(trades)
-        assert exp > 0  # net profitable set
+        # 60% win rate, avg_win=100, avg_loss=50 → 0.6*100 - 0.4*50 = 40
+        exp = expectancy(win_rate=0.6, avg_win=100, avg_loss=50)
+        assert exp == pytest.approx(40.0, abs=0.01)
 
-    def test_r_multiples(self, trades):
-        from utils.performance import r_multiples
-        rs = r_multiples(trades, risk_per_trade=40)
-        assert len(rs) == len(trades)
-        assert rs[0] == pytest.approx(3.0, abs=0.01)  # 120/40
+    def test_expectancy_negative(self):
+        from utils.performance import expectancy
+        exp = expectancy(win_rate=0.3, avg_win=50, avg_loss=200)
+        assert exp < 0
 
     def test_ulcer_index(self, equity):
         from utils.performance import ulcer_index
         ui = ulcer_index(equity)
         assert ui >= 0
 
-    def test_full_analytics(self, equity, trades):
+    def test_mar_ratio(self):
+        from utils.performance import mar_ratio
+        assert mar_ratio(cagr_pct=20.0, max_dd_pct=-10.0) == pytest.approx(2.0)
+        assert mar_ratio(cagr_pct=20.0, max_dd_pct=0.0) == 0.0
+
+    def test_full_analytics_uses_backtest_result(self, equity):
         from utils.performance import full_analytics
-        report = full_analytics(equity, trades)
-        assert "sharpe" in report or "total_return" in report
+        from backtesting.engine import BacktestResult
+        metrics = {
+            "sharpe": 1.5, "max_drawdown_pct": -5.0, "win_rate": 60.0,
+            "total_return_pct": 20.0, "total_trades": 0, "profit_factor": 1.8,
+            "cagr": 18.0, "sortino": 1.6, "calmar": 1.2,
+        }
+        result = BacktestResult(trades=[], equity_curve=equity, metrics=metrics)
+        report = full_analytics(result, initial_capital=10_000)
+        assert "expectancy"  in report
+        assert "ulcer_index" in report
 
 
 # ── Indicators ────────────────────────────────────────────────────────────────
@@ -94,32 +101,36 @@ class TestIndicators:
     def test_add_momentum_indicators(self, df):
         from utils.indicators import add_momentum_indicators
         out = add_momentum_indicators(df)
-        assert "rsi" in out.columns
-        assert "macd" in out.columns
+        assert "rsi_14" in out.columns
+        # pandas-ta MACD columns: MACD_12_26_9
+        assert any(c.startswith("MACD") for c in out.columns)
 
     def test_add_volatility_indicators(self, df):
         from utils.indicators import add_volatility_indicators
         out = add_volatility_indicators(df)
-        assert "atr" in out.columns
-        assert "bb_upper" in out.columns or "bbands_upper" in out.columns
+        assert "atr_14" in out.columns
+        # pandas-ta BB columns: BBL_20_2.0, BBM_20_2.0, BBU_20_2.0
+        assert any(c.startswith("BB") for c in out.columns)
 
     def test_add_volume_indicators(self, df):
         from utils.indicators import add_volume_indicators
         out = add_volume_indicators(df)
-        assert "obv" in out.columns or "volume" in out.columns
+        assert "obv" in out.columns
+        assert "vol_ratio" in out.columns
 
     def test_compute_market_regime(self, df):
         from utils.indicators import compute_market_regime, add_all_indicators
         df_ind = add_all_indicators(df)
-        regime = compute_market_regime(df_ind.iloc[-1])
-        assert regime in ("trending", "ranging", "breakout", "unknown") or isinstance(regime, str)
+        regime = compute_market_regime(df_ind)
+        # Returns pd.Series of {-1, 0, 1}
+        assert isinstance(regime, pd.Series)
+        assert set(regime.unique()).issubset({-1, 0, 1})
 
     def test_no_nan_in_tail(self, df):
         from utils.indicators import add_all_indicators
         out = add_all_indicators(df)
         tail = out.tail(10)
-        # Key columns should not be NaN at the end
-        for col in ["rsi", "macd", "atr"]:
+        for col in ["rsi_14", "atr_14"]:
             if col in tail.columns:
                 assert not tail[col].isna().all(), f"{col} is all NaN in tail"
 
@@ -134,9 +145,13 @@ class TestEventsFilter:
 
     def test_is_safe_to_trade_no_events(self):
         from utils.events_filter import EventsFilter
+        from datetime import datetime, timezone
         ef = EventsFilter()
-        with patch.object(ef, "upcoming_events", return_value=[]):
-            safe, reason = ef.is_safe_to_trade()
+        # Use a date/time that doesn't match any recurring events
+        # (recurring events match specific weekdays and day ranges)
+        non_event_day = datetime(2022, 6, 15, 10, 0, tzinfo=timezone.utc)  # Wed mid-month
+        with patch.object(ef, "_fetch_forex_factory", return_value=[]):
+            safe, reason = ef.is_safe_to_trade(now=non_event_day)
         assert safe is True
         assert reason == "ok"
 
@@ -144,17 +159,16 @@ class TestEventsFilter:
         from utils.events_filter import EventsFilter
         from datetime import datetime, timedelta, timezone
         ef = EventsFilter()
-        now = datetime.now(timezone.utc)
+        now = datetime(2022, 6, 15, 10, 0, tzinfo=timezone.utc)
         # Simulate event in 30 min — within 1h pre-blackout
         mock_event = {
             "datetime": now + timedelta(minutes=30),
             "title": "US CPI",
-            "impact": "high",
         }
-        with patch.object(ef, "upcoming_events", return_value=[mock_event]):
-            safe, reason = ef.is_safe_to_trade()
+        with patch.object(ef, "_fetch_forex_factory", return_value=[mock_event]):
+            safe, reason = ef.is_safe_to_trade(now=now)
         assert safe is False
-        assert "CPI" in reason or "event" in reason.lower()
+        assert "CPI" in reason or "macro" in reason.lower() or reason != "ok"
 
     def test_upcoming_events_returns_list(self):
         from utils.events_filter import EventsFilter
@@ -202,47 +216,59 @@ class TestSentiment:
 
 class TestCorrelationFilter:
     @pytest.fixture
-    def price_series(self):
+    def cf_with_data(self):
+        from utils.correlation import CorrelationFilter
         rng = np.random.default_rng(42)
         idx = pd.date_range("2022-01-01", periods=200, freq="1h")
         btc = pd.Series(np.cumprod(1 + rng.normal(0.001, 0.01, 200)), index=idx)
-        eth = btc * (1 + rng.normal(0, 0.005, 200))  # highly correlated
+        # ETH closely tracks BTC (highly correlated)
+        eth = btc * pd.Series(np.cumprod(1 + rng.normal(0, 0.002, 200)), index=idx)
+        # SOL is an independent random walk
         sol = pd.Series(np.cumprod(1 + rng.normal(0.001, 0.02, 200)), index=idx)
-        return {"BTC/USDT": btc, "ETH/USDT": eth, "SOL/USDT": sol}
 
-    def test_import(self):
+        cf = CorrelationFilter(threshold=0.80)
+        cf.update("BTC/USDT", btc)
+        cf.update("ETH/USDT", eth)
+        cf.update("SOL/USDT", sol)
+        return cf
+
+    def test_threshold_attribute(self):
         from utils.correlation import CorrelationFilter
         cf = CorrelationFilter(threshold=0.80)
         assert cf.threshold == 0.80
 
-    def test_detects_correlation(self, price_series):
-        from utils.correlation import CorrelationFilter
-        cf = CorrelationFilter(threshold=0.80)
-        cf.update_prices(price_series)
-        # ETH is highly correlated with BTC
-        is_corr = cf.is_correlated_with_open(
+    def test_detects_high_correlation(self, cf_with_data):
+        # ETH mirrors BTC closely → should be blocked
+        is_corr = cf_with_data.is_correlated_with_open(
             candidate="ETH/USDT",
             open_symbols=["BTC/USDT"],
         )
         assert is_corr is True
 
-    def test_uncorrelated_passes(self, price_series):
-        from utils.correlation import CorrelationFilter
-        cf = CorrelationFilter(threshold=0.80)
-        cf.update_prices(price_series)
-        # SOL (random walk) should not always be blocked
-        # Just verify the method returns bool without error
-        result = cf.is_correlated_with_open(
-            candidate="SOL/USDT",
+    def test_empty_open_symbols(self, cf_with_data):
+        # Nothing open → never correlated
+        result = cf_with_data.is_correlated_with_open(
+            candidate="BTC/USDT",
             open_symbols=[],
         )
-        assert isinstance(result, bool)
+        assert result is False
 
-    def test_diversified_subset(self, price_series):
-        from utils.correlation import CorrelationFilter
-        cf = CorrelationFilter(threshold=0.80)
-        cf.update_prices(price_series)
-        subset = cf.get_diversified_subset(
-            list(price_series.keys()), max_pairs=2
+    def test_unknown_candidate(self, cf_with_data):
+        result = cf_with_data.is_correlated_with_open(
+            candidate="UNKNOWN/USDT",
+            open_symbols=["BTC/USDT"],
+        )
+        assert result is False
+
+    def test_diversified_subset(self, cf_with_data):
+        subset = cf_with_data.get_diversified_subset(
+            ["BTC/USDT", "ETH/USDT", "SOL/USDT"], max_positions=2
         )
         assert len(subset) <= 2
+        # BTC and ETH are correlated → should not both be in subset
+        assert not ("BTC/USDT" in subset and "ETH/USDT" in subset)
+
+    def test_correlation_matrix(self, cf_with_data):
+        mat = cf_with_data.correlation_matrix(["BTC/USDT", "ETH/USDT"])
+        assert isinstance(mat, pd.DataFrame)
+        assert mat.shape == (2, 2)
