@@ -3,7 +3,7 @@ Data fetcher — supports CCXT (crypto) and yfinance (stocks/forex).
 Caches OHLCV locally as Parquet files to avoid repeated API calls.
 """
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
@@ -13,6 +13,15 @@ import yfinance as yf
 from loguru import logger
 
 from config import CONFIG
+
+MAX_RETRIES = 4
+_BACKOFF_BASE = 2.0   # seconds; retry waits 2, 4, 8, 16 s
+
+
+def _retry_sleep(attempt: int) -> None:
+    wait = _BACKOFF_BASE ** attempt
+    logger.debug(f"Retry {attempt} — waiting {wait:.0f}s")
+    time.sleep(wait)
 
 
 CACHE_DIR = CONFIG.data_dir / "cache"
@@ -47,12 +56,20 @@ def fetch_ohlcv_ccxt(
 
     all_ohlcv: list = []
     while True:
-        try:
-            batch = exchange.fetch_ohlcv(symbol, timeframe, since=since_ms, limit=1000)
-        except ccxt.NetworkError as e:
-            logger.warning(f"Network error, retrying: {e}")
-            time.sleep(2)
-            continue
+        for attempt in range(MAX_RETRIES):
+            try:
+                batch = exchange.fetch_ohlcv(symbol, timeframe, since=since_ms, limit=1000)
+                break
+            except (ccxt.NetworkError, ccxt.RequestTimeout) as e:
+                if attempt == MAX_RETRIES - 1:
+                    raise
+                logger.warning(f"Network error (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
+                _retry_sleep(attempt)
+            except ccxt.RateLimitExceeded as e:
+                logger.warning(f"Rate limit exceeded, backing off: {e}")
+                _retry_sleep(attempt + 1)
+        else:
+            break
 
         if not batch:
             break
@@ -89,10 +106,25 @@ def fetch_ohlcv_yfinance(
         logger.info(f"Cache hit: {ticker} {interval} ({len(df)} candles)")
         return df
 
-    df = yf.download(ticker, start=start, end=end, interval=interval, progress=False)
+    for attempt in range(MAX_RETRIES):
+        try:
+            df = yf.download(ticker, start=start, end=end, interval=interval, progress=False)
+            break
+        except Exception as e:
+            if attempt == MAX_RETRIES - 1:
+                raise
+            logger.warning(f"yfinance error (attempt {attempt + 1}/{MAX_RETRIES}): {e}")
+            _retry_sleep(attempt)
+
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
     df.columns = [c.lower() for c in df.columns]
     df.index = pd.to_datetime(df.index, utc=True)
-    df = df.rename(columns={"adj close": "close"})[["open", "high", "low", "close", "volume"]]
+    rename_map = {c: "close" for c in df.columns if "adj" in c.lower() and "close" in c.lower()}
+    if rename_map:
+        df = df.rename(columns=rename_map)
+    needed = [c for c in ["open", "high", "low", "close", "volume"] if c in df.columns]
+    df = df[needed]
     df.dropna(inplace=True)
 
     if use_cache:

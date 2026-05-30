@@ -148,10 +148,12 @@ def get_pairs():
 @app.post("/pairs", dependencies=[Depends(verify_key)])
 def update_pairs(body: PairUpdate):
     pairs = get_state("pairs", list(CONFIG.pairs))
-    if body.action == "add" and body.pair not in pairs:
-        pairs.append(body.pair)
-    elif body.action == "remove" and body.pair in pairs:
-        pairs.remove(body.pair)
+    if body.action == "add":
+        if body.pair not in pairs:
+            pairs.append(body.pair)
+    elif body.action == "remove":
+        if body.pair in pairs:
+            pairs.remove(body.pair)
     else:
         raise HTTPException(400, "action must be 'add' or 'remove'")
     set_state("pairs", pairs)
