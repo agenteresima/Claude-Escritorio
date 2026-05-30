@@ -95,21 +95,11 @@ class RegimeAdaptiveStrategy(BaseStrategy):
         df["stop_loss"]   = df["close"] * 0.97
         df["take_profit"] = df["close"] * 1.06
 
-        for i in df.index:
-            r = regimes.get(i, Regime.UNDEFINED)
-            if r == Regime.TREND_UP:
-                df.at[i, "signal"]      = t_df.at[i, "signal"]
-                df.at[i, "stop_loss"]   = t_df.at[i, "stop_loss"]
-                df.at[i, "take_profit"] = t_df.at[i, "take_profit"]
-            elif r == Regime.RANGING:
-                df.at[i, "signal"]      = m_df.at[i, "signal"]
-                df.at[i, "stop_loss"]   = m_df.at[i, "stop_loss"]
-                df.at[i, "take_profit"] = m_df.at[i, "take_profit"]
-            elif r == Regime.BREAKOUT:
-                df.at[i, "signal"]      = b_df.at[i, "signal"]
-                df.at[i, "stop_loss"]   = b_df.at[i, "stop_loss"]
-                df.at[i, "take_profit"] = b_df.at[i, "take_profit"]
-            # TREND_DOWN and UNDEFINED → signal stays 0 (flat)
+        for col in ("signal", "stop_loss", "take_profit"):
+            df.loc[regimes == Regime.TREND_UP,   col] = t_df.loc[regimes == Regime.TREND_UP,   col]
+            df.loc[regimes == Regime.RANGING,    col] = m_df.loc[regimes == Regime.RANGING,    col]
+            df.loc[regimes == Regime.BREAKOUT,   col] = b_df.loc[regimes == Regime.BREAKOUT,   col]
+        # TREND_DOWN and UNDEFINED → signal stays 0 (flat)
 
         # Log regime distribution
         counts = regimes.value_counts()
