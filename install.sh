@@ -40,16 +40,6 @@ fi
 
 source .venv/bin/activate
 
-# ── TA-Lib C library (optional) ───────────────────────────────────────────────
-if ! python -c "import talib" 2>/dev/null; then
-    info "TA-Lib not found — attempting system install..."
-    if command -v apt-get &>/dev/null; then
-        apt-get install -y libta-lib-dev 2>/dev/null || true
-    elif command -v brew &>/dev/null; then
-        brew install ta-lib 2>/dev/null || true
-    fi
-fi
-
 # ── Python dependencies ───────────────────────────────────────────────────────
 info "Installing Python dependencies..."
 pip install --upgrade pip -q

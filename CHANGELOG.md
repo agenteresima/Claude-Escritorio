@@ -28,4 +28,6 @@
 - **Makefile** with 25+ targets
 - **One-command install** via `install.sh`
 - **pyproject.toml** for proper packaging
-- **Comprehensive test suite**: 200+ test cases across all modules
+- **Comprehensive test suite**: 228 test cases across 12 test modules
+- **Pure-numpy indicator library**: replaces pandas-ta for full Python 3.10–3.12 compatibility
+- **Vectorized regime detection**: 50-100x faster regime_adaptive strategy
