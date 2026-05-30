@@ -188,7 +188,13 @@ def generate_report(
     class M:
         pass
     m = M()
-    for k, v in result.metrics.items():
+    _defaults = {
+        "total_return_pct": 0.0, "cagr": 0.0, "sharpe": 0.0,
+        "sortino": 0.0, "max_drawdown_pct": 0.0, "calmar": 0.0,
+        "win_rate": 0.0, "profit_factor": 0.0, "total_trades": 0,
+        "avg_trade_pct": 0.0, "best_trade_pct": 0.0, "worst_trade_pct": 0.0,
+    }
+    for k, v in {**_defaults, **result.metrics}.items():
         setattr(m, k, v)
 
     tmpl = Template(HTML_TEMPLATE)

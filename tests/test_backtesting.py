@@ -134,12 +134,31 @@ class TestOptimizer:
 class TestMonteCarlo:
     @pytest.fixture
     def backtest_result(self, risk_manager, backtest_config):
-        from strategies.trend_ema import TrendEMAStrategy
-        from backtesting.engine import BacktestEngine
-        df    = make_ohlcv(500)
-        strat = TrendEMAStrategy(risk_manager)
-        sig   = strat.run(df)
-        return BacktestEngine(backtest_config, risk_manager).run(sig, symbol="BTC/USDT")
+        from backtesting.engine import BacktestEngine, BacktestResult, Trade
+        import numpy as np, pandas as pd
+        # Build a synthetic result with guaranteed closed trades
+        rng = np.random.default_rng(0)
+        pnls = list(rng.normal(50, 200, 20))
+        trades = []
+        for i, pnl in enumerate(pnls):
+            t = Trade("BTC/USDT", i * 10, 40000, "long", 0.01,
+                      39000, 42000, exit_bar=i * 10 + 5,
+                      exit_price=40000 + pnl / 0.01, exit_reason="tp",
+                      pnl=pnl, pnl_pct=pnl / 400)
+        equity = pd.Series(
+            np.cumprod(1 + rng.normal(0.001, 0.01, 200)) * 10000,
+            index=pd.date_range("2022-01-01", periods=200, freq="1h", tz="UTC"),
+        )
+        trades = []
+        for i, pnl in enumerate(pnls):
+            t = Trade("BTC/USDT", i * 10, 40000, "long", 0.01,
+                      39000, 42000, exit_bar=i * 10 + 5,
+                      exit_price=40000 + pnl / 0.01, exit_reason="tp",
+                      pnl=pnl, pnl_pct=pnl / 400)
+            trades.append(t)
+        from backtesting.engine import _compute_metrics
+        metrics = _compute_metrics(trades, equity, 10000)
+        return BacktestResult(trades=trades, equity_curve=equity, metrics=metrics)
 
     def test_mc_runs(self, backtest_result, tmp_path):
         from backtesting.monte_carlo import run_monte_carlo

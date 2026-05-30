@@ -183,5 +183,16 @@ class CandleBuffer:
         df.index = pd.to_datetime(df.index, utc=True)
         return df
 
+    def to_dataframe(self) -> pd.DataFrame:
+        """Return all buffered candles (all symbols) as a single DataFrame."""
+        all_rows: list[dict] = []
+        for rows in self._data.values():
+            all_rows.extend(rows)
+        if not all_rows:
+            return pd.DataFrame()
+        df = pd.DataFrame(all_rows).set_index("timestamp")
+        df.index = pd.to_datetime(df.index, utc=True)
+        return df.sort_index()
+
     def is_ready(self, symbol: str, min_bars: int = 200) -> bool:
         return len(self._data.get(symbol, [])) >= min_bars

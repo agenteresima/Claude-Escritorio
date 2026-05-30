@@ -81,11 +81,20 @@ class BacktestResult:
 
 def _compute_metrics(trades: list[Trade], equity: pd.Series,
                      initial_capital: float) -> dict:
-    if not trades:
-        return {}
+    _empty = {
+        "total_return_pct": (equity.iloc[-1] / initial_capital - 1) * 100
+                            if len(equity) else 0.0,
+        "cagr": 0.0, "sharpe": 0.0, "sortino": 0.0,
+        "max_drawdown_pct": 0.0, "calmar": 0.0,
+        "win_rate": 0.0, "profit_factor": 0.0, "total_trades": 0,
+        "avg_trade_pct": 0.0, "best_trade_pct": 0.0, "worst_trade_pct": 0.0,
+    }
 
     pnl_list = [t.pnl for t in trades if not t.is_open]
     pnl_pct  = [t.pnl_pct for t in trades if not t.is_open]
+
+    if not pnl_list:
+        return _empty
 
     wins  = [p for p in pnl_list if p > 0]
     losses= [p for p in pnl_list if p <= 0]

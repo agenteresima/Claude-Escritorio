@@ -63,8 +63,8 @@ def hammer(df: pd.DataFrame, body_ratio: float = 0.3) -> pd.Series:
     lower = _lower_wick(df)
     upper = _upper_wick(df)
     small_body  = body <= rng * body_ratio
-    long_lower  = lower >= body * 2.0
-    small_upper = upper <= body * 0.5
+    long_lower  = lower >= rng * 0.5          # lower wick ≥ 50% of range
+    small_upper = upper <= rng * 0.2          # upper wick ≤ 20% of range
     return small_body & long_lower & small_upper & (rng > 0)
 
 
@@ -75,8 +75,8 @@ def shooting_star(df: pd.DataFrame, body_ratio: float = 0.3) -> pd.Series:
     upper = _upper_wick(df)
     lower = _lower_wick(df)
     small_body  = body <= rng * body_ratio
-    long_upper  = upper >= body * 2.0
-    small_lower = lower <= body * 0.5
+    long_upper  = upper >= rng * 0.5          # upper wick ≥ 50% of range
+    small_lower = lower <= rng * 0.2          # lower wick ≤ 20% of range
     return small_body & long_upper & small_lower & (rng > 0)
 
 

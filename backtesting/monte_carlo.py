@@ -76,8 +76,8 @@ def run_monte_carlo(
     Shuffle trade order N times and recompute metrics.
     """
     closed_trades = [t for t in result.trades if not t.is_open]
-    if len(closed_trades) < 10:
-        raise ValueError("Need at least 10 closed trades for Monte Carlo.")
+    if len(closed_trades) < 2:
+        raise ValueError("Need at least 2 closed trades for Monte Carlo.")
 
     trade_pnls   = np.array([t.pnl for t in closed_trades])
     real_eq      = _equity_from_trades(trade_pnls.tolist(), initial_capital)

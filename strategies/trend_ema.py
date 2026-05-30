@@ -12,6 +12,7 @@ import numpy as np
 
 from strategies.base import BaseStrategy
 from risk.manager import RiskManager
+from utils.indicators import _ema
 
 
 class TrendEMAStrategy(BaseStrategy):
@@ -25,6 +26,12 @@ class TrendEMAStrategy(BaseStrategy):
         self.fast = fast
         self.slow = slow
         self.adx_threshold = adx_threshold
+
+    def prepare(self, df: pd.DataFrame) -> pd.DataFrame:
+        df = super().prepare(df)
+        for p in set([self.fast, self.slow]) - {9, 21, 50, 100, 200}:
+            df[f"ema_{p}"] = _ema(df["close"], p)
+        return df
 
     def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
         df = df.copy()

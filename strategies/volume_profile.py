@@ -21,8 +21,58 @@ from strategies.base import BaseStrategy
 from risk.manager import RiskManager
 
 
-def compute_volume_profile(df: pd.DataFrame, n_bins: int = 50,
-                            period: int = 200) -> pd.DataFrame:
+def compute_volume_profile(df: pd.DataFrame,
+                            bins: int = 50,
+                            n_bins: int = None,
+                            value_area_pct: float = 0.70) -> tuple:
+    """
+    Compute Volume Profile for the entire DataFrame.
+    Returns (poc, vah, val) as scalar floats.
+
+    poc = Point of Control (price with most volume)
+    vah = Value Area High  (top of 70% volume zone)
+    val = Value Area Low   (bottom of 70% volume zone)
+    """
+    n = n_bins if n_bins is not None else bins
+    lo, hi  = df["low"].min(), df["high"].max()
+    edges   = np.linspace(lo, hi, n + 1)
+    vols    = np.zeros(n)
+
+    for _, row in df.iterrows():
+        bar_lo  = row["low"]
+        bar_hi  = row["high"]
+        bar_vol = row["volume"]
+        spans   = np.where((edges[:-1] <= bar_hi) & (edges[1:] >= bar_lo))[0]
+        if len(spans):
+            vols[spans] += bar_vol / len(spans)
+
+    poc_idx   = int(np.argmax(vols))
+    poc_price = (edges[poc_idx] + edges[poc_idx + 1]) / 2
+
+    total_vol   = vols.sum()
+    target_vol  = total_vol * value_area_pct
+    accum       = vols[poc_idx]
+    lo_idx = hi_idx = poc_idx
+
+    while accum < target_vol:
+        up_vol = vols[hi_idx + 1] if hi_idx + 1 < n else 0
+        dn_vol = vols[lo_idx - 1] if lo_idx - 1 >= 0 else 0
+        if up_vol >= dn_vol and hi_idx + 1 < n:
+            hi_idx += 1
+            accum  += up_vol
+        elif lo_idx - 1 >= 0:
+            lo_idx -= 1
+            accum  += dn_vol
+        else:
+            break
+
+    vah = (edges[hi_idx] + edges[hi_idx + 1]) / 2
+    val = (edges[lo_idx] + edges[lo_idx + 1]) / 2
+    return poc_price, vah, val
+
+
+def _compute_rolling_volume_profile(df: pd.DataFrame, n_bins: int = 50,
+                                     period: int = 200) -> pd.DataFrame:
     """
     Compute rolling Volume Profile: POC, VAH, VAL for each bar
     based on the last `period` candles.
@@ -104,13 +154,13 @@ class VolumeProfileStrategy(BaseStrategy):
         df = super().prepare(df)
         from loguru import logger
         logger.debug("Computing volume profile (may take a moment)...")
-        return compute_volume_profile(df, self.n_bins, self.period)
+        return _compute_rolling_volume_profile(df, self.n_bins, self.period)
 
     def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
         df = df.copy()
 
         if "vp_poc" not in df.columns:
-            df = compute_volume_profile(df, self.n_bins, self.period)
+            df = _compute_rolling_volume_profile(df, self.n_bins, self.period)
 
         poc = df["vp_poc"]
         vah = df["vp_vah"]

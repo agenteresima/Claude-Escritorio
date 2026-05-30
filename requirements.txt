@@ -3,7 +3,7 @@ ccxt>=4.2.0
 yfinance>=0.2.36
 pandas>=2.1.0
 numpy>=1.26.0
-pandas-ta>=0.3.14b
+# pandas-ta>=0.3.14b  # replaced with built-in pure-numpy implementations
 
 # Backtesting
 backtesting>=0.3.3

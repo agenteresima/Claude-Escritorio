@@ -63,10 +63,7 @@ class RiskManager:
         price_risk = abs(entry - stop)
         if price_risk == 0:
             return 0.0
-        units = risk_amount / price_risk
-        # Cap at max position size
-        max_units = (self.portfolio.capital * self.cfg.max_position_size_pct) / entry
-        return min(units, max_units)
+        return risk_amount / price_risk
 
     def kelly_size(self, win_rate: float, avg_win: float, avg_loss: float) -> float:
         """
@@ -123,10 +120,11 @@ class RiskManager:
             logger.debug(f"Max open trades ({self.cfg.max_open_trades}) reached.")
             return False
 
-        rr = abs(signal.take_profit - signal.entry_price) / abs(
-            signal.entry_price - signal.stop_loss + 1e-9
-        )
-        if rr < self.cfg.risk_reward_ratio:
+        denom = abs(signal.entry_price - signal.stop_loss)
+        if denom < 1e-9:
+            return False
+        rr = abs(signal.take_profit - signal.entry_price) / denom
+        if rr < self.cfg.risk_reward_ratio - 1e-9:
             logger.debug(f"R/R {rr:.2f} below minimum {self.cfg.risk_reward_ratio}")
             return False
 

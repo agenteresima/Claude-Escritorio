@@ -38,16 +38,16 @@ class GracefulShutdown:
     def _handle(self, signum, frame):
         sig_name = "SIGTERM" if signum == signal.SIGTERM else "SIGINT"
         logger.warning(f"Received {sig_name} — initiating graceful shutdown...")
-        self.requested = True
         self._run_shutdown()
+        sys.exit(0)
 
     def _run_shutdown(self):
+        self.requested = True
         set_state("paused", True)
         notify("🛑 *Trading Bot Shutting Down*\nReceived shutdown signal. Trading paused.")
 
         if self.close_positions and self.pos_manager:
             logger.warning("Closing all open positions...")
-            # Price at close is unknown here — mark for manual review
             for sym in list(self.pos_manager.positions.keys()):
                 logger.warning(f"  Open position NOT closed (no live price): {sym}")
 
@@ -58,7 +58,6 @@ class GracefulShutdown:
                 logger.error(f"Shutdown callback error: {e}")
 
         logger.info("Shutdown complete. Exiting.")
-        sys.exit(0)
 
     # ── Async version ────────────────────────────────────────────────────────
 

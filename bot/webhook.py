@@ -70,8 +70,17 @@ def _normalise_symbol(raw: str) -> str:
     return raw
 
 
-def _verify_secret(secret: str):
-    if not hmac.compare_digest(secret, WEBHOOK_SECRET):
+def _verify_secret(expected: str, provided: str) -> bool:
+    if not provided:
+        return False
+    try:
+        return hmac.compare_digest(expected, provided)
+    except TypeError:
+        return False
+
+
+def _require_secret(provided: str) -> None:
+    if not _verify_secret(WEBHOOK_SECRET, provided):
         raise HTTPException(status_code=403, detail="Invalid webhook secret")
 
 
@@ -79,7 +88,7 @@ def _verify_secret(secret: str):
 
 @app.post("/webhook/tradingview")
 async def tradingview_alert(alert: TVAlert, request: Request):
-    _verify_secret(alert.secret)
+    _require_secret(alert.secret)
 
     symbol = _normalise_symbol(alert.symbol)
     action = alert.action.lower()

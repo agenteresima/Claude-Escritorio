@@ -109,7 +109,7 @@ class PortfolioBacktester:
                 logger.error(f"Signal generation failed for {pair}: {e}")
 
         # Step 2: compute rolling correlation on close prices
-        closes = pd.DataFrame({p: data[p]["close"] for p in all_signals}).fillna(method="ffill")
+        closes = pd.DataFrame({p: data[p]["close"] for p in all_signals}).ffill()
         corr_series = closes.rolling(100).corr()  # rolling 100-bar correlation
 
         # Step 3: run individual backtests (with correlation filter)
@@ -125,7 +125,7 @@ class PortfolioBacktester:
         # Step 4: combine equity curves (sum)
         equity_frames = [r.equity_curve.rename(p) for p, r in pair_results.items()]
         if equity_frames:
-            aligned    = pd.concat(equity_frames, axis=1).fillna(method="ffill").fillna(self.initial_capital / len(pairs))
+            aligned    = pd.concat(equity_frames, axis=1).ffill().fillna(self.initial_capital / len(pairs))
             combined   = aligned.sum(axis=1)
         else:
             combined = pd.Series([self.initial_capital])

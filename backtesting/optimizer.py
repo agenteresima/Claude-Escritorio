@@ -86,7 +86,11 @@ def grid_search(
             logger.debug(f"Combo {params} failed: {e}")
 
     results.sort(key=lambda r: r.combined_score, reverse=True)
-    return results
+    rows = []
+    for r in results:
+        rows.append({"params": r.params, **r.out_of_sample,
+                     "combined_score": r.combined_score})
+    return pd.DataFrame(rows)
 
 
 def walk_forward_test(
@@ -113,10 +117,10 @@ def walk_forward_test(
         test  = df.iloc[train_end:test_end]
 
         top = grid_search(strategy_cls, train, param_grid, backtest_cfg, max_combos=200)
-        if not top:
+        if top.empty:
             continue
 
-        best_params = top[0].params
+        best_params = top.iloc[0]["params"]
         from risk.manager import RiskManager
         rm       = RiskManager(initial_capital=backtest_cfg.initial_capital)
         strategy = strategy_cls(rm, **best_params)
@@ -131,7 +135,7 @@ def walk_forward_test(
     return pd.DataFrame(oos_results)
 
 
-def print_top_results(results: list[OptimizationResult], top_n: int = 10):
+def print_top_results(results: pd.DataFrame, top_n: int = 10):
     console = Console()
     table   = Table(title="Top Optimisation Results (Out-of-Sample)")
 
@@ -143,16 +147,15 @@ def print_top_results(results: list[OptimizationResult], top_n: int = 10):
     table.add_column("MaxDD%",    style="red")
     table.add_column("PF",        style="blue")
 
-    for rank, r in enumerate(results[:top_n], 1):
-        m = r.out_of_sample
+    for rank, (_, row) in enumerate(results.head(top_n).iterrows(), 1):
         table.add_row(
             str(rank),
-            str(r.params),
-            f"{r.combined_score:.4f}",
-            f"{m.get('sharpe', 0):.2f}",
-            f"{m.get('win_rate', 0):.1f}%",
-            f"{m.get('max_drawdown_pct', 0):.1f}%",
-            f"{m.get('profit_factor', 0):.2f}",
+            str(row.get("params", {})),
+            f"{row.get('combined_score', 0):.4f}",
+            f"{row.get('sharpe', 0):.2f}",
+            f"{row.get('win_rate', 0):.1f}%",
+            f"{row.get('max_drawdown_pct', 0):.1f}%",
+            f"{row.get('profit_factor', 0):.2f}",
         )
 
     console.print(table)

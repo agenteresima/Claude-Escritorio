@@ -31,13 +31,9 @@ class SuperTrendStrategy(BaseStrategy):
         st_col   = next((c for c in df.columns if c.startswith("SUPERT_") and "d" not in c and "l" not in c and "s" not in c), None)
 
         if st_d_col is None:
-            # Recompute in case prepare() used different params
-            import pandas_ta as ta
-            st = ta.supertrend(df["high"], df["low"], df["close"],
-                               length=self.period, multiplier=self.multiplier)
-            if st is not None:
-                df = pd.concat([df, st], axis=1)
-                st_d_col = next((c for c in df.columns if c.startswith("SUPERTd_")), None)
+            from utils.indicators import _compute_supertrend
+            _compute_supertrend(df, length=self.period, multiplier=self.multiplier)
+            st_d_col = next((c for c in df.columns if c.startswith("SUPERTd_")), None)
 
         if st_d_col is None:
             df["signal"] = 0
