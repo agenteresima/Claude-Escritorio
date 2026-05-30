@@ -46,14 +46,28 @@ services:
       - ./reports:/app/reports
     command: python reports/dashboard.py
 
-  # ── Optional: Nginx reverse proxy ────────────────────────────────────────────
-  # nginx:
-  #   image: nginx:alpine
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   volumes:
-  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
-  #   depends_on:
-  #     - api
-  #     - dashboard
+  # ── Webhook receiver (TradingView alerts) ────────────────────────────────────
+  webhook:
+    build: .
+    container_name: trading_webhook
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./data:/app/data
+    command: uvicorn bot.webhook:app --host 0.0.0.0 --port 8001
+    depends_on:
+      - trader
+
+  # ── Telegram bot ──────────────────────────────────────────────────────────────
+  telegram:
+    build: .
+    container_name: trading_telegram
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    command: python bot/telegram_bot.py
+    depends_on:
+      - trader

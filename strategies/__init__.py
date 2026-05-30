@@ -8,6 +8,8 @@ from .vwap_bounce import VWAPBounceStrategy
 from .ichimoku import IchimokuStrategy
 from .regime_adaptive import RegimeAdaptiveStrategy
 from .ensemble import EnsembleStrategy
+from .grid_trading import GridTradingStrategy
+from .dca import DCAStrategy
 
 STRATEGIES = {
     "trend_ema":       TrendEMAStrategy,
@@ -20,4 +22,6 @@ STRATEGIES = {
     "ichimoku":        IchimokuStrategy,
     "regime_adaptive": RegimeAdaptiveStrategy,
     "ensemble":        EnsembleStrategy,
+    "grid_trading":    GridTradingStrategy,
+    "dca":             DCAStrategy,
 }

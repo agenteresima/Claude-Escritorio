@@ -296,10 +296,40 @@ def stats():
 
 
 @cli.command()
-@click.option("--dry-run/--live", default=True)
+@click.option("--strategy", "-s", default=None)
+@click.option("--pair",     "-p", default="BTC/USDT")
+@click.option("--start",          default="2021-01-01")
+@click.option("--trials",         default=100, type=int)
+def bayesian_optimize(strategy, pair, start, trials):
+    """Bayesian hyperparameter optimization (Optuna) — smarter than grid search."""
+    from data.fetcher import fetch_ohlcv_ccxt
+    from backtesting.optuna_optimizer import optimize, PARAM_SPACES
+    from strategies import STRATEGIES
+    from config import CONFIG
+
+    available = list(PARAM_SPACES.keys())
+    if strategy is None or strategy not in available:
+        click.echo(f"Available strategies for Optuna: {', '.join(available)}")
+        if strategy is not None:
+            click.echo(f"'{strategy}' not supported yet.")
+        return
+
+    df   = fetch_ohlcv_ccxt(pair, CONFIG.timeframe, start)
+    result = optimize(STRATEGIES[strategy], df, strategy_name=strategy, n_trials=trials)
+
+    click.echo(f"\nBest params : {result['best_params']}")
+    click.echo(f"In-sample score : {result['in_sample_score']:.4f}")
+    m = result["oos_metrics"]
+    click.echo(f"OOS Sharpe  : {m.get('sharpe',0):.2f}")
+    click.echo(f"OOS Return  : {m.get('total_return_pct',0):.1f}%")
+    click.echo(f"OOS Max DD  : {m.get('max_drawdown_pct',0):.1f}%")
+
+
+@cli.command()
+@click.option("--dry-run/--async-live", default=True)
 def live(dry_run):
-    """Start the live trading loop."""
-    from bot.live_trader import LiveTrader
+    """Start the live trading loop (async WebSocket mode by default)."""
+    import asyncio
     from config import CONFIG
 
     if not dry_run:
@@ -308,8 +338,17 @@ def live(dry_run):
         )
 
     CONFIG.dry_run = dry_run
-    trader = LiveTrader(CONFIG)
-    trader.run()
+
+    if dry_run:
+        # Sync fallback for paper trading
+        from bot.live_trader import LiveTrader
+        trader = LiveTrader(CONFIG)
+        trader.run()
+    else:
+        # Full async mode for live trading
+        from bot.async_trader import run_all_services
+        click.echo("Starting async trader + API (8000) + Webhook (8001)...")
+        asyncio.run(run_all_services(CONFIG))
 
 
 @cli.command()
