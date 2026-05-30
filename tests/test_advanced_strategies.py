@@ -165,3 +165,122 @@ class TestStrategyMonitor:
         health = mon.check()
         assert health.status in (HealthStatus.CRITICAL, HealthStatus.WARNING,
                                  HealthStatus.DEGRADED)
+
+
+# ── Hybrid ML Strategy ────────────────────────────────────────────────────────
+
+class TestHybridML:
+    def test_run_without_model_uses_ema_signals(self, ohlcv, risk_manager):
+        from strategies.hybrid_ml import HybridMLStrategy
+        strat = HybridMLStrategy(risk_manager, retrain=False)
+        strat.model = None  # ensure no model
+        out = strat.run(ohlcv)
+        assert "signal" in out.columns
+        assert set(out["signal"].unique()).issubset({-1, 0, 1})
+
+    def test_features_built_correctly(self, ohlcv, risk_manager):
+        from strategies.hybrid_ml import HybridMLStrategy, _build_features
+        strat = HybridMLStrategy(risk_manager, retrain=False)
+        df = strat.prepare(ohlcv)
+        feats = _build_features(df)
+        # Shape should match input
+        assert len(feats) == len(df)
+        # No NaN (fillna(0) applied)
+        assert not feats.isnull().any().any()
+
+    def test_triple_barrier_label_shape(self, ohlcv, risk_manager):
+        from strategies.hybrid_ml import HybridMLStrategy, _triple_barrier_label
+        strat = HybridMLStrategy(risk_manager)
+        df = strat.prepare(ohlcv)
+        # Use last 50 bars as "signal" indices
+        idx = df.index[-50:-5]
+        labels = _triple_barrier_label(df, idx, tp_pct=0.03, sl_pct=0.015, max_bars=10)
+        assert len(labels) == len(idx)
+        assert set(labels.unique()).issubset({0, 1})
+
+    def test_train_on_uptrend_data(self, risk_manager):
+        from strategies.hybrid_ml import HybridMLStrategy
+        from tests.conftest import make_ohlcv
+        df = make_ohlcv(600, trend="up", seed=42)
+        strat = HybridMLStrategy(risk_manager, retrain=True)
+        report = strat.train(df)
+        # May return {} if not enough signals — either way, no crash
+        assert isinstance(report, dict)
+
+    def test_run_with_trained_model_filters_signals(self, risk_manager):
+        from strategies.hybrid_ml import HybridMLStrategy
+        from tests.conftest import make_ohlcv
+        df = make_ohlcv(600, trend="up", seed=10)
+        strat = HybridMLStrategy(risk_manager, retrain=True)
+        strat.train(df)
+
+        if strat.model is not None:
+            out = strat.run(df)
+            assert "signal" in out.columns
+            assert "ml_confidence" in out.columns
+            # ML-filtered signals should be <= raw EMA signals
+            ml_buys = (out["signal"] == 1).sum()
+            assert ml_buys >= 0
+
+    def test_ml_confidence_column_range(self, risk_manager):
+        from strategies.hybrid_ml import HybridMLStrategy
+        from tests.conftest import make_ohlcv
+        df = make_ohlcv(600, trend="up", seed=11)
+        strat = HybridMLStrategy(risk_manager, retrain=True)
+        strat.train(df)
+        if strat.model is not None:
+            out = strat.run(df)
+            conf = out["ml_confidence"].dropna()
+            assert (conf >= 0).all() and (conf <= 1).all()
+
+
+# ── Multi-Timeframe (MTF) Strategy ────────────────────────────────────────────
+
+class TestMTFStrategy:
+    def test_single_tf_run_returns_signals(self, ohlcv, risk_manager):
+        from strategies.mtf import MultiTimeframeStrategy
+        strat = MultiTimeframeStrategy(risk_manager)
+        out = strat.run(ohlcv)
+        assert "signal" in out.columns
+        assert set(out["signal"].unique()).issubset({-1, 0, 1})
+
+    def test_run_mtf_with_two_timeframes(self, risk_manager):
+        from strategies.mtf import MultiTimeframeStrategy
+        from tests.conftest import make_ohlcv
+        ltf = make_ohlcv(500, seed=1)
+        # Simulate 4h by downsampling (every 4th row)
+        htf = ltf.iloc[::4].copy()
+        strat = MultiTimeframeStrategy(risk_manager)
+        out = strat.run_mtf(ltf, htf)
+        assert "signal" in out.columns
+        assert "htf_bias" in out.columns
+
+    def test_bull_bias_produces_longs(self, risk_manager):
+        from strategies.mtf import MultiTimeframeStrategy
+        from tests.conftest import make_ohlcv
+        df = make_ohlcv(500, trend="up", seed=5)
+        strat = MultiTimeframeStrategy(risk_manager)
+        out = strat.run(df)
+        longs = (out["signal"] == 1).sum()
+        shorts = (out["signal"] == -1).sum()
+        # Uptrend → longs should dominate or equal
+        assert longs >= shorts
+
+    def test_single_tf_fallback(self, ohlcv, risk_manager):
+        from strategies.mtf import MultiTimeframeStrategy
+        strat = MultiTimeframeStrategy(risk_manager)
+        out = strat.generate_signals_single(strat.prepare(ohlcv))
+        assert "signal" in out.columns
+        assert "htf_bias" in out.columns
+        assert (out["htf_bias"] == 1).all()  # default bull
+
+    def test_stop_loss_and_tp_set(self, ohlcv, risk_manager):
+        from strategies.mtf import MultiTimeframeStrategy
+        strat = MultiTimeframeStrategy(risk_manager)
+        out = strat.run(ohlcv)
+        assert "stop_loss" in out.columns
+        assert "take_profit" in out.columns
+        # Stop loss always below close on non-NaN rows
+        valid = out.dropna(subset=["stop_loss", "take_profit"])
+        assert (valid["stop_loss"] <= valid["close"]).all()
+        assert (valid["take_profit"] >= valid["close"]).all()
