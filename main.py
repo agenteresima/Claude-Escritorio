@@ -359,5 +359,112 @@ def dashboard():
     app.run(debug=False, port=8050)
 
 
+@cli.command()
+@click.option("--strategy", "-s", default=None)
+@click.option("--pair",     "-p", default="BTC/USDT")
+@click.option("--start",          default="2021-01-01")
+@click.option("--end",            default="2024-12-31")
+@click.option("--capital",        default=10_000.0, type=float)
+def benchmark(strategy, pair, start, end, capital):
+    """Compare bot performance vs BTC/ETH buy-and-hold and S&P 500."""
+    from data.fetcher import fetch_ohlcv_ccxt
+    from risk.manager import RiskManager
+    from backtesting.engine import BacktestEngine
+    from reports.benchmark import run_benchmark
+    from strategies import STRATEGIES
+    from config import CONFIG
+
+    strat_name = strategy or CONFIG.active_strategy
+    if strat_name not in STRATEGIES:
+        click.echo(f"Unknown strategy '{strat_name}'. Available: {', '.join(STRATEGIES)}")
+        return
+
+    df      = fetch_ohlcv_ccxt(pair, CONFIG.timeframe, start, end)
+    rm      = RiskManager(initial_capital=capital)
+    strat   = STRATEGIES[strat_name](rm)
+    sig_df  = strat.run(df)
+    engine  = BacktestEngine(CONFIG.backtest, rm)
+    result  = engine.run(sig_df, symbol=pair)
+
+    cmp = run_benchmark(result.equity_curve, start=start, end=end, initial=capital)
+    click.echo("\n" + cmp.to_string(index=False))
+    click.echo(f"\nBenchmark chart saved to {CONFIG.reports_dir}/benchmark_comparison.html")
+
+
+@cli.command()
+@click.option("--tag", default="", help="Optional tag appended to backup filename")
+def backup(tag):
+    """Backup the trading database."""
+    from data.backup import backup as do_backup
+    path = do_backup(tag=tag)
+    if path and path.exists():
+        click.echo(f"Backup created: {path}")
+    else:
+        click.echo("No database to backup yet (no trades recorded).")
+
+
+@cli.command()
+@click.option("--list-backups", "list_", is_flag=True, help="List available backups")
+@click.option("--from-file",    default=None, help="Restore from specific backup file path")
+def restore(list_, from_file):
+    """List or restore from a database backup."""
+    from data.backup import list_backups, restore as do_restore
+    from pathlib import Path
+
+    if list_:
+        backups = list_backups()
+        if not backups:
+            click.echo("No backups found.")
+            return
+        click.echo(f"\n{'File':<35} {'Size':>8}  Modified")
+        click.echo("-" * 65)
+        for b in backups:
+            click.echo(f"{b['file']:<35} {b['size_kb']:>6.1f} KB  {b['modified']}")
+        return
+
+    if from_file:
+        do_restore(Path(from_file))
+        click.echo(f"Database restored from {from_file}")
+    else:
+        click.echo("Use --list-backups to see available backups or --from-file PATH to restore.")
+
+
+@cli.command()
+@click.option("--format", "fmt", default="excel",
+              type=click.Choice(["excel", "csv"]), help="Export format")
+@click.option("--output", "-o", default=None, help="Output file path (optional)")
+def export(fmt, output):
+    """Export trade history to Excel or CSV."""
+    from pathlib import Path
+    output_path = Path(output) if output else None
+
+    if fmt == "excel":
+        from data.backup import export_trades_excel
+        path = export_trades_excel(output_path)
+    else:
+        from data.backup import export_trades_csv
+        path = export_trades_csv(output_path)
+
+    click.echo(f"Trades exported to: {path}")
+
+
+@cli.command("weekly-report")
+@click.option("--strategy", "-s", default=None)
+def weekly_report(strategy):
+    """Generate and send the weekly performance report now."""
+    from reports.weekly_report import generate_weekly_report
+    msg = generate_weekly_report(strategy=strategy)
+    click.echo("\nReport sent via Telegram:")
+    click.echo(msg)
+
+
+@cli.command("scheduler")
+def scheduler():
+    """Start the weekly report scheduler (runs every Monday 09:00 UTC)."""
+    from reports.weekly_report import start_scheduler
+    click.echo("Weekly report scheduler started (Monday 09:00 UTC). Press Ctrl+C to stop.")
+    start_scheduler()
+
+
 if __name__ == "__main__":
     cli()

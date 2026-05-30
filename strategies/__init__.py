@@ -10,18 +10,24 @@ from .regime_adaptive import RegimeAdaptiveStrategy
 from .ensemble import EnsembleStrategy
 from .grid_trading import GridTradingStrategy
 from .dca import DCAStrategy
+from .macd_divergence import MACDDivergenceStrategy
+from .heikin_ashi import HeikinAshiStrategy
+from .volume_profile import VolumeProfileStrategy
 
 STRATEGIES = {
-    "trend_ema":       TrendEMAStrategy,
-    "mean_reversion":  MeanReversionStrategy,
-    "breakout":        BreakoutStrategy,
-    "hybrid_ml":       HybridMLStrategy,
-    "supertrend":      SuperTrendStrategy,
-    "mtf":             MultiTimeframeStrategy,
-    "vwap_bounce":     VWAPBounceStrategy,
-    "ichimoku":        IchimokuStrategy,
-    "regime_adaptive": RegimeAdaptiveStrategy,
-    "ensemble":        EnsembleStrategy,
-    "grid_trading":    GridTradingStrategy,
-    "dca":             DCAStrategy,
+    "trend_ema":        TrendEMAStrategy,
+    "mean_reversion":   MeanReversionStrategy,
+    "breakout":         BreakoutStrategy,
+    "hybrid_ml":        HybridMLStrategy,
+    "supertrend":       SuperTrendStrategy,
+    "mtf":              MultiTimeframeStrategy,
+    "vwap_bounce":      VWAPBounceStrategy,
+    "ichimoku":         IchimokuStrategy,
+    "regime_adaptive":  RegimeAdaptiveStrategy,
+    "ensemble":         EnsembleStrategy,
+    "grid_trading":     GridTradingStrategy,
+    "dca":              DCAStrategy,
+    "macd_divergence":  MACDDivergenceStrategy,
+    "heikin_ashi":      HeikinAshiStrategy,
+    "volume_profile":   VolumeProfileStrategy,
 }
