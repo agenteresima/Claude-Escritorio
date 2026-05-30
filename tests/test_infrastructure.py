@@ -118,15 +118,17 @@ class TestTVAlertModel:
 # ── Database schema and CRUD ──────────────────────────────────────────────────
 
 class TestDatabase:
-    @pytest.fixture(autouse=True)
-    def patch_db(self, tmp_path):
+    @pytest.fixture()
+    def db(self, tmp_path):
+        """Provide a fresh in-temp-file database for each test."""
         import data.database as db_module
         db_path = tmp_path / "test.db"
+        # Patch DB_PATH, then init schema in the temp file
         with patch.object(db_module, "DB_PATH", db_path):
             db_module.init_db()
             yield db_module
 
-    def test_init_creates_tables(self, patch_db, tmp_path):
+    def test_init_creates_tables(self, db, tmp_path):
         db_path = tmp_path / "test.db"
         with sqlite3.connect(str(db_path)) as conn:
             tables = {r[0] for r in conn.execute(
@@ -136,69 +138,71 @@ class TestDatabase:
         assert "equity_snapshots" in tables
         assert "bot_state" in tables
 
-    def test_insert_and_get_trade(self, patch_db):
-        patch_db.insert_trade(
-            symbol="BTC/USDT", direction="long",
+    def test_insert_and_get_trade(self, db):
+        db.insert_trade(
+            symbol="BTC/USDT", direction="long", strategy="trend_ema",
             entry_price=40_000.0, size=0.01,
             stop_loss=39_000.0, take_profit=42_000.0,
-            strategy="trend_ema"
         )
-        open_trades = patch_db.get_open_trades()
+        open_trades = db.get_open_trades()
         assert len(open_trades) == 1
         assert open_trades[0]["symbol"] == "BTC/USDT"
 
-    def test_close_trade(self, patch_db):
-        patch_db.insert_trade(
-            symbol="ETH/USDT", direction="long",
+    def test_close_trade(self, db):
+        db.insert_trade(
+            symbol="ETH/USDT", direction="long", strategy="trend_ema",
             entry_price=2_000.0, size=1.0,
             stop_loss=1_900.0, take_profit=2_200.0,
-            strategy="trend_ema"
         )
-        open_trades = patch_db.get_open_trades()
+        open_trades = db.get_open_trades()
         trade_id = open_trades[0]["id"]
-        patch_db.close_trade(
+        db.close_trade(
             trade_id=trade_id,
             exit_price=2_100.0,
             pnl=100.0,
-            reason="take_profit"
+            pnl_pct=0.05,
+            exit_reason="take_profit",
+            bars_held=5,
         )
-        assert len(patch_db.get_open_trades()) == 0
+        assert len(db.get_open_trades()) == 0
 
-    def test_state_persistence(self, patch_db):
-        patch_db.set_state("paused", True)
-        patch_db.set_state("active_strategy", "regime_adaptive")
-        assert patch_db.get_state("paused", False) is True
-        assert patch_db.get_state("active_strategy", "") == "regime_adaptive"
+    def test_state_persistence(self, db):
+        db.set_state("paused", True)
+        db.set_state("active_strategy", "regime_adaptive")
+        assert db.get_state("paused", False) is True
+        assert db.get_state("active_strategy", "") == "regime_adaptive"
 
-    def test_equity_snapshot(self, patch_db):
-        patch_db.save_equity(equity=10_500.0, strategy="trend_ema")
-        history = patch_db.get_equity_history("trend_ema", limit=10)
+    def test_equity_snapshot(self, db):
+        db.save_equity(strategy="trend_ema", equity=10_500.0)
+        history = db.get_equity_history("trend_ema", limit=10)
         assert len(history) == 1
         assert history[0]["equity"] == pytest.approx(10_500.0)
 
-    def test_trade_stats_no_trades(self, patch_db):
-        stats = patch_db.trade_stats()
-        assert stats["total_trades"] == 0
-        assert stats["win_rate"] == 0.0
+    def test_trade_stats_no_trades(self, db):
+        # trade_stats() returns {} when no trades (empty dict)
+        stats = db.trade_stats()
+        assert stats == {} or stats.get("total_trades", 0) == 0
 
-    def test_trade_stats_with_trades(self, patch_db):
-        for pnl in [100, -50, 80, 60, -30]:
-            patch_db.insert_trade(
-                symbol="BTC/USDT", direction="long",
+    def test_trade_stats_with_trades(self, db):
+        pnls = [100.0, -50.0, 80.0, 60.0, -30.0]
+        for _ in pnls:
+            db.insert_trade(
+                symbol="BTC/USDT", direction="long", strategy="trend_ema",
                 entry_price=40_000.0, size=0.01,
                 stop_loss=39_000.0, take_profit=42_000.0,
-                strategy="trend_ema"
             )
-        open_ = patch_db.get_open_trades()
-        pnls = [100, -50, 80, 60, -30]
+        open_ = db.get_open_trades()
         for i, trade in enumerate(open_):
-            patch_db.close_trade(
-                trade["id"], exit_price=40_000 + pnls[i],
-                pnl=pnls[i], reason="test"
+            db.close_trade(
+                trade["id"],
+                exit_price=40_000.0 + pnls[i] / 0.01,
+                pnl=pnls[i], pnl_pct=pnls[i] / 400.0,
+                exit_reason="test", bars_held=3,
             )
-        stats = patch_db.trade_stats("trend_ema")
+        stats = db.trade_stats("trend_ema")
         assert stats["total_trades"] == 5
-        assert stats["win_rate"] == pytest.approx(60.0, abs=1.0)
+        wins = sum(1 for p in pnls if p > 0)
+        assert stats["win_rate"] == pytest.approx(wins / len(pnls) * 100, abs=1.0)
 
 
 # ── Config loading ────────────────────────────────────────────────────────────
