@@ -11,3 +11,4 @@ reports/*.csv
 logs/
 *.parquet
 .DS_Store
+data/bot.db

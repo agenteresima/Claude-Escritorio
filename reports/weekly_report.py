@@ -126,8 +126,6 @@ tr:nth-child(even){background:#161b22}
 </table>
 </body></html>
 """
-    from jinja2 import Template as T
-
     class Row:
         pass
 
@@ -137,7 +135,7 @@ tr:nth-child(even){background:#161b22}
         r.__dict__.update(t)
         rows.append(r)
 
-    html = T(TMPL).render(
+    html = Template(TMPL).render(
         week=ts.strftime("%Y-%m-%d"),
         strategy=strategy,
         n_trades=len(trades),

@@ -78,7 +78,7 @@ def run_benchmark(
 
     for name, prices in benchmarks.items():
         # Align to bot equity timeframe
-        aligned = prices.reindex(bot_equity.index, method="ffill").dropna()
+        aligned = prices.reindex(bot_equity.index).ffill().dropna()
         if len(aligned) < 10:
             continue
         m = _compute_benchmark_metrics(aligned, initial)

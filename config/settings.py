@@ -50,7 +50,6 @@ class BotConfig(BaseModel):
     ]
     timeframe: str = "1h"
     higher_timeframe: str = "4h"   # For trend filter
-    dry_run: bool = True
 
     # Strategy selection
     active_strategy: str = Field(

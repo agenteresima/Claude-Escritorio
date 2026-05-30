@@ -24,7 +24,7 @@ dependencies = [
     "yfinance>=0.2.36",
     "pandas>=2.1.0",
     "numpy>=1.26.0",
-    "pandas-ta>=0.3.14b",
+    # pandas-ta replaced with built-in pure-numpy indicators (utils/indicators.py)
     "scikit-learn>=1.4.0",
     "xgboost>=2.0.0",
     "lightgbm>=4.3.0",
@@ -61,7 +61,7 @@ dev = [
     "isort>=5.13.0",
     "mypy>=1.9.0",
 ]
-talib = ["ta-lib>=0.4.28"]
+# talib = ["ta-lib>=0.4.28"]  # optional: C library not required, pure-numpy used instead
 
 [project.scripts]
 trading-bot = "main:cli"

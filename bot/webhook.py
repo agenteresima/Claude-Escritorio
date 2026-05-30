@@ -95,6 +95,10 @@ async def tradingview_alert(alert: TVAlert, request: Request):
 
     logger.info(f"TradingView alert: {symbol} {action} @ {alert.price}")
 
+    if symbol not in CONFIG.pairs:
+        logger.warning(f"Symbol {symbol} not in configured pairs — rejected")
+        return {"ok": False, "reason": f"symbol {symbol} not in allowed pairs"}
+
     if get_state("paused", False):
         return {"ok": False, "reason": "bot paused"}
 
