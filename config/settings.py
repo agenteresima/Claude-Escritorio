@@ -53,8 +53,23 @@ class BotConfig(BaseModel):
     dry_run: bool = True
 
     # Strategy selection
-    active_strategy: str = "hybrid_ml"   # Options: trend_ema, mean_reversion, breakout, hybrid_ml
+    active_strategy: str = Field(
+        default_factory=lambda: os.getenv("ACTIVE_STRATEGY", "regime_adaptive")
+    )
     enable_ml: bool = True
+
+    # Telegram
+    telegram_token: str = Field(default_factory=lambda: os.getenv("TELEGRAM_BOT_TOKEN", ""))
+    telegram_chat_id: str = Field(default_factory=lambda: os.getenv("TELEGRAM_CHAT_ID", ""))
+
+    # API
+    api_key: str = Field(default_factory=lambda: os.getenv("API_KEY", "changeme"))
+    webhook_secret: str = Field(default_factory=lambda: os.getenv("WEBHOOK_SECRET", "changeme"))
+
+    # Mode
+    dry_run: bool = Field(
+        default_factory=lambda: os.getenv("DRY_RUN", "true").lower() != "false"
+    )
 
     # Paths
     data_dir: Path = ROOT / "data"
