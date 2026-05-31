@@ -1,4 +1,7 @@
 from .trend_ema import TrendEMAStrategy
+from .momentum_factor import MomentumFactorStrategy
+from .sector_rotation import SectorRotationStrategy
+from .equity_mean_reversion import EquityMeanReversionStrategy
 from .mean_reversion import MeanReversionStrategy
 from .breakout import BreakoutStrategy
 from .hybrid_ml import HybridMLStrategy
@@ -29,5 +32,8 @@ STRATEGIES = {
     "dca":              DCAStrategy,
     "macd_divergence":  MACDDivergenceStrategy,
     "heikin_ashi":      HeikinAshiStrategy,
-    "volume_profile":   VolumeProfileStrategy,
+    "volume_profile":        VolumeProfileStrategy,
+    "momentum_factor":       MomentumFactorStrategy,
+    "sector_rotation":       SectorRotationStrategy,
+    "equity_mean_reversion": EquityMeanReversionStrategy,
 }

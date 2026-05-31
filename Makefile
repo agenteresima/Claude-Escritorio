@@ -7,7 +7,7 @@ PAIR       ?= BTC/USDT
 STRATEGY   ?= regime_adaptive
 START      ?= 2021-01-01
 
-.PHONY: help install test test-fast test-cov backtest compare optimize train live dashboard api benchmark backup restore export weekly lint clean
+.PHONY: help install test test-fast test-cov backtest compare optimize train live dashboard api benchmark backup restore export weekly lint clean sp500 sp500-download portfolio-optimize v2
 
 help:
 	@echo ""
@@ -46,6 +46,13 @@ help:
 	@echo "    make lint          Check code style (flake8)"
 	@echo "    make health        Quick API health check"
 	@echo "    make weekly        Send weekly performance report"
+	@echo ""
+	@echo "  Version 2 — S&P 500:"
+	@echo "    make sp500         10-year backtest (synthetic, offline)"
+	@echo "    make sp500-live    10-year backtest (Yahoo Finance download)"
+	@echo "    make sp500-download Download 50-stock universe data"
+	@echo "    make portfolio-optimize  MPT portfolio optimization"
+	@echo "    make v2            Show all v2 commands and options"
 	@echo ""
 	@echo "  Docker:"
 	@echo "    make docker-up     Build and start all services"
@@ -155,6 +162,52 @@ docker-down:
 
 docker-logs:
 	docker-compose logs -f trader
+
+# ─── Version 2: S&P 500 ──────────────────────────────────────────────────────
+SP500_STRATEGY ?= momentum_factor
+SP500_START    ?= 2015-01-01
+SP500_END      ?= 2024-12-31
+SP500_CAPITAL  ?= 100000
+SP500_TOPN     ?= 20
+
+sp500:
+	$(PYTHON) main.py sp500-backtest \
+	  --strategy $(SP500_STRATEGY) \
+	  --start $(SP500_START) \
+	  --end $(SP500_END) \
+	  --capital $(SP500_CAPITAL) \
+	  --top-n $(SP500_TOPN) \
+	  --no-download
+
+sp500-live:
+	$(PYTHON) main.py sp500-backtest \
+	  --strategy $(SP500_STRATEGY) \
+	  --start $(SP500_START) \
+	  --end $(SP500_END) \
+	  --capital $(SP500_CAPITAL) \
+	  --top-n $(SP500_TOPN) \
+	  --download
+
+sp500-download:
+	$(PYTHON) main.py sp500-download --start $(SP500_START) --end $(SP500_END)
+
+portfolio-optimize:
+	$(PYTHON) main.py portfolio-optimize --method $(or $(METHOD),risk_parity)
+
+v2:
+	@echo ""
+	@echo "  Version 2 — S&P 500 Commands"
+	@echo "  ============================="
+	@echo "  make sp500                  10-year backtest (synthetic data, fast)"
+	@echo "  make sp500-live             10-year backtest (real Yahoo Finance data)"
+	@echo "  make sp500-download         Download & cache S&P 500 OHLCV data"
+	@echo "  make portfolio-optimize     MPT portfolio optimization"
+	@echo ""
+	@echo "  Options:"
+	@echo "    SP500_STRATEGY=momentum_factor|sector_rotation|equity_mean_reversion"
+	@echo "    SP500_TOPN=20 (number of stocks to hold)"
+	@echo "    METHOD=min_variance|max_sharpe|risk_parity"
+	@echo ""
 
 clean:
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null; \

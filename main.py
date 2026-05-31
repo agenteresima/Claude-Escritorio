@@ -466,5 +466,121 @@ def scheduler():
     start_scheduler()
 
 
+# ─── Version 2: S&P 500 commands ──────────────────────────────────────────────
+
+@cli.command("sp500-backtest")
+@click.option("--strategy", "-s", default="momentum_factor",
+              type=click.Choice(["momentum_factor", "sector_rotation", "equity_mean_reversion",
+                                 "trend_ema", "mean_reversion", "breakout"]),
+              help="Strategy to use for stock selection")
+@click.option("--start",   default="2015-01-01", help="Backtest start date")
+@click.option("--end",     default="2024-12-31", help="Backtest end date")
+@click.option("--capital", default=100_000.0, type=float, help="Initial capital (USD)")
+@click.option("--top-n",   default=20, type=int,  help="Number of stocks to hold at once")
+@click.option("--rebal",   default=21, type=int,  help="Rebalancing frequency (trading days)")
+@click.option("--download/--no-download", default=False,
+              help="Download real data from Yahoo Finance (requires internet)")
+@click.option("--report/--no-report", default=True, help="Generate interactive HTML report")
+def sp500_backtest(strategy, start, end, capital, top_n, rebal, download, report):
+    """10-year S&P 500 portfolio backtest with MPT portfolio construction (v2)."""
+    from backtesting.sp500_backtest import run_sp500_backtest
+    from reports.sp500_report import generate_sp500_report
+    from pathlib import Path
+
+    click.echo(f"\n{'='*60}")
+    click.echo(f"  S&P 500 Backtest — Version 2")
+    click.echo(f"  Strategy : {strategy}")
+    click.echo(f"  Period   : {start} → {end}")
+    click.echo(f"  Capital  : ${capital:,.0f}")
+    click.echo(f"  Top-N    : {top_n} stocks | Rebal every {rebal} days")
+    click.echo(f"{'='*60}\n")
+
+    result = run_sp500_backtest(
+        strategy=strategy,
+        start=start,
+        end=end,
+        initial_capital=capital,
+        top_n=top_n,
+        rebalance_days=rebal,
+        download=download,
+    )
+
+    if report:
+        out = Path("reports/sp500_backtest_report.html")
+        generate_sp500_report(result, out)
+        click.echo(f"\nInteractive report: {out.resolve()}")
+
+
+@cli.command("portfolio-optimize")
+@click.option("--method", default="risk_parity",
+              type=click.Choice(["min_variance", "max_sharpe", "risk_parity"]),
+              help="Portfolio optimization method")
+@click.option("--start",    default="2015-01-01")
+@click.option("--end",      default="2024-12-31")
+@click.option("--lookback", default=252, type=int, help="Rolling lookback window (days)")
+@click.option("--rebal",    default=21, type=int,  help="Rebalancing frequency (days)")
+@click.option("--download/--no-download", default=False)
+def portfolio_optimize(method, start, end, lookback, rebal, download):
+    """Run portfolio optimization on S&P 500 universe and show equity curve (v2)."""
+    from utils.portfolio_optimization import rolling_rebalance, compute_portfolio_metrics
+    import numpy as np
+    import pandas as pd
+
+    click.echo(f"\nPortfolio Optimization — {method.replace('_',' ').title()}")
+    click.echo(f"Period: {start} → {end} | Lookback: {lookback}d | Rebal: {rebal}d\n")
+
+    if download:
+        from data.sp500_universe import download_universe, compute_returns_matrix
+        universe = download_universe(start=start, end=end)
+        returns  = compute_returns_matrix(universe)
+    else:
+        click.echo("(Using synthetic returns — pass --download for real data)")
+        np.random.seed(42)
+        n_days  = (pd.to_datetime(end) - pd.to_datetime(start)).days
+        dates   = pd.date_range(start, periods=n_days, freq="B")
+        tickers = ["AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA",
+                   "JPM", "JNJ", "XOM", "PG", "MA", "HD", "KO", "PEP"]
+        returns = pd.DataFrame(
+            np.random.normal(0.0004, 0.015, (len(dates), len(tickers))),
+            index=dates, columns=tickers
+        )
+
+    equity = rolling_rebalance(returns, method=method, lookback=lookback, rebal_freq=rebal)
+
+    # Compute vs equal-weight benchmark
+    ew_equity = rolling_rebalance(returns, method="risk_parity", lookback=lookback, rebal_freq=rebal)
+    bench_ret = returns.mean(axis=1)
+
+    equal_weights = pd.Series(1.0 / len(returns.columns), index=returns.columns)
+    pm = compute_portfolio_metrics(equal_weights, returns, benchmark_returns=bench_ret)
+
+    click.echo(f"{'─'*40}")
+    click.echo(f"  Final Equity     : ${equity.iloc[-1]:,.0f}")
+    click.echo(f"  Total Return     : {(equity.iloc[-1]/10000-1)*100:+.1f}%")
+    click.echo(f"  Annual Return    : {pm.get('annual_return',0)*100:+.1f}%")
+    click.echo(f"  Annual Vol       : {pm.get('annual_vol',0)*100:.1f}%")
+    click.echo(f"  Sharpe Ratio     : {pm.get('sharpe',0):.2f}")
+    click.echo(f"  Max Drawdown     : {pm.get('max_drawdown',0)*100:.1f}%")
+    click.echo(f"  Calmar Ratio     : {pm.get('calmar',0):.2f}")
+    click.echo(f"{'─'*40}")
+
+
+@cli.command("sp500-download")
+@click.option("--start", default="2015-01-01")
+@click.option("--end",   default="2024-12-31")
+@click.option("--tickers", multiple=True, help="Specific tickers (default: full 50-stock universe)")
+def sp500_download(start, end, tickers):
+    """Download and cache 10 years of S&P 500 daily OHLCV data (v2)."""
+    from data.sp500_universe import download_universe, SP500_TICKERS
+    tickers_list = list(tickers) if tickers else SP500_TICKERS
+    click.echo(f"Downloading {len(tickers_list)} tickers ({start} → {end})...")
+    universe = download_universe(tickers_list, start=start, end=end)
+    click.echo(f"\nDownloaded {len(universe)} tickers successfully.")
+    for ticker, df in list(universe.items())[:5]:
+        click.echo(f"  {ticker}: {len(df)} bars ({df.index[0].date()} → {df.index[-1].date()})")
+    if len(universe) > 5:
+        click.echo(f"  ... and {len(universe)-5} more")
+
+
 if __name__ == "__main__":
     cli()
