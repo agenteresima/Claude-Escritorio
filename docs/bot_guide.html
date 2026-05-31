@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Bot — Guía Interactiva</title>
+<style>
+  :root {
+    --bg:       #0d1117;
+    --surface:  #161b22;
+    --border:   #30363d;
+    --accent:   #58a6ff;
+    --green:    #3fb950;
+    --red:      #f85149;
+    --yellow:   #d29922;
+    --purple:   #bc8cff;
+    --text:     #c9d1d9;
+    --muted:    #8b949e;
+    --radius:   10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; }
+
+  /* ─── NAV ─────────────────────────────────────────────────────────────── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,17,23,.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 0; overflow-x: auto;
+  }
+  nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); padding: 1rem 1rem 1rem 0; white-space: nowrap; margin-right: 1rem; }
+  nav a {
+    color: var(--muted); text-decoration: none; padding: .8rem 1rem;
+    white-space: nowrap; font-size: .9rem; border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  nav a:hover, nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ─── SECTIONS ────────────────────────────────────────────────────────── */
+  section { display: none; padding: 2rem; max-width: 1100px; margin: 0 auto; animation: fadeIn .3s ease; }
+  section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  /* ─── HERO ────────────────────────────────────────────────────────────── */
+  .hero {
+    text-align: center; padding: 4rem 1rem 3rem;
+    background: radial-gradient(ellipse at top, #1e2a3a 0%, var(--bg) 70%);
+    border-radius: var(--radius); margin-bottom: 2rem;
+  }
+  .hero h1 { font-size: 2.6rem; font-weight: 800; color: #fff; margin-bottom: .5rem; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 1.5rem; }
+  .badges { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem; }
+  .badge { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: .3rem .9rem; font-size: .8rem; color: var(--muted); }
+  .badge.green  { border-color: var(--green);  color: var(--green); }
+  .badge.blue   { border-color: var(--accent); color: var(--accent); }
+  .badge.purple { border-color: var(--purple); color: var(--purple); }
+
+  /* ─── CARDS ───────────────────────────────────────────────────────────── */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.25rem; transition: border-color .2s, transform .2s;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card .icon { font-size: 2rem; margin-bottom: .5rem; }
+  .card h3 { color: #fff; margin-bottom: .4rem; font-size: 1rem; }
+  .card p { color: var(--muted); font-size: .88rem; }
+
+  /* ─── FLOW ────────────────────────────────────────────────────────────── */
+  .flow { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .flow-step {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.25rem; background: var(--surface);
+    border: 1px solid var(--border); position: relative; cursor: pointer;
+    transition: border-color .2s;
+  }
+  .flow-step:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+  .flow-step:last-child  { border-radius: 0 0 var(--radius) var(--radius); }
+  .flow-step:not(:last-child)::after {
+    content: '▼'; position: absolute; bottom: -18px; left: 50%;
+    transform: translateX(-50%); color: var(--accent); font-size: .9rem; z-index: 1;
+  }
+  .flow-step:hover { border-color: var(--accent); }
+  .flow-step .num {
+    width: 36px; height: 36px; min-width: 36px; border-radius: 50%;
+    background: var(--accent); color: #000; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; font-size: .9rem;
+  }
+  .flow-step .content h4 { color: #fff; margin-bottom: .2rem; }
+  .flow-step .content p  { color: var(--muted); font-size: .88rem; }
+  .flow-step .detail {
+    display: none; margin-top: .6rem; padding: .6rem .8rem;
+    background: rgba(88,166,255,.08); border-left: 3px solid var(--accent);
+    border-radius: 4px; font-size: .85rem; color: var(--text);
+  }
+  .flow-step.open .detail { display: block; }
+  .flow-step .num.red    { background: var(--red); }
+  .flow-step .num.green  { background: var(--green); }
+  .flow-step .num.yellow { background: var(--yellow); }
+  .flow-step .num.purple { background: var(--purple); }
+
+  /* ─── TABLE ───────────────────────────────────────────────────────────── */
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .88rem; }
+  th { background: #1f2937; color: var(--accent); text-align: left; padding: .7rem 1rem; font-weight: 600; }
+  td { padding: .65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); }
+  tr:hover td { background: rgba(255,255,255,.02); }
+  .pos { color: var(--green); font-weight: 600; }
+  .neg { color: var(--red); font-weight: 600; }
+  .tag {
+    display: inline-block; padding: .15rem .55rem; border-radius: 4px;
+    font-size: .75rem; font-weight: 600;
+  }
+  .tag.trend    { background: rgba(88,166,255,.15); color: var(--accent); }
+  .tag.rev      { background: rgba(63,185,80,.15);  color: var(--green); }
+  .tag.break    { background: rgba(210,153,34,.15); color: var(--yellow); }
+  .tag.ml       { background: rgba(188,140,255,.15);color: var(--purple); }
+  .tag.other    { background: rgba(139,148,158,.15);color: var(--muted); }
+
+  /* ─── RISK LAYERS ─────────────────────────────────────────────────────── */
+  .layers { display: flex; flex-direction: column; gap: .5rem; margin: 1.5rem 0; }
+  .layer {
+    display: flex; align-items: center; gap: 1rem;
+    padding: .9rem 1.2rem; background: var(--surface);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    transition: border-color .2s;
+  }
+  .layer:hover { border-color: var(--accent); }
+  .layer-num {
+    width: 32px; height: 32px; min-width: 32px; border-radius: 50%;
+    background: var(--border); display: flex; align-items: center;
+    justify-content: center; font-weight: 700; color: var(--accent); font-size: .9rem;
+  }
+  .layer-bar {
+    flex: 1; height: 6px; border-radius: 3px; background: var(--border); overflow: hidden;
+  }
+  .layer-bar-fill { height: 100%; border-radius: 3px; background: var(--accent); }
+  .layer-label { min-width: 180px; }
+  .layer-label h4 { color: #fff; font-size: .9rem; }
+  .layer-label p  { color: var(--muted); font-size: .78rem; }
+
+  /* ─── CODE ────────────────────────────────────────────────────────────── */
+  pre {
+    background: #010409; border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.25rem; overflow-x: auto; font-size: .85rem; line-height: 1.7;
+    color: #e6edf3; margin: 1rem 0;
+  }
+  .kw  { color: #ff7b72; } /* keyword */
+  .fn  { color: #d2a8ff; } /* function */
+  .st  { color: #a5d6ff; } /* string */
+  .co  { color: #8b949e; } /* comment */
+  .nu  { color: #79c0ff; } /* number */
+
+  /* ─── ACCORDION ───────────────────────────────────────────────────────── */
+  .acc { margin: 1rem 0; }
+  .acc-item { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: .5rem; overflow: hidden; }
+  .acc-header {
+    padding: .9rem 1.2rem; cursor: pointer; display: flex; justify-content: space-between;
+    align-items: center; background: var(--surface); user-select: none;
+    transition: background .2s;
+  }
+  .acc-header:hover { background: #1f2937; }
+  .acc-header h4 { color: #fff; font-size: .95rem; }
+  .acc-header span { color: var(--accent); font-size: 1.2rem; transition: transform .3s; }
+  .acc-item.open .acc-header span { transform: rotate(45deg); }
+  .acc-body { display: none; padding: 1rem 1.2rem; background: rgba(0,0,0,.2); }
+  .acc-item.open .acc-body { display: block; }
+  .acc-body p { color: var(--muted); font-size: .88rem; margin-bottom: .4rem; }
+  .acc-body ul { color: var(--text); font-size: .88rem; padding-left: 1.2rem; }
+  .acc-body li { margin-bottom: .3rem; }
+
+  /* ─── METRICS ─────────────────────────────────────────────────────────── */
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .metric {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1rem; text-align: center;
+  }
+  .metric .val { font-size: 1.9rem; font-weight: 800; color: var(--accent); }
+  .metric .lbl { font-size: .8rem; color: var(--muted); margin-top: .2rem; }
+  .metric.green .val { color: var(--green); }
+  .metric.red   .val { color: var(--red); }
+
+  /* ─── TIPPS ───────────────────────────────────────────────────────────── */
+  .tip {
+    background: rgba(88,166,255,.08); border-left: 4px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: .8rem 1rem; margin: 1rem 0; font-size: .88rem;
+  }
+  .tip.warn { background: rgba(210,153,34,.08); border-color: var(--yellow); }
+  .tip.ok   { background: rgba(63,185,80,.08);  border-color: var(--green); }
+
+  /* ─── HEADINGS ────────────────────────────────────────────────────────── */
+  h2 { color: #fff; font-size: 1.5rem; margin: 1.5rem 0 .75rem; display: flex; align-items: center; gap: .5rem; }
+  h2::before { content: ''; display: block; width: 4px; height: 1.2em; background: var(--accent); border-radius: 2px; }
+  h3 { color: #fff; font-size: 1.1rem; margin: 1.2rem 0 .5rem; }
+  p  { margin-bottom: .8rem; }
+
+  /* ─── SCROLLBAR ───────────────────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">🤖 Trading Bot</span>
+  <a href="#" class="active" onclick="show('intro',this)">Inicio</a>
+  <a href="#" onclick="show('flujo',this)">Flujo de Trabajo</a>
+  <a href="#" onclick="show('estrategias',this)">Estrategias</a>
+  <a href="#" onclick="show('riesgo',this)">Gestión de Riesgo</a>
+  <a href="#" onclick="show('backtest',this)">Backtest</a>
+  <a href="#" onclick="show('uso',this)">Cómo Usarlo</a>
+  <a href="#" onclick="show('arquitectura',this)">Arquitectura</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════ INTRO ══════════════════════ -->
+<section id="intro" class="active">
+  <div class="hero">
+    <h1>Bot de Trading <span>Profesional</span></h1>
+    <p>Sistema algorítmico completo: 15 estrategias, gestión de riesgo multicapa,
+       backtesting con walk-forward y trading en vivo por WebSocket.</p>
+    <div class="badges">
+      <span class="badge blue">15 Estrategias</span>
+      <span class="badge green">99% Test Coverage</span>
+      <span class="badge green">652 Tests</span>
+      <span class="badge purple">Walk-Forward Optimized</span>
+      <span class="badge blue">Monte Carlo</span>
+      <span class="badge blue">Optuna Bayesian</span>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card" onclick="show('flujo', document.querySelector('nav a:nth-child(3)'))">
+      <div class="icon">⚡</div>
+      <h3>Flujo de Trading en Vivo</h3>
+      <p>5 filtros de entrada en cascada antes de abrir cualquier posición. Desde la vela WebSocket hasta la orden en el exchange.</p>
+    </div>
+    <div class="card" onclick="show('estrategias', document.querySelector('nav a:nth-child(4)'))">
+      <div class="icon">📊</div>
+      <h3>15 Estrategias</h3>
+      <p>Tendencia, reversión, ruptura, ML con XGBoost, régimen adaptativo, ensemble y más. Cada una con su caso de uso.</p>
+    </div>
+    <div class="card" onclick="show('riesgo', document.querySelector('nav a:nth-child(5)'))">
+      <div class="icon">🛡️</div>
+      <h3>Gestión de Riesgo en 6 Capas</h3>
+      <p>Stop ATR, fracción fija, Kelly Criterion, portfolio heat, circuit-breaker y filtro de correlación.</p>
+    </div>
+    <div class="card" onclick="show('backtest', document.querySelector('nav a:nth-child(6)'))">
+      <div class="icon">📈</div>
+      <h3>Resultados de Backtest</h3>
+      <p>Comparativa de todas las estrategias en mercado alcista y lateral. Sharpe, drawdown, win rate y más.</p>
+    </div>
+    <div class="card" onclick="show('uso', document.querySelector('nav a:nth-child(7)'))">
+      <div class="icon">🚀</div>
+      <h3>Cómo Usarlo</h3>
+      <p>Comandos CLI, Makefile, Docker. Desde el primer backtest hasta el trading en vivo con papel.</p>
+    </div>
+    <div class="card" onclick="show('arquitectura', document.querySelector('nav a:nth-child(8)'))">
+      <div class="icon">🏗️</div>
+      <h3>Arquitectura del Código</h3>
+      <p>Estructura de módulos, base de datos SQLite, API REST, Telegram Bot, dashboard en tiempo real.</p>
+    </div>
+  </div>
+
+  <div class="tip ok">
+    <strong>✅ Estado actual:</strong> 652 tests pasando · Cobertura 99% · Listo para paper trading y live trading.
+  </div>
+  <div class="tip warn">
+    <strong>⚠️ Aviso:</strong> El rendimiento pasado en backtest no garantiza resultados futuros. Empieza siempre con paper trading (DRY_RUN=true) al menos 2 semanas.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FLUJO ══════════════════════ -->
+<section id="flujo">
+  <h2>Flujo de Trading en Vivo</h2>
+  <p>Cada vez que llega una nueva vela del WebSocket, el bot ejecuta este pipeline de 8 pasos.
+     <strong>Haz clic en cada paso</strong> para ver más detalles.</p>
+
+  <div class="flow">
+    <div class="flow-step" onclick="toggle(this)">
+      <div class="num">1</div>
+      <div class="content">
+        <h4>📡 WebSocket Feed → CandleBuffer</h4>
+        <p>Recibe velas OHLCV en tiempo real desde el exchange (Binance, Bybit, etc.)</p>
+        <div class="detail">
+          El módulo <code>data/websocket_feed.py</code> mantiene un buffer circular de hasta 500 velas.
+          Si el WebSocket falla, cae automáticamente a un modo REST de polling.
+          Los datos llegan como <em>[timestamp, open, high, low, close, volume]</em>.
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" onclick="toggle(this)">
+      <div class="num red">2</div>
+      <div class="content">
+        <h4>🗓️ Filtro de Eventos Macro (EventsFilter)</h4>
+        <p>Bloquea el trading 30 min antes / 15 min después de eventos de alto impacto.</p>
+        <div class="detail">
+          Consulta ForexFactory (caché de 1 hora). Bloquea ante: FOMC, CPI, NFP, PIB, etc.
+          Si el evento está dentro del período de blackout, devuelve <code>(False, "Near CPI…")</code>
+          y el bot no abre ninguna posición. Protege de la volatilidad extrema post-noticia.
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" onclick="toggle(this)">
+      <div class="num red">3</div>
+      <div class="content">
+        <h4>😱 Filtro de Sentimiento (SentimentGate)</h4>
+        <p>Evalúa el Fear &amp; Greed Index y las funding rates para decidir si operar.</p>
+        <div class="detail">
+          <strong>Fear &amp; Greed:</strong> Si el índice está por debajo de 20 (miedo extremo),
+          bloquea longs. Si está por encima de 80 (codicia extrema), bloquea shorts.<br><br>
+          <strong>Funding rates:</strong> Si la tasa de financiación es muy alta (>0.1%), el mercado
+          está sobrecalentado en longs y se reduce la exposición.<br><br>
+          Este filtro se refresca automáticamente cada hora.
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" onclick="toggle(this)">
+      <div class="num yellow">4</div>
+      <div class="content">
+        <h4>📖 Filtro de Order Book (OrderBookFilter)</h4>
+        <p>Analiza el desequilibrio bids/asks para confirmar la dirección de la señal.</p>
+        <div class="detail">
+          Calcula el ratio: <code>bids_vol / (bids_vol + asks_vol)</code>.
+          Si hay más volumen de venta que compra frente a una señal long, la descarta.
+          Threshold configurable (por defecto: 0.55 para long, 0.45 para short).
+          Previene entrar contra la pared de órdenes institucionales.
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" onclick="toggle(this)">
+      <div class="num yellow">5</div>
+      <div class="content">
+        <h4>🕯️ Patrones de Velas (CandlePatterns)</h4>
+        <p>Confirma la señal con patrones de vela: martillo, engulfing, doji, etc.</p>
+        <div class="detail">
+          Añade un <code>candle_score</code> entre -1 y +1 a cada barra.
+          Un score positivo refuerza una señal de compra; negativo, de venta.
+          Incluye: Hammer, Shooting Star, Bullish/Bearish Engulfing, Doji, Inside Bar,
+          Three White Soldiers, Three Black Crows.
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" onclick="toggle(this)">
+      <div class="num yellow">6</div>
+      <div class="content">
+        <h4>🔗 Filtro de Correlación (CorrelationFilter)</h4>
+        <p>Evita abrir posiciones muy correladas entre sí para mantener diversificación.</p>
+        <div class="detail">
+          Calcula la correlación de Pearson entre los retornos de la posición candidata
+          y todas las posiciones abiertas. Si la correlación supera 0.80, rechaza la nueva entrada.
+          Ejemplo: si tienes BTC abierto, no abrirá ETH si su correlación en las últimas 100 velas > 0.80.
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" onclick="toggle(this)">
+      <div class="num green">7</div>
+      <div class="content">
+        <h4>🧠 Estrategia → Señal</h4>
+        <p>La estrategia activa analiza los indicadores y genera una señal: +1 (buy), -1 (sell), 0 (hold).</p>
+        <div class="detail">
+          Cada estrategia sigue el patrón:<br>
+          <code>prepare(df)</code> → añade indicadores (EMA, RSI, ADX, ATR…)<br>
+          <code>generate_signals(df)</code> → aplica la lógica y devuelve columnas
+          <code>signal</code>, <code>stop_loss</code>, <code>take_profit</code>.<br><br>
+          Se puede cambiar la estrategia activa en caliente por API REST o Telegram sin reiniciar el bot.
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-step" onclick="toggle(this)">
+      <div class="num green">8</div>
+      <div class="content">
+        <h4>💰 RiskManager → Orden → Base de Datos → Telegram</h4>
+        <p>Calcula el tamaño de posición, valida la orden y la registra inmediatamente en SQLite.</p>
+        <div class="detail">
+          El RiskManager valida 4 condiciones antes de ejecutar:<br>
+          1) Drawdown actual &lt; límite máximo (15%)<br>
+          2) Número de posiciones abiertas &lt; límite (5)<br>
+          3) Denominador de stop (entry − stop) &gt; 1e-9 (stop no trivial)<br>
+          4) Ratio R/R (risk/reward) ≥ mínimo configurado (2.0)<br><br>
+          Si pasa, calcula el tamaño por ATR (<code>atr_size()</code>),
+          comprueba el Portfolio Heat (máx 6% capital en riesgo total),
+          y envía la orden. Todo queda persistido en SQLite inmediatamente,
+          incluso en dry-run. Se notifica por Telegram.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ ESTRATEGIAS ════════════════ -->
+<section id="estrategias">
+  <h2>Las 15 Estrategias</h2>
+  <p>Cada estrategia está diseñada para un régimen de mercado concreto. Ninguna funciona bien en todos los contextos — por eso existe <code>regime_adaptive</code> y <code>ensemble</code>.</p>
+
+  <div class="acc">
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this.parentElement)">
+        <h4>📈 Estrategias de <strong>Tendencia</strong> — mejor en mercados direccionales</h4>
+        <span>+</span>
+      </div>
+      <div class="acc-body">
+        <table>
+          <tr><th>Estrategia</th><th>Señales clave</th><th>Cuándo brilla</th></tr>
+          <tr>
+            <td><strong>trend_ema</strong></td>
+            <td>Cruce EMA rápida/lenta + ADX &gt; threshold + RSI (40-75) + ratio volumen</td>
+            <td>Tendencias largas y limpias (BTC bull run)</td>
+          </tr>
+          <tr>
+            <td><strong>supertrend</strong></td>
+            <td>Flip de SuperTrend (basado en ATR) + confirmación ADX + filtro RSI</td>
+            <td>Tendencias con pullbacks moderados</td>
+          </tr>
+          <tr>
+            <td><strong>heikin_ashi</strong></td>
+            <td>Flip de velas HA (de roja a verde o viceversa) + N barras de confirmación</td>
+            <td>Tendencias suaves, reduce el ruido visual</td>
+          </tr>
+          <tr>
+            <td><strong>ichimoku</strong></td>
+            <td>Precio sobre/bajo Kumo + cruce Tenkan/Kijun + Chikou por encima del precio</td>
+            <td>Tendencias con estructura clara, timeframes 4h+</td>
+          </tr>
+          <tr>
+            <td><strong>mtf</strong> (multi-timeframe)</td>
+            <td>Alineación de tendencia en 1h y 4h simultáneamente</td>
+            <td>Evita señales contra la tendencia mayor</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this.parentElement)">
+        <h4>🔄 Estrategias de <strong>Reversión</strong> — mejor en mercados laterales</h4>
+        <span>+</span>
+      </div>
+      <div class="acc-body">
+        <table>
+          <tr><th>Estrategia</th><th>Señales clave</th><th>Cuándo brilla</th></tr>
+          <tr>
+            <td><strong>mean_reversion</strong></td>
+            <td>RSI sobrevendido/sobrecomprado + Bollinger Bands + ADX &lt; 25 (no tendencia)</td>
+            <td>Rangos laterales con rebotes predecibles</td>
+          </tr>
+          <tr>
+            <td><strong>vwap_bounce</strong></td>
+            <td>Precio cae bajo VWAP y recupera + RSI cerca de oversold + OBV subiendo</td>
+            <td>Trading intraday institucional (08:00-20:00 UTC)</td>
+          </tr>
+          <tr>
+            <td><strong>macd_divergence</strong></td>
+            <td>Divergencias regulares y ocultas entre precio y MACD (máximos/mínimos discordantes)</td>
+            <td>Agotamientos de tendencia y giros importantes</td>
+          </tr>
+          <tr>
+            <td><strong>dca</strong> (Dollar Cost Averaging)</td>
+            <td>Safety orders escalonadas bajo precio de entrada + scale de volumen</td>
+            <td>Acumulación en caídas con gestión de posición dinámica</td>
+          </tr>
+          <tr>
+            <td><strong>grid_trading</strong></td>
+            <td>N niveles de precio equidistantes, compra en bajos y vende en altos</td>
+            <td>Rangos laterales estables con oscilaciones regulares</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this.parentElement)">
+        <h4>💥 Estrategias de <strong>Ruptura</strong> — mejor en consolidaciones antes de movimiento</h4>
+        <span>+</span>
+      </div>
+      <div class="acc-body">
+        <table>
+          <tr><th>Estrategia</th><th>Señales clave</th><th>Cuándo brilla</th></tr>
+          <tr>
+            <td><strong>breakout</strong></td>
+            <td>Precio rompe el canal Donchian + TTM Squeeze (BB dentro de KC) se libera</td>
+            <td>Consolidaciones largas seguidas de movimiento explosivo</td>
+          </tr>
+          <tr>
+            <td><strong>volume_profile</strong></td>
+            <td>Precio rebota en POC/VAH/VAL (zonas de alto volumen institucional)</td>
+            <td>Soporte/resistencia institucional, swing trading</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this.parentElement)">
+        <h4>🤖 Estrategias <strong>Avanzadas</strong> — adaptativas e inteligentes</h4>
+        <span>+</span>
+      </div>
+      <div class="acc-body">
+        <table>
+          <tr><th>Estrategia</th><th>Cómo funciona</th></tr>
+          <tr>
+            <td><strong>hybrid_ml</strong></td>
+            <td>Entrena XGBoost con etiquetado triple-barrera (Lopez de Prado). Predice si el precio
+                alcanzará take-profit antes que stop-loss. Más de 30 features técnicos.</td>
+          </tr>
+          <tr>
+            <td><strong>regime_adaptive</strong></td>
+            <td>Detecta el régimen actual (TREND_UP, TREND_DOWN, RANGING, BREAKOUT) usando ADX y Bollinger.
+                Luego delega en la sub-estrategia correcta para ese régimen.</td>
+          </tr>
+          <tr>
+            <td><strong>ensemble</strong></td>
+            <td>Ejecuta múltiples estrategias a la vez y entra solo cuando hay mayoría de votos
+                (≥3 de 5). Reduce las falsas señales a costa de menos trades.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>¿Qué estrategia elegir?</h2>
+  <table>
+    <tr><th>Situación</th><th>Estrategia recomendada</th><th>Por qué</th></tr>
+    <tr><td>No sé el régimen actual</td><td><span class="tag ml">regime_adaptive</span></td><td>Detecta automáticamente y delega</td></tr>
+    <tr><td>Mercado claramente alcista</td><td><span class="tag trend">supertrend</span> / <span class="tag trend">macd_divergence</span></td><td>Mejor Sharpe en trending up</td></tr>
+    <tr><td>Mercado lateral / rango</td><td><span class="tag rev">mean_reversion</span> / <span class="tag other">grid_trading</span></td><td>Los únicos positivos en sideways</td></tr>
+    <tr><td>Quiero la señal más fiable</td><td><span class="tag ml">ensemble</span></td><td>Solo entra con consenso de 5 estrategias</td></tr>
+    <tr><td>Tengo datos históricos suficientes</td><td><span class="tag ml">hybrid_ml</span></td><td>Adapta los pesos a tu par y período</td></tr>
+    <tr><td>Trading intraday</td><td><span class="tag rev">vwap_bounce</span></td><td>Diseñada para sesión activa 08-20 UTC</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════ RIESGO ═════════════════════ -->
+<section id="riesgo">
+  <h2>Gestión de Riesgo — 6 Capas de Protección</h2>
+  <p>El dinero se protege en cascada. Una posición tiene que pasar <strong>todos</strong> los filtros para abrirse.
+     Haz clic en cada capa para entender los parámetros configurables.</p>
+
+  <div class="layers">
+    <div class="layer" onclick="toggleAcc(document.querySelector('#risk-1'))">
+      <div class="layer-num">1</div>
+      <div class="layer-label">
+        <h4>Stop Loss ATR</h4>
+        <p>Stop dinámico basado en volatilidad</p>
+      </div>
+      <div class="layer-bar"><div class="layer-bar-fill" style="width:100%"></div></div>
+    </div>
+    <div class="acc-item" id="risk-1" style="margin:0 0 .5rem 3rem; border-radius: var(--radius);">
+      <div class="acc-body" style="display:block; padding:.8rem 1rem">
+        <p>El stop se coloca a <strong>1.5× ATR</strong> (Average True Range) bajo la entrada para longs.
+           El ATR mide la volatilidad reciente, por lo que el stop es proporcional al movimiento del mercado.
+           Con ATR alto (mercado volátil) el stop es más amplio; con ATR bajo, más ajustado.</p>
+        <ul>
+          <li>Fórmula long: <code>stop = entry − ATR × 1.5</code></li>
+          <li>Fórmula short: <code>stop = entry + ATR × 1.5</code></li>
+          <li>Configurable en <code>config.yaml</code> → <code>risk.atr_multiplier</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layer" onclick="toggleAcc(document.querySelector('#risk-2'))">
+      <div class="layer-num">2</div>
+      <div class="layer-label">
+        <h4>Tamaño de Posición Fijo</h4>
+        <p>1% del capital por operación (por defecto)</p>
+      </div>
+      <div class="layer-bar"><div class="layer-bar-fill" style="width:85%"></div></div>
+    </div>
+    <div class="acc-item" id="risk-2" style="margin:0 0 .5rem 3rem; border-radius: var(--radius);">
+      <div class="acc-body" style="display:block; padding:.8rem 1rem">
+        <p>Se arriesga un porcentaje fijo del capital en cada trade, independientemente del precio del activo.</p>
+        <ul>
+          <li>Fórmula: <code>size = (capital × stake_pct) / |entry − stop|</code></li>
+          <li>Default: <code>stake_amount_pct = 0.01</code> (1% del capital)</li>
+          <li>Asegura que nunca se pierde más del 1% en una sola operación si el stop se respeta.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layer" onclick="toggleAcc(document.querySelector('#risk-3'))">
+      <div class="layer-num">3</div>
+      <div class="layer-label">
+        <h4>Kelly Criterion</h4>
+        <p>Tamaño óptimo basado en historial de trades</p>
+      </div>
+      <div class="layer-bar"><div class="layer-bar-fill" style="width:60%"></div></div>
+    </div>
+    <div class="acc-item" id="risk-3" style="margin:0 0 .5rem 3rem; border-radius: var(--radius);">
+      <div class="acc-body" style="display:block; padding:.8rem 1rem">
+        <p>Opcional. Se activa cuando hay al menos 30 trades en el historial.</p>
+        <ul>
+          <li>Fórmula: <code>kelly = (b × wr − (1 − wr)) / b</code>, donde b = avg_win/avg_loss</li>
+          <li>Se usa <strong>Half-Kelly</strong> para mayor seguridad</li>
+          <li>Limitado entre 1% y <code>max_position_size_pct</code> (25% por defecto)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layer" onclick="toggleAcc(document.querySelector('#risk-4'))">
+      <div class="layer-num">4</div>
+      <div class="layer-label">
+        <h4>Portfolio Heat Manager</h4>
+        <p>Máximo 6% del capital en riesgo total</p>
+      </div>
+      <div class="layer-bar"><div class="layer-bar-fill" style="width:70%"></div></div>
+    </div>
+    <div class="acc-item" id="risk-4" style="margin:0 0 .5rem 3rem; border-radius: var(--radius);">
+      <div class="acc-body" style="display:block; padding:.8rem 1rem">
+        <p>Aunque el tamaño individual sea correcto, el calor total del portfolio no puede superar el 6%.</p>
+        <ul>
+          <li><em>Heat</em> = suma del riesgo en % de cada posición abierta</li>
+          <li>Si abrir una nueva posición llevaría el heat por encima del 6%, se bloquea</li>
+          <li>Protege ante eventos de correlación extrema (todas las posiciones caen a la vez)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layer" onclick="toggleAcc(document.querySelector('#risk-5'))">
+      <div class="layer-num">5</div>
+      <div class="layer-label">
+        <h4>Circuit Breaker de Drawdown</h4>
+        <p>Pausa automática si DD &gt; 15%</p>
+      </div>
+      <div class="layer-bar"><div class="layer-bar-fill" style="width:50%"></div></div>
+    </div>
+    <div class="acc-item" id="risk-5" style="margin:0 0 .5rem 3rem; border-radius: var(--radius);">
+      <div class="acc-body" style="display:block; padding:.8rem 1rem">
+        <p>Si el capital cae más de un 15% desde su máximo histórico, el bot se pausa automáticamente.</p>
+        <ul>
+          <li><code>drawdown = (peak_equity − current_equity) / peak_equity</code></li>
+          <li>La pausa se guarda en SQLite (<code>bot_state[paused] = True</code>)</li>
+          <li>Se puede reanudar manualmente por API o Telegram (<code>/resume</code>)</li>
+          <li>Configurable: <code>risk.max_drawdown_pct</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="layer" onclick="toggleAcc(document.querySelector('#risk-6'))">
+      <div class="layer-num">6</div>
+      <div class="layer-label">
+        <h4>Filtro de Correlación</h4>
+        <p>No abre posiciones con corr &gt; 0.80</p>
+      </div>
+      <div class="layer-bar"><div class="layer-bar-fill" style="width:40%"></div></div>
+    </div>
+    <div class="acc-item" id="risk-6" style="margin:0 0 .5rem 3rem; border-radius: var(--radius);">
+      <div class="acc-body" style="display:block; padding:.8rem 1rem">
+        <p>Antes de abrir una nueva posición, calcula la correlación de Pearson entre sus retornos
+           y los de todas las posiciones abiertas.</p>
+        <ul>
+          <li>Si correlación &gt; 0.80 con cualquier posición existente → rechaza la entrada</li>
+          <li>Evita tener efectivamente la misma apuesta dos veces (ej: BTC y ETH muy correlados)</li>
+          <li>Usa los últimos 100 períodos para el cálculo</li>
+          <li>Threshold configurable: <code>correlation.threshold = 0.80</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip ok">
+    <strong>Resumen:</strong> En el peor escenario (todas las posiciones van a stop al mismo tiempo), el bot nunca pierde más del 6% del capital en un día. El circuit-breaker para definitivamente si el drawdown acumulado supera el 15%.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ BACKTEST ══════════════════ -->
+<section id="backtest">
+  <h2>Resultados de Backtest</h2>
+  <p>Simulaciones con 1,500 velas en datos sintéticos representativos. Los números reales dependerán
+     del par, timeframe y período histórico que uses. <strong>Usa siempre datos reales de CCXT antes de operar.</strong></p>
+
+  <h3>Mercado Alcista (Trending UP)</h3>
+  <table>
+    <tr><th>Estrategia</th><th>Tipo</th><th>Retorno</th><th>Sharpe</th><th>Max DD</th><th>Win Rate</th><th>Trades</th></tr>
+    <tr><td><strong>macd_divergence</strong></td><td><span class="tag rev">Divergencia</span></td><td class="pos">+2.7%</td><td class="pos">5.30</td><td class="neg">-0.4%</td><td>58%</td><td>26</td></tr>
+    <tr><td><strong>supertrend</strong></td>      <td><span class="tag trend">Tendencia</span></td><td class="pos">+2.2%</td><td class="pos">5.14</td><td class="neg">-0.2%</td><td>73%</td><td>11</td></tr>
+    <tr><td><strong>heikin_ashi</strong></td>     <td><span class="tag trend">Tendencia</span></td><td class="pos">+1.6%</td><td class="pos">3.38</td><td class="neg">-0.8%</td><td>49%</td><td>47</td></tr>
+    <tr><td><strong>regime_adaptive</strong></td> <td><span class="tag ml">Adaptativo</span></td><td class="pos">+0.6%</td><td class="pos">4.10</td><td>0.0%</td><td>100%</td><td>3</td></tr>
+    <tr><td><strong>breakout</strong></td>        <td><span class="tag break">Ruptura</span></td><td class="pos">+0.6%</td><td class="pos">3.42</td><td>0.0%</td><td>100%</td><td>2</td></tr>
+    <tr><td><strong>ichimoku</strong></td>        <td><span class="tag trend">Tendencia</span></td><td class="pos">+0.4%</td><td>1.09</td><td class="neg">-0.7%</td><td>39%</td><td>18</td></tr>
+    <tr><td><strong>trend_ema</strong></td>       <td><span class="tag trend">Tendencia</span></td><td class="pos">+0.3%</td><td class="pos">2.42</td><td>0.0%</td><td>100%</td><td>1</td></tr>
+    <tr><td><strong>volume_profile</strong></td>  <td><span class="tag break">Volumen</span></td><td class="pos">+0.1%</td><td>0.27</td><td class="neg">-0.4%</td><td>43%</td><td>7</td></tr>
+    <tr><td>mean_reversion / vwap / mtf / dca</td><td><span class="tag rev">Reversión</span></td><td>0.0%</td><td>0.00</td><td>0.0%</td><td>—</td><td>0</td></tr>
+  </table>
+
+  <h3>Mercado Lateral (Sideways)</h3>
+  <table>
+    <tr><th>Estrategia</th><th>Tipo</th><th>Retorno</th><th>Sharpe</th><th>Max DD</th><th>Win Rate</th><th>Trades</th></tr>
+    <tr><td><strong>mean_reversion</strong></td>  <td><span class="tag rev">Reversión</span></td><td class="pos">+0.1%</td><td class="pos">0.43</td><td class="neg">-0.2%</td><td>50%</td><td>2</td></tr>
+    <tr><td><strong>grid_trading</strong></td>    <td><span class="tag other">Grid</span></td><td>-0.04%</td><td>-0.22</td><td class="neg">-0.6%</td><td>33%</td><td>12</td></tr>
+    <tr><td><strong>regime_adaptive</strong></td> <td><span class="tag ml">Adaptativo</span></td><td class="neg">-0.2%</td><td>-1.03</td><td class="neg">-0.4%</td><td>40%</td><td>5</td></tr>
+    <tr><td><strong>macd_divergence</strong></td> <td><span class="tag rev">Divergencia</span></td><td class="neg">-0.6%</td><td>-1.40</td><td class="neg">-1.0%</td><td>40%</td><td>25</td></tr>
+    <tr><td><strong>heikin_ashi</strong></td>     <td><span class="tag trend">Tendencia</span></td><td class="neg">-0.9%</td><td>-3.58</td><td class="neg">-1.2%</td><td>22%</td><td>18</td></tr>
+    <tr><td><strong>supertrend</strong></td>      <td><span class="tag trend">Tendencia</span></td><td class="neg">-1.3%</td><td>-4.39</td><td class="neg">-1.5%</td><td>9%</td><td>11</td></tr>
+    <tr><td><strong>ichimoku</strong></td>        <td><span class="tag trend">Tendencia</span></td><td class="neg">-0.9%</td><td>-5.80</td><td class="neg">-0.9%</td><td>0%</td><td>7</td></tr>
+  </table>
+
+  <div class="tip warn">
+    <strong>Conclusión clave:</strong> Las estrategias de tendencia (supertrend, ichimoku) pierden en laterales.
+    Si no sabes en qué régimen estás, usa <code>regime_adaptive</code> o <code>mean_reversion</code> como base conservadora.
+  </div>
+
+  <h2>Cómo Ejecutar Backtests Reales</h2>
+  <pre><span class="co"># 1. Backtest rápido con datos de CCXT (Binance)</span>
+python main.py backtest --strategy supertrend --pair BTC/USDT --start 2022-01-01
+
+<span class="co"># 2. Comparar todas las estrategias en el mismo dataset</span>
+python main.py compare --pair BTC/USDT --start 2021-01-01
+
+<span class="co"># 3. Optimización Walk-Forward (más robusta que simple backtest)</span>
+python main.py optimize --strategy trend_ema --pair BTC/USDT --windows 5
+
+<span class="co"># 4. Optimización bayesiana con Optuna (inteligente)</span>
+python main.py bayesian-optimize --strategy trend_ema --trials 200
+
+<span class="co"># 5. Monte Carlo — ¿es el resultado estadísticamente sólido?</span>
+python main.py montecarlo --strategy supertrend --sims 1000</pre>
+
+  <h3>¿Qué es el Walk-Forward?</h3>
+  <p>En lugar de optimizar sobre todos los datos históricos (overfitting), se divide en N ventanas.
+     En cada ventana se entrena en el 70% y se testa en el 30% siguiente (datos nunca vistos).
+     El resultado es mucho más realista que un backtest normal.</p>
+  <pre>Ventana 1: [────TRAIN────|OOS] → métricas reales
+Ventana 2:      [────TRAIN────|OOS] → métricas reales
+Ventana 3:           [────TRAIN────|OOS] → métricas reales</pre>
+</section>
+
+<!-- ═══════════════════════════════════════════ USO ═══════════════════════ -->
+<section id="uso">
+  <h2>Cómo Usar el Bot — Paso a Paso</h2>
+
+  <div class="acc">
+    <div class="acc-item open">
+      <div class="acc-header" onclick="toggleAcc(this.parentElement)">
+        <h4>🔧 Paso 1 — Instalación</h4><span>+</span>
+      </div>
+      <div class="acc-body">
+        <pre><span class="co"># Opción A: instalación local</span>
+bash install.sh
+source .venv/bin/activate
+cp .env.example .env
+<span class="co"># editar .env con tus API keys</span>
+
+<span class="co"># Opción B: Docker (recomendado para producción)</span>
+docker-compose up -d --build
+<span class="co"># Inicia: trader + API (8000) + Dashboard (8050) + Webhook (8001) + Telegram</span></pre>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this.parentElement)">
+        <h4>⚙️ Paso 2 — Configuración mínima (.env)</h4><span>+</span>
+      </div>
+      <div class="acc-body">
+        <pre><span class="co"># Exchange</span>
+EXCHANGE_API_KEY=tu_api_key
+EXCHANGE_API_SECRET=tu_api_secret
+EXCHANGE_SANDBOX=true      <span class="co"># true = testnet</span>
+DRY_RUN=true               <span class="co"># true = sin órdenes reales</span>
+
+<span class="co"># Telegram (opcional pero muy recomendado)</span>
+TELEGRAM_BOT_TOKEN=tu_token
+TELEGRAM_CHAT_ID=tu_chat_id
+
+<span class="co"># Seguridad webhook</span>
+WEBHOOK_SECRET=cambia_este_secreto</pre>
+        <div class="tip warn">Nunca pongas <code>DRY_RUN=false</code> sin haber probado en paper al menos 2 semanas.</div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this.parentElement)">
+        <h4>📊 Paso 3 — Primeros Backtests</h4><span>+</span>
+      </div>
+      <div class="acc-body">
+        <pre><span class="co"># Backtest básico</span>
+make backtest STRATEGY=trend_ema PAIR=BTC/USDT
+
+<span class="co"># Comparar todas las estrategias</span>
+make compare PAIR=BTC/USDT
+
+<span class="co"># Optimizar parámetros</span>
+make optimize STRATEGY=trend_ema
+make bayesian STRATEGY=trend_ema TRIALS=200
+
+<span class="co"># Ver si el resultado es robusto estadísticamente</span>
+make montecarlo STRATEGY=trend_ema</pre>
+        <p>Los reportes HTML se guardan en <code>reports/</code> automáticamente.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this.parentElement)">
+        <h4>🎭 Paso 4 — Paper Trading (simulado, sin dinero)</h4><span>+</span>
+      </div>
+      <div class="acc-body">
+        <pre><span class="co"># Modo síncrono (simple)</span>
+python main.py live --dry-run
+
+<span class="co"># Modo asíncrono completo (WebSocket + API + Webhook)</span>
+python main.py live --async-live
+<span class="co"># → Confirma con 'y' al pedirte confirmación</span></pre>
+        <p>En dry-run todas las órdenes se simulan. Los datos se guardan en SQLite igual que en live.</p>
+        <pre><span class="co"># Ver estadísticas mientras corre</span>
+python main.py stats
+
+<span class="co"># Dashboard en tiempo real</span>
+make dashboard  <span class="co"># → http://localhost:8050</span></pre>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this.parentElement)">
+        <h4>📱 Control por Telegram</h4><span>+</span>
+      </div>
+      <div class="acc-body">
+        <table>
+          <tr><th>Comando</th><th>Acción</th></tr>
+          <tr><td><code>/status</code></td><td>Posiciones abiertas y estado del bot</td></tr>
+          <tr><td><code>/pause</code></td><td>Pausa el trading (conserva posiciones)</td></tr>
+          <tr><td><code>/resume</code></td><td>Reanuda el trading</td></tr>
+          <tr><td><code>/stats</code></td><td>Estadísticas de trades: win rate, PnL, etc.</td></tr>
+          <tr><td><code>/strategy trend_ema</code></td><td>Cambia la estrategia activa en caliente</td></tr>
+          <tr><td><code>/close BTC/USDT</code></td><td>Cierra una posición específica</td></tr>
+          <tr><td><code>/events</code></td><td>Próximos eventos macro de alto impacto</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggleAcc(this.parentElement)">
+        <h4>🔌 API REST (puerto 8000)</h4><span>+</span>
+      </div>
+      <div class="acc-body">
+        <pre><span class="co"># Iniciar la API</span>
+python main.py api
+
+<span class="co"># Ejemplos de uso</span>
+curl http://localhost:8000/status -H "x-api-key: tu_clave"
+curl http://localhost:8000/trades -H "x-api-key: tu_clave"
+curl -X POST http://localhost:8000/strategy \
+     -H "x-api-key: tu_clave" \
+     -d '{"name": "supertrend"}'</pre>
+        <table>
+          <tr><th>Endpoint</th><th>Descripción</th></tr>
+          <tr><td>GET /status</td><td>Estado, equity, posiciones abiertas</td></tr>
+          <tr><td>GET /trades</td><td>Historial de trades cerrados</td></tr>
+          <tr><td>GET /equity</td><td>Curva de equity</td></tr>
+          <tr><td>GET /metrics</td><td>Métricas de rendimiento en tiempo real</td></tr>
+          <tr><td>POST /strategy</td><td>Cambiar estrategia sin reiniciar</td></tr>
+          <tr><td>POST /pause</td><td>Pausar trading</td></tr>
+          <tr><td>POST /close/{symbol}</td><td>Cerrar posición manualmente</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ ARQUITECTURA ══════════════ -->
+<section id="arquitectura">
+  <h2>Arquitectura del Sistema</h2>
+
+  <div class="metrics">
+    <div class="metric green"><div class="val">15</div><div class="lbl">Estrategias</div></div>
+    <div class="metric green"><div class="val">652</div><div class="lbl">Tests</div></div>
+    <div class="metric green"><div class="val">99%</div><div class="lbl">Cobertura</div></div>
+    <div class="metric"><div class="val">20</div><div class="lbl">Comandos CLI</div></div>
+    <div class="metric"><div class="val">9</div><div class="lbl">Endpoints API</div></div>
+    <div class="metric"><div class="val">5</div><div class="lbl">Servicios Docker</div></div>
+  </div>
+
+  <h3>Módulos del Proyecto</h3>
+  <table>
+    <tr><th>Módulo</th><th>Responsabilidad</th><th>Ficheros clave</th></tr>
+    <tr><td><code>config/</code></td><td>Configuración (Pydantic + YAML + .env)</td><td>config.yaml, BotConfig</td></tr>
+    <tr><td><code>data/</code></td><td>Obtención de datos OHLCV, BD SQLite, WebSocket, backup</td><td>fetcher.py, database.py, websocket_feed.py</td></tr>
+    <tr><td><code>utils/</code></td><td>Indicadores técnicos, patrones de vela, sentimiento, filtros</td><td>indicators.py, candle_patterns.py, sentiment.py</td></tr>
+    <tr><td><code>strategies/</code></td><td>Las 15 estrategias (todas heredan de BaseStrategy)</td><td>trend_ema.py, supertrend.py, hybrid_ml.py…</td></tr>
+    <tr><td><code>risk/</code></td><td>Sizing, stops, portfolio heat, circuit-breaker</td><td>manager.py</td></tr>
+    <tr><td><code>backtesting/</code></td><td>Engine, comparador, optimizador, Monte Carlo, Optuna</td><td>engine.py, optimizer.py, optuna_optimizer.py</td></tr>
+    <tr><td><code>bot/</code></td><td>Trader live (sync + async), API, Telegram, position manager</td><td>async_trader.py, live_trader.py, api.py</td></tr>
+    <tr><td><code>reports/</code></td><td>Dashboard Dash, reportes HTML, benchmark, reporte semanal</td><td>dashboard.py, report_generator.py</td></tr>
+    <tr><td><code>tests/</code></td><td>Suite pytest (652 tests, 99% cobertura)</td><td>test_*.py</td></tr>
+  </table>
+
+  <h3>Base de Datos (SQLite)</h3>
+  <table>
+    <tr><th>Tabla</th><th>Contenido</th></tr>
+    <tr><td><code>trades</code></td><td>Todas las posiciones: abiertas y cerradas. Symbol, dirección, entry, PnL, etc.</td></tr>
+    <tr><td><code>equity_snapshots</code></td><td>Instantáneas periódicas del equity para la curva.</td></tr>
+    <tr><td><code>bot_state</code></td><td>Estado persistente: paused, active_strategy, etc. Survives crashes.</td></tr>
+    <tr><td><code>signal_log</code></td><td>Historial de señales generadas para debugging.</td></tr>
+  </table>
+
+  <h3>Stack Docker (5 Servicios)</h3>
+  <pre>docker-compose up -d --build
+
+<span class="co">┌─────────────────────────────────────────────────────┐
+│ trader     │ Bot principal (async WebSocket + REST)  │
+│ api        │ FastAPI REST en :8000                   │
+│ dashboard  │ Dash monitoring en :8050                │
+│ webhook    │ TradingView webhooks en :8001            │
+│ telegram   │ Bot Telegram (polling)                  │
+└─────────────────────────────────────────────────────┘</span></pre>
+
+  <h3>Cómo Añadir una Nueva Estrategia</h3>
+  <pre><span class="co"># 1. Crear el fichero</span>
+<span class="kw">class</span> <span class="fn">MiEstrategia</span>(BaseStrategy):
+    name = <span class="st">"mi_estrategia"</span>
+
+    <span class="kw">def</span> <span class="fn">generate_signals</span>(self, df):
+        df = df.copy()
+        <span class="co"># ... tu lógica aquí</span>
+        df[<span class="st">"signal"</span>]      = <span class="nu">0</span>   <span class="co"># 1=buy, -1=sell, 0=hold</span>
+        df[<span class="st">"stop_loss"</span>]   = df[<span class="st">"close"</span>] * <span class="nu">0.97</span>
+        df[<span class="st">"take_profit"</span>] = df[<span class="st">"close"</span>] * <span class="nu">1.06</span>
+        <span class="kw">return</span> df
+
+<span class="co"># 2. Registrarla en strategies/__init__.py</span>
+STRATEGIES = {
+    ...,
+    <span class="st">"mi_estrategia"</span>: MiEstrategia,
+}
+
+<span class="co"># 3. Opcional: añadir espacio de parámetros en optuna_optimizer.py</span>
+PARAM_SPACES[<span class="st">"mi_estrategia"</span>] = <span class="kw">lambda</span> t: {
+    <span class="st">"periodo"</span>: t.suggest_int(<span class="st">"periodo"</span>, <span class="nu">10</span>, <span class="nu">50</span>)
+}
+
+<span class="co"># Ya está disponible en todos los comandos del CLI</span></pre>
+
+  <div class="tip ok">
+    <strong>Diseño limpio:</strong> todas las estrategias comparten el mismo
+    <code>BaseStrategy</code>, el mismo <code>RiskManager</code> y el mismo engine de backtest.
+    Añadir una nueva estrategia no requiere tocar el resto del sistema.
+  </div>
+</section>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (el) el.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function toggle(el) {
+  el.classList.toggle('open');
+}
+
+function toggleAcc(item) {
+  item.classList.toggle('open');
+}
+
+// Activar primer acc-item de estrategias al cargar
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#risk-1,#risk-2,#risk-3,#risk-4,#risk-5,#risk-6')
+    .forEach(el => el.classList.remove('open'));
+  // Abrir primer paso de flujo
+  const first = document.querySelector('.flow-step');
+  if (first) first.classList.add('open');
+});
+</script>
+</body>
+</html>
