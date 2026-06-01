@@ -188,6 +188,9 @@ sp500-live:
 	  --top-n $(SP500_TOPN) \
 	  --download
 
+walkforward:
+	$(PYTHON) main.py walkforward --no-download
+
 sp500-download:
 	$(PYTHON) main.py sp500-download --start $(SP500_START) --end $(SP500_END)
 

@@ -529,7 +529,7 @@ class SP500BacktestEngine:
         drift = 0.00035  # ~9 % annual (S&P historical mean 2015-2024)
         vol = 0.010      # ~16 % annual
         log_rets = rng.normal(drift, vol, size=n)
-        prices = 300.0 * np.exp(np.cumsum(log_rets))  # SPY started ~$200 in 2015
+        prices = 201.0 * np.exp(np.cumsum(log_rets))  # SPY closed at $201 on 2015-01-02
         return pd.Series(prices, index=index, name="SPY")
 
     # ------------------------------------------------------------------
@@ -615,8 +615,13 @@ class SP500BacktestEngine:
         losses = 0
         total_trades = 0
 
+        # Use open prices for next-bar execution if available, else fall back to close.
+        # This eliminates same-bar entry look-ahead bias: signal at close[i-1] →
+        # execute at open[i] (or close[i] if no open column).
+        open_prices = df["open"].values if "open" in df.columns else close
+
         for i in range(1, len(df)):
-            price = close[i]
+            price = close[i]   # mark-to-market and stop/TP checks always use close
 
             if in_trade:
                 # Update trailing stop from high-water close
@@ -624,20 +629,20 @@ class SP500BacktestEngine:
                 trailing = high_water * 0.92
                 entry_stop = max(entry_stop, trailing)
 
-                # Exit conditions
+                # Exit conditions — stop/TP checked against today's close;
+                # strategy exit signal from the *previous* bar (next-bar execution).
                 hit_sl = price <= entry_stop
                 hit_tp = price >= entry_tp
-                exit_signal = signals[i] == -1
+                exit_signal = signals[i - 1] == -1  # FIX: previous bar's exit signal
 
                 if hit_sl or hit_tp or exit_signal:
                     exit_price = price * (1.0 - 0.0005)  # half-tick slippage
-                    # P&L on the invested fraction
                     ret = exit_price / max(entry_price, 1e-9)
                     proceeds = invested_value * ret
                     cost = (invested_value + proceeds) * self.commission  # round-trip
                     pnl = proceeds - invested_value - cost
-                    capital += invested_value + pnl  # reclaim invested + profit/loss
-                    capital = max(capital, 0.0)       # floor at zero — can't owe money
+                    capital += invested_value + pnl
+                    capital = max(capital, 0.0)
                     if pnl > 0:
                         wins += 1
                     else:
@@ -647,23 +652,27 @@ class SP500BacktestEngine:
                     invested_value = 0.0
                     entry_price = 0.0
 
-            # Entry
-            if (not in_trade) and signals[i] == 1 and capital > 1.0:
-                entry_price = price * (1.0 + 0.0005)  # half-tick slippage
-                # Invest 95 % of available capital; 5 % stays as cash buffer
+            # FIX: next-bar execution — use signal from previous bar (i-1) and
+            # enter at today's open (bar i), not at the signal bar's close.
+            if (not in_trade) and signals[i - 1] == 1 and capital > 1.0:
+                entry_price = open_prices[i] * (1.0 + 0.0005)  # open + slippage
                 invested_value = capital * 0.95
-                commission_cost = invested_value * self.commission  # entry leg only
-                invested_value -= commission_cost               # net invested
-                capital -= invested_value + commission_cost     # deduct from cash
+                commission_cost = invested_value * self.commission
+                invested_value -= commission_cost
+                capital -= invested_value + commission_cost
                 capital = max(capital, 0.0)
                 in_trade = True
                 high_water = price
-                raw_sl = float(stop_loss_col[i])
-                raw_tp = float(take_profit_col[i])
-                entry_stop = raw_sl if raw_sl > 0 else entry_price * 0.93
-                entry_tp   = raw_tp if raw_tp > 0 else entry_price * 1.25
-                # Sanity-clamp stop to never exceed entry (avoids instant loss)
-                entry_stop = min(entry_stop, entry_price * 0.99)
+                # Stop/TP derived from signal bar (i-1) levels, adjusted to entry_price
+                raw_sl = float(stop_loss_col[i - 1])
+                raw_tp = float(take_profit_col[i - 1])
+                # Re-anchor stop to entry_price so level is consistent
+                sl_pct = 1.0 - (raw_sl / max(close[i - 1], 1e-9)) if raw_sl > 0 else 0.07
+                tp_pct = (raw_tp / max(close[i - 1], 1e-9)) - 1.0 if raw_tp > 0 else 0.25
+                sl_pct = max(min(sl_pct, 0.20), 0.02)  # clamp: 2%–20% stop distance
+                tp_pct = max(min(tp_pct, 0.50), 0.05)  # clamp: 5%–50% target
+                entry_stop = entry_price * (1.0 - sl_pct)
+                entry_tp   = entry_price * (1.0 + tp_pct)
 
             # Mark-to-market equity
             if in_trade:
@@ -784,9 +793,10 @@ class SP500BacktestEngine:
         current_selected: list[str] = tickers[: self.top_n]  # initial slice
 
         for day_i in range(1, n_days):
-            # Rebalance on schedule or on first bar
+            # Rebalance on schedule — use PREVIOUS day's score to avoid look-ahead.
+            # The portfolio selected at day_i uses information available at close of day_i-1.
             if day_i == 1 or (day_i % rebalance_days == 0):
-                scores_row = rolling_sharpe.iloc[day_i]
+                scores_row = rolling_sharpe.iloc[day_i - 1]  # FIX: prior day's Sharpe
                 valid_scores = scores_row.dropna()
                 ranked = valid_scores.sort_values(ascending=False).index.tolist()
                 if ranked:

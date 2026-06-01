@@ -565,6 +565,17 @@ def portfolio_optimize(method, start, end, lookback, rebal, download):
     click.echo(f"{'─'*40}")
 
 
+@cli.command("walkforward")
+@click.option("--capital",  default=100_000.0, type=float)
+@click.option("--top-n",    default=15, type=int)
+@click.option("--rebal",    default=21, type=int)
+@click.option("--download/--no-download", default=False)
+def walkforward(capital, top_n, rebal, download):
+    """Walk-forward validation: in-sample 2015-2020 → out-of-sample 2021-2024 (v2)."""
+    from backtesting.walkforward_sp500 import run_walkforward
+    run_walkforward(initial_capital=capital, download=download, top_n=top_n, rebalance_days=rebal)
+
+
 @cli.command("sp500-download")
 @click.option("--start", default="2015-01-01")
 @click.option("--end",   default="2024-12-31")
