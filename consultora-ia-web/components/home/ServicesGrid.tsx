@@ -1,0 +1,142 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import {
+  Lightbulb,
+  UserCheck,
+  Zap,
+  Bot,
+  Search,
+  GraduationCap,
+  ArrowRight,
+} from 'lucide-react'
+
+interface Service {
+  icon: React.ElementType
+  title: string
+  description: string
+  href: string
+  cta: string
+}
+
+const services: Service[] = [
+  {
+    icon: Lightbulb,
+    title: 'Consultoría IA',
+    description:
+      'Estrategia, hoja de ruta y asesoramiento experto para llevar la IA a tu empresa de forma ordenada y con resultados reales.',
+    href: '/servicios',
+    cta: 'Saber más',
+  },
+  {
+    icon: UserCheck,
+    title: 'Consultor IA Externo',
+    description:
+      'Tu propio experto en IA disponible mes a mes, sin coste de plantilla. Supervisión, soporte y mejora continua.',
+    href: '/consultor-ia-externo',
+    cta: 'Ver el servicio',
+  },
+  {
+    icon: Zap,
+    title: 'Automatización de Procesos',
+    description:
+      'Conectamos tus herramientas y automatizamos los procesos más repetitivos para que tu equipo se centre en lo importante.',
+    href: '/automatizacion-procesos',
+    cta: 'Ver cómo funciona',
+  },
+  {
+    icon: Bot,
+    title: 'Agentes IA',
+    description:
+      'Agentes inteligentes que atienden clientes, procesan documentos o gestionan tareas de forma autónoma las 24 horas del día.',
+    href: '/agentes-ia',
+    cta: 'Explorar agentes',
+  },
+  {
+    icon: Search,
+    title: 'Auditoría IA',
+    description:
+      'Analizamos tus procesos y sistemas actuales para identificar las oportunidades de mayor impacto con inteligencia artificial.',
+    href: '/auditoria-ia',
+    cta: 'Solicitar auditoría',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Formación IA',
+    description:
+      'Talleres y programas formativos para equipos empresariales: aprende a usar la IA de forma práctica y aplicada a tu sector.',
+    href: '/formacion-ia',
+    cta: 'Ver formaciones',
+  },
+]
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+}
+
+export default function ServicesGrid() {
+  return (
+    <section
+      aria-labelledby="services-heading"
+      className="bg-slate-50 py-20 md:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2
+            id="services-heading"
+            className="text-3xl font-extrabold tracking-tight text-[#0F172A] sm:text-4xl"
+          >
+            Nuestros servicios
+          </h2>
+          <p className="mt-4 text-lg text-slate-600">
+            Soluciones prácticas de IA adaptadas al tamaño y necesidades de tu empresa.
+          </p>
+        </div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {services.map((service) => {
+            const Icon = service.icon
+            return (
+              <motion.article
+                key={service.title}
+                variants={cardVariants}
+                className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              >
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-[#2563EB] transition-colors group-hover:bg-[#2563EB] group-hover:text-white">
+                  <Icon className="h-6 w-6" aria-hidden="true" />
+                </div>
+                <h3 className="mb-2 text-lg font-semibold text-[#0F172A]">
+                  {service.title}
+                </h3>
+                <p className="flex-1 text-sm leading-relaxed text-slate-500">
+                  {service.description}
+                </p>
+                <Link
+                  href={service.href}
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#2563EB] transition-colors hover:text-blue-700"
+                  aria-label={`${service.cta} sobre ${service.title}`}
+                >
+                  {service.cta}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </Link>
+              </motion.article>
+            )
+          })}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
