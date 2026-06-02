@@ -1,0 +1,298 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Variables CSS — Nexus IA Design System
+   ============================================================ */
+:root {
+  /* Colores de marca */
+  --color-navy-950: #060D1A;
+  --color-navy-900: #0F172A;
+  --color-navy-800: #1E293B;
+  --color-navy-700: #27374D;
+  --color-brand: #2563EB;
+  --color-brand-light: #3B82F6;
+  --color-brand-dark: #1D4ED8;
+  --color-surface: #F8FAFC;
+  --color-success: #10B981;
+  --color-accent-purple: #7C3AED;
+  --color-accent-cyan: #06B6D4;
+
+  /* Tipografía */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --header-height: 4rem;
+
+  /* Transiciones */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Sombras */
+  --shadow-brand: 0 4px 20px rgba(37, 99, 235, 0.25);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* ============================================================
+   Base styles
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-surface-50 text-navy-900 font-sans;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+  }
+
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl leading-tight; }
+  h2 { @apply text-3xl md:text-4xl leading-tight; }
+  h3 { @apply text-2xl md:text-3xl leading-snug; }
+  h4 { @apply text-xl md:text-2xl; }
+  h5 { @apply text-lg md:text-xl; }
+  h6 { @apply text-base md:text-lg; }
+
+  /* Links */
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  /* Focus visible */
+  *:focus-visible {
+    @apply outline-2 outline-brand-600 outline-offset-2;
+  }
+
+  /* Selección de texto */
+  ::selection {
+    @apply bg-brand-600/20 text-navy-900;
+  }
+
+  /* Scrollbar personalizada */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-navy-600;
+  }
+}
+
+/* ============================================================
+   Componentes reutilizables
+   ============================================================ */
+@layer components {
+  /* Contenedor principal */
+  .container-main {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Gradiente hero de fondo */
+  .hero-gradient {
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+  }
+
+  /* Glow de marca */
+  .brand-glow {
+    box-shadow: 0 0 60px rgba(37, 99, 235, 0.3);
+  }
+
+  /* Texto gradiente */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-400 to-accent-cyan bg-clip-text text-transparent;
+  }
+
+  /* Texto gradiente success */
+  .text-gradient-success {
+    @apply bg-gradient-to-r from-success-400 to-brand-400 bg-clip-text text-transparent;
+  }
+
+  /* Glassmorphism card */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl;
+  }
+
+  /* Dark glass card */
+  .glass-card-dark {
+    @apply bg-navy-800/80 backdrop-blur-sm border border-white/10 rounded-2xl;
+  }
+
+  /* Sección padding estándar */
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  /* Dot pattern overlay */
+  .dot-pattern {
+    background-image: radial-gradient(circle, #2563EB 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.04;
+  }
+
+  /* Grid pattern overlay */
+  .grid-pattern {
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Pill badge */
+  .pill {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  /* Línea divisora con gradiente */
+  .divider-gradient {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #2563EB, transparent);
+  }
+
+  /* Animación de entrada */
+  .animate-in {
+    animation: animateIn 0.5s ease-out forwards;
+  }
+
+  /* Overlay oscuro semi-transparente */
+  .overlay-dark {
+    background: linear-gradient(
+      to bottom,
+      rgba(15, 23, 42, 0) 0%,
+      rgba(15, 23, 42, 0.8) 100%
+    );
+  }
+
+  /* Chat bubble */
+  .chat-bubble-user {
+    @apply bg-brand-600 text-white rounded-2xl rounded-br-sm px-4 py-2.5 text-sm max-w-xs ml-auto;
+  }
+
+  .chat-bubble-bot {
+    @apply bg-white border border-surface-200 text-navy-800 rounded-2xl rounded-bl-sm px-4 py-2.5 text-sm max-w-xs shadow-card;
+  }
+
+  /* Typing indicator */
+  .typing-indicator span {
+    @apply inline-block w-1.5 h-1.5 rounded-full bg-navy-400;
+    animation: typingBounce 1.4s infinite ease-in-out;
+  }
+
+  .typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+/* ============================================================
+   Utilidades adicionales
+   ============================================================ */
+@layer utilities {
+  /* Truncar texto N líneas */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Sin scrollbar visible */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Aspecto de imagen */
+  .aspect-video { aspect-ratio: 16/9; }
+  .aspect-square { aspect-ratio: 1/1; }
+
+  /* Texto balance */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ============================================================
+   Animaciones keyframes
+   ============================================================ */
+@keyframes animateIn {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+  40% { transform: scale(1.2); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #E2E8F0 25%,
+    #F1F5F9 50%,
+    #E2E8F0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ============================================================
+   Responsive typography
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

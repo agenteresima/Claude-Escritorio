@@ -1,0 +1,194 @@
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
+import ChatBot from '@/components/bot/ChatBot'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://www.nexusia.es'),
+  title: {
+    default: 'Nexus IA | Consultoría de Inteligencia Artificial para Empresas',
+    template: '%s | Nexus IA',
+  },
+  description:
+    'Nexus IA es la consultoría de inteligencia artificial que tu empresa necesita. Automatizamos procesos, implantamos agentes IA y formamos a tus equipos. El experto en IA que todavía no tienes en plantilla.',
+  keywords: [
+    'consultoría inteligencia artificial',
+    'IA para empresas',
+    'automatización con IA',
+    'agentes de inteligencia artificial',
+    'transformación digital',
+    'ChatGPT empresas',
+    'machine learning empresas',
+    'automatización procesos',
+    'IA España',
+    'consultoría IA España',
+    'implementación IA',
+    'estrategia de IA',
+    'Nexus IA',
+  ],
+  authors: [{ name: 'Nexus IA', url: 'https://www.nexusia.es' }],
+  creator: 'Nexus IA',
+  publisher: 'Nexus IA',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'es_ES',
+    url: 'https://www.nexusia.es',
+    siteName: 'Nexus IA',
+    title: 'Nexus IA | Consultoría de Inteligencia Artificial para Empresas',
+    description:
+      'El experto en IA que tu empresa todavía no tiene en plantilla. Automatizamos procesos, implantamos agentes IA y formamos a tus equipos.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Nexus IA — Consultoría de Inteligencia Artificial para Empresas',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nexus IA | Consultoría de Inteligencia Artificial para Empresas',
+    description:
+      'El experto en IA que tu empresa todavía no tiene en plantilla. Automatizamos, implantamos y formamos.',
+    images: ['/og-image.jpg'],
+    creator: '@nexusia_es',
+    site: '@nexusia_es',
+  },
+  alternates: {
+    canonical: 'https://www.nexusia.es',
+    languages: {
+      'es-ES': 'https://www.nexusia.es',
+    },
+  },
+  verification: {
+    google: 'google-site-verification-token',
+  },
+  category: 'technology',
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['ProfessionalService', 'LocalBusiness'],
+  name: 'Nexus IA',
+  description:
+    'Consultoría de Inteligencia Artificial para empresas. Automatización de procesos, agentes IA, formación y estrategia de IA.',
+  slogan: 'El experto en IA que tu empresa todavía no tiene en plantilla',
+  url: 'https://www.nexusia.es',
+  logo: 'https://www.nexusia.es/logo.png',
+  image: 'https://www.nexusia.es/og-image.jpg',
+  email: 'hola@nexusia.es',
+  telephone: '+34-900-000-000',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'ES',
+    addressLocality: 'Madrid',
+    addressRegion: 'Madrid',
+    postalCode: '28001',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: '40.4168',
+    longitude: '-3.7038',
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'España',
+  },
+  priceRange: '€€€',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '18:00',
+    },
+  ],
+  sameAs: [
+    'https://www.linkedin.com/company/nexusia',
+    'https://twitter.com/nexusia_es',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios de IA',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Automatización de procesos con IA',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Agentes de Inteligencia Artificial',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Formación en IA para equipos',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Estrategia e implantación de IA',
+        },
+      },
+    ],
+  },
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="es" className={inter.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0F172A" />
+      </head>
+      <body className="font-sans antialiased">
+        <Header />
+        <main>{children}</main>
+        <Footer />
+        <ChatBot />
+      </body>
+    </html>
+  )
+}
