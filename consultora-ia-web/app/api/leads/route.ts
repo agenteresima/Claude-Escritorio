@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { supabase } from '@/lib/supabase'
+import { createServerClient } from '@/lib/supabase'
 import { Resend } from 'resend'
 import {
   emailNuevoLead,
   emailConfirmacionCliente,
 } from '@/lib/email-templates'
+
+const supabase = createServerClient()
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 

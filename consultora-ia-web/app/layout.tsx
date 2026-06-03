@@ -4,6 +4,7 @@ import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import ChatBot from '@/components/bot/ChatBot'
+import CookieBanner from '@/components/ui/CookieBanner'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -188,6 +189,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <ChatBot />
+        <CookieBanner />
       </body>
     </html>
   )
