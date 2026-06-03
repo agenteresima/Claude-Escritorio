@@ -2,8 +2,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Página no encontrada | Nexus IA',
-  description: 'La página que buscas no existe. Vuelve a la página principal de Nexus IA.',
+  title: 'Página no encontrada | AP Automatización IA',
+  description: 'La página que buscas no existe. Vuelve a la página principal de AP Automatización IA.',
   robots: { index: false, follow: false },
 }
 
@@ -19,7 +19,7 @@ export default function NotFound() {
         </h1>
         <p className="text-slate-600 text-lg mb-8">
           La dirección que has introducido no corresponde a ninguna página de
-          Nexus IA. Es posible que haya sido movida o eliminada.
+          AP Automatización IA. Es posible que haya sido movida o eliminada.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link

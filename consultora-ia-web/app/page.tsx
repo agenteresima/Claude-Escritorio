@@ -12,9 +12,9 @@ import FAQ from '@/components/home/FAQ'
 import CTAFinal from '@/components/home/CTAFinal'
 
 export const metadata: Metadata = {
-  title: 'Nexus IA | Consultoría de Inteligencia Artificial para Empresas | IA Práctica para Pymes',
+  title: 'AP Automatización IA | Consultoría de Inteligencia Artificial para Empresas | IA Práctica para Pymes',
   description:
-    'Nexus IA ayuda a empresas y pymes a implementar inteligencia artificial de forma práctica: automatización de procesos, agentes IA, auditoría IA y formación. Sin tecnicismos, con resultados medibles.',
+    'AP Automatización IA ayuda a empresas y pymes a implementar inteligencia artificial de forma práctica: automatización de procesos, agentes IA, auditoría IA y formación. Sin tecnicismos, con resultados medibles.',
   keywords: [
     'consultoría IA',
     'inteligencia artificial para empresas',
@@ -26,24 +26,24 @@ export const metadata: Metadata = {
     'IA para pymes España',
   ],
   openGraph: {
-    title: 'Nexus IA | Consultoría de Inteligencia Artificial para Empresas',
+    title: 'AP Automatización IA | Consultoría de Inteligencia Artificial para Empresas',
     description:
       'El experto en IA que tu empresa todavía no tiene en plantilla. Ayudamos a pymes a implementar IA de forma práctica y con resultados medibles.',
     type: 'website',
     locale: 'es_ES',
   },
   alternates: {
-    canonical: 'https://www.nexus-ia.es',
+    canonical: 'https://www.ap-automatizacion-ia.es',
   },
 }
 
 const jsonLdProfessionalService = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'Nexus IA',
+  name: 'AP Automatización IA',
   description:
     'Consultoría de Inteligencia Artificial para empresas y pymes. Automatización de procesos, agentes IA, auditoría IA y formación.',
-  url: 'https://www.nexus-ia.es',
+  url: 'https://www.ap-automatizacion-ia.es',
   telephone: '+34 900 000 000',
   areaServed: {
     '@type': 'Country',
@@ -111,7 +111,7 @@ const jsonLdFAQ = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: '¿Necesito conocimientos técnicos para trabajar con Nexus IA?',
+      name: '¿Necesito conocimientos técnicos para trabajar con AP Automatización IA?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'En absoluto. Nos adaptamos a vuestro lenguaje y explicamos todo sin tecnicismos. Vosotros nos contáis vuestros problemas de negocio y nosotros nos encargamos de la parte técnica.',

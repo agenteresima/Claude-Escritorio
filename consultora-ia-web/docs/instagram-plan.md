@@ -1,4 +1,4 @@
-# Plan de Contenidos Instagram — Nexus IA
+# Plan de Contenidos Instagram — AP Automatización IA
 ## 12 Semanas de Lanzamiento
 
 ---
@@ -26,14 +26,14 @@ El coste de implementar IA bien: entre 2.000 € y 8.000 € el primer año.
 La pregunta correcta no es "¿podemos permitirnos la IA?".
 Es "¿podemos permitirnos seguir sin ella?"
 
-En Nexus IA ayudamos a empresas españolas a implementar inteligencia artificial de forma ordenada, con resultados reales y sin malgastar el presupuesto.
+En AP Automatización IA ayudamos a empresas españolas a implementar inteligencia artificial de forma ordenada, con resultados reales y sin malgastar el presupuesto.
 
 Si quieres saber cuánto te está costando la ineficiencia actual, enlace en bio para el diagnóstico gratuito.
 
 **CTA:** Enlace en bio → diagnóstico gratuito
 
 **Hashtags:**
-#InteligenciaArtificial #PymesEspaña #AutomatizacionEmpresarial #IAEmpresa #TransformacionDigital #EficienciaEmpresarial #NexusIA #ConsultoraIA #DigitalizacionPymes #IAEspaña #AutomatizacionProcesos #GestionEmpresarial #Productividad #EmprendimientoEspañol #DirectivosEspaña #PymesDigitales #IAParaEmpresas #RentabilidadEmpresa #TecnologiaEmpresarial #InnovacionEmpresarial #FuturoDelTrabajo #EmpresasEspaña
+#InteligenciaArtificial #PymesEspaña #AutomatizacionEmpresarial #IAEmpresa #TransformacionDigital #EficienciaEmpresarial #APAutomatizacionIA #ConsultoraIA #DigitalizacionPymes #IAEspaña #AutomatizacionProcesos #GestionEmpresarial #Productividad #EmprendimientoEspañol #DirectivosEspaña #PymesDigitales #IAParaEmpresas #RentabilidadEmpresa #TecnologiaEmpresarial #InnovacionEmpresarial #FuturoDelTrabajo #EmpresasEspaña
 
 ---
 
@@ -61,7 +61,7 @@ Estos son los 5 procesos que automatizamos con más frecuencia en pymes español
 **CTA:** "¿Cuál reconoces? Escríbeme en DM"
 
 **Hashtags:**
-#AutomatizacionEmpresarial #InteligenciaArtificial #PymesEspaña #EficienciaEmpresarial #IAEmpresa #AutomatizacionProcesos #TransformacionDigital #NexusIA #PymesDigitales #GestionEmpresarial #ProcesoEmpresarial #Productividad #IAParaEmpresas #DigitalizacionEmpresas #CarruselEducativo #TipsEmpresariales #EmprendedorEspañol #DirectivosEspaña #TecnologiaEmpresarial #FlujosTrabajo #n8n #MakeAutomation
+#AutomatizacionEmpresarial #InteligenciaArtificial #PymesEspaña #EficienciaEmpresarial #IAEmpresa #AutomatizacionProcesos #TransformacionDigital #APAutomatizacionIA #PymesDigitales #GestionEmpresarial #ProcesoEmpresarial #Productividad #IAParaEmpresas #DigitalizacionEmpresas #CarruselEducativo #TipsEmpresariales #EmprendedorEspañol #DirectivosEspaña #TecnologiaEmpresarial #FlujosTrabajo #n8n #MakeAutomation
 
 ---
 
@@ -87,12 +87,12 @@ Antes de invertir en cualquier herramienta de IA, la pregunta correcta es:
 
 Si no tienes ese número, aún no estás listo para invertir. Y eso está bien. El diagnóstico previo vale más que cualquier herramienta.
 
-(El diagnóstico gratuito que ofrecemos en Nexus IA está diseñado exactamente para eso)
+(El diagnóstico gratuito que ofrecemos en AP Automatización IA está diseñado exactamente para eso)
 
 **CTA:** Enlace en bio
 
 **Hashtags:**
-#EstadisticasEmpresariales #IAEspaña #PymesEspaña #TransformacionDigital #InteligenciaArtificial #EstrategiaEmpresarial #GestionEmpresarial #DirectivosEspaña #NexusIA #InversionIA #ROIEmpresarial #DigitalizacionPymes #TomadaDeDecisiones #GerenciaEmpresarial #LiderazgoEmpresarial #EmpresasEspaña #ConsultoraIA #IAEmpresa
+#EstadisticasEmpresariales #IAEspaña #PymesEspaña #TransformacionDigital #InteligenciaArtificial #EstrategiaEmpresarial #GestionEmpresarial #DirectivosEspaña #APAutomatizacionIA #InversionIA #ROIEmpresarial #DigitalizacionPymes #TomadaDeDecisiones #GerenciaEmpresarial #LiderazgoEmpresarial #EmpresasEspaña #ConsultoraIA #IAEmpresa
 
 ---
 
@@ -119,7 +119,7 @@ Un flujo de automatización básico que conecte tu CRM con tu herramienta de fac
 **CTA:** "¿Qué proceso de copia-pega tienes en tu empresa? Cuéntamelo en comentarios"
 
 **Hashtags:**
-#AutomatizacionEmpresarial #IAEmpresa #PymesEspaña #EficienciaEmpresarial #InteligenciaArtificial #ProductividadEmpresarial #NexusIA #TransformacionDigital #AutomatizarProcesos #TalentoHumano #GestionEmpresas #DigitalizacionEmpresa #AhorroTiempo #FlujosAutomatizados #n8n #EmprendedorEspañol #PymesDigitales #IAParaEmpresas #DirectivosEspaña #InnovacionEmpresarial
+#AutomatizacionEmpresarial #IAEmpresa #PymesEspaña #EficienciaEmpresarial #InteligenciaArtificial #ProductividadEmpresarial #APAutomatizacionIA #TransformacionDigital #AutomatizarProcesos #TalentoHumano #GestionEmpresas #DigitalizacionEmpresa #AhorroTiempo #FlujosAutomatizados #n8n #EmprendedorEspañol #PymesDigitales #IAParaEmpresas #DirectivosEspaña #InnovacionEmpresarial
 
 ---
 
@@ -150,7 +150,7 @@ Voz: "¿Cuántas facturas procesas tú al mes?"
 **CTA:** "¿Cuántas facturas al mes? Comenta el número"
 
 **Hashtags:**
-#AutomatizacionFacturas #IAEmpresa #PymesEspaña #Facturacion #AutomatizacionEmpresarial #InteligenciaArtificial #NexusIA #AhorroTiempo #EficienciaEmpresarial #Reel #TipsEmpresariales #DigitalizacionEmpresas #OCRInteligente #GestionDocumental #n8n #FlujosAutomatizados #ROIEmpresarial #PymesDigitales #ConsultoraIA #TransformacionDigital
+#AutomatizacionFacturas #IAEmpresa #PymesEspaña #Facturacion #AutomatizacionEmpresarial #InteligenciaArtificial #APAutomatizacionIA #AhorroTiempo #EficienciaEmpresarial #Reel #TipsEmpresariales #DigitalizacionEmpresas #OCRInteligente #GestionDocumental #n8n #FlujosAutomatizados #ROIEmpresarial #PymesDigitales #ConsultoraIA #TransformacionDigital
 
 ---
 
@@ -180,7 +180,7 @@ Señales de que tu Excel está asumiendo demasiado:
 **CTA:** "¿Cuántos reconoces? Del 1 al 5 en comentarios"
 
 **Hashtags:**
-#Excel #AutomatizacionEmpresarial #PymesEspaña #IAEmpresa #GestionEmpresarial #EficienciaEmpresarial #NexusIA #TransformacionDigital #HumorEmpresarial #Oficina #TrabajadorRemoto #HerramientasDigitales #ProductividadEmpresarial #DigitalizacionEmpresas #InteligenciaArtificial #PymesDigitales
+#Excel #AutomatizacionEmpresarial #PymesEspaña #IAEmpresa #GestionEmpresarial #EficienciaEmpresarial #APAutomatizacionIA #TransformacionDigital #HumorEmpresarial #Oficina #TrabajadorRemoto #HerramientasDigitales #ProductividadEmpresarial #DigitalizacionEmpresas #InteligenciaArtificial #PymesDigitales
 
 ---
 
@@ -210,7 +210,7 @@ El artículo completo con precios, fortalezas y limitaciones de cada una, en el 
 **CTA:** "¿Cuál usas tú? Cuéntamelo en comentarios"
 
 **Hashtags:**
-#ChatGPT #Claude #MicrosoftCopilot #Gemini #HerramientasIA #IAEmpresa #ComparativaIA #InteligenciaArtificial #NexusIA #PymesEspaña #HerramientasDigitales #ProductividadEmpresarial #IAParaEmpresas #TecnologiaEmpresarial #BlogNexusIA #TransformacionDigital #EficienciaEmpresarial #OpenAI #Anthropic #Google #Microsoft
+#ChatGPT #Claude #MicrosoftCopilot #Gemini #HerramientasIA #IAEmpresa #ComparativaIA #InteligenciaArtificial #APAutomatizacionIA #PymesEspaña #HerramientasDigitales #ProductividadEmpresarial #IAParaEmpresas #TecnologiaEmpresarial #BlogAPAutomatizacionIA #TransformacionDigital #EficienciaEmpresarial #OpenAI #Anthropic #Google #Microsoft
 
 ---
 
@@ -237,7 +237,7 @@ Desliza para ver la comparativa completa y la recomendación práctica al final.
 **CTA:** "Guárdalo para compartirlo con tu equipo"
 
 **Hashtags:**
-#ComparativaIA #HerramientasIA #IAEmpresa #ChatGPT #Claude #MicrosoftCopilot #Gemini #InteligenciaArtificial #NexusIA #PymesEspaña #EficienciaEmpresarial #ProductividadEmpresarial #BlogIA #GuiaIA #TecnologiaEmpresarial #DigitalizacionEmpresas
+#ComparativaIA #HerramientasIA #IAEmpresa #ChatGPT #Claude #MicrosoftCopilot #Gemini #InteligenciaArtificial #APAutomatizacionIA #PymesEspaña #EficienciaEmpresarial #ProductividadEmpresarial #BlogIA #GuiaIA #TecnologiaEmpresarial #DigitalizacionEmpresas
 
 ---
 
@@ -281,7 +281,7 @@ Esto no es magia. Es ingeniería de procesos con IA.
 **CTA:** "¿Cuántas facturas procesas al mes? Comenta el número"
 
 **Hashtags:**
-#ROIEmpresarial #AutomatizacionFacturas #CasoDeExito #IAEmpresa #PymesEspaña #AutomatizacionEmpresarial #NexusIA #RetornoInversion #EficienciaEmpresarial #NumerosReales #CasoPractico #InteligenciaArtificial #DistribucionEmpresarial #GestionDocumental #TransformacionDigital
+#ROIEmpresarial #AutomatizacionFacturas #CasoDeExito #IAEmpresa #PymesEspaña #AutomatizacionEmpresarial #APAutomatizacionIA #RetornoInversion #EficienciaEmpresarial #NumerosReales #CasoPractico #InteligenciaArtificial #DistribucionEmpresarial #GestionDocumental #TransformacionDigital
 
 ---
 
@@ -301,7 +301,7 @@ Esto no es magia. Es ingeniería de procesos con IA.
 **CTA:** "¿Te gustaría ver el cálculo para tu empresa? DM o enlace en bio"
 
 **Hashtags:**
-#ROI #CalculoROI #AutomatizacionEmpresarial #IAEmpresa #RetornoInversion #NexusIA #PymesEspaña #InteligenciaArtificial #EficienciaEmpresarial #FinanzasEmpresarial #InversionInteligente #TransformacionDigital
+#ROI #CalculoROI #AutomatizacionEmpresarial #IAEmpresa #RetornoInversion #APAutomatizacionIA #PymesEspaña #InteligenciaArtificial #EficienciaEmpresarial #FinanzasEmpresarial #InversionInteligente #TransformacionDigital
 
 ---
 
@@ -327,7 +327,7 @@ Eso es lo que marca la diferencia entre automatizar comunicaciones y automatizar
 **CTA:** "¿Qué operación te gustaría que se hiciera sola? Cuéntame en comentarios"
 
 **Hashtags:**
-#AgentesIA #AutomatizacionInteligente #ChatbotVsAgente #IAEmpresa #InteligenciaArtificial #NexusIA #PymesEspaña #AutomatizacionEmpresarial #CRMAutomatico #EficienciaEmpresarial #LLM #AgentesInteligentes #TransformacionDigital #IAParaEmpresas
+#AgentesIA #AutomatizacionInteligente #ChatbotVsAgente #IAEmpresa #InteligenciaArtificial #APAutomatizacionIA #PymesEspaña #AutomatizacionEmpresarial #CRMAutomatico #EficienciaEmpresarial #LLM #AgentesInteligentes #TransformacionDigital #IAParaEmpresas
 
 ---
 
@@ -348,7 +348,7 @@ La IA reemplaza tareas, no personas.
 
 La persona que antes dedicaba 3 horas al día a introducir datos en el sistema ahora dedica ese tiempo a resolver problemas complejos que la IA no puede resolver: gestionar una incidencia difícil con un cliente, analizar por qué bajan las ventas en una zona, proponer mejoras al proceso.
 
-En ninguno de los proyectos que hemos implementado en Nexus IA ha habido un despido por causa de la IA.
+En ninguno de los proyectos que hemos implementado en AP Automatización IA ha habido un despido por causa de la IA.
 
 Sí ha habido equipos que han podido crecer sin necesitar contratar más personas para las mismas tareas administrativas.
 
@@ -357,7 +357,7 @@ Eso no es sustitución. Es liberación.
 **CTA:** "¿Cuál es tu mayor miedo sobre la IA en la empresa? Cuéntamelo"
 
 **Hashtags:**
-#MitosIA #InteligenciaArtificial #FuturoDelTrabajo #IAEmpresa #NexusIA #PymesEspaña #TalentoHumano #AutomatizacionEmpresarial #TransformacionDigital #RRHHDigital #EmpresasFuturo #DebateIA #IAResponsable #EticaIA
+#MitosIA #InteligenciaArtificial #FuturoDelTrabajo #IAEmpresa #APAutomatizacionIA #PymesEspaña #TalentoHumano #AutomatizacionEmpresarial #TransformacionDigital #RRHHDigital #EmpresasFuturo #DebateIA #IAResponsable #EticaIA
 
 ---
 
@@ -368,7 +368,7 @@ Eso no es sustitución. Es liberación.
 **Caption:**
 No hay magia. Hay metodología y herramientas correctas.
 
-Estas son las 5 herramientas que aparecen en prácticamente todos los proyectos que implementamos en Nexus IA para pymes españolas:
+Estas son las 5 herramientas que aparecen en prácticamente todos los proyectos que implementamos en AP Automatización IA para pymes españolas:
 
 → n8n: automatización de flujos sin código. Open source.
 → Supabase: base de datos para guardar y consultar datos de la empresa.
@@ -383,7 +383,7 @@ El conocimiento para conectarlas bien: eso es donde aportamos valor.
 **CTA:** "¿Usas alguna de estas? Cuéntame en comentarios"
 
 **Hashtags:**
-#HerramientasIA #n8n #Supabase #OpenAI #AutomatizacionSinCodigo #NoCode #IAEmpresa #NexusIA #PymesEspaña #TecnologiaEmpresarial #StackTecnologico #DigitalizacionEmpresas #BuildInPublic
+#HerramientasIA #n8n #Supabase #OpenAI #AutomatizacionSinCodigo #NoCode #IAEmpresa #APAutomatizacionIA #PymesEspaña #TecnologiaEmpresarial #StackTecnologico #DigitalizacionEmpresas #BuildInPublic
 
 ---
 
@@ -417,7 +417,7 @@ Enlace en bio para reservar el tuyo.
 **CTA:** "Reserva en el enlace de bio. Quedan X plazas este mes."
 
 **Hashtags:**
-#DiagnosticoGratuito #ConsultoraIA #IAEmpresa #NexusIA #PymesEspaña #AutomatizacionEmpresarial #InteligenciaArtificial #ConsultoriaEstrategica #TransformacionDigital #HojaDeRuta #EstrategiaIA #OfertaLimitada #PymesDigitales
+#DiagnosticoGratuito #ConsultoraIA #IAEmpresa #APAutomatizacionIA #PymesEspaña #AutomatizacionEmpresarial #InteligenciaArtificial #ConsultoriaEstrategica #TransformacionDigital #HojaDeRuta #EstrategiaIA #OfertaLimitada #PymesDigitales
 
 ---
 
@@ -449,7 +449,7 @@ Desliza para entender cómo funciona y qué puedes hacer con ello.
 **CTA:** "¿Qué datos de tu empresa te gustaría que la IA pudiera consultar?"
 
 **Hashtags:**
-#RAG #IAEmpresarial #BaseDeDatosIA #InteligenciaArtificial #NexusIA #TecnologiaEmpresarial #IAParaEmpresas #PymesEspaña #EducacionIA #ExplicacionIA #DatosEmpresa #AgentesIA #LLM #ChatbotEmpresarial
+#RAG #IAEmpresarial #BaseDeDatosIA #InteligenciaArtificial #APAutomatizacionIA #TecnologiaEmpresarial #IAParaEmpresas #PymesEspaña #EducacionIA #ExplicacionIA #DatosEmpresa #AgentesIA #LLM #ChatbotEmpresarial
 
 ---
 
@@ -460,7 +460,7 @@ Desliza para entender cómo funciona y qué puedes hacer con ello.
 **Concepto visual:** Cita en formato testimonio con diseño premium. Avatar con iniciales, nombre, empresa y sector.
 
 **Caption:**
-"Llevábamos 3 años queriendo digitalizar el proceso de alta de clientes. Siempre lo posponíamos porque parecía un proyecto enorme. Nexus IA lo implementó en 2 semanas. Ahora el cliente rellena un formulario y en 5 minutos tiene acceso, su ficha creada y su email de bienvenida. Sin que nadie del equipo tenga que hacer nada."
+"Llevábamos 3 años queriendo digitalizar el proceso de alta de clientes. Siempre lo posponíamos porque parecía un proyecto enorme. AP Automatización IA lo implementó en 2 semanas. Ahora el cliente rellena un formulario y en 5 minutos tiene acceso, su ficha creada y su email de bienvenida. Sin que nadie del equipo tenga que hacer nada."
 
 — [Nombre], Director de Operaciones, [Empresa], sector servicios
 
@@ -474,7 +474,7 @@ Resultados a los 3 meses:
 **CTA:** "¿Cuánto tarda el alta de un cliente nuevo en tu empresa?"
 
 **Hashtags:**
-#CasoDeExito #TestimonioCliente #AutomatizacionEmpresarial #IAEmpresa #NexusIA #PymesEspaña #ResultadosReales #OnboardingClientes #EficienciaEmpresarial #InteligenciaArtificial #TransformacionDigital #NPSEmpresa
+#CasoDeExito #TestimonioCliente #AutomatizacionEmpresarial #IAEmpresa #APAutomatizacionIA #PymesEspaña #ResultadosReales #OnboardingClientes #EficienciaEmpresarial #InteligenciaArtificial #TransformacionDigital #NPSEmpresa
 
 ---
 
@@ -508,7 +508,7 @@ El problema es no tener los números sobre la mesa.
 **CTA:** "¿Cuántas horas repetitivas tiene tu equipo a la semana? Estima en comentarios"
 
 **Hashtags:**
-#PresupuestoIA #ROIEmpresarial #InversionIA #PymesEspaña #IAEmpresa #AutomatizacionEmpresarial #NexusIA #CalculoROI #AhorroEmpresarial #EficienciaEmpresarial #FinanzasEmpresa #InversionInteligente #InteligenciaArtificial
+#PresupuestoIA #ROIEmpresarial #InversionIA #PymesEspaña #IAEmpresa #AutomatizacionEmpresarial #APAutomatizacionIA #CalculoROI #AhorroEmpresarial #EficienciaEmpresarial #FinanzasEmpresa #InversionInteligente #InteligenciaArtificial
 
 ---
 
@@ -525,7 +525,7 @@ Lo que hemos aprendido de vosotros:
 → El mayor miedo no es el coste. Es implementarlo mal y perder dinero.
 → Lo que más valoran no son las herramientas: es tener a alguien que entienda su negocio antes de proponer soluciones.
 
-Eso es exactamente lo que hacemos en Nexus IA.
+Eso es exactamente lo que hacemos en AP Automatización IA.
 
 Si llevas meses pensando en dar el salto y no lo has dado porque no sabes cómo empezar, este es el momento.
 
@@ -536,7 +536,7 @@ Enlace en bio.
 **CTA:** "¿Cuál es tu próximo paso con la IA este trimestre?"
 
 **Hashtags:**
-#Reflexion #IAEmpresa #NexusIA #PymesEspaña #AutomatizacionEmpresarial #InteligenciaArtificial #TransformacionDigital #3MesesDeContenido #ComunidadIA #EmpresaFuturo #DiagnosticoGratuito #ConsultoraIA
+#Reflexion #IAEmpresa #APAutomatizacionIA #PymesEspaña #AutomatizacionEmpresarial #InteligenciaArtificial #TransformacionDigital #3MesesDeContenido #ComunidadIA #EmpresaFuturo #DiagnosticoGratuito #ConsultoraIA
 
 ---
 
@@ -559,7 +559,7 @@ Enlace en bio.
 ## GUÍA DE HASHTAGS POR CATEGORÍA
 
 ### Hashtags de marca (usar siempre)
-`#NexusIA` `#ConsultoraIA` `#IAParaEmpresas`
+`#APAutomatizacionIA` `#ConsultoraIA` `#IAParaEmpresas`
 
 ### Hashtags de sector/audiencia (rotar)
 `#PymesEspaña` `#DirectivosEspaña` `#EmprendimientoEspañol` `#EmpresasEspaña` `#GerenciaEmpresarial` `#LiderazgoEmpresarial`

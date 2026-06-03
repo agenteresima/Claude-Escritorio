@@ -82,7 +82,7 @@ export default function Header() {
           <Link
             href="/"
             className="flex items-center gap-2 flex-shrink-0 group"
-            aria-label="Nexus IA — Inicio"
+            aria-label="AP Automatización IA — Inicio"
           >
             <div
               className={cn(
@@ -100,7 +100,7 @@ export default function Header() {
                 isScrolled ? 'text-navy-900' : 'text-white'
               )}
             >
-              Nexus IA
+              AP Automatización IA
             </span>
           </Link>
 

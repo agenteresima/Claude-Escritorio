@@ -128,7 +128,7 @@ export default function Footer() {
               <div className="flex items-center justify-center w-9 h-9 bg-brand-600 rounded-xl">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold text-xl text-white">Nexus IA</span>
+              <span className="font-bold text-xl text-white">AP Automatización IA</span>
             </Link>
             <p className="text-navy-300 text-sm leading-relaxed mb-6 max-w-sm">
               {COMPANY_INFO.descripcion}
@@ -169,7 +169,7 @@ export default function Footer() {
                   href={COMPANY_INFO.redes_sociales.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="LinkedIn Nexus IA"
+                  aria-label="LinkedIn AP Automatización IA"
                   className="flex items-center justify-center w-9 h-9 bg-white/10 hover:bg-brand-600 rounded-lg transition-colors"
                 >
                   <Linkedin className="w-4 h-4" />
@@ -180,7 +180,7 @@ export default function Footer() {
                   href={COMPANY_INFO.redes_sociales.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Twitter Nexus IA"
+                  aria-label="Twitter AP Automatización IA"
                   className="flex items-center justify-center w-9 h-9 bg-white/10 hover:bg-brand-600 rounded-lg transition-colors"
                 >
                   <Twitter className="w-4 h-4" />
@@ -191,7 +191,7 @@ export default function Footer() {
                   href={COMPANY_INFO.redes_sociales.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="YouTube Nexus IA"
+                  aria-label="YouTube AP Automatización IA"
                   className="flex items-center justify-center w-9 h-9 bg-white/10 hover:bg-brand-600 rounded-lg transition-colors"
                 >
                   <Youtube className="w-4 h-4" />

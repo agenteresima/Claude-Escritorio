@@ -15,15 +15,15 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Agentes IA para Empresas | Nexus IA',
+  title: 'Agentes IA para Empresas | AP Automatización IA',
   description:
     'Desarrollamos agentes de inteligencia artificial personalizados para tu empresa: comercial, atención al cliente, administración, finanzas y reporting. Trabajan 24/7 integrados en tus sistemas.',
-  alternates: { canonical: 'https://nexusia.es/agentes-ia' },
+  alternates: { canonical: 'https://automatizacionprocesos.es/agentes-ia' },
   openGraph: {
-    title: 'Agentes IA para Empresas | Nexus IA',
+    title: 'Agentes IA para Empresas | AP Automatización IA',
     description:
       'Agentes de inteligencia artificial que trabajan 24/7 integrados en tus sistemas: CRM, ERP, email, WhatsApp Business.',
-    url: 'https://nexusia.es/agentes-ia',
+    url: 'https://automatizacionprocesos.es/agentes-ia',
   },
 }
 
@@ -179,8 +179,8 @@ export default function AgentesIAPage() {
             name: 'Agentes IA para Empresas',
             description:
               'Desarrollo de agentes de inteligencia artificial personalizados para empresas.',
-            provider: { '@type': 'Organization', name: 'Nexus IA', url: 'https://nexusia.es' },
-            url: 'https://nexusia.es/agentes-ia',
+            provider: { '@type': 'Organization', name: 'AP Automatización IA', url: 'https://automatizacionprocesos.es' },
+            url: 'https://automatizacionprocesos.es/agentes-ia',
             offers: {
               '@type': 'Offer',
               price: '5000',

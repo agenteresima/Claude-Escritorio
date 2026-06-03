@@ -16,16 +16,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getBlogPost(params.slug)
   if (!post) return {}
   return {
-    title: `${post.title} | Nexus IA`,
+    title: `${post.title} | AP Automatización IA`,
     description: post.description,
-    alternates: { canonical: `https://nexusia.es/blog/${post.slug}` },
+    alternates: { canonical: `https://automatizacionprocesos.es/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.description,
-      url: `https://nexusia.es/blog/${post.slug}`,
+      url: `https://automatizacionprocesos.es/blog/${post.slug}`,
       type: 'article',
       publishedTime: post.date,
-      authors: ['Nexus IA'],
+      authors: ['AP Automatización IA'],
     },
   }
 }
@@ -49,15 +49,15 @@ export default function BlogPostPage({ params }: Props) {
     datePublished: post.date,
     author: {
       '@type': 'Organization',
-      name: 'Nexus IA',
-      url: 'https://nexusia.es',
+      name: 'AP Automatización IA',
+      url: 'https://automatizacionprocesos.es',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Nexus IA',
-      url: 'https://nexusia.es',
+      name: 'AP Automatización IA',
+      url: 'https://automatizacionprocesos.es',
     },
-    url: `https://nexusia.es/blog/${post.slug}`,
+    url: `https://automatizacionprocesos.es/blog/${post.slug}`,
   }
 
   return (

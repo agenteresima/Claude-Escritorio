@@ -1,6 +1,6 @@
-# Nexus IA — Web Corporativa
+# AP Automatización IA — Web Corporativa
 
-Sitio web de Nexus IA, consultora de inteligencia artificial para empresas en España.
+Sitio web de AP Automatización IA, consultora de inteligencia artificial para empresas en España.
 
 ## Stack tecnológico
 
@@ -19,7 +19,7 @@ Sitio web de Nexus IA, consultora de inteligencia artificial para empresas en Es
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/nexus-ia/web.git
+git clone https://github.com/ap-automatizacion-ia/web.git
 
 # 2. Acceder al directorio
 cd consultora-ia-web
@@ -51,7 +51,7 @@ El sitio estará disponible en http://localhost:3000
 | `RESEND_FROM_EMAIL` | Dirección de envío de emails transaccionales | Sí |
 | `RESEND_TEAM_EMAIL` | Email interno que recibe notificaciones de leads | Sí |
 | `NEXT_PUBLIC_SITE_URL` | URL pública del sitio (sin barra final) | Sí |
-| `NEXT_PUBLIC_COMPANY_NAME` | Nombre de la empresa (Nexus IA) | Sí |
+| `NEXT_PUBLIC_COMPANY_NAME` | Nombre de la empresa (AP Automatización IA) | Sí |
 | `NEXT_PUBLIC_COMPANY_EMAIL` | Email de contacto público | Sí |
 | `NEXT_PUBLIC_COMPANY_PHONE` | Teléfono de contacto público | Sí |
 | `N8N_WEBHOOK_URL` | URL del webhook de n8n para nuevo lead | No |
@@ -77,7 +77,7 @@ consultora-ia-web/
 │   ├── diagnostico-gratuito/     # Formulario de diagnóstico (captación de leads)
 │   ├── contacto/                 # Página de contacto
 │   ├── casos-de-exito/           # Casos de éxito de clientes
-│   ├── sobre-nosotros/           # Página sobre Nexus IA
+│   ├── sobre-nosotros/           # Página sobre AP Automatización IA
 │   ├── precios/                  # Página de precios
 │   ├── aviso-legal/              # Aviso legal obligatorio
 │   ├── privacidad/               # Política de privacidad RGPD
@@ -153,7 +153,7 @@ Ver instrucciones completas en `docs/vercel-deployment.md`. Pasos clave:
 
 1. Conectar el repositorio de GitHub a Vercel desde el dashboard
 2. Configurar todas las variables de entorno en Vercel (Project → Settings → Environment Variables)
-3. Configurar el dominio personalizado `nexusia.es` en la sección Domains
+3. Configurar el dominio personalizado `automatizacionprocesos.es` en la sección Domains
 4. El despliegue es automático en cada push a la rama `main`
 
 ## Cómo añadir una página nueva
@@ -169,7 +169,7 @@ Ver instrucciones completas en `docs/vercel-deployment.md`. Pasos clave:
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Título de la página | Nexus IA',
+  title: 'Título de la página | AP Automatización IA',
   description: 'Descripción para SEO de entre 155 y 160 caracteres.',
 }
 
@@ -193,7 +193,7 @@ La lógica de conversación del chatbot está en `app/api/chat/route.ts`. El pro
 ## Cómo personalizar el diseño
 
 **Colores de marca:** editar `tailwind.config.ts` en `theme.extend.colors`:
-- `brand.*`: paleta azul principal (azul Nexus IA)
+- `brand.*`: paleta azul principal (azul AP Automatización IA)
 - `navy.*`: fondos oscuros para secciones con fondo oscuro
 
 **Tipografía:** la fuente se importa en `app/layout.tsx` desde Google Fonts y se aplica como variable CSS `--font-sans`.
@@ -224,7 +224,7 @@ La lógica de conversación del chatbot está en `app/api/chat/route.ts`. El pro
 
 ## Descripción del proyecto
 
-Nexus IA es una consultora especializada en la adopción de inteligencia artificial para empresas medianas y pymes. Esta web tiene tres objetivos principales:
+AP Automatización IA es una consultora especializada en la adopción de inteligencia artificial para empresas medianas y pymes. Esta web tiene tres objetivos principales:
 
 1. **Generar leads cualificados** mediante un bot conversacional que recoge datos del potencial cliente (sector, tamaño, problema principal, herramientas actuales) y calcula un `lead_score` automático.
 2. **Comunicar propuesta de valor** a través de servicios, casos de uso reales y blog educativo.
@@ -269,8 +269,8 @@ Asegúrate de tener instalado en tu máquina:
 ### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/tu-org/nexus-ia-web.git
-cd nexus-ia-web
+git clone https://github.com/tu-org/ap-automatizacion-ia-web.git
+cd ap-automatizacion-ia-web
 ```
 
 ### 2. Instala las dependencias
@@ -368,12 +368,12 @@ Consulta la guía detallada en [`docs/supabase-setup.md`](./docs/supabase-setup.
 ## Configuración de Resend
 
 1. Crea una cuenta en [resend.com](https://resend.com)
-2. Ve a **Domains** y añade `nexusia.es`
+2. Ve a **Domains** y añade `automatizacionprocesos.es`
 3. Añade los registros DNS indicados (SPF, DKIM, DMARC) en tu proveedor de dominio
 4. Espera la verificación (puede tardar hasta 48 h)
 5. Ve a **API Keys** > **Create API Key**
 6. Copia la clave en `RESEND_API_KEY`
-7. Establece `RESEND_FROM_EMAIL=noreply@nexusia.es`
+7. Establece `RESEND_FROM_EMAIL=noreply@automatizacionprocesos.es`
 
 > **Nota:** Hasta que el dominio esté verificado, Resend solo permite enviar a la dirección de email con la que te registraste. Perfecto para desarrollo.
 
@@ -397,14 +397,14 @@ Consulta la guía completa en [`docs/vercel-deployment.md`](./docs/vercel-deploy
 #### 1. Sube el código a GitHub
 
 ```bash
-git remote add origin https://github.com/tu-org/nexus-ia-web.git
+git remote add origin https://github.com/tu-org/ap-automatizacion-ia-web.git
 git push -u origin main
 ```
 
 #### 2. Importa el proyecto en Vercel
 
 1. Ve a [vercel.com/new](https://vercel.com/new)
-2. Selecciona el repositorio `nexus-ia-web`
+2. Selecciona el repositorio `ap-automatizacion-ia-web`
 3. Vercel detecta automáticamente que es Next.js
 4. **NO pulses Deploy todavía** — antes configura las variables de entorno
 
@@ -419,18 +419,18 @@ Pulsa **Deploy**. Vercel tardará aproximadamente 2-3 minutos.
 #### 5. Configura el dominio personalizado
 
 1. Ve a **Settings > Domains**
-2. Añade `nexusia.es` y `www.nexusia.es`
+2. Añade `automatizacionprocesos.es` y `www.automatizacionprocesos.es`
 3. Añade los registros DNS en tu proveedor de dominio:
    - Registro `A`: `76.76.21.21`
    - `CNAME www`: `cname.vercel-dns.com`
-4. Configura el redirect de `nexusia.es` → `www.nexusia.es`
+4. Configura el redirect de `automatizacionprocesos.es` → `www.automatizacionprocesos.es`
 
 ---
 
 ## Estructura de carpetas
 
 ```
-nexus-ia-web/
+ap-automatizacion-ia-web/
 │
 ├── app/                          # Next.js App Router
 │   ├── (marketing)/              # Grupo de rutas públicas
@@ -593,10 +593,10 @@ Vercel CDN / Edge (Next.js App Router)
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Nueva Página — Nexus IA',
+  title: 'Nueva Página — AP Automatización IA',
   description: 'Descripción para SEO (150-160 caracteres).',
   openGraph: {
-    title: 'Nueva Página — Nexus IA',
+    title: 'Nueva Página — AP Automatización IA',
     description: 'Descripción para redes sociales.',
     images: ['/og/nueva-pagina.png'],
   },
@@ -620,7 +620,7 @@ Crea `app/(marketing)/blog/mi-articulo/page.mdx` con frontmatter:
 title: "Cómo automatizar la gestión de facturas con IA"
 description: "Guía práctica para eliminar el trabajo manual en administración"
 date: "2025-06-15"
-author: "Equipo Nexus IA"
+author: "Equipo AP Automatización IA"
 tags: ["automatización", "administración", "IA"]
 image: "/images/blog/facturas-ia.webp"
 ---
@@ -700,7 +700,7 @@ Escala 0-100 puntos, distribuidos entre las respuestas:
 
 1. Verifica que `RESEND_API_KEY` es válida (empieza por `re_`)
 2. Asegúrate de que `EMAIL_DRY_RUN=false` en `.env.local`
-3. Comprueba que el dominio `nexusia.es` está verificado en Resend > **Domains**
+3. Comprueba que el dominio `automatizacionprocesos.es` está verificado en Resend > **Domains**
 4. Revisa Resend > **Logs** para ver si llegan las peticiones y qué error devuelven
 
 ### El webhook de n8n no se dispara
@@ -747,4 +747,4 @@ Ver el fichero completo en [`CHECKLIST.md`](./CHECKLIST.md).
 
 ## Licencia
 
-Propietario — © 2025 Nexus IA. Todos los derechos reservados.
+Propietario — © 2025 AP Automatización IA. Todos los derechos reservados.

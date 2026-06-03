@@ -41,13 +41,13 @@ const BASE_STYLES = {
 
 const FOOTER_LEGAL = `
   <p style="${BASE_STYLES.footerText} text-align: center;">
-    Nexus IA · Consultora de Inteligencia Artificial<br>
-    <a href="https://nexusia.es" style="color: #9ca3af;">nexusia.es</a> · 
-    <a href="mailto:hola@nexusia.es" style="color: #9ca3af;">hola@nexusia.es</a><br><br>
+    AP Automatización IA · Consultora de Inteligencia Artificial<br>
+    <a href="https://automatizacionprocesos.es" style="color: #9ca3af;">automatizacionprocesos.es</a> · 
+    <a href="mailto:hola@automatizacionprocesos.es" style="color: #9ca3af;">hola@automatizacionprocesos.es</a><br><br>
     De conformidad con el Reglamento (UE) 2016/679 (RGPD) y la LOPDGDD, tus datos personales son tratados 
-    por Nexus IA con la finalidad de gestionar tu solicitud y contactarte comercialmente. 
+    por AP Automatización IA con la finalidad de gestionar tu solicitud y contactarte comercialmente. 
     Puedes ejercer tus derechos de acceso, rectificación, supresión y oposición escribiendo a 
-    <a href="mailto:privacidad@nexusia.es" style="color: #9ca3af;">privacidad@nexusia.es</a>.
+    <a href="mailto:privacidad@automatizacionprocesos.es" style="color: #9ca3af;">privacidad@automatizacionprocesos.es</a>.
   </p>
 `
 
@@ -90,7 +90,7 @@ export function emailNuevoLead(lead: Lead): string {
           <div style="${BASE_STYLES.card}">
             <!-- Header -->
             <div style="${BASE_STYLES.header}">
-              <h1 style="${BASE_STYLES.h1}">🔔 Nuevo Lead — Nexus IA</h1>
+              <h1 style="${BASE_STYLES.h1}">🔔 Nuevo Lead — AP Automatización IA</h1>
               <p style="${BASE_STYLES.subtitle}">Solicitud recibida desde ${lead.source ?? 'web'}</p>
             </div>
 
@@ -134,7 +134,7 @@ export function emailNuevoLead(lead: Lead): string {
               <table cellpadding="0" cellspacing="0" style="margin: 0 auto;">
                 <tr>
                   <td style="${BASE_STYLES.cta}">
-                    <a href="mailto:${lead.email}?subject=Tu solicitud en Nexus IA" style="${BASE_STYLES.ctaLink}">
+                    <a href="mailto:${lead.email}?subject=Tu solicitud en AP Automatización IA" style="${BASE_STYLES.ctaLink}">
                       Contactar a ${lead.name?.split(' ')[0] ?? 'este lead'} →
                     </a>
                   </td>
@@ -167,7 +167,7 @@ export function emailConfirmacionCliente(lead: Lead): string {
         <tr><td>
           <div style="${BASE_STYLES.card}">
             <div style="${BASE_STYLES.header}">
-              <h1 style="${BASE_STYLES.h1}">Nexus IA</h1>
+              <h1 style="${BASE_STYLES.h1}">AP Automatización IA</h1>
               <p style="${BASE_STYLES.subtitle}">Consultora de Inteligencia Artificial</p>
             </div>
 
@@ -177,7 +177,7 @@ export function emailConfirmacionCliente(lead: Lead): string {
                 Hemos recibido tu solicitud y nos pondremos en contacto contigo en <strong>menos de 24 horas laborables</strong> para confirmar la videollamada gratuita de 45 minutos.
               </p>
               <p style="${BASE_STYLES.p}">
-                En esa llamada, un consultor de Nexus IA analizará junto a ti:
+                En esa llamada, un consultor de AP Automatización IA analizará junto a ti:
               </p>
               <ul style="color: #374151; line-height: 1.8; font-size: 15px; padding-left: 20px; margin-bottom: 24px;">
                 <li>Qué procesos de tu empresa tienen mayor potencial de automatización</li>
@@ -195,14 +195,14 @@ export function emailConfirmacionCliente(lead: Lead): string {
               <table cellpadding="0" cellspacing="0" style="margin: 0 auto 28px;">
                 <tr>
                   <td style="${BASE_STYLES.cta}">
-                    <a href="https://nexusia.es/servicios" style="${BASE_STYLES.ctaLink}">Explorar nuestros servicios →</a>
+                    <a href="https://automatizacionprocesos.es/servicios" style="${BASE_STYLES.ctaLink}">Explorar nuestros servicios →</a>
                   </td>
                 </tr>
               </table>
 
               <p style="color: #6b7280; font-size: 13px; margin: 0;">
                 ¿Tienes alguna pregunta? Escríbenos a 
-                <a href="mailto:hola@nexusia.es" style="color: #1e40af;">hola@nexusia.es</a>
+                <a href="mailto:hola@automatizacionprocesos.es" style="color: #1e40af;">hola@automatizacionprocesos.es</a>
               </p>
             </div>
 
@@ -229,7 +229,7 @@ export function emailSeguimiento(lead: Lead): string {
         <tr><td>
           <div style="${BASE_STYLES.card}">
             <div style="${BASE_STYLES.header}">
-              <h1 style="${BASE_STYLES.h1}">Nexus IA</h1>
+              <h1 style="${BASE_STYLES.h1}">AP Automatización IA</h1>
               <p style="${BASE_STYLES.subtitle}">Consultora de Inteligencia Artificial</p>
             </div>
             <div style="${BASE_STYLES.body}">
@@ -243,7 +243,7 @@ export function emailSeguimiento(lead: Lead): string {
               <table cellpadding="0" cellspacing="0" style="margin: 24px auto 28px;">
                 <tr>
                   <td style="${BASE_STYLES.cta}">
-                    <a href="https://nexusia.es/diagnostico-gratuito" style="${BASE_STYLES.ctaLink}">Reservar mi videollamada gratuita →</a>
+                    <a href="https://automatizacionprocesos.es/diagnostico-gratuito" style="${BASE_STYLES.ctaLink}">Reservar mi videollamada gratuita →</a>
                   </td>
                 </tr>
               </table>
@@ -272,7 +272,7 @@ export function emailPostReunion(lead: Lead): string {
         <tr><td>
           <div style="${BASE_STYLES.card}">
             <div style="${BASE_STYLES.header}">
-              <h1 style="${BASE_STYLES.h1}">Nexus IA</h1>
+              <h1 style="${BASE_STYLES.h1}">AP Automatización IA</h1>
               <p style="${BASE_STYLES.subtitle}">Consultora de Inteligencia Artificial</p>
             </div>
             <div style="${BASE_STYLES.body}">
@@ -294,7 +294,7 @@ export function emailPostReunion(lead: Lead): string {
               <table cellpadding="0" cellspacing="0" style="margin: 24px auto 28px;">
                 <tr>
                   <td style="${BASE_STYLES.cta}">
-                    <a href="https://nexusia.es" style="${BASE_STYLES.ctaLink}">Explorar casos de éxito →</a>
+                    <a href="https://automatizacionprocesos.es" style="${BASE_STYLES.ctaLink}">Explorar casos de éxito →</a>
                   </td>
                 </tr>
               </table>
@@ -320,7 +320,7 @@ export function emailPropuesta(lead: Lead): string {
         <tr><td>
           <div style="${BASE_STYLES.card}">
             <div style="${BASE_STYLES.header}">
-              <h1 style="${BASE_STYLES.h1}">Nexus IA</h1>
+              <h1 style="${BASE_STYLES.h1}">AP Automatización IA</h1>
               <p style="${BASE_STYLES.subtitle}">Propuesta Personalizada</p>
             </div>
             <div style="${BASE_STYLES.body}">
@@ -344,13 +344,13 @@ export function emailPropuesta(lead: Lead): string {
               <table cellpadding="0" cellspacing="0" style="margin: 24px auto 16px;">
                 <tr>
                   <td style="${BASE_STYLES.cta}">
-                    <a href="https://nexusia.es/propuesta/${lead.id ?? ''}" style="${BASE_STYLES.ctaLink}">Ver mi propuesta completa →</a>
+                    <a href="https://automatizacionprocesos.es/propuesta/${lead.id ?? ''}" style="${BASE_STYLES.ctaLink}">Ver mi propuesta completa →</a>
                   </td>
                 </tr>
               </table>
               <p style="color: #6b7280; font-size: 13px; text-align: center;">
                 Esta propuesta es válida durante 30 días. Cualquier duda, escríbenos a 
-                <a href="mailto:hola@nexusia.es" style="color: #1e40af;">hola@nexusia.es</a>
+                <a href="mailto:hola@automatizacionprocesos.es" style="color: #1e40af;">hola@automatizacionprocesos.es</a>
               </p>
             </div>
             <div style="${BASE_STYLES.footer}">${FOOTER_LEGAL}</div>

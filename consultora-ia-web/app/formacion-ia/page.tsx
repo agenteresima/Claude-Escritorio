@@ -17,15 +17,15 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Formación IA para Equipos Empresariales | Nexus IA',
+  title: 'Formación IA para Equipos Empresariales | AP Automatización IA',
   description:
     'Formación práctica en inteligencia artificial para equipos empresariales: ChatGPT, Claude, Microsoft Copilot, diseño de prompts y automatización. Presencial, online y grabado.',
-  alternates: { canonical: 'https://nexusia.es/formacion-ia' },
+  alternates: { canonical: 'https://automatizacionprocesos.es/formacion-ia' },
   openGraph: {
-    title: 'Formación IA para Equipos Empresariales | Nexus IA',
+    title: 'Formación IA para Equipos Empresariales | AP Automatización IA',
     description:
       'Formación práctica en IA adaptada al trabajo real de tu equipo. Desde medio día hasta 3 días. Presencial, online o grabado.',
-    url: 'https://nexusia.es/formacion-ia',
+    url: 'https://automatizacionprocesos.es/formacion-ia',
   },
 }
 
@@ -136,9 +136,9 @@ export default function FormacionIAPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'EducationalOrganization',
-            name: 'Nexus IA - Formación en IA para Empresas',
+            name: 'AP Automatización IA - Formación en IA para Empresas',
             description: 'Formación práctica en inteligencia artificial para equipos empresariales.',
-            url: 'https://nexusia.es/formacion-ia',
+            url: 'https://automatizacionprocesos.es/formacion-ia',
           }),
         }}
       />

@@ -15,7 +15,7 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     quote:
-      'Llevábamos años queriendo modernizar nuestros procesos pero nunca encontrábamos el momento ni sabíamos por dónde empezar. En tres meses con Nexus IA automatizamos la gestión de expedientes y la comunicación con clientes. El equipo tiene ahora tiempo para hacer lo que realmente importa.',
+      'Llevábamos años queriendo modernizar nuestros procesos pero nunca encontrábamos el momento ni sabíamos por dónde empezar. En tres meses con AP Automatización IA automatizamos la gestión de expedientes y la comunicación con clientes. El equipo tiene ahora tiempo para hacer lo que realmente importa.',
     name: 'María Dolores Fuentes',
     role: 'Socia directora',
     company: 'Fuentes & Asociados',
@@ -24,7 +24,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      'Éramos escépticos con todo lo de la IA. Pensábamos que era para grandes corporaciones o que era muy cara. Nexus IA nos demostró lo contrario: en semanas teníamos automatizada la gestión de pedidos y un agente respondiendo a nuestros transportistas fuera de horario. El ROI fue claro desde el primer mes.',
+      'Éramos escépticos con todo lo de la IA. Pensábamos que era para grandes corporaciones o que era muy cara. AP Automatización IA nos demostró lo contrario: en semanas teníamos automatizada la gestión de pedidos y un agente respondiendo a nuestros transportistas fuera de horario. El ROI fue claro desde el primer mes.',
     name: 'Jordi Puigdomènech',
     role: 'Director de operaciones',
     company: 'Translogix Barcelona',

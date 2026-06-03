@@ -12,15 +12,15 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Servicios de Consultoría IA para Empresas | Nexus IA',
+  title: 'Servicios de Consultoría IA para Empresas | AP Automatización IA',
   description:
     'Automatización de procesos, agentes IA, consultor externo, auditoría y formación en inteligencia artificial para empresas. Soluciones prácticas con resultados medibles.',
-  alternates: { canonical: 'https://nexusia.es/servicios' },
+  alternates: { canonical: 'https://automatizacionprocesos.es/servicios' },
   openGraph: {
-    title: 'Servicios de Consultoría IA para Empresas | Nexus IA',
+    title: 'Servicios de Consultoría IA para Empresas | AP Automatización IA',
     description:
       'Automatización de procesos, agentes IA, consultor externo, auditoría y formación en inteligencia artificial para empresas.',
-    url: 'https://nexusia.es/servicios',
+    url: 'https://automatizacionprocesos.es/servicios',
   },
 }
 
@@ -165,9 +165,9 @@ export default function ServiciosPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'ItemList',
-            name: 'Servicios de Nexus IA',
+            name: 'Servicios de AP Automatización IA',
             description: 'Consultoría de inteligencia artificial para empresas',
-            url: 'https://nexusia.es/servicios',
+            url: 'https://automatizacionprocesos.es/servicios',
             itemListElement: services.map((s, i) => ({
               '@type': 'ListItem',
               position: i + 1,
@@ -175,10 +175,10 @@ export default function ServiciosPage() {
                 '@type': 'Service',
                 name: s.title,
                 description: s.description,
-                url: `https://nexusia.es/${s.slug}`,
+                url: `https://automatizacionprocesos.es/${s.slug}`,
                 provider: {
                   '@type': 'Organization',
-                  name: 'Nexus IA',
+                  name: 'AP Automatización IA',
                 },
               },
             })),

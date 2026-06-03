@@ -170,16 +170,16 @@ export async function POST(request: NextRequest) {
         }
 
         await resend.emails.send({
-          from: 'Nexus IA <noreply@nexusia.es>',
-          to: 'hola@nexusia.es',
+          from: 'AP Automatización IA <noreply@automatizacionprocesos.es>',
+          to: 'hola@automatizacionprocesos.es',
           subject: `🤖 Lead del chatbot: ${data.name} — ${data.company ?? 'Sin empresa'} (Score: ${qualification_score})`,
           html: emailNuevoLead(lead),
         })
 
         await resend.emails.send({
-          from: 'Nexus IA <hola@nexusia.es>',
+          from: 'AP Automatización IA <hola@automatizacionprocesos.es>',
           to: data.email,
-          subject: 'Tu solicitud de consultoría ha sido recibida — Nexus IA',
+          subject: 'Tu solicitud de consultoría ha sido recibida — AP Automatización IA',
           html: emailConfirmacionCliente(lead),
         })
       }

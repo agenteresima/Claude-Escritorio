@@ -9,7 +9,7 @@ Esta guía cubre desde la creación del proyecto hasta la monitorización en pro
 1. Ve a [supabase.com/dashboard](https://supabase.com/dashboard) e inicia sesión
 2. Pulsa **New Project**
 3. Rellena los datos:
-   - **Name**: `nexus-ia-prod` (o `nexus-ia-dev` para el entorno de desarrollo)
+   - **Name**: `ap-automatizacion-ia-prod` (o `ap-automatizacion-ia-dev` para el entorno de desarrollo)
    - **Database Password**: genera una contraseña segura y guárdala en un gestor de contraseñas
    - **Region**: `West EU (Ireland)` — más cercana a usuarios de España
    - **Pricing Plan**: Free para empezar, Pro cuando superes 50.000 filas o necesites backups diarios
@@ -303,10 +303,10 @@ Si en el futuro añades un área de clientes donde los leads puedan ver el estad
 
 1. Ve a **Authentication > Settings**
 2. En **Email Auth**: activa "Confirm email"
-3. En **Email Templates**: personaliza los emails de confirmación con la marca Nexus IA
+3. En **Email Templates**: personaliza los emails de confirmación con la marca AP Automatización IA
 4. En **URL Configuration**:
-   - Site URL: `https://www.nexusia.es`
-   - Redirect URLs: `https://www.nexusia.es/clientes/**`
+   - Site URL: `https://www.automatizacionprocesos.es`
+   - Redirect URLs: `https://www.automatizacionprocesos.es/clientes/**`
 
 ```typescript
 // lib/supabase-server.ts — cliente para uso en servidor con auth

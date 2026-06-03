@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Sitemap: https://www.nexusia.es/sitemap.xml
+Sitemap: https://www.automatizacionprocesos.es/sitemap.xml

@@ -1,4 +1,4 @@
-# Checklist de Lanzamiento — Nexus IA Web
+# Checklist de Lanzamiento — AP Automatización IA Web
 
 Usar este checklist antes de hacer pública la web. Marcar cada ítem cuando esté completado y verificado.
 
@@ -12,13 +12,13 @@ Usar este checklist antes de hacer pública la web. Marcar cada ítem cuando est
 - [ ] `supabase/schema.sql` ejecutado en el proyecto de Supabase de producción
 - [ ] Row Level Security (RLS) activado en todas las tablas de Supabase
 - [ ] Políticas de RLS probadas: anon solo puede INSERT en `leads`, no SELECT
-- [ ] Test completo del formulario de diagnóstico: datos recibidos correctamente en Supabase + email de confirmación enviado al lead + email de notificación recibido en `hola@nexusia.es`
+- [ ] Test completo del formulario de diagnóstico: datos recibidos correctamente en Supabase + email de confirmación enviado al lead + email de notificación recibido en `hola@automatizacionprocesos.es`
 - [ ] Test completo del formulario de contacto general
 - [ ] Test del bot de conversación: completar flujo completo de principio a fin
 - [ ] Webhook de n8n conectado, testado y activo (Flujo 1: Nuevo Lead)
 - [ ] Flujo de seguimiento 48h (Flujo 2) activado y probado con dato de prueba
-- [ ] SSL/HTTPS activo y válido en el dominio `nexusia.es`
-- [ ] Redirect `www.nexusia.es` → `nexusia.es` configurado (o viceversa, de forma consistente)
+- [ ] SSL/HTTPS activo y válido en el dominio `automatizacionprocesos.es`
+- [ ] Redirect `www.automatizacionprocesos.es` → `automatizacionprocesos.es` configurado (o viceversa, de forma consistente)
 - [ ] Redirect HTTP → HTTPS funcionando
 - [ ] Página 404 personalizada accesible y con el diseño correcto
 - [ ] Core Web Vitals > 90 en PageSpeed Insights en mobile y desktop (probar en https://pagespeed.web.dev)
@@ -35,7 +35,7 @@ Usar este checklist antes de hacer pública la web. Marcar cada ítem cuando est
 - [ ] Open Graph image de 1200x630px creada y configurada (`og:image`)
 - [ ] Twitter Card configurada correctamente
 - [ ] Canonical URLs configuradas en todas las páginas
-- [ ] Google Search Console: dominio `nexusia.es` añadido y verificado
+- [ ] Google Search Console: dominio `automatizacionprocesos.es` añadido y verificado
 - [ ] Sitemap enviado a Google Search Console
 - [ ] Google Analytics o Vercel Analytics activo y recibiendo datos
 - [ ] Imágenes con atributos `alt` descriptivos en todas las páginas
@@ -65,7 +65,7 @@ Usar este checklist antes de hacer pública la web. Marcar cada ítem cuando est
 - [ ] Logo en SVG subido en `/public/logo.svg` y configurado en Header y Footer
 - [ ] Favicon configurado (`/public/favicon.ico` y variantes para Apple Touch Icon)
 - [ ] Todas las imágenes en formato WebP y optimizadas (< 200KB por imagen)
-- [ ] Open Graph image (1200x630px) creada con el logo y tagline de Nexus IA
+- [ ] Open Graph image (1200x630px) creada con el logo y tagline de AP Automatización IA
 - [ ] Primeros 3 artículos del blog publicados y con contenido real completo
 - [ ] Páginas de servicios con contenido real, no placeholder
 - [ ] Página "Sobre nosotros" con información real del equipo
@@ -77,7 +77,7 @@ Usar este checklist antes de hacer pública la web. Marcar cada ítem cuando est
 
 ## Comercial
 
-- [ ] `hola@nexusia.es` configurado, operativo y revisado al menos 2 veces al día
+- [ ] `hola@automatizacionprocesos.es` configurado, operativo y revisado al menos 2 veces al día
 - [ ] Calendly configurado con disponibilidad real, confirmación automática por email, y URL configurada en `.env`: `NEXT_PUBLIC_CALENDLY_URL`
 - [ ] CRM (o hoja de seguimiento) preparado para recibir y gestionar los leads entrantes
 - [ ] Notificación de nuevo lead llegando correctamente a email del equipo
@@ -111,4 +111,4 @@ Usar este checklist antes de hacer pública la web. Marcar cada ítem cuando est
 - [ ] Publicar anuncio del lanzamiento en LinkedIn personal y de empresa
 - [ ] Enviar email de lanzamiento a lista de contactos previos si existe
 - [ ] Solicitar al menos 3 reseñas o testimonios a clientes actuales o anteriores
-- [ ] Configurar alerta en Google Alerts para "Nexus IA" y variantes del nombre
+- [ ] Configurar alerta en Google Alerts para "AP Automatización IA" y variantes del nombre

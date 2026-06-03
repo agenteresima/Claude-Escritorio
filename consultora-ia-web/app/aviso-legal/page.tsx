@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Aviso Legal | Nexus IA',
+  title: 'Aviso Legal | AP Automatización IA',
   description:
-    'Aviso legal de Nexus IA conforme a la Ley 34/2002, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE).',
-  alternates: { canonical: 'https://nexusia.es/aviso-legal' },
+    'Aviso legal de AP Automatización IA conforme a la Ley 34/2002, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE).',
+  alternates: { canonical: 'https://automatizacionprocesos.es/aviso-legal' },
 }
 
 export default function AvisoLegalPage() {
@@ -26,21 +26,21 @@ export default function AvisoLegalPage() {
             facilitan a continuación los datos identificativos del titular del sitio web:
           </p>
           <ul>
-            <li><strong>Denominación:</strong> Nexus IA</li>
+            <li><strong>Denominación:</strong> AP Automatización IA</li>
             <li><strong>Actividad:</strong> Consultoría e implementación de inteligencia artificial para empresas</li>
-            <li><strong>Email:</strong> hola@nexusia.es</li>
+            <li><strong>Email:</strong> hola@automatizacionprocesos.es</li>
             <li><strong>Teléfono:</strong> +34 900 000 000</li>
-            <li><strong>Sitio web:</strong> https://nexusia.es</li>
+            <li><strong>Sitio web:</strong> https://automatizacionprocesos.es</li>
           </ul>
 
           <h2>2. Objeto y ámbito de aplicación</h2>
           <p>
-            El presente Aviso Legal regula el uso del sitio web nexusia.es (en adelante, "el sitio
-            web"), cuyo titular es Nexus IA. El acceso y uso del sitio web implica la aceptación
+            El presente Aviso Legal regula el uso del sitio web automatizacionprocesos.es (en adelante, "el sitio
+            web"), cuyo titular es AP Automatización IA. El acceso y uso del sitio web implica la aceptación
             plena y sin reservas de todas las disposiciones contenidas en este Aviso Legal.
           </p>
           <p>
-            Nexus IA se reserva el derecho a modificar en cualquier momento las condiciones de uso
+            AP Automatización IA se reserva el derecho a modificar en cualquier momento las condiciones de uso
             del sitio web, así como sus contenidos y servicios. El uso continuado del sitio web tras
             la publicación de tales modificaciones implica la aceptación de los mismos.
           </p>
@@ -65,42 +65,42 @@ export default function AvisoLegalPage() {
           <p>
             Todos los contenidos del sitio web, incluyendo, a título enunciativo y no limitativo,
             textos, imágenes, gráficos, logotipos, iconos, código fuente, diseño y estructura de
-            navegación, son propiedad de Nexus IA o de terceros que han autorizado su uso, y están
+            navegación, son propiedad de AP Automatización IA o de terceros que han autorizado su uso, y están
             protegidos por las leyes españolas e internacionales de propiedad intelectual e
             industrial.
           </p>
           <p>
             Queda prohibida la reproducción total o parcial de los contenidos del sitio web sin la
-            autorización expresa y por escrito de Nexus IA, salvo para uso personal y privado del
+            autorización expresa y por escrito de AP Automatización IA, salvo para uso personal y privado del
             usuario.
           </p>
           <p>
             Las marcas, nombres comerciales y distintivos que aparecen en el sitio web son
-            propiedad de Nexus IA o de sus respectivos propietarios. El acceso al sitio web no
+            propiedad de AP Automatización IA o de sus respectivos propietarios. El acceso al sitio web no
             otorga ningún derecho sobre dichas marcas o nombres comerciales.
           </p>
 
           <h2>5. Exclusión de responsabilidad</h2>
           <h3>5.1 Contenidos del sitio web</h3>
           <p>
-            Nexus IA no garantiza la exactitud, veracidad, exhaustividad o actualidad de los
+            AP Automatización IA no garantiza la exactitud, veracidad, exhaustividad o actualidad de los
             contenidos del sitio web. Los contenidos tienen finalidad meramente informativa y no
             constituyen asesoramiento profesional de ningún tipo.
           </p>
           <h3>5.2 Disponibilidad del sitio web</h3>
           <p>
-            Nexus IA no garantiza la disponibilidad continua e ininterrumpida del sitio web. Nexus
+            AP Automatización IA no garantiza la disponibilidad continua e ininterrumpida del sitio web. Nexus
             IA se exime de cualquier responsabilidad por los daños y perjuicios que pudieran
             derivarse de la falta de disponibilidad o accesibilidad del sitio web.
           </p>
           <h3>5.3 Virus y elementos dañinos</h3>
           <p>
-            Nexus IA no se responsabiliza de los daños producidos en el equipo del usuario como
+            AP Automatización IA no se responsabiliza de los daños producidos en el equipo del usuario como
             consecuencia de la descarga de programas dañinos en el sitio web.
           </p>
           <h3>5.4 Sitios web enlazados</h3>
           <p>
-            El sitio web puede contener enlaces a otros sitios web de terceros. Nexus IA no
+            El sitio web puede contener enlaces a otros sitios web de terceros. AP Automatización IA no
             controla ni es responsable de los contenidos, políticas de privacidad o prácticas de
             dichos sitios web.
           </p>
@@ -133,7 +133,7 @@ export default function AvisoLegalPage() {
           <p>
             Para cualquier consulta relacionada con el presente Aviso Legal, puede ponerse en
             contacto con nosotros a través de:{' '}
-            <a href="mailto:hola@nexusia.es">hola@nexusia.es</a>
+            <a href="mailto:hola@automatizacionprocesos.es">hola@automatizacionprocesos.es</a>
           </p>
         </div>
       </div>

@@ -123,17 +123,17 @@ export async function POST(request: NextRequest) {
 
     // Enviar email interno al equipo comercial
     await resend.emails.send({
-      from: 'Nexus IA <noreply@nexusia.es>',
-      to: 'hola@nexusia.es',
+      from: 'AP Automatización IA <noreply@automatizacionprocesos.es>',
+      to: 'hola@automatizacionprocesos.es',
       subject: `🔔 Nuevo lead: ${data.name} — ${data.company ?? 'Sin empresa'} (Score: ${lead_score})`,
       html: emailNuevoLead(lead),
     })
 
     // Enviar email de confirmación al cliente
     await resend.emails.send({
-      from: 'Nexus IA <hola@nexusia.es>',
+      from: 'AP Automatización IA <hola@automatizacionprocesos.es>',
       to: data.email,
-      subject: 'Hemos recibido tu solicitud — Nexus IA',
+      subject: 'Hemos recibido tu solicitud — AP Automatización IA',
       html: emailConfirmacionCliente(lead),
     })
 

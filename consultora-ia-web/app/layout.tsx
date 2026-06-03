@@ -13,13 +13,13 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.nexusia.es'),
+  metadataBase: new URL('https://www.automatizacionprocesos.es'),
   title: {
-    default: 'Nexus IA | Consultoría de Inteligencia Artificial para Empresas',
-    template: '%s | Nexus IA',
+    default: 'AP Automatización IA | Consultoría de Inteligencia Artificial para Empresas',
+    template: '%s | AP Automatización IA',
   },
   description:
-    'Nexus IA es la consultoría de inteligencia artificial que tu empresa necesita. Automatizamos procesos, implantamos agentes IA y formamos a tus equipos. El experto en IA que todavía no tienes en plantilla.',
+    'AP Automatización IA es la consultoría de inteligencia artificial que tu empresa necesita. Automatizamos procesos, implantamos agentes IA y formamos a tus equipos. El experto en IA que todavía no tienes en plantilla.',
   keywords: [
     'consultoría inteligencia artificial',
     'IA para empresas',
@@ -33,11 +33,11 @@ export const metadata: Metadata = {
     'consultoría IA España',
     'implementación IA',
     'estrategia de IA',
-    'Nexus IA',
+    'AP Automatización IA',
   ],
-  authors: [{ name: 'Nexus IA', url: 'https://www.nexusia.es' }],
-  creator: 'Nexus IA',
-  publisher: 'Nexus IA',
+  authors: [{ name: 'AP Automatización IA', url: 'https://www.automatizacionprocesos.es' }],
+  creator: 'AP Automatización IA',
+  publisher: 'AP Automatización IA',
   robots: {
     index: true,
     follow: true,
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: 'https://www.nexusia.es',
-    siteName: 'Nexus IA',
-    title: 'Nexus IA | Consultoría de Inteligencia Artificial para Empresas',
+    url: 'https://www.automatizacionprocesos.es',
+    siteName: 'AP Automatización IA',
+    title: 'AP Automatización IA | Consultoría de Inteligencia Artificial para Empresas',
     description:
       'El experto en IA que tu empresa todavía no tiene en plantilla. Automatizamos procesos, implantamos agentes IA y formamos a tus equipos.',
     images: [
@@ -62,23 +62,23 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Nexus IA — Consultoría de Inteligencia Artificial para Empresas',
+        alt: 'AP Automatización IA — Consultoría de Inteligencia Artificial para Empresas',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Nexus IA | Consultoría de Inteligencia Artificial para Empresas',
+    title: 'AP Automatización IA | Consultoría de Inteligencia Artificial para Empresas',
     description:
       'El experto en IA que tu empresa todavía no tiene en plantilla. Automatizamos, implantamos y formamos.',
     images: ['/og-image.jpg'],
-    creator: '@nexusia_es',
-    site: '@nexusia_es',
+    creator: '@apautomatizacion_es',
+    site: '@apautomatizacion_es',
   },
   alternates: {
-    canonical: 'https://www.nexusia.es',
+    canonical: 'https://www.automatizacionprocesos.es',
     languages: {
-      'es-ES': 'https://www.nexusia.es',
+      'es-ES': 'https://www.automatizacionprocesos.es',
     },
   },
   verification: {
@@ -90,14 +90,14 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': ['ProfessionalService', 'LocalBusiness'],
-  name: 'Nexus IA',
+  name: 'AP Automatización IA',
   description:
     'Consultoría de Inteligencia Artificial para empresas. Automatización de procesos, agentes IA, formación y estrategia de IA.',
   slogan: 'El experto en IA que tu empresa todavía no tiene en plantilla',
-  url: 'https://www.nexusia.es',
-  logo: 'https://www.nexusia.es/logo.png',
-  image: 'https://www.nexusia.es/og-image.jpg',
-  email: 'hola@nexusia.es',
+  url: 'https://www.automatizacionprocesos.es',
+  logo: 'https://www.automatizacionprocesos.es/logo.png',
+  image: 'https://www.automatizacionprocesos.es/og-image.jpg',
+  email: 'hola@automatizacionprocesos.es',
   telephone: '+34-900-000-000',
   address: {
     '@type': 'PostalAddress',
@@ -125,8 +125,8 @@ const jsonLd = {
     },
   ],
   sameAs: [
-    'https://www.linkedin.com/company/nexusia',
-    'https://twitter.com/nexusia_es',
+    'https://www.linkedin.com/company/apautomatizacion',
+    'https://twitter.com/apautomatizacion_es',
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',

@@ -1,4 +1,4 @@
-# Templates de Email — Nexus IA
+# Templates de Email — AP Automatización IA
 
 Documentación y código HTML completo de los 5 emails transaccionales del sistema.
 
@@ -10,7 +10,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
 
 **Asunto:** `🎯 Nuevo lead cualificado: [nombre] de [empresa]`
 
-**Destinatario:** `hola@nexusia.es` (equipo comercial)
+**Destinatario:** `hola@automatizacionprocesos.es` (equipo comercial)
 
 **Cuándo se envía:** Inmediatamente tras recibir un nuevo lead via bot o formulario.
 
@@ -20,7 +20,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuevo Lead — Nexus IA</title>
+  <title>Nuevo Lead — AP Automatización IA</title>
 </head>
 <body style="margin:0;padding:0;background-color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
   
@@ -35,7 +35,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td>
-                    <span style="color:#ffffff;font-size:20px;font-weight:700;letter-spacing:-0.5px;">Nexus IA</span>
+                    <span style="color:#ffffff;font-size:20px;font-weight:700;letter-spacing:-0.5px;">AP Automatización IA</span>
                   </td>
                   <td align="right">
                     <span style="background-color:#4f46e5;color:#ffffff;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;">NUEVO LEAD</span>
@@ -177,7 +177,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
                     </a>
                   </td>
                   <td style="padding-left:8px;width:50%;">
-                    <a href="mailto:{{email}}?subject=Hola {{name}}, soy del equipo de Nexus IA" style="display:block;background-color:#ffffff;color:#6366f1;text-align:center;padding:12px;border-radius:6px;font-size:14px;font-weight:600;text-decoration:none;border:2px solid #6366f1;">
+                    <a href="mailto:{{email}}?subject=Hola {{name}}, soy del equipo de AP Automatización IA" style="display:block;background-color:#ffffff;color:#6366f1;text-align:center;padding:12px;border-radius:6px;font-size:14px;font-weight:600;text-decoration:none;border:2px solid #6366f1;">
                       Responder directamente
                     </a>
                   </td>
@@ -190,7 +190,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
           <tr>
             <td style="background-color:#f9fafb;border-radius:0 0 12px 12px;padding:16px 32px;border-top:1px solid #e5e7eb;">
               <p style="margin:0;font-size:12px;color:#9ca3af;text-align:center;">
-                Email automático generado por el sistema de Nexus IA · 
+                Email automático generado por el sistema de AP Automatización IA · 
                 <a href="{{supabase_dashboard_url}}" style="color:#6366f1;text-decoration:none;">Ver todos los leads</a>
               </p>
             </td>
@@ -209,7 +209,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
 
 ## Email 2: Confirmación al cliente
 
-**Asunto:** `Hemos recibido tu solicitud de diagnóstico — Nexus IA`
+**Asunto:** `Hemos recibido tu solicitud de diagnóstico — AP Automatización IA`
 
 **Destinatario:** Email del lead
 
@@ -221,7 +221,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmación — Nexus IA</title>
+  <title>Confirmación — AP Automatización IA</title>
 </head>
 <body style="margin:0;padding:0;background-color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
   
@@ -233,7 +233,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
           <!-- Cabecera con gradiente -->
           <tr>
             <td style="background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);border-radius:12px 12px 0 0;padding:40px 32px;text-align:center;">
-              <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#c4b5fd;text-transform:uppercase;letter-spacing:0.1em;">Nexus IA</p>
+              <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#c4b5fd;text-transform:uppercase;letter-spacing:0.1em;">AP Automatización IA</p>
               <h1 style="margin:0;font-size:26px;font-weight:800;color:#ffffff;line-height:1.3;">
                 Hemos recibido tu solicitud ✓
               </h1>
@@ -279,7 +279,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
                         </td>
                         <td>
                           <p style="margin:0;font-size:14px;font-weight:600;color:#1f2937;">En las próximas 24 horas</p>
-                          <p style="margin:4px 0 0;font-size:13px;color:#6b7280;line-height:1.5;">Un consultor de Nexus IA te contactará por email o teléfono para presentarse y confirmar los detalles de vuestro diagnóstico.</p>
+                          <p style="margin:4px 0 0;font-size:13px;color:#6b7280;line-height:1.5;">Un consultor de AP Automatización IA te contactará por email o teléfono para presentarse y confirmar los detalles de vuestro diagnóstico.</p>
                         </td>
                       </tr>
                     </table>
@@ -339,19 +339,19 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="padding-right:8px;width:33%;">
-                    <a href="https://www.nexusia.es/blog" style="display:block;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:6px;padding:12px;text-align:center;text-decoration:none;">
+                    <a href="https://www.automatizacionprocesos.es/blog" style="display:block;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:6px;padding:12px;text-align:center;text-decoration:none;">
                       <p style="margin:0;font-size:12px;font-weight:600;color:#6366f1;">Blog IA</p>
                       <p style="margin:4px 0 0;font-size:11px;color:#9ca3af;">Guías y casos prácticos</p>
                     </a>
                   </td>
                   <td style="padding:0 4px;width:33%;">
-                    <a href="https://www.nexusia.es/casos-de-uso" style="display:block;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:6px;padding:12px;text-align:center;text-decoration:none;">
+                    <a href="https://www.automatizacionprocesos.es/casos-de-uso" style="display:block;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:6px;padding:12px;text-align:center;text-decoration:none;">
                       <p style="margin:0;font-size:12px;font-weight:600;color:#6366f1;">Casos reales</p>
                       <p style="margin:4px 0 0;font-size:11px;color:#9ca3af;">Resultados de clientes</p>
                     </a>
                   </td>
                   <td style="padding-left:8px;width:33%;">
-                    <a href="https://www.instagram.com/nexusia.es" style="display:block;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:6px;padding:12px;text-align:center;text-decoration:none;">
+                    <a href="https://www.instagram.com/automatizacionprocesos.es" style="display:block;background-color:#ffffff;border:1px solid #e5e7eb;border-radius:6px;padding:12px;text-align:center;text-decoration:none;">
                       <p style="margin:0;font-size:12px;font-weight:600;color:#6366f1;">Instagram</p>
                       <p style="margin:4px 0 0;font-size:11px;color:#9ca3af;">Consejos diarios de IA</p>
                     </a>
@@ -364,10 +364,10 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
           <!-- Footer -->
           <tr>
             <td style="background-color:#1f2937;border-radius:0 0 12px 12px;padding:24px 32px;">
-              <p style="margin:0 0 4px;font-size:14px;font-weight:700;color:#ffffff;">Nexus IA</p>
-              <p style="margin:0 0 12px;font-size:12px;color:#9ca3af;">Calle Gran Vía 28, 28013 Madrid · hola@nexusia.es · +34 900 000 000</p>
+              <p style="margin:0 0 4px;font-size:14px;font-weight:700;color:#ffffff;">AP Automatización IA</p>
+              <p style="margin:0 0 12px;font-size:12px;color:#9ca3af;">Calle Gran Vía 28, 28013 Madrid · hola@automatizacionprocesos.es · +34 900 000 000</p>
               <p style="margin:0;font-size:11px;color:#6b7280;">
-                Has recibido este email porque solicitaste información en nexusia.es. 
+                Has recibido este email porque solicitaste información en automatizacionprocesos.es. 
                 <a href="{{unsubscribe_url}}" style="color:#6366f1;text-decoration:none;">Cancelar suscripción</a>
               </p>
             </td>
@@ -398,7 +398,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seguimiento — Nexus IA</title>
+  <title>Seguimiento — AP Automatización IA</title>
 </head>
 <body style="margin:0;padding:0;background-color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
   
@@ -409,7 +409,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
           
           <tr>
             <td style="background-color:#6366f1;border-radius:12px 12px 0 0;padding:20px 32px;">
-              <span style="color:#ffffff;font-size:18px;font-weight:700;">Nexus IA</span>
+              <span style="color:#ffffff;font-size:18px;font-weight:700;">AP Automatización IA</span>
             </td>
           </tr>
           
@@ -453,14 +453,14 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
               
               <p style="margin:24px 0 0;font-size:14px;color:#374151;">
                 Un saludo,<br>
-                <strong>Equipo Nexus IA</strong><br>
-                <span style="color:#6b7280;">hola@nexusia.es · +34 900 000 000</span>
+                <strong>Equipo AP Automatización IA</strong><br>
+                <span style="color:#6b7280;">hola@automatizacionprocesos.es · +34 900 000 000</span>
               </p>
               
               <hr style="border:none;border-top:1px solid #f3f4f6;margin:24px 0;">
               
               <p style="margin:0;font-size:11px;color:#9ca3af;">
-                Nexus IA · Calle Gran Vía 28, 28013 Madrid · 
+                AP Automatización IA · Calle Gran Vía 28, 28013 Madrid · 
                 <a href="{{unsubscribe_url}}" style="color:#6366f1;text-decoration:none;">No quiero recibir más emails</a>
               </p>
             </td>
@@ -491,7 +491,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resumen reunión — Nexus IA</title>
+  <title>Resumen reunión — AP Automatización IA</title>
 </head>
 <body style="margin:0;padding:0;background-color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
   
@@ -505,7 +505,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td>
-                    <span style="color:#ffffff;font-size:18px;font-weight:700;">Nexus IA</span>
+                    <span style="color:#ffffff;font-size:18px;font-weight:700;">AP Automatización IA</span>
                   </td>
                   <td align="right">
                     <span style="color:#9ca3af;font-size:13px;">Reunión del {{meeting_date}}</span>
@@ -546,12 +546,12 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
               
               <p style="margin:0 0 24px;font-size:14px;color:#374151;">
                 <a href="tel:+34900000000" style="color:#6366f1;text-decoration:none;">+34 900 000 000</a> · 
-                <a href="mailto:hola@nexusia.es" style="color:#6366f1;text-decoration:none;">hola@nexusia.es</a>
+                <a href="mailto:hola@automatizacionprocesos.es" style="color:#6366f1;text-decoration:none;">hola@automatizacionprocesos.es</a>
               </p>
               
               <p style="margin:0;font-size:14px;color:#374151;">
                 Hasta pronto,<br>
-                <strong>Equipo Nexus IA</strong>
+                <strong>Equipo AP Automatización IA</strong>
               </p>
               
             </td>
@@ -560,7 +560,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
           <tr>
             <td style="background-color:#f9fafb;border-radius:0 0 12px 12px;padding:16px 32px;border-top:1px solid #e5e7eb;">
               <p style="margin:0;font-size:11px;color:#9ca3af;text-align:center;">
-                Nexus IA · Calle Gran Vía 28, 28013 Madrid · 
+                AP Automatización IA · Calle Gran Vía 28, 28013 Madrid · 
                 <a href="{{unsubscribe_url}}" style="color:#6366f1;text-decoration:none;">Gestionar preferencias de email</a>
               </p>
             </td>
@@ -579,7 +579,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
 
 ## Email 5: Envío de propuesta
 
-**Asunto:** `Tu propuesta personalizada de Nexus IA — {{company}}`
+**Asunto:** `Tu propuesta personalizada de AP Automatización IA — {{company}}`
 
 **Destinatario:** Email del lead
 
@@ -591,7 +591,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Propuesta — Nexus IA</title>
+  <title>Propuesta — AP Automatización IA</title>
 </head>
 <body style="margin:0;padding:0;background-color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
   
@@ -603,7 +603,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
           <!-- Cabecera premium -->
           <tr>
             <td style="background:linear-gradient(135deg,#1f2937 0%,#4f46e5 100%);border-radius:12px 12px 0 0;padding:40px 32px;text-align:center;">
-              <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#a5b4fc;text-transform:uppercase;letter-spacing:0.1em;">Nexus IA</p>
+              <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#a5b4fc;text-transform:uppercase;letter-spacing:0.1em;">AP Automatización IA</p>
               <h1 style="margin:0;font-size:28px;font-weight:800;color:#ffffff;line-height:1.3;">
                 Tu propuesta personalizada
               </h1>
@@ -687,7 +687,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
               <!-- Datos bancarios / pago -->
               <div style="background-color:#faf5ff;border-radius:8px;padding:20px;margin-bottom:24px;">
                 <h3 style="margin:0 0 12px;font-size:14px;font-weight:700;color:#4f46e5;">Datos para formalizar el proyecto</h3>
-                <p style="margin:0 0 4px;font-size:13px;color:#374151;"><strong>Empresa:</strong> Nexus IA Consulting S.L.</p>
+                <p style="margin:0 0 4px;font-size:13px;color:#374151;"><strong>Empresa:</strong> AP Automatización IA Consulting S.L.</p>
                 <p style="margin:0 0 4px;font-size:13px;color:#374151;"><strong>CIF:</strong> B-XXXXXXXXX</p>
                 <p style="margin:0 0 4px;font-size:13px;color:#374151;"><strong>IBAN:</strong> ES12 1234 5678 9012 3456 7890</p>
                 <p style="margin:0 0 4px;font-size:13px;color:#374151;"><strong>Forma de pago:</strong> 50% al firmar, 50% al entregar</p>
@@ -697,8 +697,8 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
               <p style="margin:0;font-size:14px;color:#374151;">
                 Muchas gracias por la confianza, {{name}}. Estamos deseando trabajar con {{company}}.<br><br>
                 Un saludo,<br>
-                <strong>Equipo Nexus IA</strong><br>
-                <span style="color:#6b7280;">hola@nexusia.es · +34 900 000 000</span>
+                <strong>Equipo AP Automatización IA</strong><br>
+                <span style="color:#6b7280;">hola@automatizacionprocesos.es · +34 900 000 000</span>
               </p>
               
             </td>
@@ -707,7 +707,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
           <tr>
             <td style="background-color:#1f2937;border-radius:0 0 12px 12px;padding:20px 32px;">
               <p style="margin:0;font-size:11px;color:#6b7280;text-align:center;">
-                © 2025 Nexus IA Consulting S.L. · Calle Gran Vía 28, 28013 Madrid · 
+                © 2025 AP Automatización IA Consulting S.L. · Calle Gran Vía 28, 28013 Madrid · 
                 <a href="{{unsubscribe_url}}" style="color:#6366f1;text-decoration:none;">Gestionar emails</a>
               </p>
             </td>
@@ -748,7 +748,7 @@ Todos los templates usan inline CSS para máxima compatibilidad con clientes de 
 | `{{implementation_time}}` | Tiempo estimado | 6-8 semanas |
 | `{{roi_estimate}}` | ROI estimado | Recuperación de la inversión en 4 meses |
 | `{{price}}` | Precio de la propuesta | 12.000 € + IVA |
-| `{{calendly_url}}` | Link de Calendly | https://calendly.com/nexusia/... |
+| `{{calendly_url}}` | Link de Calendly | https://calendly.com/apautomatizacion/... |
 | `{{proposal_link}}` | Link a la propuesta online | https://... |
 | `{{supabase_dashboard_url}}` | Link al dashboard de Supabase | https://... |
-| `{{unsubscribe_url}}` | Link de baja | https://www.nexusia.es/baja?token=... |
+| `{{unsubscribe_url}}` | Link de baja | https://www.automatizacionprocesos.es/baja?token=... |

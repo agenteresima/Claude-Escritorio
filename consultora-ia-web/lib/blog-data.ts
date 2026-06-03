@@ -19,10 +19,10 @@ export const blogPosts: BlogPost[] = [
     date: '2026-05-20',
     category: 'Estrategia IA',
     readTime: 8,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['estrategia ia', 'pymes', 'implementacion ia', 'presupuesto ia', 'roi ia'],
     content: `<h2>Por qué tantas empresas fracasan al implementar IA</h2>
-<p>Cada semana aparece una nueva herramienta de inteligencia artificial que promete revolucionar tu empresa. El resultado, en demasiadas ocasiones, es una factura considerable y un equipo que no sabe cómo usar lo que acaba de contratar. En Nexus IA llevamos años acompañando a empresas españolas en su transformación digital con IA, y lo que hemos aprendido es que el fracaso casi nunca tiene que ver con la tecnología. Tiene que ver con el orden en que se hacen las cosas.</p>
+<p>Cada semana aparece una nueva herramienta de inteligencia artificial que promete revolucionar tu empresa. El resultado, en demasiadas ocasiones, es una factura considerable y un equipo que no sabe cómo usar lo que acaba de contratar. En AP Automatización IA llevamos años acompañando a empresas españolas en su transformación digital con IA, y lo que hemos aprendido es que el fracaso casi nunca tiene que ver con la tecnología. Tiene que ver con el orden en que se hacen las cosas.</p>
 <p>Según datos del INE, el 62% de las pymes españolas que han invertido en digitalización en los últimos dos años no pueden cuantificar el retorno obtenido. En el caso específico de la inteligencia artificial, ese porcentaje sube al 71%. No porque la IA no funcione, sino porque se implementa sin metodología.</p>
 
 <h2>El error más común: empezar por la solución</h2>
@@ -71,7 +71,7 @@ export const blogPosts: BlogPost[] = [
 <p>Tampoco puede reemplazar a las personas en tareas que requieren empatía, juicio complejo o relación humana. El objetivo nunca debería ser eliminar personas, sino liberar a las personas de tareas que les quitan tiempo y valor para que puedan dedicarse a lo que realmente importa.</p>
 
 <h2>El primer paso concreto que puedes dar hoy</h2>
-<p>Si quieres empezar bien, empieza con un diagnóstico. En Nexus IA ofrecemos un diagnóstico gratuito de 45 minutos donde analizamos tus procesos actuales, identificamos los tres casos de uso con mayor potencial y te damos una hoja de ruta con el orden lógico de implementación. Sin presión, sin compromiso. Si al final tiene sentido trabajar juntos, hablamos. Si no, te vas con un plan claro que puedes ejecutar solo.</p>
+<p>Si quieres empezar bien, empieza con un diagnóstico. En AP Automatización IA ofrecemos un diagnóstico gratuito de 45 minutos donde analizamos tus procesos actuales, identificamos los tres casos de uso con mayor potencial y te damos una hoja de ruta con el orden lógico de implementación. Sin presión, sin compromiso. Si al final tiene sentido trabajar juntos, hablamos. Si no, te vas con un plan claro que puedes ejecutar solo.</p>
 <p><a href="/diagnostico-gratuito">Solicita tu diagnóstico gratuito aquí</a> y da el primer paso de forma inteligente.</p>`,
   },
   {
@@ -82,7 +82,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-05-13',
     category: 'Automatización',
     readTime: 7,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['automatizacion pymes', 'procesos empresariales', 'ahorro tiempo', 'ia para pymes', 'eficiencia'],
     content: `<h2>La automatización con IA ya no es solo para grandes empresas</h2>
 <p>Hace cinco años, implementar inteligencia artificial en una empresa era un proyecto que requería un equipo de ingenieros, meses de desarrollo y un presupuesto de seis cifras. Hoy, gracias a herramientas como n8n, Make, Zapier y las APIs de los modelos de lenguaje más avanzados, una pyme con 10 empleados puede automatizar procesos completos por unos cientos de euros al año.</p>
@@ -137,7 +137,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-05-06',
     category: 'Herramientas IA',
     readTime: 9,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['chatgpt empresa', 'claude ia', 'microsoft copilot', 'gemini google', 'comparativa ia'],
     content: `<h2>La pregunta que nos hacen casi todas las semanas</h2>
 <p>"¿Qué herramienta de IA debería usar mi empresa?" es probablemente la consulta que más recibimos. Y la respuesta honesta es que no existe una única herramienta correcta: depende de lo que hagas, de los sistemas que ya usas y de qué tipo de tareas quieres automatizar o potenciar.</p>
@@ -237,7 +237,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-04-29',
     category: 'Agentes IA',
     readTime: 6,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['agentes ia', 'automatizacion inteligente', 'chatbot vs agente', 'ia empresarial', 'transformacion digital'],
     content: `<h2>La diferencia fundamental entre un chatbot y un agente de IA</h2>
 <p>Cuando la mayoría de empresas piensa en IA, piensa en chatbots. Y tiene sentido: fueron la primera forma de IA conversacional que se popularizó en los negocios. Pero los agentes de IA son algo sustancialmente diferente y mucho más potente.</p>
@@ -290,7 +290,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-04-22',
     category: 'Automatización',
     readTime: 7,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['automatizacion facturas', 'gestion documental ia', 'ocr ia', 'n8n automatizacion', 'roi automatizacion'],
     content: `<h2>El problema que nadie quiere admitir</h2>
 <p>En la mayoría de pymes españolas, el procesamiento de facturas y documentos funciona así: alguien recibe un email con una factura adjunta, la descarga, la abre, lee los datos manualmente, los introduce en el software de contabilidad o en una hoja de Excel, la archiva en la carpeta correcta, y lo registra en el sistema de seguimiento de pagos. Este proceso, multiplicado por decenas o cientos de documentos al mes, consume horas de trabajo cualificado en tareas que no aportan ningún valor al negocio.</p>
@@ -346,7 +346,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-04-15',
     category: 'Automatización',
     readTime: 6,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['administracion ia', 'tareas repetitivas', 'automatizacion administrativa', 'productividad empresa', 'pymes españa'],
     content: `<h2>El coste oculto de las tareas administrativas</h2>
 <p>En una pyme española media, el equipo administrativo dedica entre el 40% y el 60% de su tiempo a tareas completamente repetitivas: copiar datos de un sistema a otro, enviar emails con la misma estructura una y otra vez, archivar documentos en carpetas, generar informes copiando números de una hoja a otra. Ese porcentaje, traducido a coste anual, suele superar los 20.000 euros en empresas de 10 personas.</p>
@@ -386,7 +386,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-04-08',
     category: 'Estrategia IA',
     readTime: 8,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['ia para directivos', 'gerentes ia', 'inversion ia empresa', 'estrategia ia', 'proveedores ia'],
     content: `<h2>Lo que nadie te cuenta sobre la IA empresarial</h2>
 <p>Si eres gerente o director de una empresa, en los últimos meses te habrán llegado propuestas de proveedores de IA, artículos sobre empresas que han "transformado su negocio con IA" y presión implícita o explícita de competidores que aparentemente están avanzando más rápido. Este artículo está escrito para ti: sin tecnicismos, sin hype, con la información que necesitas para tomar decisiones inteligentes sobre dónde y cuánto invertir.</p>
@@ -457,7 +457,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-04-01',
     category: 'Automatización',
     readTime: 6,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['automatizacion email', 'email marketing ia', 'n8n email', 'seguimiento automatico', 'crm automatizacion'],
     content: `<h2>Por qué la automatización de emails es el primer proyecto de IA de muchas empresas</h2>
 <p>Si tuvieras que elegir un solo proceso para automatizar en tu empresa este año, la automatización de emails sería una candidata muy seria para empezar. Las razones son claras: casi todas las empresas usan email intensamente en sus operaciones diarias, el impacto en ventas y en servicio al cliente es directo y fácilmente medible, las herramientas para implementarlo son maduras y accesibles, y el retorno es rápido y visible para toda la organización.</p>
@@ -514,7 +514,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-03-25',
     category: 'Tecnología',
     readTime: 7,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['rag empresarial', 'ia datos empresa', 'base de datos ia', 'privacidad ia', 'agentes ia datos'],
     content: `<h2>El límite de la IA genérica en las empresas</h2>
 <p>ChatGPT es muy útil para muchas cosas. Pero tiene un límite fundamental para el uso empresarial serio: no conoce tu empresa. No sabe cuánto stock tienes de cada producto, no conoce el historial de tu cliente número 4521, no tiene acceso a tus contratos actuales ni a tus tarifas vigentes. Responde con conocimiento general, no con el conocimiento específico de tu negocio.</p>
@@ -567,7 +567,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-03-18',
     category: 'Estrategia IA',
     readTime: 8,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['errores ia empresa', 'implementacion ia', 'estrategia ia', 'fallos ia empresarial', 'buenas practicas ia'],
     content: `<h2>Por qué los proyectos de IA fracasan</h2>
 <p>Según datos de Gartner, más del 85% de los proyectos de IA empresarial no llegan a producción o no alcanzan los resultados esperados en el plazo previsto. En nuestra experiencia trabajando con empresas españolas de distintos sectores y tamaños, esa cifra nos parece creíble. Y en casi todos los casos que hemos visto, el fracaso no se debe a que la tecnología no funcione. Se debe a errores evitables que se cometen en las primeras fases del proyecto.</p>
@@ -624,7 +624,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-03-11',
     category: 'Consultoría',
     readTime: 7,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['consultor ia externo', 'consultoria ia empresa', 'cuando contratar ia', 'proveedor ia', 'implementacion ia'],
     content: `<h2>¿Realmente necesitas un consultor de IA externo?</h2>
 <p>Empecemos con honestidad: no todas las empresas necesitan un consultor de IA externo. Si tienes un equipo técnico interno con tiempo disponible y conocimientos reales en automatización e inteligencia artificial, o si el proyecto que tienes en mente es pequeño y perfectamente definido, probablemente puedes avanzar sin ayuda externa.</p>
@@ -672,7 +672,7 @@ export const blogPosts: BlogPost[] = [
 
 <h2>Cuándo NO contratar un consultor externo</h2>
 <p>No tiene sentido contratar un consultor cuando: el proyecto está perfectamente definido y tu equipo técnico tiene los conocimientos para ejecutarlo, el presupuesto es tan ajustado que el coste de consultoría compromete la viabilidad del propio proyecto, o buscas a alguien que haga absolutamente todo por ti sin involucrar ni formar al equipo interno (eso garantiza dependencia externa indefinida y costes crecientes).</p>
-<p>En Nexus IA trabajamos con estos principios. Si quieres explorar si tiene sentido colaborar, el primer paso es nuestro <a href="/diagnostico-gratuito">diagnóstico gratuito de 45 minutos</a>. Sin presión, sin compromiso, y con resultados concretos independientemente de si luego decidís contratar o no.</p>`,
+<p>En AP Automatización IA trabajamos con estos principios. Si quieres explorar si tiene sentido colaborar, el primer paso es nuestro <a href="/diagnostico-gratuito">diagnóstico gratuito de 45 minutos</a>. Sin presión, sin compromiso, y con resultados concretos independientemente de si luego decidís contratar o no.</p>`,
   },
   {
     slug: 'calcular-roi-automatizacion',
@@ -682,7 +682,7 @@ export const blogPosts: BlogPost[] = [
     date: '2026-03-04',
     category: 'Estrategia IA',
     readTime: 7,
-    author: 'Nexus IA',
+    author: 'AP Automatización IA',
     tags: ['roi automatizacion', 'calcular roi ia', 'retorno inversion ia', 'ahorro ia empresa', 'metricas ia'],
     content: `<h2>Por qué la mayoría de cálculos de ROI de IA son engañosos</h2>
 <p>Si has pedido propuestas a proveedores de automatización e inteligencia artificial, probablemente has visto presentaciones con gráficas que prometen retornos del 300% o ahorros de "miles de horas anuales". Estos números suelen ser proyecciones optimistas construidas sobre el mejor escenario posible, sin tener en cuenta la curva real de adopción del equipo, los costes ocultos de mantenimiento, ni la realidad de que ninguna automatización funciona al 100% de eficiencia desde el primer día.</p>

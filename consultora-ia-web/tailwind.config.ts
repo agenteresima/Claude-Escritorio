@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Paleta principal Nexus IA
+        // Paleta principal AP Automatización IA
         navy: {
           950: '#060D1A',
           900: '#0F172A',

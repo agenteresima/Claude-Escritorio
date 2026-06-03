@@ -1,6 +1,6 @@
 # Vercel — Guía de Despliegue Completa
 
-Esta guía cubre el despliegue completo del proyecto Nexus IA en Vercel, desde la conexión del repositorio hasta la configuración de dominio personalizado y CI/CD.
+Esta guía cubre el despliegue completo del proyecto AP Automatización IA en Vercel, desde la conexión del repositorio hasta la configuración de dominio personalizado y CI/CD.
 
 ---
 
@@ -10,7 +10,7 @@ Esta guía cubre el despliegue completo del proyecto Nexus IA en Vercel, desde l
 
 ```bash
 # Si todavía no tienes remote configurado:
-git remote add origin https://github.com/TU_ORG/nexus-ia-web.git
+git remote add origin https://github.com/TU_ORG/ap-automatizacion-ia-web.git
 git branch -M main
 git push -u origin main
 ```
@@ -21,7 +21,7 @@ Verifica que `.env.local` está en `.gitignore` (nunca debe subirse al repositor
 
 1. Ve a [vercel.com/new](https://vercel.com/new)
 2. Conecta tu cuenta de GitHub si aún no lo has hecho
-3. Busca el repositorio `nexus-ia-web` y pulsa **Import**
+3. Busca el repositorio `ap-automatizacion-ia-web` y pulsa **Import**
 4. Vercel detecta automáticamente el framework (Next.js)
 5. **Importante:** NO pulses Deploy todavía — configura las variables de entorno primero
 
@@ -45,13 +45,13 @@ En la pantalla de configuración del proyecto (antes del primer deploy):
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Production, Preview | Clave anon de Supabase |
 | `SUPABASE_SERVICE_ROLE_KEY` | Production, Preview | Clave service_role (¡nunca pública!) |
 | `RESEND_API_KEY` | Production | API key de Resend |
-| `RESEND_FROM_EMAIL` | Production | `noreply@nexusia.es` |
-| `RESEND_TEAM_EMAIL` | Production | `hola@nexusia.es` |
+| `RESEND_FROM_EMAIL` | Production | `noreply@automatizacionprocesos.es` |
+| `RESEND_TEAM_EMAIL` | Production | `hola@automatizacionprocesos.es` |
 | `N8N_WEBHOOK_URL` | Production | URL del webhook activo en n8n |
 | `N8N_WEBHOOK_SECRET` | Production | Secret del webhook |
-| `NEXT_PUBLIC_SITE_URL` | Production | `https://www.nexusia.es` |
-| `NEXT_PUBLIC_COMPANY_NAME` | All | `Nexus IA` |
-| `NEXT_PUBLIC_COMPANY_EMAIL` | All | `hola@nexusia.es` |
+| `NEXT_PUBLIC_SITE_URL` | Production | `https://www.automatizacionprocesos.es` |
+| `NEXT_PUBLIC_COMPANY_NAME` | All | `AP Automatización IA` |
+| `NEXT_PUBLIC_COMPANY_EMAIL` | All | `hola@automatizacionprocesos.es` |
 | `NEXT_PUBLIC_COMPANY_PHONE` | All | `+34900000000` |
 | `NEXT_PUBLIC_COMPANY_ADDRESS` | All | `Calle Gran Vía 28, 28013 Madrid` |
 | `NEXT_PUBLIC_COMPANY_CIF` | All | `B-XXXXXXXXX` |
@@ -85,7 +85,7 @@ Después de configurar las variables, pulsa **Deploy**. Vercel:
 3. Ejecuta `pnpm build` (Next.js compila)
 4. Despliega en su CDN global
 
-El proceso tarda entre 2 y 5 minutos. Recibirás una URL temporal como `nexus-ia-web.vercel.app`.
+El proceso tarda entre 2 y 5 minutos. Recibirás una URL temporal como `ap-automatizacion-ia-web.vercel.app`.
 
 ### Si el build falla
 
@@ -106,9 +106,9 @@ El proceso tarda entre 2 y 5 minutos. Recibirás una URL temporal como `nexus-ia
 ### 4.1 Añadir el dominio en Vercel
 
 1. Ve a tu proyecto en Vercel > **Settings > Domains**
-2. Escribe `nexusia.es` y pulsa **Add**
-3. Añade también `www.nexusia.es`
-4. Configura el redirect: `nexusia.es` → `www.nexusia.es` (o al revés)
+2. Escribe `automatizacionprocesos.es` y pulsa **Add**
+3. Añade también `www.automatizacionprocesos.es`
+4. Configura el redirect: `automatizacionprocesos.es` → `www.automatizacionprocesos.es` (o al revés)
 
 ### 4.2 Configurar DNS en tu proveedor de dominio
 
@@ -325,22 +325,22 @@ Ver el fichero completo en [`../CHECKLIST.md`](../CHECKLIST.md).
 
 ```bash
 # 1. Verificar que el sitio responde
-curl -I https://www.nexusia.es
+curl -I https://www.automatizacionprocesos.es
 
 # 2. Verificar redirects
-curl -I https://nexusia.es  # debe redirigir a www
+curl -I https://automatizacionprocesos.es  # debe redirigir a www
 
 # 3. Verificar headers de seguridad
-curl -I https://www.nexusia.es | grep -E "X-Frame|X-Content|Referrer"
+curl -I https://www.automatizacionprocesos.es | grep -E "X-Frame|X-Content|Referrer"
 
 # 4. Verificar sitemap
-curl https://www.nexusia.es/sitemap.xml
+curl https://www.automatizacionprocesos.es/sitemap.xml
 
 # 5. Verificar robots.txt
-curl https://www.nexusia.es/robots.txt
+curl https://www.automatizacionprocesos.es/robots.txt
 
 # 6. Probar formulario de lead (con datos de prueba)
-curl -X POST https://www.nexusia.es/api/leads \
+curl -X POST https://www.automatizacionprocesos.es/api/leads \
   -H "Content-Type: application/json" \
   -d '{"name":"Test","email":"test@test.com","lead_score":50,"status":"nuevo"}'
 ```

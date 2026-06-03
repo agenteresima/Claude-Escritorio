@@ -5,21 +5,21 @@ import type { CompanyInfo, NavItem, Service, FAQItem, UseCase } from './types'
 // ============================================================
 
 export const COMPANY_INFO: CompanyInfo = {
-  nombre: 'Nexus IA',
+  nombre: 'AP Automatización IA',
   nombre_legal: 'Nexus Inteligencia Artificial S.L.',
   slogan: 'El experto en IA que tu empresa todavía no tiene en plantilla',
   descripcion:
     'Ayudamos a empresas de todos los sectores a implantar inteligencia artificial de forma práctica, rentable y sin complicaciones. Desde la estrategia hasta la automatización de tus primeros procesos.',
-  email: 'hola@nexusia.es',
-  email_soporte: 'soporte@nexusia.es',
+  email: 'hola@automatizacionprocesos.es',
+  email_soporte: 'soporte@automatizacionprocesos.es',
   telefono: '+34 900 000 000',
   direccion: 'Calle de Alcalá, 50, 1ª planta',
   ciudad: 'Madrid',
   pais: 'España',
   redes_sociales: {
-    linkedin: 'https://www.linkedin.com/company/nexusia',
-    twitter: 'https://twitter.com/nexusia_es',
-    youtube: 'https://youtube.com/@nexusia',
+    linkedin: 'https://www.linkedin.com/company/apautomatizacion',
+    twitter: 'https://twitter.com/apautomatizacion_es',
+    youtube: 'https://youtube.com/@apautomatizacion',
   },
 }
 

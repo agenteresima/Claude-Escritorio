@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Política de Cookies | Nexus IA',
+  title: 'Política de Cookies | AP Automatización IA',
   description:
-    'Política de cookies de Nexus IA conforme al Reglamento General de Protección de Datos (RGPD) y la normativa española de cookies.',
-  alternates: { canonical: 'https://nexusia.es/cookies' },
+    'Política de cookies de AP Automatización IA conforme al Reglamento General de Protección de Datos (RGPD) y la normativa española de cookies.',
+  alternates: { canonical: 'https://automatizacionprocesos.es/cookies' },
 }
 
 const cookieTable = [
@@ -17,19 +17,19 @@ const cookieTable = [
         name: 'session',
         purpose: 'Mantiene la sesión activa del usuario durante la navegación',
         duration: 'Sesión',
-        provider: 'Nexus IA',
+        provider: 'AP Automatización IA',
       },
       {
         name: 'csrf_token',
         purpose: 'Protección contra ataques de falsificación de solicitudes entre sitios',
         duration: 'Sesión',
-        provider: 'Nexus IA',
+        provider: 'AP Automatización IA',
       },
       {
         name: 'cookie_consent',
         purpose: 'Almacena las preferencias de cookies del usuario',
         duration: '12 meses',
-        provider: 'Nexus IA',
+        provider: 'AP Automatización IA',
       },
     ],
   },
@@ -242,7 +242,7 @@ export default function CookiesPage() {
           <p>
             Puede retirar su consentimiento en cualquier momento modificando la configuración de su
             navegador o contactando con nosotros en{' '}
-            <a href="mailto:hola@nexusia.es">hola@nexusia.es</a>.
+            <a href="mailto:hola@automatizacionprocesos.es">hola@automatizacionprocesos.es</a>.
           </p>
 
           <h2>7. Actualizaciones de esta política</h2>
@@ -257,7 +257,7 @@ export default function CookiesPage() {
             Para más información sobre el tratamiento de sus datos personales, consulte nuestra{' '}
             <Link href="/privacidad">política de privacidad</Link>. Para cualquier consulta sobre
             esta política de cookies, puede contactarnos en{' '}
-            <a href="mailto:hola@nexusia.es">hola@nexusia.es</a>.
+            <a href="mailto:hola@automatizacionprocesos.es">hola@automatizacionprocesos.es</a>.
           </p>
         </div>
       </div>

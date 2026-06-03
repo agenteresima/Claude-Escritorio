@@ -1,5 +1,5 @@
 -- ============================================================================
--- Nexus IA — Esquema de base de datos Supabase
+-- AP Automatización IA — Esquema de base de datos Supabase
 -- ============================================================================
 
 -- ─── Habilitar extensiones ────────────────────────────────────────────────────
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS leads (
   qualification         TEXT CHECK (qualification IN ('consultoría_ia', 'automatización', 'agentes_ia', 'información', 'no_cualificado'))
 );
 
-COMMENT ON TABLE leads IS 'Leads captados desde el sitio web y el chatbot de Nexus IA';
+COMMENT ON TABLE leads IS 'Leads captados desde el sitio web y el chatbot de AP Automatización IA';
 COMMENT ON COLUMN leads.lead_score IS 'Puntuación de 0-100 calculada automáticamente según criterios de cualificación';
 COMMENT ON COLUMN leads.qualification IS 'Tipo de servicio de interés identificado en la conversación con el bot';
 
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS newsletter_subscribers (
   status                TEXT DEFAULT 'activo' CHECK (status IN ('activo', 'baja', 'rebotado'))
 );
 
-COMMENT ON TABLE newsletter_subscribers IS 'Suscriptores de la newsletter de Nexus IA';
+COMMENT ON TABLE newsletter_subscribers IS 'Suscriptores de la newsletter de AP Automatización IA';
 
 -- ─── Índices ──────────────────────────────────────────────────────────────────
 CREATE INDEX IF NOT EXISTS leads_email_idx           ON leads(email);

@@ -1,6 +1,6 @@
-# Configuración de n8n — Nexus IA
+# Configuración de n8n — AP Automatización IA
 
-Esta documentación describe los tres flujos de automatización de n8n que procesan los leads captados por la web de Nexus IA.
+Esta documentación describe los tres flujos de automatización de n8n que procesan los leads captados por la web de AP Automatización IA.
 
 ## Visión general de los flujos
 
@@ -70,14 +70,14 @@ Webhook (POST) →
 ### Nodo: Email confirmación al lead
 
 - **Servicio:** Resend (credencial configurada en n8n)
-- **From:** `hola@nexusia.es`
+- **From:** `hola@automatizacionprocesos.es`
 - **To:** `{{$json.email}}`
 - **Subject:** `Tu diagnóstico gratuito está confirmado, {{$json.name.split(' ')[0]}}`
 - **Body:** usar plantilla HTML de `lib/email-templates.ts` > `diagnosticConfirmation`
 
 ### Nodo: Email notificación al equipo
 
-- **To:** `hola@nexusia.es`
+- **To:** `hola@automatizacionprocesos.es`
 - **Subject:** `Nuevo lead: {{$json.company}} (puntuación: {{$json.lead_score}})`
 - **Body HTML:**
 ```html
@@ -200,10 +200,10 @@ Configurar en n8n bajo **Settings → Credentials**:
 
 | Nombre de credencial | Tipo | Campos requeridos |
 |---------------------|------|-------------------|
-| `nexusia-supabase` | HTTP Request | URL base, API Key (service role) |
-| `nexusia-resend` | HTTP Request | API Key de Resend |
-| `nexusia-webhook-secret` | Generic credential | Secreto para validar webhooks entrantes |
-| `nexusia-telegram` (opcional) | Telegram API | Bot Token, Chat ID |
+| `apautomatizacion-supabase` | HTTP Request | URL base, API Key (service role) |
+| `apautomatizacion-resend` | HTTP Request | API Key de Resend |
+| `apautomatizacion-webhook-secret` | Generic credential | Secreto para validar webhooks entrantes |
+| `apautomatizacion-telegram` (opcional) | Telegram API | Bot Token, Chat ID |
 
 ## Cómo conectar credenciales de Supabase en n8n
 
@@ -214,7 +214,7 @@ Configurar en n8n bajo **Settings → Credentials**:
    - **Header:** `apikey: eyJ...` (tu SUPABASE_SERVICE_ROLE_KEY)
    - **Header:** `Authorization: Bearer eyJ...` (misma clave)
    - **Header:** `Content-Type: application/json`
-4. Guardar la credencial con el nombre `nexusia-supabase`
+4. Guardar la credencial con el nombre `apautomatizacion-supabase`
 5. En cada nodo que use Supabase, seleccionar esta credencial en el campo Credential
 
 ## Activar y probar los flujos
@@ -227,4 +227,4 @@ Configurar en n8n bajo **Settings → Credentials**:
 
 - **Webhook no recibe datos:** verificar que `N8N_WEBHOOK_URL` está correctamente configurado en Vercel y que el CORS del endpoint `/api/diagnostic/route.ts` permite la llamada.
 - **Error en Supabase:** verificar que el service role key tiene permisos de INSERT/UPDATE en la tabla `leads`.
-- **Email no llega:** verificar que el dominio `nexusia.es` está verificado en Resend y que los registros DNS (DKIM, SPF) están configurados correctamente.
+- **Email no llega:** verificar que el dominio `automatizacionprocesos.es` está verificado en Resend y que los registros DNS (DKIM, SPF) están configurados correctamente.
