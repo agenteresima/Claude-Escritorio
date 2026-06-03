@@ -1,708 +1,608 @@
 # Plan de Contenidos Instagram — Nexus IA
-## 12 Semanas Completo
-
-**Perfil:** @nexusia.es  
-**Objetivo:** Posicionar a Nexus IA como referente de IA para empresas en España, generar leads cualificados y construir una comunidad de directivos y responsables de área interesados en automatización.
-
-**Métricas objetivo:**
-- Semana 1-4: 0 → 300 seguidores, engagement rate >5%
-- Semana 5-8: 300 → 800 seguidores, 5 leads desde Instagram/mes
-- Semana 9-12: 800 → 1.500 seguidores, 10 leads/mes, 1 colaboración
+## 12 Semanas de Lanzamiento
 
 ---
 
-## Guía de hashtags
+## SEMANA 1 — Presentación y propuesta de valor
 
-### Primarios (alta competencia, visibilidad)
-`#InteligenciaArtificial` `#IA` `#AutomatizacionEmpresarial` `#TransformacionDigital` `#InnovaciónEmpresarial`
+### Lunes · Post
 
-### Secundarios (nichos específicos)
-`#PymesEspana` `#AutomatizacionProcesos` `#AgenteIA` `#ChatGPTEmpresas` `#IAparaEmpresas`
-
-### De nicho (baja competencia, alta cualificación)
-`#ConsultoriaIA` `#AutomatizacionRPA` `#AIPymes` `#NexusIA` `#ConsultorDigital`
-
-### Por sector
-`#GestionEmpresarial` `#AdministracionEmpresas` `#DigitalizacionPymes` `#EmpresasEspana` `#EmprendedoresEspana`
-
-### Por herramienta
-`#ChatGPT` `#Claude` `#Copilot` `#n8n` `#AutomatizacionIA`
-
-### Horarios óptimos para España
-- **Lunes–Viernes**: 8:00-9:00 (antes del trabajo), 13:00-14:00 (mediodía), 20:00-21:00 (tarde-noche)
-- **Mejor día para alcance**: Martes y miércoles
-- **Mejor día para engagement**: Lunes (vuelta al trabajo, receptivos a contenido profesional)
-
----
-
-## SEMANA 1 — Presentación y posicionamiento
-
-### Lunes — Post educativo
-
-**Tipo:** Post (imagen estática)  
-**Concepto visual:** Fondo oscuro con gradiente púrpura. Texto grande en blanco: "¿Qué es Nexus IA?" con puntos de valor en formato lista.
+**Concepto visual:** Fondo oscuro azul marino con texto blanco grande. Comparativa visual: izquierda "Lo que cuesta no usar IA" con icono de reloj y número en rojo, derecha "Lo que cuesta implementarla bien" con icono de cohete y número en verde.
 
 **Caption:**
-```
-Nexus IA nace de una pregunta que nos hacían constantemente los directivos:
+¿Tu empresa ya sabe lo que cuesta NO usar IA?
 
-"¿Por dónde empezamos con la inteligencia artificial?"
+No me refiero al coste de las herramientas. Me refiero al coste real de seguir como hasta ahora.
 
-Hemos trabajado con empresas que compraron licencias de ChatGPT sin saber para qué, otras que probaron automatizaciones que nunca funcionaron, y algunas que sí lo hicieron bien desde el principio.
+Haz los números:
+→ ¿Cuántas horas dedica tu equipo a tareas repetitivas cada semana?
+→ ¿Cuántos errores manuales hay que corregir al mes?
+→ ¿Cuántos clientes pierdes por responder tarde?
 
-La diferencia no era el presupuesto. Era la estrategia.
+En una pyme de 15 personas, ese coste suele estar entre 40.000 € y 80.000 € anuales en tiempo perdido.
 
-En Nexus IA ayudamos a empresas medianas a:
-→ Identificar qué procesos merece la pena automatizar (no todos)
-→ Elegir las herramientas correctas para su caso concreto
-→ Implementar sin interrumpir el día a día del equipo
-→ Medir el retorno real, no el esperado
+El coste de implementar IA bien: entre 2.000 € y 8.000 € el primer año.
 
-Sin humo. Sin proyectos de 18 meses. Sin consultoras de traje que luego desaparecen.
+La pregunta correcta no es "¿podemos permitirnos la IA?".
+Es "¿podemos permitirnos seguir sin ella?"
 
-Si tu empresa tiene entre 20 y 500 personas y todavía hay procesos que dependen de que alguien copie y pegue datos, esto va para ti.
+En Nexus IA ayudamos a empresas españolas a implementar inteligencia artificial de forma ordenada, con resultados reales y sin malgastar el presupuesto.
 
-¿Cuál es el proceso que más tiempo consume en tu empresa? 👇
+Si quieres saber cuánto te está costando la ineficiencia actual, enlace en bio para el diagnóstico gratuito.
 
-#InteligenciaArtificial #ConsultoriaIA #AutomatizacionEmpresarial #PymesEspana #TransformacionDigital #IAparaEmpresas #NexusIA #EmpresasEspana #DigitalizacionPymes #InnovaciónEmpresarial #AutomatizacionProcesos #GestionEmpresarial #ConsultorDigital #AIPymes #EmprendedoresEspana
-```
+**CTA:** Enlace en bio → diagnóstico gratuito
 
-**CTA:** Comentar el proceso que más tiempo consume
-
----
-
-### Miércoles — Carrusel
-
-**Tipo:** Carrusel (6 diapositivas)  
-**Concepto visual:** Fondo claro. Iconos minimalistas. Números grandes en púrpura.
-
-**Guion del carrusel:**
-
-*Diapositiva 1 (portada):*  
-"5 señales de que tu empresa está lista para usar IA (y una que indica que todavía no)"
-
-*Diapositiva 2:*  
-"✅ Señal 1: Tienes procesos que se repiten cada día de la misma forma. La IA funciona mejor con tareas predecibles: facturas, albaranes, respuestas a emails tipo, informes semanales..."
-
-*Diapositiva 3:*  
-"✅ Señal 2: Tu equipo pierde más de 2 horas al día en tareas que no requieren criterio. Copiar datos entre sistemas. Rellenar formularios. Enviar el mismo email con distintos nombres."
-
-*Diapositiva 4:*  
-"✅ Señal 3: Tienes datos pero no los analizas. Muchas empresas tienen años de datos en Excel o en su ERP que nunca se convierten en decisiones. La IA puede cambiar eso."
-
-*Diapositiva 5:*  
-"✅ Señal 4: La atención al cliente se repite. Si el 60% de las consultas que recibís son las mismas preguntas, un agente IA puede responderlas al instante, 24/7."
-
-*Diapositiva 6 (la señal negativa):*  
-"❌ Todavía NO estás listo si: no tienes claro quién es el responsable de los datos en tu empresa. La IA necesita datos limpios y accesibles. Sin eso, cualquier proyecto fracasa."
-
-**Caption:**
-```
-¿Tu empresa está lista para la IA? 
-
-Desliza para descubrirlo 👉
-
-La IA no es magia. Funciona cuando hay procesos claros, datos disponibles y alguien responsable de que todo funcione.
-
-Guardamos esto para cuando lo necesites 📌
-
-#InteligenciaArtificial #IAparaEmpresas #AutomatizacionEmpresarial #PymesEspana #TransformacionDigital #GestionEmpresarial #AutomatizacionProcesos #DigitalizacionPymes #NexusIA #ConsultoriaIA #AIPymes #InnovaciónEmpresarial #EmpresasEspana #EmprendedoresEspana #ConsultorDigital #ChatGPTEmpresas #AgenteIA #AutomatizacionRPA #n8n #ChatGPT
-```
+**Hashtags:**
+#InteligenciaArtificial #PymesEspaña #AutomatizacionEmpresarial #IAEmpresa #TransformacionDigital #EficienciaEmpresarial #NexusIA #ConsultoraIA #DigitalizacionPymes #IAEspaña #AutomatizacionProcesos #GestionEmpresarial #Productividad #EmprendimientoEspañol #DirectivosEspaña #PymesDigitales #IAParaEmpresas #RentabilidadEmpresa #TecnologiaEmpresarial #InnovacionEmpresarial #FuturoDelTrabajo #EmpresasEspaña
 
 ---
 
-### Viernes — Story + Post
+### Miércoles · Carrusel (6 slides)
 
-**Story (secuencia de 3):**
-1. "¿Cuántas horas a la semana pierde tu equipo en tareas manuales?" + encuesta: "1-5h / 5-10h / Más de 10h"
-2. Resultado de la encuesta (publicar el lunes siguiente)
-3. "Mañana os contamos cómo lo resolvemos 👀"
+**Concepto visual:** Carrusel educativo con diseño azul/blanco limpio. Cada slide con número de proceso, icono y descripción corta.
 
-**Post:**  
-**Tipo:** Post de presentación del equipo  
 **Caption:**
-```
-Somos el equipo de Nexus IA 👋
+5 procesos que tu empresa puede automatizar ESTA SEMANA 👆 (desliza para verlos)
 
-No somos una gran consultora con 200 consultores que llevan traje y hablan de "roadmaps de transformación digital".
+No necesitas un equipo técnico. No necesitas meses de desarrollo. No necesitas un presupuesto de 50.000 €.
 
-Somos un equipo pequeño, especializado en IA aplicada, que ha trabajado dentro de empresas como las vuestras antes de montar esto.
+Estos son los 5 procesos que automatizamos con más frecuencia en pymes españolas y que tienen retorno visible en semanas, no en años.
 
-Sabemos lo que significa que el ERP no se lleva bien con el Excel. Que la persona que sabe cómo funciona el proceso lleva 15 años en la empresa y no lo ha documentado nadie. Que el presupuesto para tecnología siempre llega tarde.
+¿Cuál reconoces en tu empresa? Cuéntamelo en comentarios 👇
 
-Por eso trabajamos diferente:
-→ Empezamos por auditar lo que ya tenéis
-→ Solo recomendamos lo que tiene sentido para vuestro caso
-→ Implementamos con vuestro equipo, no en lugar de vuestro equipo
+**Contenido de slides:**
+- Slide 1 (portada): "5 procesos que puedes automatizar esta semana"
+- Slide 2: Proceso 1 — Generación y envío de facturas. "Lo que tarda: 2-3h al día. Con IA: 10 minutos"
+- Slide 3: Proceso 2 — Seguimiento de leads. "Tasa de conversión con seguimiento manual: 8%. Con automatización: 23%"
+- Slide 4: Proceso 3 — Informes semanales. "De 4 horas los lunes a 0 minutos. El informe llega solo a dirección"
+- Slide 5: Proceso 4 — Alta de clientes nuevos. "De 12 pasos manuales a 1 formulario. El resto es automático"
+- Slide 6 (CTA): "¿Cuál de estos tienes en tu empresa? Diagnóstico gratuito en el enlace de bio"
 
-Si quieres conocernos, el diagnóstico gratuito es el mejor punto de partida. Link en bio 👆
+**CTA:** "¿Cuál reconoces? Escríbeme en DM"
 
-#NexusIA #ConsultoriaIA #IAparaEmpresas #PymesEspana #TransformacionDigital
-```
+**Hashtags:**
+#AutomatizacionEmpresarial #InteligenciaArtificial #PymesEspaña #EficienciaEmpresarial #IAEmpresa #AutomatizacionProcesos #TransformacionDigital #NexusIA #PymesDigitales #GestionEmpresarial #ProcesoEmpresarial #Productividad #IAParaEmpresas #DigitalizacionEmpresas #CarruselEducativo #TipsEmpresariales #EmprendedorEspañol #DirectivosEspaña #TecnologiaEmpresarial #FlujosTrabajo #n8n #MakeAutomation
+
+---
+
+### Viernes · Story + Post
+
+**Story:** Pregunta interactiva con sticker de encuesta.
+Texto: "En tu empresa, ¿cuánto tiempo dedica el equipo a tareas repetitivas cada semana?"
+Opciones: "Menos de 5 horas" / "Más de 5 horas"
+
+**Post:**
+**Concepto visual:** Fondo blanco roto con número grande en azul y frase impactante.
+
+**Caption:**
+Dato que debería estar en la agenda de todos los directivos de pymes en España:
+
+El 62% de las pymes españolas no puede cuantificar el retorno de su inversión en digitalización.
+
+No porque la tecnología no funcione.
+Sino porque se implementa sin estrategia y sin métricas de partida.
+
+Antes de invertir en cualquier herramienta de IA, la pregunta correcta es:
+"¿Cuánto nos cuesta este proceso ahora mismo?"
+
+Si no tienes ese número, aún no estás listo para invertir. Y eso está bien. El diagnóstico previo vale más que cualquier herramienta.
+
+(El diagnóstico gratuito que ofrecemos en Nexus IA está diseñado exactamente para eso)
+
+**CTA:** Enlace en bio
+
+**Hashtags:**
+#EstadisticasEmpresariales #IAEspaña #PymesEspaña #TransformacionDigital #InteligenciaArtificial #EstrategiaEmpresarial #GestionEmpresarial #DirectivosEspaña #NexusIA #InversionIA #ROIEmpresarial #DigitalizacionPymes #TomadaDeDecisiones #GerenciaEmpresarial #LiderazgoEmpresarial #EmpresasEspaña #ConsultoraIA #IAEmpresa
 
 ---
 
 ## SEMANA 2 — Automatización de procesos
 
-### Lunes — Post educativo
+### Lunes · Post
 
-**Tipo:** Post (imagen)  
-**Concepto visual:** Dos columnas: "ANTES" (rojo) y "DESPUÉS" (verde). Proceso de gestión de pedidos.
+**Concepto visual:** Imagen dividida en dos partes: izquierda (antes) con persona frente a pantalla y montaña de papeles, derecha (después) con gráfica verde subiendo y persona con café tranquila.
 
 **Caption:**
-```
-Tu empresa no necesita más Excel.
-Necesita menos trabajo manual.
+Si tu equipo copia y pega datos todos los días, tenemos un problema.
 
-Te pongo un ejemplo real 👇
+No con ellos. Con el proceso.
 
-Una empresa de distribución con 45 personas recibía 80 pedidos al día por email, WhatsApp y teléfono.
+Copiar datos de un sistema a otro, introducirlos manualmente, volver a copiarlos para el informe... Eso es lo que hace alguien brillante que podría estar haciendo algo que marque la diferencia.
 
-ANTES (situación real):
-- Alguien leía cada pedido
-- Copiaba los datos en el ERP
-- Mandaba confirmación al cliente
-- Actualizaba el Excel de seguimiento
-- 3 horas diarias. Un error cada 2 días.
+La IA no va a reemplazar a tu equipo.
+Va a liberar a tu equipo de las tareas que no merecen su talento.
 
-DESPUÉS (con IA):
-- El sistema lee los pedidos (email, WhatsApp, PDF)
-- Los introduce automáticamente en el ERP
-- Envía confirmación personalizada al cliente
-- Actualiza el stock en tiempo real
-- 0 horas. 0 errores.
+Un flujo de automatización básico que conecte tu CRM con tu herramienta de facturación con tu hoja de seguimiento puede costar 800 euros y ahorrar 6 horas semanales.
 
-El equipo ahora usa esas 3 horas en llamadas de seguimiento que antes no podían hacer.
+¿Las matemáticas? Tú las haces.
 
-¿El coste? Menos de lo que cobra una persona a tiempo parcial.
+**CTA:** "¿Qué proceso de copia-pega tienes en tu empresa? Cuéntamelo en comentarios"
 
-¿Quieres ver si algo así encaja en tu empresa? 
-Diagnóstico gratuito en bio 👆
-
-#AutomatizacionEmpresarial #AutomatizacionProcesos #IAparaEmpresas #PymesEspana #ERP #GestionPedidos #NexusIA #InteligenciaArtificial #TransformacionDigital #DigitalizacionPymes
-```
+**Hashtags:**
+#AutomatizacionEmpresarial #IAEmpresa #PymesEspaña #EficienciaEmpresarial #InteligenciaArtificial #ProductividadEmpresarial #NexusIA #TransformacionDigital #AutomatizarProcesos #TalentoHumano #GestionEmpresas #DigitalizacionEmpresa #AhorroTiempo #FlujosAutomatizados #n8n #EmprendedorEspañol #PymesDigitales #IAParaEmpresas #DirectivosEspaña #InnovacionEmpresarial
 
 ---
 
-### Miércoles — Reel
+### Miércoles · Reel 30 segundos
 
-**Tipo:** Reel (30-45 segundos)  
-**Idea visual:** Grabación de pantalla mostrando n8n con un flujo real de automatización, con voice-over.
+**Concepto visual:** Pantalla dividida o cuts rápidos mostrando el antes/después del proceso. Música de fondo motivacional. Texto en pantalla sincronizado con la narración.
 
-**Guion del Reel:**
-```
-[0-3s] Texto en pantalla: "Así automatizamos el proceso de facturas en una empresa de 60 personas"
+**Guion completo del Reel:**
 
-[3-10s] VOZ: "Cada día, el equipo de administración recibía 30 facturas de proveedores por email. Tenían que abrirlas, extraer los datos, introducirlos en el ERP y archivar el PDF."
+[0-3s] Texto en pantalla: "El flujo de facturación que te ahorra 5 horas a la semana"
+Voz: "¿Cuánto tiempo dedica tu equipo a procesar facturas cada semana?"
 
-[10-20s] VOZ: "Ahora el sistema detecta automáticamente el email, extrae los datos de la factura con IA, los introduce en el ERP, y archiva el documento con el nombre correcto."
+[4-8s] Texto: "El proceso actual (de muchas pymes):"
+Voz: "Recibir el email, descargar el PDF, leerlo, introducir los datos a mano, crear la factura, enviarla, archivarla... Una hora por factura. 150 facturas al mes."
 
-[20-30s] VOZ: "Resultado: de 2 horas diarias a 5 minutos de revisión. El equipo de administración ahora tiene tiempo para lo que de verdad importa."
+[9-14s] Texto: "Con automatización:"
+Voz: "La factura llega al email de facturas. La IA lee los datos. Los registra en el sistema. Genera el albarán. Notifica al equipo. Archiva el documento."
 
-[30-35s] Texto en pantalla: "¿Quieres ver cómo funciona para tu empresa? Link en bio 👆"
-```
+[15-20s] Texto: "Tiempo total: 2 minutos"
+Voz: "El 90% del proceso, sin que nadie toque nada."
 
-**Caption:**
-```
-Automatización de facturas en menos de 3 semanas 📄⚡
+[21-25s] Texto: "Coste de implementación: desde 2.500 €"
+Voz: "Ahorro primer año con 150 facturas al mes: más de 8.000 euros."
 
-Esto es lo que pasa cuando dejas de hacer las cosas a mano.
+[26-30s] Texto: "Diagnóstico gratuito — enlace en bio"
+Voz: "¿Cuántas facturas procesas tú al mes?"
 
-¿Tu equipo de administración sigue introduciendo facturas a mano? Cuéntanos en comentarios 👇
+**CTA:** "¿Cuántas facturas al mes? Comenta el número"
 
-#AutomatizacionProcesos #IAparaEmpresas #Facturas #Administracion #n8n #InteligenciaArtificial #PymesEspana #NexusIA #AutomatizacionEmpresarial #TransformacionDigital #GestionEmpresarial #DigitalizacionPymes #AutomatizacionRPA #ConsultoriaIA #AIPymes
-```
+**Hashtags:**
+#AutomatizacionFacturas #IAEmpresa #PymesEspaña #Facturacion #AutomatizacionEmpresarial #InteligenciaArtificial #NexusIA #AhorroTiempo #EficienciaEmpresarial #Reel #TipsEmpresariales #DigitalizacionEmpresas #OCRInteligente #GestionDocumental #n8n #FlujosAutomatizados #ROIEmpresarial #PymesDigitales #ConsultoraIA #TransformacionDigital
 
 ---
 
-### Viernes — Story + Post
+### Viernes · Story + Post
 
-**Story:** Tutorial "Herramienta del viernes" — Make.com para principiantes (3 slides)
+**Story:** Meme de oficina sobre Excel. Imagen con texto: "El equipo cuando llevan 3 horas actualizando el Excel de seguimiento de pedidos 🥲"
 
 **Post:**
-```
-Administración a las 17:59 del viernes 😅
-
-Versión manual: "Todavía me quedan 15 facturas por introducir..."
-
-Versión automatizada: "Ya están todas. Me voy."
-
-No es ciencia ficción. Es lo que ocurre cuando automatizas los procesos repetitivos.
-
-El lunes os contamos cómo lo hicimos para una empresa de servicios. 👀
-
-#Viernes #AutomatizacionProcesos #IAparaEmpresas #HumorOficina #NexusIA #Administracion #PymesEspana
-```
-
----
-
-## SEMANA 3 — Agentes IA para empresas
-
-### Lunes — Post educativo
+**Concepto visual:** Fondo amarillo pastel con texto negro. Tono más ligero y humorístico.
 
 **Caption:**
-```
-Un agente de IA no es un chatbot.
+El Excel no es el problema.
 
-Déjame explicarte la diferencia porque importa 👇
+El problema es que el Excel está haciendo un trabajo que debería hacer un sistema.
 
-Un chatbot: responde preguntas predefinidas. Si le preguntas algo que no está en su script, no sabe qué hacer.
+No digo que elimines el Excel. Digo que si alguien de tu empresa dedica más de 2 horas semanales a "mantener actualizado el Excel", eso es una señal clara de que hay un proceso que automatizar.
 
-Un agente de IA: entiende el contexto, accede a tus sistemas (CRM, ERP, base de datos de clientes), toma decisiones y ejecuta acciones.
+Señales de que tu Excel está asumiendo demasiado:
+→ Tiene más de 15 columnas con fórmulas complejas
+→ Nadie más que su creador lo entiende
+→ Se actualiza manualmente después de cada operación
+→ Cuando falla, falla todo
+→ La versión que usan en contabilidad es diferente a la de ventas
 
-Ejemplo:
-→ Chatbot: "Para consultar tu pedido, introduce el número de pedido"
-→ Agente IA: "Hola Ana, veo que tienes el pedido #4521 en camino. Sale mañana por la mañana con Seur. ¿Necesitas cambiar la dirección de entrega?"
+¿Cuántos de estos reconoces? 👇
 
-La diferencia para tu empresa:
-Un chatbot reduce llamadas.
-Un agente IA resuelve problemas.
+**CTA:** "¿Cuántos reconoces? Del 1 al 5 en comentarios"
 
-¿Tu empresa recibe muchas consultas repetitivas? 👇
-
-#AgenteIA #ChatGPT #AutomatizacionEmpresas #AtencionalCliente #InteligenciaArtificial #IAparaEmpresas #NexusIA #PymesEspana #TransformacionDigital
-```
+**Hashtags:**
+#Excel #AutomatizacionEmpresarial #PymesEspaña #IAEmpresa #GestionEmpresarial #EficienciaEmpresarial #NexusIA #TransformacionDigital #HumorEmpresarial #Oficina #TrabajadorRemoto #HerramientasDigitales #ProductividadEmpresarial #DigitalizacionEmpresas #InteligenciaArtificial #PymesDigitales
 
 ---
 
-### Miércoles — Carrusel
+## SEMANA 3 — Herramientas IA
 
-**Guion:** "4 tipos de agentes IA que ya funcionan en empresas españolas"
+### Lunes · Post
 
-*Diapositiva 1:* Agente de atención al cliente  
-*Diapositiva 2:* Agente de ventas internas (cualificación de leads)  
-*Diapositiva 3:* Agente de administración (facturas, albaranes, RRHH)  
-*Diapositiva 4:* Agente de análisis de datos  
-*Diapositiva 5:* "¿Cuál necesita tu empresa?" + CTA al diagnóstico
-
----
-
-### Viernes — Story + Post
-
-**Post:**
-```
-"¿No es muy caro montar un agente de IA?"
-
-Es la pregunta que más nos hacen. Y la respuesta siempre sorprende.
-
-Un agente de IA básico para atención al cliente cuesta entre 2.000 y 6.000 euros de implementación, más 200-500 euros/mes de mantenimiento.
-
-Una persona a tiempo parcial para hacer lo mismo: 1.200-1.500 euros/mes.
-
-El agente no se pone enfermo, no tiene vacaciones, no se olvida del protocolo cuando está cansado, y trabaja a las 3 de la mañana si hace falta.
-
-No decimos que reemplace personas. Decimos que libera personas para tareas que requieren criterio humano.
-
-¿Tiene sentido para tu empresa? Diagnóstico gratuito en bio 👆
-
-#AgenteIA #InteligenciaArtificial #IAparaEmpresas #AutomatizacionEmpresas #PymesEspana #AtencionalCliente #NexusIA
-```
-
----
-
-## SEMANA 4 — IA para pymes: casos reales
-
-### Lunes — Post educativo
+**Concepto visual:** Grid de 4 logos (ChatGPT, Claude, Copilot, Gemini) con una etiqueta descriptiva debajo de cada uno en azul.
 
 **Caption:**
-```
-"La IA es para las grandes empresas"
+ChatGPT vs Claude vs Copilot vs Gemini.
 
-Mito. Completamente desmentido. 👇
+Cuál usar en tu empresa. Sin rodeos.
 
-Estos son 3 casos reales de pymes españolas (datos anonimizados con permiso de los clientes):
+→ ChatGPT: la navaja suiza. Para todo lo demás. Contenidos, análisis, creatividad, formación.
 
-🏭 Empresa de fabricación, 35 empleados, Guadalajara
-Problema: control de calidad visual en la línea de producción (1 operario dedicado 8h/día)
-Solución: sistema de visión artificial que detecta defectos
-Resultado: 94% de precisión, operario reasignado a tareas de valor
+→ Claude: para documentos largos. Si trabajas con contratos, informes o documentación extensa, es el mejor. Puede leer 200.000 palabras de una vez.
 
-🚛 Empresa de transporte, 22 empleados, Valencia
-Problema: optimización de rutas (el dispatcher tardaba 2 horas cada mañana)
-Solución: algoritmo de optimización con IA + datos de tráfico en tiempo real
-Resultado: reducción del 18% en km recorridos, 2 horas ahorradas al día
+→ Copilot (Microsoft): si ya usas Word, Excel, Teams y Outlook a diario, es la respuesta más lógica. La integración nativa es su gran ventaja.
 
-📋 Despacho de abogados, 12 personas, Madrid
-Problema: revisión de contratos (3-4 horas por contrato buscando cláusulas clave)
-Solución: asistente IA entrenado en derecho mercantil español
-Resultado: revisión inicial en 20 minutos, abogados centrados en asesoramiento
+→ Gemini (Google): si tu empresa trabaja en Google Workspace (Gmail, Drive, Docs), es su equivalente directo.
 
-Ninguna de estas empresas tiene un departamento de IT. Ninguna tenía experiencia previa con IA.
+Regla práctica: empieza con la herramienta que mejor se integre con lo que ya usas.
 
-¿Qué tienen en común? Tenían un problema concreto y encontraron a alguien que les ayudara a resolverlo.
+El artículo completo con precios, fortalezas y limitaciones de cada una, en el blog. Enlace en bio.
 
-¿Cuál es tu problema concreto? 👇
+**CTA:** "¿Cuál usas tú? Cuéntamelo en comentarios"
 
-#IAparaEmpresas #PymesEspana #CasosDeExito #InteligenciaArtificial #AutomatizacionEmpresarial #NexusIA #TransformacionDigital
-```
+**Hashtags:**
+#ChatGPT #Claude #MicrosoftCopilot #Gemini #HerramientasIA #IAEmpresa #ComparativaIA #InteligenciaArtificial #NexusIA #PymesEspaña #HerramientasDigitales #ProductividadEmpresarial #IAParaEmpresas #TecnologiaEmpresarial #BlogNexusIA #TransformacionDigital #EficienciaEmpresarial #OpenAI #Anthropic #Google #Microsoft
 
 ---
 
-## SEMANA 5 — Errores al empezar con IA
+### Miércoles · Carrusel (5 slides)
 
-### Lunes — Post educativo
+**Concepto visual:** Diseño comparativo con iconos de cada herramienta y puntuación en cada categoría.
 
 **Caption:**
-```
-El error número 1 que cometen las empresas al empezar con IA:
+La guía definitiva para elegir la herramienta de IA correcta para tu empresa 👆
 
-Comprar antes de diagnosticar.
+No existe la herramienta perfecta universal. Existe la herramienta correcta para TU empresa según lo que ya usas y lo que necesitas resolver.
 
-Sucede así: el CEO lee un artículo sobre IA, va a la reunión de dirección y dice "tenemos que usar IA". Alguien contrata licencias de Copilot para 50 personas. Nadie sabe muy bien para qué.
+Desliza para ver la comparativa completa y la recomendación práctica al final.
 
-6 meses después: las licencias están infrautilizadas, el equipo está frustrado, y el proyecto "de IA" se archiva.
+¿Ya usas alguna de estas en tu empresa? Cuéntame cómo va en comentarios.
 
-El problema no era la herramienta. Era el orden.
+**Slides:**
+- Slide 1: "¿ChatGPT, Claude, Copilot o Gemini? La guía para empresas"
+- Slide 2: ChatGPT — Precio, mejor para, limitación principal
+- Slide 3: Claude — Precio, mejor para, limitación principal
+- Slide 4: Copilot + Gemini — Precio, mejor para, limitación principal
+- Slide 5 (CTA): "Artículo completo en el blog — enlace en bio"
 
-El orden correcto:
-1️⃣ Identifica el proceso que más duele (tiempo, errores, coste)
-2️⃣ Define qué sería el éxito de automatizarlo
-3️⃣ Busca la herramienta que resuelve exactamente eso
-4️⃣ Pilota con un equipo pequeño
-5️⃣ Expande si funciona
+**CTA:** "Guárdalo para compartirlo con tu equipo"
 
-Antes de comprar cualquier cosa: haz el diagnóstico.
-
-Por eso ofrecemos el nuestro gratis. No porque seamos muy generosos, sino porque sabemos que si lo hacemos bien, tiene sentido para los dos. Link en bio 👆
-
-#IAparaEmpresas #Automatizacion #ErroresIA #PymesEspana #NexusIA #ConsultoriaIA #TransformacionDigital
-```
+**Hashtags:**
+#ComparativaIA #HerramientasIA #IAEmpresa #ChatGPT #Claude #MicrosoftCopilot #Gemini #InteligenciaArtificial #NexusIA #PymesEspaña #EficienciaEmpresarial #ProductividadEmpresarial #BlogIA #GuiaIA #TecnologiaEmpresarial #DigitalizacionEmpresas
 
 ---
 
-### Miércoles — Reel
+### Viernes · Story interactiva
 
-**Guion del Reel (situación de humor de oficina):**
-```
-[0-3s] Texto: "Cuando el jefe dice 'vamos a usar IA' sin estrategia"
-
-[3-8s] (Voz del jefe, tono entusiasmado): "He leído que la IA puede hacer todo. Contratad ChatGPT para todos."
-
-[8-15s] (Empleado, mirando a cámara): "¿Para todo? ¿ChatGPT... para el ERP?"
-
-[15-22s] Texto en pantalla: "3 semanas después..."
-(Empleado mirando pantalla confuso): "¿Por qué le estoy preguntando al chatbot los datos de la factura de Suministros García?"
-
-[22-30s] Texto: "La IA funciona. Pero necesita estrategia."
-"¿Por dónde empezar? Link en bio 👆"
-```
+**Story tipo quiz:** "¿Cuánto sabes de IA para empresas?"
+Pregunta: "¿Cuánto puede costar implementar un chatbot básico en una pyme?"
+Opciones: "Más de 50.000 €" / "Entre 2.000 y 8.000 €"
+Respuesta correcta: "Entre 2.000 y 8.000 €. Mucho menos de lo que la mayoría cree 💡"
 
 ---
 
-## SEMANA 6 — ChatGPT para empresas
+## SEMANA 4 — Casos reales y ROI
 
-### Lunes — Post educativo
+### Lunes · Post
+
+**Concepto visual:** Diseño de "antes/después" con números reales. Fondo blanco, números grandes en azul y verde.
 
 **Caption:**
-```
-ChatGPT no es una estrategia de IA.
+Números reales. No proyecciones de marketing.
 
-Esto sí lo es 👇
+Una empresa de distribución. 150 facturas al mes. Proceso manual.
 
-ChatGPT es una herramienta. Una muy buena. Pero como cualquier herramienta, lo que importa es saber cuándo usarla y cuándo no.
+ANTES:
+→ 8 minutos por factura
+→ 20 horas mensuales
+→ 4-6 errores mensuales que había que corregir
+→ Coste total: 4.320 € al año solo en tiempo
 
-Dónde ChatGPT aporta valor real en tu empresa:
-✅ Redacción de emails, propuestas y documentos comerciales
-✅ Resúmenes de reuniones y actas
-✅ Generación de primeros borradores de contratos y políticas internas
-✅ Análisis de feedback de clientes
-✅ Respuesta a preguntas frecuentes del equipo sobre procedimientos internos
+DESPUÉS (6 semanas de implementación):
+→ 90% de las facturas procesadas automáticamente
+→ 2 horas mensuales de supervisión
+→ 0,3 errores de media
+→ Coste de operación: 80 € al mes en herramientas
 
-Dónde ChatGPT NO es la solución:
-❌ Integración directa con tu ERP o CRM (necesita conectores)
-❌ Acceso a datos en tiempo real de tu empresa
-❌ Automatización de procesos sin intervención humana
-❌ Análisis de datos propietarios sin configuración adicional
+ROI en el primer año: más del 300%.
+Período de retorno: 4 meses.
 
-Para esos casos: GPT + APIs + bases de datos propias + n8n o Make.
+Esto no es magia. Es ingeniería de procesos con IA.
 
-Una estrategia de IA combina las herramientas correctas para cada problema.
+**CTA:** "¿Cuántas facturas procesas al mes? Comenta el número"
 
-¿Estáis usando ChatGPT en tu empresa? ¿Para qué? 👇
-
-#ChatGPT #IAparaEmpresas #OpenAI #AutomatizacionEmpresarial #NexusIA #PymesEspana #InteligenciaArtificial #TransformacionDigital
-```
+**Hashtags:**
+#ROIEmpresarial #AutomatizacionFacturas #CasoDeExito #IAEmpresa #PymesEspaña #AutomatizacionEmpresarial #NexusIA #RetornoInversion #EficienciaEmpresarial #NumerosReales #CasoPractico #InteligenciaArtificial #DistribucionEmpresarial #GestionDocumental #TransformacionDigital
 
 ---
 
-## SEMANA 7 — Claude para análisis y redacción empresarial
+### Miércoles · Reel 45 segundos: "Cómo calculamos el ROI de una automatización"
 
-### Lunes — Post educativo
+**Guion:**
+[0-5s] "Antes de implementar cualquier automatización de IA, calculamos el ROI. Así:"
 
-**Caption:**
-```
-Claude es la IA que usa tu equipo jurídico, de RRHH y de comunicación.
+[6-15s] "Paso 1: medimos el proceso actual. ¿Cuántas horas a la semana? ¿Cuánto cuesta esa hora? ¿Cuántos errores hay?"
 
-¿Por qué Claude y no ChatGPT para ciertos usos? 👇
+[16-25s] "Paso 2: calculamos el coste de la solución. Implementación + herramientas + mantenimiento. Sin sorpresas."
 
-Claude (de Anthropic) destaca especialmente en:
+[26-35s] "Paso 3: la fórmula. ROI = (Ahorro - Coste) / Coste × 100. Si no da mínimo 100% en el primer año, no lo recomendamos."
 
-📄 Análisis de documentos largos
-→ Puedes darle un contrato de 80 páginas y pedirle que localice todas las cláusulas de penalización. Lo hace en segundos.
+[36-45s] "¿Quieres que calculemos el ROI de tu proceso? Diagnóstico gratuito en el enlace de bio."
 
-✍️ Redacción con tono consistente
-→ Si le das varios ejemplos de cómo escribe tu empresa, mantendrá ese tono en todos los documentos que genere.
+**CTA:** "¿Te gustaría ver el cálculo para tu empresa? DM o enlace en bio"
 
-🔍 Razonamiento paso a paso
-→ Ideal para análisis de casos, evaluación de proveedores o comparación de opciones con criterios múltiples.
-
-📊 Extracción de información estructurada
-→ "Lee estos 50 CVs y dame una tabla con nombre, años de experiencia en el sector y pretensiones salariales"
-
-🔒 Privacidad
-→ Claude tiene políticas de privacidad especialmente pensadas para entornos empresariales (API with data privacy).
-
-Herramienta recomendada: Claude Pro o Claude API para integraciones.
-
-¿Habíais probado Claude para algo? ¿Qué os pareció? 👇
-
-#Claude #Anthropic #IAparaEmpresas #InteligenciaArtificial #NexusIA #PymesEspana #HerramientasIA #AutomatizacionEmpresarial
-```
+**Hashtags:**
+#ROI #CalculoROI #AutomatizacionEmpresarial #IAEmpresa #RetornoInversion #NexusIA #PymesEspaña #InteligenciaArtificial #EficienciaEmpresarial #FinanzasEmpresarial #InversionInteligente #TransformacionDigital
 
 ---
 
-## SEMANA 8 — Copilot para Microsoft 365
+## SEMANA 5 — Agentes de IA
 
-### Lunes — Post educativo
+### Lunes · Post
+
+**Concepto visual:** Diagrama simple que muestra un flujo: "Lead llega al email" → "Agente analiza" → "CRM actualizado" → "Email enviado" → "Comercial notificado". Todo en 90 segundos.
 
 **Caption:**
-```
-Si tu empresa usa Microsoft 365, Copilot ya está ahí.
+Un agente de IA vs un chatbot. La diferencia que muchos no explican.
 
-Y probablemente no lo estáis aprovechando.
+CHATBOT: responde preguntas.
+"¿Cuál es vuestro precio?" → "Nuestro precio es X"
 
-Microsoft 365 Copilot es IA directamente integrada en Word, Excel, PowerPoint, Outlook y Teams. Sin cambiar herramientas, sin formación especial.
+AGENTE DE IA: toma acciones.
+Lead nuevo llega → analiza la información → califica el lead → crea la ficha en el CRM → envía email de bienvenida personalizado → asigna al comercial correcto → notifica al equipo.
 
-Lo que Copilot hace por ti hoy mismo:
+Todo en 90 segundos. Sin que nadie intervenga.
 
-📧 En Outlook:
-"Resume este hilo de 40 emails y dime qué decisiones se tomaron"
-"Redacta una respuesta a este cliente explicando el retraso con tono conciliador"
+Eso es lo que marca la diferencia entre automatizar comunicaciones y automatizar operaciones.
 
-📊 En Excel:
-"Analiza estas ventas del último trimestre y dime qué producto ha crecido más y por qué"
-"Crea un gráfico de tendencias para presentar al comité de dirección"
+**CTA:** "¿Qué operación te gustaría que se hiciera sola? Cuéntame en comentarios"
 
-📝 En Word:
-"Convierte estas notas de reunión en un informe ejecutivo de 2 páginas"
-"Adapta esta propuesta para una empresa del sector industrial"
-
-💬 En Teams:
-"Resume la reunión de hoy y envía las tareas asignadas a cada persona"
-
-¿El coste? 30€/usuario/mes sobre vuestra licencia M365 existente.
-
-¿Vale la pena? Depende de cuánto tiempo pasa tu equipo en estas herramientas. Generalmente, sí.
-
-¿Usáis Copilot en vuestra empresa? 👇
-
-#MicrosoftCopilot #Microsoft365 #IAparaEmpresas #Productividad #NexusIA #PymesEspana #AutomatizacionEmpresarial #InteligenciaArtificial
-```
+**Hashtags:**
+#AgentesIA #AutomatizacionInteligente #ChatbotVsAgente #IAEmpresa #InteligenciaArtificial #NexusIA #PymesEspaña #AutomatizacionEmpresarial #CRMAutomatico #EficienciaEmpresarial #LLM #AgentesInteligentes #TransformacionDigital #IAParaEmpresas
 
 ---
 
-## SEMANA 9 — IA en administración y finanzas
+## SEMANA 6 — Objeciones y mitos
 
-### Lunes — Post educativo
+### Lunes · Post
+
+**Concepto visual:** Formato pregunta/respuesta. Fondo oscuro con texto blanco y verde.
 
 **Caption:**
-```
-Si tu equipo copia y pega datos todos los días...
+"La IA va a reemplazar a nuestro equipo"
 
-Esto es para ti 👇
+Es el miedo que más escucho. Y lo entiendo.
 
-El departamento de administración es donde más tiempo se pierde en empresas de 20-200 personas. Y donde la IA tiene un ROI más claro y rápido.
+Pero la realidad que vemos en cada proyecto que implementamos es diferente:
 
-Procesos que se pueden automatizar hoy:
+La IA reemplaza tareas, no personas.
 
-📥 Recepción y contabilización de facturas
-De: abrir email → leer PDF → introducir en contabilidad → archivar
-A: el sistema lo hace solo. Tiempo ahorrado: 2-3 h/día
+La persona que antes dedicaba 3 horas al día a introducir datos en el sistema ahora dedica ese tiempo a resolver problemas complejos que la IA no puede resolver: gestionar una incidencia difícil con un cliente, analizar por qué bajan las ventas en una zona, proponer mejoras al proceso.
 
-🧾 Conciliación bancaria
-De: descargar extracto → comparar con apuntes → marcar manualmente
-A: la IA cruza los datos automáticamente. Tiempo ahorrado: 4-6 h/semana
+En ninguno de los proyectos que hemos implementado en Nexus IA ha habido un despido por causa de la IA.
 
-📊 Reporting mensual
-De: exportar datos → hacer tablas en Excel → formatear presentación
-A: informe generado automáticamente el día 1 de cada mes
+Sí ha habido equipos que han podido crecer sin necesitar contratar más personas para las mismas tareas administrativas.
 
-👥 Gestión de ausencias y vacaciones
-De: email al jefe → email a RRHH → actualizar Excel
-A: el empleado lo solicita por el chatbot interno y se actualiza todo solo
+Eso no es sustitución. Es liberación.
 
-¿Por cuál empezarías? 👇
+**CTA:** "¿Cuál es tu mayor miedo sobre la IA en la empresa? Cuéntamelo"
 
-#Administracion #AutomatizacionProcesos #IAparaEmpresas #NexusIA #PymesEspana #Contabilidad #GestionEmpresarial #InteligenciaArtificial
-```
+**Hashtags:**
+#MitosIA #InteligenciaArtificial #FuturoDelTrabajo #IAEmpresa #NexusIA #PymesEspaña #TalentoHumano #AutomatizacionEmpresarial #TransformacionDigital #RRHHDigital #EmpresasFuturo #DebateIA #IAResponsable #EticaIA
 
 ---
 
-## SEMANA 10 — IA en atención al cliente
+## SEMANA 7 — Herramientas técnicas
 
-### Lunes — Post educativo
+### Miércoles · Carrusel: "Las 5 herramientas que usamos en todos nuestros proyectos"
 
 **Caption:**
-```
-La IA no viene a quitarte el trabajo.
-Viene a quitarte las tareas que nadie quiere hacer.
+No hay magia. Hay metodología y herramientas correctas.
 
-En atención al cliente, esto significa:
+Estas son las 5 herramientas que aparecen en prácticamente todos los proyectos que implementamos en Nexus IA para pymes españolas:
 
-Las tareas que la IA quita:
-→ Responder "¿Cuál es el estado de mi pedido?" por decima vez hoy
-→ Explicar el proceso de devolución que está en la web
-→ Reenviar facturas y albaranes
-→ Responder fuera de horario laboral
+→ n8n: automatización de flujos sin código. Open source.
+→ Supabase: base de datos para guardar y consultar datos de la empresa.
+→ Resend: envío de emails transaccionales con alta entregabilidad.
+→ OpenAI / Anthropic API: el cerebro que procesa y genera texto.
+→ Vercel: para desplegar las interfaces si se necesitan.
 
-Las tareas que quedan para el equipo humano:
-→ Clientes enfadados que necesitan empatía real
-→ Situaciones excepcionales que requieren criterio
-→ Clientes VIP que merecen atención personalizada
-→ Ventas cruzadas y relaciones a largo plazo
+Coste mensual total de estas herramientas para una pyme pequeña: menos de 150 €.
 
-Una empresa de e-commerce con la que trabajamos tenía 2 personas en atención al cliente gestionando 150 consultas/día. El 65% eran preguntas repetitivas.
+El conocimiento para conectarlas bien: eso es donde aportamos valor.
 
-Ahora el agente IA gestiona esas 97 consultas repetitivas. Las 2 personas atienden las 53 que requieren atención real, y además llaman proactivamente a clientes que han abandonado el carrito.
+**CTA:** "¿Usas alguna de estas? Cuéntame en comentarios"
 
-Las ventas subieron un 23% el primer trimestre.
-
-¿Cuántas consultas repetitivas recibe tu empresa? 👇
-
-#AtencionalCliente #AgenteIA #IAparaEmpresas #NexusIA #AutomatizacionEmpresas #PymesEspana #Ecommerce
-```
+**Hashtags:**
+#HerramientasIA #n8n #Supabase #OpenAI #AutomatizacionSinCodigo #NoCode #IAEmpresa #NexusIA #PymesEspaña #TecnologiaEmpresarial #StackTecnologico #DigitalizacionEmpresas #BuildInPublic
 
 ---
 
-## SEMANA 11 — Consultor IA externo
+## SEMANA 8 — Captación directa
 
-### Lunes — Post educativo
+### Lunes · Post: Oferta de diagnóstico
+
+**Concepto visual:** Diseño limpio con los 5 puntos que incluye el diagnóstico. Fondo azul marino, texto blanco, iconos de check verde.
 
 **Caption:**
-```
-Antes de contratar a alguien de IA a tiempo completo, considera esto.
+El diagnóstico gratuito que ofrecemos no es una llamada de ventas.
 
-Un perfil de IA engineer senior en España cuesta entre 60.000 y 90.000 euros anuales.
+Es literalmente esto:
 
-Y en muchos casos, lo que necesita una empresa de 50-200 personas no es una persona a tiempo completo. Necesita:
+✓ 45 minutos contigo (o con quien lleve la operación)
+✓ Analizamos tus 3 procesos que más tiempo consumen
+✓ Te damos el orden lógico de implementación
+✓ Calculamos el ROI estimado de cada uno
+✓ Te recomendamos las herramientas específicas para tu caso
 
-→ Un diagnóstico inicial (2-4 semanas)
-→ Una implementación por fases (2-6 meses)
-→ Mantenimiento y optimización (ongoing)
+Al final de la sesión tienes una hoja de ruta completa.
 
-Eso no requiere una persona interna. Requiere un equipo externo especializado que haya hecho eso mismo para otras empresas.
+Puedes implementarla con nosotros. Puedes implementarla solo. Puedes no implementarla.
 
-Las ventajas de trabajar con un consultor externo:
-✅ Conoces el coste desde el principio
-✅ Traes la experiencia de múltiples sectores
-✅ No dependes de una persona que puede irse
-✅ Puedes escalar o reducir según necesites
-✅ El equipo interno no tiene que aprender desde cero
+Sin presión. Sin compromiso. Con resultados concretos.
 
-No decimos que los perfiles internos de IA no valgan. Decimos que para la mayoría de pymes, no es el primer paso.
+Llevamos X diagnósticos realizados. El 100% de los participantes dice que la sesión valió la pena independientemente de si contrataron o no.
 
-¿Estáis pensando en contratar alguien de IA internamente? 👇
+Enlace en bio para reservar el tuyo.
 
-#ConsultoriaIA #IAparaEmpresas #NexusIA #PymesEspana #RecursosHumanos #TransformacionDigital #InteligenciaArtificial
-```
+**CTA:** "Reserva en el enlace de bio. Quedan X plazas este mes."
+
+**Hashtags:**
+#DiagnosticoGratuito #ConsultoraIA #IAEmpresa #NexusIA #PymesEspaña #AutomatizacionEmpresarial #InteligenciaArtificial #ConsultoriaEstrategica #TransformacionDigital #HojaDeRuta #EstrategiaIA #OfertaLimitada #PymesDigitales
 
 ---
 
-## SEMANA 12 — Casos de éxito y CTA final
+## SEMANA 9 — Educación técnica accesible
 
-### Lunes — Post de caso de éxito
-
-**Caption:**
-```
-Caso real: cómo una empresa de logística ahorró 40.000€ en su primer año con IA
-
-(Datos publicados con permiso. Empresa anonimizada.)
-
-Sector: transporte y logística
-Tamaño: 65 empleados
-Ciudad: Zaragoza
-
-Situación inicial:
-- 3 personas dedicadas a gestión de albaranes (entrada y salida)
-- 400-600 albaranes diarios en temporada alta
-- 1-2 errores de introducción por día que generaban reclamaciones
-- El equipo llegaba tarde y salía tarde en temporada alta
-
-Lo que implementamos:
-1. Sistema de lectura automática de albaranes (OCR + IA)
-2. Integración directa con su ERP (Sage)
-3. Panel de revisión para los casos con baja confianza
-4. Alertas automáticas ante inconsistencias
-
-Resultados a los 6 meses:
-✅ De 3 personas a 1.5 dedicación (las otras se reasignaron)
-✅ Tiempo de procesado: de 3 min/albarán a 8 segundos
-✅ Errores: de 1-2/día a 0.2/día
-✅ El equipo sale a su hora, también en temporada alta
-✅ Ahorro estimado primer año: 38.000-42.000€
-
-Coste del proyecto: 14.500€
-
-ROI: recuperado en 4 meses.
-
-¿Tiene sentido para tu empresa? Diagnóstico gratuito en bio 👆
-
-#CasosDeExito #Logistica #IAparaEmpresas #NexusIA #AutomatizacionProcesos #PymesEspana #ROI #InteligenciaArtificial
-```
-
-### Miércoles — Carrusel resumen de las 12 semanas
-
-**Concepto:** "Lo que has aprendido en 12 semanas de seguirnos" — resumen de los conceptos clave con CTA final al diagnóstico.
-
-### Viernes — Post CTA final de la campaña
+### Miércoles · Carrusel: "Qué es RAG explicado sin tecnicismos"
 
 **Caption:**
-```
-Llevamos 12 semanas compartiendo todo lo que sabemos sobre IA para empresas.
+"Conectar la IA con los datos de tu empresa"
 
-Ha llegado el momento de hacer la pregunta directa:
+Eso es lo que hace RAG. Sin el palabro técnico, la idea es esta:
 
-¿Hay algún proceso en tu empresa que te quite más tiempo del que debería?
+→ ChatGPT sabe mucho. Pero no sabe nada de TU empresa.
+→ No conoce tu stock, tus clientes, tus precios, tus contratos.
+→ RAG le da acceso a esa información antes de responder.
 
-Si la respuesta es sí, tienes 30 minutos libres esta semana y quieres saber si la IA puede ayudarte... el diagnóstico gratuito sigue en bio 👆
+Es como contratar a alguien muy inteligente y darle acceso a todos tus archivos internos.
 
-Sin compromiso. Sin palabrería técnica. Solo una conversación honesta sobre si tiene sentido o no para vosotros.
+Desliza para entender cómo funciona y qué puedes hacer con ello.
 
-Y si la respuesta es no, también te lo decimos.
+**Slides:**
+1. "¿Qué es RAG? Explicado para empresas"
+2. "El problema: la IA no conoce tu empresa"
+3. "La solución: dale acceso a tus datos"
+4. "Caso 1: agente que consulta tu stock en tiempo real"
+5. "Caso 2: chatbot que conoce todos tus contratos"
+6. "Coste aproximado y próximos pasos"
 
-Nos leemos 👋
+**CTA:** "¿Qué datos de tu empresa te gustaría que la IA pudiera consultar?"
 
-#NexusIA #IAparaEmpresas #DiagnosticoGratuito #ConsultoriaIA #AutomatizacionEmpresas #PymesEspana #InteligenciaArtificial #TransformacionDigital
-```
+**Hashtags:**
+#RAG #IAEmpresarial #BaseDeDatosIA #InteligenciaArtificial #NexusIA #TecnologiaEmpresarial #IAParaEmpresas #PymesEspaña #EducacionIA #ExplicacionIA #DatosEmpresa #AgentesIA #LLM #ChatbotEmpresarial
 
 ---
 
-## Estrategia de crecimiento
+## SEMANA 10 — Social proof y casos de éxito
 
-### Semanas 1-4: Construir base
+### Lunes · Post
 
-- Seguir a cuentas de directivos de pymes, responsables de operaciones y CEOs de empresas de 20-200 empleados en España
-- Comentar con valor en posts de LinkedIn/Instagram de referentes del sector (sin spam)
-- Publicar en horarios óptimos: lunes 9:00, miércoles 13:00, viernes 20:00
+**Concepto visual:** Cita en formato testimonio con diseño premium. Avatar con iniciales, nombre, empresa y sector.
 
-### Semanas 5-8: Aumentar engagement
+**Caption:**
+"Llevábamos 3 años queriendo digitalizar el proceso de alta de clientes. Siempre lo posponíamos porque parecía un proyecto enorme. Nexus IA lo implementó en 2 semanas. Ahora el cliente rellena un formulario y en 5 minutos tiene acceso, su ficha creada y su email de bienvenida. Sin que nadie del equipo tenga que hacer nada."
 
-- Hacer preguntas en todos los posts para generar comentarios
-- Responder a TODOS los comentarios en las primeras 2 horas
-- Usar la función de colaboración de Instagram para publicaciones conjuntas con otras cuentas complementarias (agencias de marketing digital, asesores fiscales, etc.)
-- Stories diarias (aunque sea reshare de un post)
+— [Nombre], Director de Operaciones, [Empresa], sector servicios
 
-### Semanas 9-12: Monetizar la audiencia
+Resultados a los 3 meses:
+→ Tiempo de alta de cliente: de 45 minutos a 0 (automático)
+→ Errores en los datos de nuevos clientes: de 8/mes a 0
+→ Satisfacción de los nuevos clientes en la primera semana: +40 puntos NPS
 
-- Añadir CTA al diagnóstico gratuito en todos los posts
-- Stories con encuestas y resultados enlazados a la web
-- Destacados de Instagram organizados: "Casos reales", "Herramientas", "Preguntas frecuentes", "Nuestro proceso"
-- Empezar a etiquetar a clientes (con permiso) en casos de éxito
+¿Tienes un proceso parecido en tu empresa? Enlace en bio.
 
-### Ideas de colaboraciones
+**CTA:** "¿Cuánto tarda el alta de un cliente nuevo en tu empresa?"
 
-- **Asesores fiscales y laborales**: público similar, complementario
-- **Agencias de transformación digital**: referidos mutuos
-- **Asociaciones empresariales** (CEOE, asociaciones sectoriales): credibilidad
-- **Proveedores de ERP** (Sage, Holded, SAP): acuerdos de partner
-- **Escuelas de negocio** (IE, ESADE, CEF): charlas y contenido educativo
+**Hashtags:**
+#CasoDeExito #TestimonioCliente #AutomatizacionEmpresarial #IAEmpresa #NexusIA #PymesEspaña #ResultadosReales #OnboardingClientes #EficienciaEmpresarial #InteligenciaArtificial #TransformacionDigital #NPSEmpresa
+
+---
+
+## SEMANA 11 — Objeciones sobre costes
+
+### Lunes · Post
+
+**Concepto visual:** Calculadora con números y fórmula ROI. Diseño minimalista.
+
+**Caption:**
+"Es que no tenemos presupuesto para IA"
+
+Vale. Hagamos los números juntos.
+
+¿Cuántas horas dedica tu equipo a tareas repetitivas cada semana?
+
+Digamos que son 10 horas. A 20 €/hora de coste empresa.
+Son 200 € semanales. 10.000 € al año.
+
+Una automatización que resuelva eso puede costar entre 2.000 y 4.000 €.
+
+El período de retorno: menos de 6 meses.
+
+El ROI a partir del año 2: más del 400%.
+
+El presupuesto no es el problema.
+El problema es no tener los números sobre la mesa.
+
+¿Quieres que calculemos el ROI de tu proceso específico? Diagnóstico gratuito en el enlace de bio.
+
+**CTA:** "¿Cuántas horas repetitivas tiene tu equipo a la semana? Estima en comentarios"
+
+**Hashtags:**
+#PresupuestoIA #ROIEmpresarial #InversionIA #PymesEspaña #IAEmpresa #AutomatizacionEmpresarial #NexusIA #CalculoROI #AhorroEmpresarial #EficienciaEmpresarial #FinanzasEmpresa #InversionInteligente #InteligenciaArtificial
+
+---
+
+## SEMANA 12 — Cierre del primer trimestre y próximos pasos
+
+### Lunes · Post de reflexión
+
+**Caption:**
+3 meses publicando contenido sobre IA para empresas.
+
+Lo que hemos aprendido de vosotros:
+
+→ La mayoría de pymes saben que necesitan IA pero no saben por dónde empezar.
+→ El mayor miedo no es el coste. Es implementarlo mal y perder dinero.
+→ Lo que más valoran no son las herramientas: es tener a alguien que entienda su negocio antes de proponer soluciones.
+
+Eso es exactamente lo que hacemos en Nexus IA.
+
+Si llevas meses pensando en dar el salto y no lo has dado porque no sabes cómo empezar, este es el momento.
+
+El diagnóstico gratuito sigue siendo gratuito. Y el primer paso siempre es el más importante.
+
+Enlace en bio.
+
+**CTA:** "¿Cuál es tu próximo paso con la IA este trimestre?"
+
+**Hashtags:**
+#Reflexion #IAEmpresa #NexusIA #PymesEspaña #AutomatizacionEmpresarial #InteligenciaArtificial #TransformacionDigital #3MesesDeContenido #ComunidadIA #EmpresaFuturo #DiagnosticoGratuito #ConsultoraIA
+
+---
+
+## MEJORES HORARIOS DE PUBLICACIÓN EN ESPAÑA
+
+| Día | Mejor franja | Tipo de contenido recomendado |
+|-----|-------------|-------------------------------|
+| Lunes | 8:00-9:00 o 12:00-13:00 | Post de valor, reflexión de inicio de semana |
+| Martes | 12:00-14:00 | Stories interactivas |
+| Miércoles | 11:00-13:00 | Carruseles educativos o Reels |
+| Jueves | 12:00-14:00 o 19:00-20:00 | Stories de seguimiento |
+| Viernes | 9:00-11:00 | Post más ligero, meme de oficina, dato estadístico |
+| Sábado | Evitar (audiencia empresarial no activa) | — |
+| Domingo | Evitar (ídem) | — |
+
+**Nota:** la audiencia objetiva (directivos y responsables de pymes) suele revisar Instagram durante las pausas laborales (café de media mañana 10:30-11:00, comida 13:00-14:30) o en el transporte por la mañana (8:00-9:00).
+
+---
+
+## GUÍA DE HASHTAGS POR CATEGORÍA
+
+### Hashtags de marca (usar siempre)
+`#NexusIA` `#ConsultoraIA` `#IAParaEmpresas`
+
+### Hashtags de sector/audiencia (rotar)
+`#PymesEspaña` `#DirectivosEspaña` `#EmprendimientoEspañol` `#EmpresasEspaña` `#GerenciaEmpresarial` `#LiderazgoEmpresarial`
+
+### Hashtags de temática IA (rotar por relevancia)
+`#InteligenciaArtificial` `#IAEmpresa` `#AutomatizacionEmpresarial` `#TransformacionDigital` `#DigitalizacionEmpresas` `#AgentesIA` `#ChatGPT` `#LLM`
+
+### Hashtags de contenido educativo
+`#TipsEmpresariales` `#CarruselEducativo` `#GuiaIA` `#BlogIA` `#AprendeIA`
+
+### Hashtags de resultados
+`#ROIEmpresarial` `#CasoDeExito` `#ResultadosReales` `#EficienciaEmpresarial` `#AhorroTiempo`
+
+**Regla:** usar entre 20 y 25 hashtags por post. Nunca más de 30. Mezclar siempre hashtags de nicho (específicos, 50K-500K posts) con hashtags amplios (más de 1M posts) en proporción 70/30.
+
+---
+
+## ESTRATEGIA DE CRECIMIENTO PRIMEROS 3 MESES
+
+### Mes 1 (Semanas 1-4): Establecer presencia y voz
+- Objetivo de seguidores: 200-400 seguidores orgánicos
+- Foco: definir voz, mostrar conocimiento, introducir los servicios
+- Interacción: responder el 100% de los comentarios en menos de 2 horas
+- Seguir cuentas: directivos de pymes, asociaciones empresariales, medios especializados en empresas España
+- DMs: responder consultas con generosidad, sin vender directamente
+
+### Mes 2 (Semanas 5-8): Construir comunidad y autoridad
+- Objetivo de seguidores: 400-800 seguidores
+- Foco: casos de uso más específicos, Reels con mayor producción
+- Colaboraciones: buscar 1-2 colaboraciones con cuentas de nicho complementarias (gestoría, RRHH, marketing para pymes)
+- Testimonios: publicar primeros testimonios reales de clientes
+- Stories: usar stickers de encuesta, pregunta y quiz para aumentar engagement
+
+### Mes 3 (Semanas 9-12): Escalar y convertir
+- Objetivo de seguidores: 800-1.500 seguidores
+- Foco: contenido más directo de captación, testimonios, cifras de resultados
+- Lead magnet: ofrecer descargable gratuito (checklist, guía) a cambio de email
+- Bio optimizada: actualizar con el número de diagnósticos realizados
+- Ads: considerar invertir 200-400 €/mes en publicidad en posts de mayor rendimiento orgánico
+
+### KPIs mensuales a medir
+- Seguidores nuevos netos
+- Tasa de engagement (objetivo: >3% en posts, >5% en Reels)
+- Visitas al perfil
+- Clics al enlace de bio
+- Leads provenientes de Instagram (preguntarlo en el formulario de diagnóstico)

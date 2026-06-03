@@ -1,473 +1,230 @@
-# n8n — Guía de Automatización Completa
+# Configuración de n8n — Nexus IA
 
-Esta guía documenta todos los flujos de automatización de Nexus IA, los payloads de webhook, las credenciales necesarias y cómo instalar n8n.
-
----
+Esta documentación describe los tres flujos de automatización de n8n que procesan los leads captados por la web de Nexus IA.
 
 ## Visión general de los flujos
 
-| Flujo | Trigger | Propósito |
-|-------|---------|-----------|
-| Flujo 1: Nuevo Lead | Webhook POST desde la web | Notificar al equipo, enviar confirmación al cliente, registrar en Sheets |
-| Flujo 2: Seguimiento 48h | Schedule diario 9:00 | Recordatorio a leads sin reunión agendada |
-| Flujo 3: Post Reunión | Webhook manual desde CRM | Email post-reunión con resumen y próximos pasos |
+| Flujo | Disparador | Propósito |
+|-------|------------|-----------|
+| Flujo 1: Nuevo Lead | Webhook POST | Procesar un lead nuevo del formulario de diagnóstico |
+| Flujo 2: Seguimiento 48h | Schedule (cada hora) | Enviar email de seguimiento a leads sin respuesta |
+| Flujo 3: Post Reunión | Webhook manual | Enviar materiales y próximos pasos tras una reunión |
 
 ---
 
-## Instalación de n8n
-
-### Opción A: n8n Cloud (recomendado para empezar)
-
-1. Ve a [app.n8n.cloud](https://app.n8n.cloud) y crea una cuenta
-2. Selecciona el plan **Starter** (gratis hasta 5.000 ejecuciones/mes)
-3. Tu instancia estará en `https://TU-NOMBRE.app.n8n.cloud`
-4. No necesitas gestionar servidores
-
-### Opción B: Docker self-hosted
-
-```bash
-# docker-compose.yml para n8n
-version: '3.8'
-
-services:
-  n8n:
-    image: n8nio/n8n:latest
-    restart: always
-    ports:
-      - "5678:5678"
-    environment:
-      - N8N_HOST=n8n.nexusia.es
-      - N8N_PORT=5678
-      - N8N_PROTOCOL=https
-      - NODE_ENV=production
-      - WEBHOOK_URL=https://n8n.nexusia.es
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=TU_PASSWORD_SEGURO
-      - DB_TYPE=postgresdb
-      - DB_POSTGRESDB_HOST=tu-postgres-host
-      - DB_POSTGRESDB_PORT=5432
-      - DB_POSTGRESDB_DATABASE=n8n
-      - DB_POSTGRESDB_USER=n8n_user
-      - DB_POSTGRESDB_PASSWORD=TU_DB_PASSWORD
-    volumes:
-      - n8n_data:/home/node/.n8n
-
-volumes:
-  n8n_data:
-```
-
-```bash
-docker compose up -d
-# Accede a http://localhost:5678
-```
-
----
-
-## Variables de entorno para n8n
-
-En n8n, las variables de entorno se configuran en **Settings > Variables** (en n8n Cloud) o directamente en el `docker-compose.yml`.
-
-| Variable | Valor |
-|----------|-------|
-| `SUPABASE_URL` | URL de tu proyecto Supabase |
-| `SUPABASE_SERVICE_ROLE_KEY` | Clave service_role de Supabase |
-| `RESEND_API_KEY` | API key de Resend |
-| `TEAM_EMAIL` | `hola@nexusia.es` |
-| `FROM_EMAIL` | `noreply@nexusia.es` |
-| `TELEGRAM_BOT_TOKEN` | Token del bot de Telegram |
-| `TELEGRAM_CHAT_ID` | ID del grupo/canal de Telegram del equipo |
-| `CALENDLY_URL` | `https://calendly.com/nexusia/diagnostico-gratuito` |
-| `GOOGLE_SHEETS_ID` | ID del Google Sheet para el log de leads |
-| `WEBHOOK_SECRET` | El mismo valor que `N8N_WEBHOOK_SECRET` en tu web |
-
----
-
-## Credenciales necesarias en n8n
-
-Antes de crear los flujos, configura estas credenciales en n8n > **Credentials > New**:
-
-### Supabase (vía HTTP Request con Bearer token)
-- Tipo: **Header Auth**
-- Name: `Supabase Service Role`
-- Header Name: `Authorization`
-- Header Value: `Bearer TU_SERVICE_ROLE_KEY`
-
-### Resend (para emails)
-- Tipo: **HTTP Header Auth**
-- Name: `Resend API`
-- Header Name: `Authorization`
-- Header Value: `Bearer re_TU_API_KEY`
-
-### Telegram Bot
-1. Crea un bot en [@BotFather](https://t.me/BotFather): `/newbot`
-2. Copia el token
-3. En n8n: tipo **Telegram API**, pega el token
-4. Añade el bot al grupo/canal del equipo y obtén el `chat_id`
-
-### Google Sheets
-- Tipo: **Google Sheets OAuth2** (sigue el proceso OAuth de Google)
-- Necesitarás una cuenta de servicio de Google Cloud o autenticación OAuth
-
-### Gmail / Outlook (alternativa a Resend para emails internos)
-- Tipo: **Gmail OAuth2** o **Microsoft Outlook OAuth2**
-
----
-
-## Flujo 1: Nuevo Lead desde Web
+## Flujo 1: Nuevo Lead
 
 ### Descripción
+Se activa cuando el formulario de diagnóstico de la web envía los datos al webhook. Guarda el lead en Supabase, envía email de confirmación al lead, notifica al equipo por email y opcionalmente por Telegram.
 
-Se activa cuando la web envía un webhook al confirmar un nuevo lead. Valida los datos, envía emails al equipo y al cliente, notifica por Telegram, registra en Google Sheets y, si el score es alto, envía el link de Calendly automáticamente.
+### Nodos del flujo
 
-### Estructura del webhook entrante (Request)
+```
+Webhook (POST) →
+  Validar datos →
+    Insertar en Supabase (tabla leads) →
+      Email confirmación al lead (Resend) →
+        Email notificación al equipo (Resend) →
+          [Opcional] Notificación Telegram
+```
+
+### Configuración del Webhook
+
+- **Método:** POST
+- **URL de producción:** `https://tu-n8n.app.n8n.cloud/webhook/nuevo-lead`
+- **Authentication:** Header `X-Webhook-Secret: {{$credentials.webhookSecret}}`
+- **Respuesta:** HTTP 200 con `{ "success": true, "lead_id": "..." }`
+
+### Ejemplo de body del webhook de entrada
 
 ```json
-POST /webhook/nuevo-lead
-Authorization: Bearer TU_WEBHOOK_SECRET
-Content-Type: application/json
-
 {
-  "lead": {
-    "id": "550e8400-e29b-41d4-a716-446655440000",
-    "created_at": "2025-06-15T10:30:00Z",
-    "name": "María García",
-    "email": "maria.garcia@empresa.es",
-    "phone": "+34612345678",
-    "company": "Distribuciones García S.L.",
-    "role": "Directora de Operaciones",
-    "sector": "Logística",
-    "employees_range": "50-200",
-    "service_interest": "Automatización de procesos",
-    "main_problem": "Gestionamos más de 500 albaranes al mes de forma manual. El equipo pasa 2 horas diarias copiando datos entre Excel y el ERP.",
-    "tools_used": ["Excel", "SAP"],
-    "urgency": "trimestre",
-    "lead_score": 82,
-    "qualification": "muy-caliente",
-    "source": "bot"
-  }
+  "lead_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "name": "María García",
+  "email": "maria.garcia@empresa.com",
+  "phone": "+34 666 123 456",
+  "company": "Distribuciones García SL",
+  "company_size": "11-50",
+  "sector": "distribución",
+  "current_tools": "Excel, email, un CRM básico",
+  "main_challenge": "Perdemos mucho tiempo procesando facturas de proveedores manualmente. Somos 3 personas en administración y dedicamos casi 2 días a la semana solo a esto.",
+  "budget_range": "2000-5000",
+  "timeline": "3-6 meses",
+  "lead_score": 75,
+  "intent": "automatizacion",
+  "utm_source": "google",
+  "utm_medium": "cpc",
+  "utm_campaign": "automatizacion-facturas",
+  "created_at": "2026-06-03T10:32:00.000Z",
+  "ip_country": "ES"
 }
 ```
 
-### Respuesta esperada del webhook (Response)
+### Nodo: Insertar en Supabase
 
-```json
-HTTP/1.1 200 OK
-Content-Type: application/json
+- **Operación:** Insert
+- **Tabla:** `leads`
+- **Campos a mapear:** todos los campos del body anterior
+- **Campo adicional a añadir:** `status: 'nuevo'`, `notified_at: new Date().toISOString()`
 
-{
-  "success": true,
-  "workflow_execution_id": "abc123",
-  "actions_triggered": [
-    "email_team",
-    "email_client_confirmation",
-    "telegram_notification",
-    "google_sheets_log",
-    "calendly_link_sent"
-  ]
-}
+### Nodo: Email confirmación al lead
+
+- **Servicio:** Resend (credencial configurada en n8n)
+- **From:** `hola@nexusia.es`
+- **To:** `{{$json.email}}`
+- **Subject:** `Tu diagnóstico gratuito está confirmado, {{$json.name.split(' ')[0]}}`
+- **Body:** usar plantilla HTML de `lib/email-templates.ts` > `diagnosticConfirmation`
+
+### Nodo: Email notificación al equipo
+
+- **To:** `hola@nexusia.es`
+- **Subject:** `Nuevo lead: {{$json.company}} (puntuación: {{$json.lead_score}})`
+- **Body HTML:**
+```html
+<h2>Nuevo lead recibido</h2>
+<table>
+  <tr><td><strong>Nombre:</strong></td><td>{{$json.name}}</td></tr>
+  <tr><td><strong>Empresa:</strong></td><td>{{$json.company}}</td></tr>
+  <tr><td><strong>Email:</strong></td><td>{{$json.email}}</td></tr>
+  <tr><td><strong>Teléfono:</strong></td><td>{{$json.phone}}</td></tr>
+  <tr><td><strong>Sector:</strong></td><td>{{$json.sector}}</td></tr>
+  <tr><td><strong>Lead score:</strong></td><td>{{$json.lead_score}}/100</td></tr>
+  <tr><td><strong>Intención:</strong></td><td>{{$json.intent}}</td></tr>
+  <tr><td><strong>Reto principal:</strong></td><td>{{$json.main_challenge}}</td></tr>
+  <tr><td><strong>Presupuesto:</strong></td><td>{{$json.budget_range}} €</td></tr>
+</table>
+<a href="https://supabase.com/dashboard/project/TU_PROJECT/table-editor" style="background:#2563EB;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;">Ver en Supabase</a>
 ```
-
-### Pasos del flujo
-
-#### Paso 1: Webhook Trigger
-
-- **Tipo de nodo**: Webhook
-- **HTTP Method**: POST
-- **Path**: `nuevo-lead`
-- **Authentication**: Header Auth (verifica el header `Authorization: Bearer TU_SECRET`)
-- **Response Mode**: Last Node (devuelve la respuesta al finalizar)
-
-Configuración de autenticación:
-```
-Header Name: Authorization
-Header Value: Bearer {{ $env.WEBHOOK_SECRET }}
-```
-
-#### Paso 2: Validar datos recibidos
-
-- **Tipo de nodo**: Code (JavaScript)
-- **Propósito**: Verificar que el payload tiene los campos mínimos obligatorios
-
-```javascript
-const lead = $input.first().json.lead;
-
-// Validaciones mínimas
-if (!lead.email || !lead.name) {
-  throw new Error('Faltan campos obligatorios: name y email');
-}
-
-if (typeof lead.lead_score !== 'number' || lead.lead_score < 0 || lead.lead_score > 100) {
-  throw new Error('lead_score inválido');
-}
-
-// Enriquecer datos si faltan
-const enriched = {
-  ...lead,
-  qualification: lead.lead_score >= 81 ? 'muy-caliente'
-    : lead.lead_score >= 61 ? 'caliente'
-    : lead.lead_score >= 31 ? 'templado'
-    : 'frío',
-  received_at: new Date().toISOString(),
-};
-
-return [{ json: enriched }];
-```
-
-#### Paso 3: Guardar en Supabase (si no se hizo en la web)
-
-- **Tipo de nodo**: HTTP Request
-- **Method**: POST
-- **URL**: `{{ $env.SUPABASE_URL }}/rest/v1/leads`
-- **Authentication**: Header Auth (Supabase Service Role)
-- **Headers adicionales**:
-  - `apikey: TU_SUPABASE_ANON_KEY`
-  - `Prefer: return=representation`
-- **Body** (JSON):
-  ```json
-  {
-    "id": "{{ $json.id }}",
-    "name": "{{ $json.name }}",
-    "email": "{{ $json.email }}",
-    "lead_score": {{ $json.lead_score }},
-    "status": "nuevo"
-  }
-  ```
-
-> Nota: Si la web ya guardó el lead en Supabase (lo cual es lo habitual), este paso usará `ON CONFLICT DO NOTHING`. Configura el header `Prefer: resolution=ignore-duplicates`.
-
-#### Paso 4: Enviar email interno al equipo comercial
-
-- **Tipo de nodo**: HTTP Request a la API de Resend
-- **URL**: `https://api.resend.com/emails`
-- **Method**: POST
-- **Headers**: `Authorization: Bearer {{ $env.RESEND_API_KEY }}`
-- **Body**:
-```json
-{
-  "from": "Nexus IA Bot <noreply@nexusia.es>",
-  "to": ["hola@nexusia.es"],
-  "subject": "🎯 Nuevo lead cualificado: {{ $json.name }} de {{ $json.company }}",
-  "html": "<!-- Ver template completo en docs/email-templates.md -->"
-}
-```
-
-El template HTML completo está en [`email-templates.md`](./email-templates.md) — Email 1.
-
-#### Paso 5: Enviar email de confirmación al cliente
-
-- **Tipo de nodo**: HTTP Request a la API de Resend
-- **URL**: `https://api.resend.com/emails`
-- **Body**:
-```json
-{
-  "from": "Equipo Nexus IA <hola@nexusia.es>",
-  "to": ["{{ $json.email }}"],
-  "subject": "Hemos recibido tu solicitud de diagnóstico — Nexus IA",
-  "html": "<!-- Ver Email 2 en email-templates.md -->"
-}
-```
-
-#### Paso 6: Notificación por Telegram al equipo
-
-- **Tipo de nodo**: Telegram
-- **Credential**: Telegram Bot (configurada en paso previo)
-- **Chat ID**: `{{ $env.TELEGRAM_CHAT_ID }}`
-- **Message**:
-```
-🎯 *Nuevo lead: {{ $json.qualification | upper }}*
-
-👤 *{{ $json.name }}* — {{ $json.role }} en {{ $json.company }}
-📧 {{ $json.email }}
-📱 {{ $json.phone || 'Sin teléfono' }}
-🏭 Sector: {{ $json.sector }} · {{ $json.employees_range }} empleados
-⭐ Score: {{ $json.lead_score }}/100
-
-💬 _"{{ $json.main_problem }}"_
-
-👉 [Ver en Supabase]({{ $env.SUPABASE_URL }}/project/default/editor)
-```
-
-#### Paso 7: Añadir a Google Sheets
-
-- **Tipo de nodo**: Google Sheets
-- **Operation**: Append Row
-- **Sheet ID**: `{{ $env.GOOGLE_SHEETS_ID }}`
-- **Sheet Name**: `Leads`
-- **Columnas** (en este orden en el Sheet):
-  - Fecha, Nombre, Email, Teléfono, Empresa, Cargo, Sector, Empleados, Score, Cualificación, Problema, Estado
-
-```javascript
-// Mapping de datos para el Sheet
-{
-  "Fecha": $json.created_at,
-  "Nombre": $json.name,
-  "Email": $json.email,
-  "Teléfono": $json.phone,
-  "Empresa": $json.company,
-  "Cargo": $json.role,
-  "Sector": $json.sector,
-  "Empleados": $json.employees_range,
-  "Score": $json.lead_score,
-  "Cualificación": $json.qualification,
-  "Problema": $json.main_problem,
-  "Estado": "Nuevo"
-}
-```
-
-#### Paso 8: Condicional — Si lead_score > 70, enviar Calendly
-
-- **Tipo de nodo**: IF
-- **Condición**: `{{ $json.lead_score }}` > `70`
-
-**Rama Verdadero**: Envía email con link de Calendly:
-```json
-{
-  "from": "Equipo Nexus IA <hola@nexusia.es>",
-  "to": ["{{ $json.email }}"],
-  "subject": "¿Agendamos tu diagnóstico gratuito? — 30 minutos que pueden cambiar tu empresa",
-  "html": "<p>Hola {{ $json.name }},</p><p>Hemos revisado tu solicitud y, dado el nivel de automatización que podemos aportar a {{ $json.company }}, queremos reservar tiempo contigo esta semana.</p><p><a href='{{ $env.CALENDLY_URL }}?name={{ $json.name }}&email={{ $json.email }}' style='background:#6366f1;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;display:inline-block'>Reservar mi diagnóstico gratuito →</a></p><p>El equipo de Nexus IA</p>"
-}
-```
-
-**Rama Falso**: No envía nada (el flujo de seguimiento de 48h se encargará).
 
 ---
 
-## Flujo 2: Seguimiento de Lead (48h sin reunión)
+## Flujo 2: Seguimiento a las 48 horas
 
 ### Descripción
+Se ejecuta cada hora. Busca en Supabase los leads que: llevan más de 48 horas desde su creación, tienen status `nuevo` (no han sido contactados), y no han respondido. Envía un email de seguimiento personalizado.
 
-Se ejecuta cada día a las 9:00. Busca leads con más de 48 horas de antigüedad que siguen en estado `nuevo` (no se han contactado ni agendado reunión) y envía un email de seguimiento personalizado.
-
-### Trigger: Schedule
-
-- **Tipo de nodo**: Schedule Trigger
-- **Configuración**: Todos los días a las 9:00 (hora española, UTC+1 o UTC+2 en verano)
-- **Cron**: `0 8 * * 1-5` (9:00 hora española en horario de invierno; ajusta en verano a `0 7 * * 1-5`)
-
-### Paso 1: Consultar leads pendientes en Supabase
-
-- **Tipo de nodo**: HTTP Request
-- **Method**: GET
-- **URL**: 
-```
-{{ $env.SUPABASE_URL }}/rest/v1/leads?select=*&status=eq.nuevo&created_at=lt.{{ DateTime.now().minus({hours: 48}).toISO() }}&lead_score=gte.31&order=lead_score.desc
-```
-- **Headers**: 
-  - `apikey: TU_ANON_KEY`
-  - `Authorization: Bearer TU_SERVICE_ROLE_KEY`
-
-### Paso 2: Comprobar si hay resultados
-
-- **Tipo de nodo**: IF
-- **Condición**: `{{ $json.length }}` > `0`
-
-Si no hay leads, el flujo termina aquí.
-
-### Paso 3: Iterar sobre cada lead
-
-- **Tipo de nodo**: Split In Batches (o Loop Over Items)
-- Para cada lead, ejecuta los siguientes pasos
-
-### Paso 4: Enviar email de seguimiento personalizado
-
-```json
-{
-  "from": "Equipo Nexus IA <hola@nexusia.es>",
-  "to": ["{{ $json.email }}"],
-  "subject": "¿Pudiste revisar tu diagnóstico gratuito? 👋",
-  "html": "<!-- Ver Email 3 en email-templates.md -->"
-}
-```
-
-### Paso 5: Actualizar estado en Supabase
+### Nodos del flujo
 
 ```
-PATCH {{ $env.SUPABASE_URL }}/rest/v1/leads?id=eq.{{ $json.id }}
-Body: { "status": "contactado", "notes": "Email de seguimiento automático enviado el {{ DateTime.now().toISODate() }}" }
+Schedule Trigger (cada hora) →
+  Consulta Supabase (leads pendientes) →
+    IF hay leads pendientes →
+      Loop por cada lead →
+        Enviar email de seguimiento (Resend) →
+          Actualizar status en Supabase →
+            Notificar al equipo
 ```
+
+### Nodo: Schedule Trigger
+
+- **Intervalo:** cada 1 hora
+- **Zona horaria:** Europe/Madrid
+
+### Nodo: Consulta Supabase
+
+- **Operación:** GetAll con filtros
+- **Tabla:** `leads`
+- **Filtros:**
+  - `status` = `nuevo`
+  - `created_at` <= `NOW() - INTERVAL '48 hours'`
+  - `follow_up_sent` = `false`
+- **Límite:** 50 registros por ejecución
+
+### Query SQL directa (alternativa)
+
+```sql
+SELECT *
+FROM leads
+WHERE
+  status = 'nuevo'
+  AND created_at <= NOW() - INTERVAL '48 hours'
+  AND follow_up_sent = false
+ORDER BY lead_score DESC
+LIMIT 50;
+```
+
+### Nodo: Email de seguimiento
+
+- **Subject:** `¿Tienes 5 minutos esta semana, {{$json.name.split(' ')[0]}}?`
+- **Body:** email de seguimiento personalizado con referencia al reto mencionado en el formulario.
+
+### Nodo: Actualizar status en Supabase
+
+- **Operación:** Update
+- **Tabla:** `leads`
+- **ID:** `{{$json.lead_id}}`
+- **Campos:** `follow_up_sent: true`, `follow_up_sent_at: new Date().toISOString()`, `status: 'seguimiento_1'`
 
 ---
 
 ## Flujo 3: Post Reunión
 
 ### Descripción
+Se activa manualmente desde el dashboard de n8n o mediante un webhook específico después de celebrar una reunión de diagnóstico con un lead. Envía los materiales acordados, la propuesta o los próximos pasos.
 
-Se activa manualmente desde el CRM (o via webhook desde Calendly cuando una reunión termina). Envía el email de post-reunión con resumen y próximos pasos.
+### Webhook de activación
 
-### Trigger: Webhook manual
+- **URL:** `https://tu-n8n.app.n8n.cloud/webhook/post-reunion`
+- **Método:** POST
 
-```
-POST /webhook/post-reunion
-Authorization: Bearer TU_WEBHOOK_SECRET
+### Body del webhook de activación
 
+```json
 {
-  "lead_id": "550e8400-e29b-41d4-a716-446655440000",
-  "meeting_date": "2025-06-15",
-  "meeting_notes": "Empresa con 80 empleados. Proceso de facturación manual. Integración con SAP posible. Presupuesto disponible para Q3. Muy interesados.",
-  "next_steps": "Enviar propuesta antes del 20 de junio. Llamada de seguimiento el 22.",
-  "proposal_value": "15000-25000"
+  "lead_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "reunion_date": "2026-06-03T11:00:00.000Z",
+  "outcome": "interesado",
+  "next_step": "propuesta",
+  "notes": "Interesados en automatizar el proceso de facturación. Tienen 150 facturas/mes. Presupuesto confirmado entre 3.000 y 5.000 €. Quieren propuesta formal en 48h.",
+  "send_materials": true,
+  "materials": ["caso-exito-distribucion", "metodologia-nexus"]
 }
 ```
 
-### Pasos
+### Nodos del flujo
 
-1. **Obtener datos del lead** desde Supabase por `lead_id`
-2. **Enviar email post-reunión** (ver Email 4 en `email-templates.md`)
-3. **Actualizar estado** del lead a `propuesta` en Supabase
-4. **Notificar por Telegram** al equipo que la reunión fue completada
-
----
-
-## Probar los webhooks
-
-### Probar Flujo 1 manualmente
-
-```bash
-curl -X POST https://TU-INSTANCIA.app.n8n.cloud/webhook/nuevo-lead \
-  -H "Authorization: Bearer TU_WEBHOOK_SECRET" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "lead": {
-      "id": "test-id-001",
-      "created_at": "2025-06-15T10:00:00Z",
-      "name": "Test Usuario",
-      "email": "test@nexusia.es",
-      "company": "Empresa Test S.L.",
-      "role": "Director General",
-      "sector": "Industria",
-      "employees_range": "50-200",
-      "service_interest": "Automatización de procesos",
-      "main_problem": "Procesos manuales que consumen mucho tiempo",
-      "tools_used": ["Excel"],
-      "lead_score": 85,
-      "qualification": "muy-caliente",
-      "source": "bot"
-    }
-  }'
 ```
-
-### Probar Flujo 3 (post reunión)
-
-```bash
-curl -X POST https://TU-INSTANCIA.app.n8n.cloud/webhook/post-reunion \
-  -H "Authorization: Bearer TU_WEBHOOK_SECRET" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "lead_id": "550e8400-e29b-41d4-a716-446655440000",
-    "meeting_date": "2025-06-15",
-    "meeting_notes": "Reunión muy productiva. Empresa con procesos manuales claros.",
-    "next_steps": "Enviar propuesta antes del viernes.",
-    "proposal_value": "12000"
-  }'
+Webhook POST →
+  Obtener datos del lead de Supabase →
+    Actualizar status del lead (reunión realizada) →
+      Enviar email con materiales y próximos pasos →
+        Crear tarea de seguimiento (actualizar Supabase) →
+          Notificar al equipo con resumen
 ```
 
 ---
 
-## Notas de mantenimiento
+## Variables de credenciales en n8n
 
-- Revisa los logs de ejecución en n8n > **Executions** periódicamente
-- Si un flujo falla repetidamente, n8n puede pausarlo automáticamente — revisa las alertas de error
-- Haz un backup de los workflows exportándolos como JSON: n8n > **Workflows** > selecciona todos > **Export**
-- Guarda los backups en `docs/n8n-workflows/` en el repositorio (sin credenciales)
+Configurar en n8n bajo **Settings → Credentials**:
+
+| Nombre de credencial | Tipo | Campos requeridos |
+|---------------------|------|-------------------|
+| `nexusia-supabase` | HTTP Request | URL base, API Key (service role) |
+| `nexusia-resend` | HTTP Request | API Key de Resend |
+| `nexusia-webhook-secret` | Generic credential | Secreto para validar webhooks entrantes |
+| `nexusia-telegram` (opcional) | Telegram API | Bot Token, Chat ID |
+
+## Cómo conectar credenciales de Supabase en n8n
+
+1. En el dashboard de n8n, ir a **Settings → Credentials → New Credential**
+2. Seleccionar tipo **Supabase** (si está disponible) o **HTTP Request** para mayor control
+3. Para HTTP Request con Supabase:
+   - **Base URL:** `https://tu-proyecto.supabase.co`
+   - **Header:** `apikey: eyJ...` (tu SUPABASE_SERVICE_ROLE_KEY)
+   - **Header:** `Authorization: Bearer eyJ...` (misma clave)
+   - **Header:** `Content-Type: application/json`
+4. Guardar la credencial con el nombre `nexusia-supabase`
+5. En cada nodo que use Supabase, seleccionar esta credencial en el campo Credential
+
+## Activar y probar los flujos
+
+1. **Flujo 1 (Nuevo Lead):** activar el webhook en n8n, copiar la URL y configurarla en `N8N_WEBHOOK_URL` del `.env.local`. Enviar una petición de prueba desde el formulario de diagnóstico en desarrollo.
+2. **Flujo 2 (Seguimiento):** activar el schedule trigger. Para probar sin esperar, ejecutar el nodo de consulta Supabase manualmente con datos de prueba.
+3. **Flujo 3 (Post Reunión):** activar el webhook. Probar enviando el body de ejemplo con cURL o Postman.
+
+## Troubleshooting común
+
+- **Webhook no recibe datos:** verificar que `N8N_WEBHOOK_URL` está correctamente configurado en Vercel y que el CORS del endpoint `/api/diagnostic/route.ts` permite la llamada.
+- **Error en Supabase:** verificar que el service role key tiene permisos de INSERT/UPDATE en la tabla `leads`.
+- **Email no llega:** verificar que el dominio `nexusia.es` está verificado en Resend y que los registros DNS (DKIM, SPF) están configurados correctamente.

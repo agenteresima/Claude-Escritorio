@@ -1,6 +1,204 @@
 # Nexus IA — Web Corporativa
 
-Sitio web de la consultora de inteligencia artificial **Nexus IA**, construido con Next.js 14, Tailwind CSS, Supabase y Resend. Incluye un bot conversacional de cualificación de leads, formularios de contacto, sección de servicios y blog.
+Sitio web de Nexus IA, consultora de inteligencia artificial para empresas en España.
+
+## Stack tecnológico
+
+| Capa | Tecnología |
+|------|------------|
+| Framework | Next.js 14 (App Router) |
+| Lenguaje | TypeScript |
+| Estilos | Tailwind CSS |
+| Base de datos | Supabase (PostgreSQL) |
+| Email | Resend |
+| Animaciones | Framer Motion |
+| Iconos | Lucide React |
+| Despliegue | Vercel |
+
+## Instalación rápida
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/nexus-ia/web.git
+
+# 2. Acceder al directorio
+cd consultora-ia-web
+
+# 3. Instalar dependencias
+npm install
+
+# 4. Configurar variables de entorno
+cp .env.example .env.local
+# Editar .env.local con tus valores reales
+
+# 5. Configurar Supabase
+# Ver docs/supabase-setup.md para instrucciones completas
+
+# 6. Iniciar en modo desarrollo
+npm run dev
+```
+
+El sitio estará disponible en http://localhost:3000
+
+## Variables de entorno
+
+| Variable | Descripción | Obligatoria |
+|----------|-------------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto de Supabase | Sí |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Clave pública anon de Supabase | Sí |
+| `SUPABASE_SERVICE_ROLE_KEY` | Clave de servicio con permisos de admin | Sí |
+| `RESEND_API_KEY` | Clave de API de Resend para emails | Sí |
+| `RESEND_FROM_EMAIL` | Dirección de envío de emails transaccionales | Sí |
+| `RESEND_TEAM_EMAIL` | Email interno que recibe notificaciones de leads | Sí |
+| `NEXT_PUBLIC_SITE_URL` | URL pública del sitio (sin barra final) | Sí |
+| `NEXT_PUBLIC_COMPANY_NAME` | Nombre de la empresa (Nexus IA) | Sí |
+| `NEXT_PUBLIC_COMPANY_EMAIL` | Email de contacto público | Sí |
+| `NEXT_PUBLIC_COMPANY_PHONE` | Teléfono de contacto público | Sí |
+| `N8N_WEBHOOK_URL` | URL del webhook de n8n para nuevo lead | No |
+| `N8N_WEBHOOK_SECRET` | Secreto para validar webhooks de n8n | No |
+| `NEXT_PUBLIC_CALENDLY_URL` | URL de Calendly para reservar reunión | No |
+| `NEXT_PUBLIC_GA_ID` | ID de Google Analytics (G-XXXXXXXXXX) | No |
+
+## Estructura del proyecto
+
+```
+consultora-ia-web/
+├── app/                          # Páginas y rutas (Next.js App Router)
+│   ├── layout.tsx                # Layout raíz con metadatos globales
+│   ├── page.tsx                  # Homepage
+│   ├── blog/
+│   │   ├── page.tsx              # Listado del blog
+│   │   └── [slug]/page.tsx       # Artículo individual
+│   ├── servicios/
+│   │   ├── page.tsx              # Página de servicios
+│   │   ├── automatizacion/       # Servicio de automatización
+│   │   ├── agentes-ia/           # Servicio de agentes IA
+│   │   └── consultoria/          # Servicio de consultoría
+│   ├── diagnostico-gratuito/     # Formulario de diagnóstico (captación de leads)
+│   ├── contacto/                 # Página de contacto
+│   ├── casos-de-exito/           # Casos de éxito de clientes
+│   ├── sobre-nosotros/           # Página sobre Nexus IA
+│   ├── precios/                  # Página de precios
+│   ├── aviso-legal/              # Aviso legal obligatorio
+│   ├── privacidad/               # Política de privacidad RGPD
+│   ├── cookies/                  # Política de cookies
+│   └── api/
+│       ├── contact/route.ts      # Endpoint: formulario de contacto
+│       ├── diagnostic/route.ts   # Endpoint: formulario de diagnóstico
+│       └── newsletter/route.ts   # Endpoint: suscripción newsletter
+├── components/
+│   ├── layout/
+│   │   ├── Header.tsx            # Cabecera con navegación
+│   │   └── Footer.tsx            # Pie de página
+│   └── ui/
+│       ├── Badge.tsx             # Badge de categoría/estado
+│       ├── BlogCard.tsx          # Card para listado de blog
+│       ├── Button.tsx            # Botón reutilizable con variantes
+│       ├── Card.tsx              # Card genérico
+│       ├── CookieBanner.tsx      # Banner RGPD de cookies (slide-up)
+│       ├── NewsletterForm.tsx    # Formulario de suscripción al newsletter
+│       ├── PricingCard.tsx       # Card de precios con opción "destacado"
+│       ├── ProcessSteps.tsx      # Pasos de proceso numerados con animación
+│       ├── Section.tsx           # Wrapper de sección con padding estándar
+│       ├── ServiceCard.tsx       # Card de servicio con highlights
+│       └── TestimonialCard.tsx   # Card de testimonio con avatar y stars
+├── lib/
+│   ├── blog-data.ts              # 12 artículos completos del blog
+│   ├── constants.ts              # Constantes globales de la app
+│   ├── email-templates.ts        # Plantillas HTML de email
+│   ├── supabase.ts               # Cliente Supabase
+│   ├── types.ts                  # Tipos TypeScript globales
+│   └── utils.ts                  # Funciones utilitarias
+├── supabase/
+│   └── schema.sql                # Schema completo de la base de datos
+├── docs/
+│   ├── n8n-setup.md              # Configuración de los 3 flujos de n8n
+│   ├── supabase-setup.md         # Configuración de Supabase paso a paso
+│   ├── vercel-deployment.md      # Despliegue en Vercel
+│   └── instagram-plan.md         # Plan de contenidos para Instagram (12 semanas)
+├── public/
+│   ├── favicon.ico
+│   ├── og-image.png              # Imagen Open Graph (1200x630px)
+│   └── logo.svg
+├── .env.example                  # Plantilla de variables de entorno
+├── CHECKLIST.md                  # Checklist completo de lanzamiento
+├── next.config.ts
+├── tailwind.config.ts
+└── tsconfig.json
+```
+
+## Páginas del sitio
+
+| URL | Propósito |
+|-----|-----------|
+| `/` | Homepage con propuesta de valor, servicios destacados y CTA principal |
+| `/servicios` | Visión general de todos los servicios con comparativa |
+| `/servicios/automatizacion` | Detalle del servicio de automatización de procesos |
+| `/servicios/agentes-ia` | Detalle del servicio de agentes de IA personalizados |
+| `/servicios/consultoria` | Detalle del servicio de consultoría estratégica |
+| `/diagnostico-gratuito` | Formulario de captación de leads premium |
+| `/contacto` | Formulario de contacto general |
+| `/casos-de-exito` | Casos de uso reales con métricas de impacto |
+| `/sobre-nosotros` | Presentación del equipo y metodología de trabajo |
+| `/precios` | Tabla de precios y planes disponibles |
+| `/blog` | Listado de los 12 artículos del blog |
+| `/blog/[slug]` | Artículo individual del blog |
+| `/aviso-legal` | Aviso legal obligatorio (datos empresa, CIF) |
+| `/privacidad` | Política de privacidad y cumplimiento RGPD |
+| `/cookies` | Política de cookies con listado de cookies usadas |
+
+## Despliegue en Vercel
+
+Ver instrucciones completas en `docs/vercel-deployment.md`. Pasos clave:
+
+1. Conectar el repositorio de GitHub a Vercel desde el dashboard
+2. Configurar todas las variables de entorno en Vercel (Project → Settings → Environment Variables)
+3. Configurar el dominio personalizado `nexusia.es` en la sección Domains
+4. El despliegue es automático en cada push a la rama `main`
+
+## Cómo añadir una página nueva
+
+1. Crear el directorio en `app/nombre-pagina/`
+2. Crear `page.tsx` con la exportación por defecto del componente React
+3. Añadir metadatos de SEO con `export const metadata` al inicio del archivo
+4. Añadir la ruta al sitemap en `app/sitemap.ts`
+5. Añadir el enlace en Header y/o Footer si corresponde
+
+```tsx
+// app/nueva-pagina/page.tsx
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Título de la página | Nexus IA',
+  description: 'Descripción para SEO de entre 155 y 160 caracteres.',
+}
+
+export default function NuevaPagina() {
+  return (
+    <main>
+      {/* contenido de la página */}
+    </main>
+  )
+}
+```
+
+## Cómo modificar el bot conversacional
+
+La lógica de conversación del chatbot está en `app/api/chat/route.ts`. El prompt del sistema que define el comportamiento del bot está en `lib/constants.ts` bajo la constante `BOT_SYSTEM_PROMPT`. Para modificar el comportamiento:
+
+1. Editar `BOT_SYSTEM_PROMPT` en `lib/constants.ts` con las nuevas instrucciones
+2. Los flujos de conversación y las preguntas del diagnóstico están tipados en `lib/types.ts`
+3. El componente de chat con el historial de conversación está en `components/ui/ChatBot.tsx`
+
+## Cómo personalizar el diseño
+
+**Colores de marca:** editar `tailwind.config.ts` en `theme.extend.colors`:
+- `brand.*`: paleta azul principal (azul Nexus IA)
+- `navy.*`: fondos oscuros para secciones con fondo oscuro
+
+**Tipografía:** la fuente se importa en `app/layout.tsx` desde Google Fonts y se aplica como variable CSS `--font-sans`.
+
+**Componentes UI:** todos los componentes base están en `components/ui/`. Son componentes de servidor por defecto. Si necesitan interactividad del cliente (useState, useEffect), añadir `'use client'` como primera línea del archivo.
 
 ---
 
