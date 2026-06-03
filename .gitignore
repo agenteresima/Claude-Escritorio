@@ -12,3 +12,4 @@ logs/
 *.parquet
 .DS_Store
 data/bot.db
+.claude/worktrees/
