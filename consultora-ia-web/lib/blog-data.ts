@@ -775,4 +775,4 @@ export function getRelatedPosts(slug: string, count: number = 3): BlogPost[] {
   return [...sameCat, ...diffCat].slice(0, count)
 }
 
-export const blogCategories = [...new Set(blogPosts.map((p) => p.category))]
+export const blogCategories = Array.from(new Set(blogPosts.map((p) => p.category)))

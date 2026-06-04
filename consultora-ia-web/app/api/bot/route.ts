@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createServerClient } from '@/lib/supabase'
+import type { Lead } from '@/lib/supabase'
 import { Resend } from 'resend'
 import { emailNuevoLead, emailConfirmacionCliente } from '@/lib/email-templates'
 
@@ -152,10 +153,10 @@ export async function POST(request: NextRequest) {
         lead_id = insertedLead.id
 
         // Enviar emails si tenemos lead completo
-        const lead = {
-          id: lead_id,
+        const lead: Lead = {
+          id: insertedLead.id ?? undefined,
           name: data.name ?? 'Desconocido',
-          email: data.email,
+          email: data.email!,
           company: data.company,
           role: data.role,
           phone: data.phone,
