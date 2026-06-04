@@ -8,7 +8,6 @@ import {
   Twitter,
   Youtube,
   Mail,
-  Phone,
   MapPin,
   ArrowRight,
   CheckCircle,
@@ -145,16 +144,7 @@ export default function Footer() {
                   {COMPANY_INFO.email}
                 </a>
               </li>
-              <li>
-                <a
-                  href={`tel:${COMPANY_INFO.telefono}`}
-                  className="flex items-center gap-2.5 text-navy-300 hover:text-white text-sm transition-colors"
-                >
-                  <Phone className="w-4 h-4 text-brand-400 flex-shrink-0" />
-                  {COMPANY_INFO.telefono}
-                </a>
-              </li>
-              <li>
+<li>
                 <span className="flex items-center gap-2.5 text-navy-300 text-sm">
                   <MapPin className="w-4 h-4 text-brand-400 flex-shrink-0" />
                   {COMPANY_INFO.ciudad}, {COMPANY_INFO.pais}

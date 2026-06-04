@@ -16,7 +16,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { NAV_ITEMS, COMPANY_INFO } from '@/lib/constants'
+import { NAV_ITEMS } from '@/lib/constants'
 import Button from '@/components/ui/Button'
 
 const serviceIcons: Record<string, React.ReactNode> = {
@@ -193,15 +193,6 @@ export default function Header() {
 
           {/* CTA desktop */}
           <div className="hidden lg:flex items-center gap-3">
-            <Link
-              href="/contacto"
-              className={cn(
-                'text-sm font-medium transition-colors duration-200',
-                isScrolled ? 'text-navy-600 hover:text-navy-900' : 'text-white/70 hover:text-white'
-              )}
-            >
-              {COMPANY_INFO.telefono}
-            </Link>
             <Button href="/diagnostico-gratuito" size="sm" variant="primary">
               Diagnóstico gratuito
             </Button>
@@ -276,12 +267,6 @@ export default function Header() {
             ))}
 
             <div className="pt-4 mt-4 border-t border-surface-200 space-y-3">
-              <a
-                href={`tel:${COMPANY_INFO.telefono}`}
-                className="flex items-center gap-2 px-4 py-3 text-navy-600 hover:text-brand-600 transition-colors"
-              >
-                <span className="text-sm">{COMPANY_INFO.telefono}</span>
-              </a>
               <Button href="/diagnostico-gratuito" variant="primary" className="w-full justify-center">
                 Solicitar diagnóstico gratuito
               </Button>
