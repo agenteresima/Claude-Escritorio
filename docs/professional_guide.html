@@ -2,235 +2,459 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Professional Trading Bot — Documentación Completa</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <style>
-  :root {
-    --bg:       #0a0e1a;
-    --surface:  #111827;
-    --card:     #1a2235;
-    --border:   #1f2d45;
-    --accent:   #3b82f6;
-    --accent2:  #10b981;
-    --accent3:  #f59e0b;
-    --accent4:  #ef4444;
-    --accent5:  #8b5cf6;
-    --text:     #e2e8f0;
-    --muted:    #64748b;
-    --code-bg:  #0d1117;
+/* ════════════════════════════════════════════════════════
+   VARIABLES & RESET
+════════════════════════════════════════════════════════ */
+:root {
+  --bg:        #0a0e1a;
+  --surface:   #111827;
+  --card:      #1a2235;
+  --border:    #1f2d45;
+  --accent:    #3b82f6;
+  --accent2:   #10b981;
+  --accent3:   #f59e0b;
+  --accent4:   #ef4444;
+  --accent5:   #8b5cf6;
+  --text:      #e2e8f0;
+  --muted:     #64748b;
+  --code-bg:   #0d1117;
+  --sidebar-w: 260px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.7; overflow-x: hidden; }
+
+/* ════════════════════════════════════════════════════════
+   LAYOUT SHELL
+════════════════════════════════════════════════════════ */
+.layout { display: flex; min-height: 100vh; }
+
+/* ════════════════════════════════════════════════════════
+   SIDEBAR
+════════════════════════════════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.sidebar-logo {
+  padding: 20px 20px 18px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.bot-name { font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: .3px; line-height: 1.3; }
+.version-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent), var(--accent5));
+  color: #fff; font-size: .6rem; font-weight: 700;
+  padding: 2px 8px; border-radius: 20px; margin-top: 6px;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.nav-section {
+  padding: 14px 20px 4px;
+  font-size: .65rem; font-weight: 700;
+  color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase;
+}
+.nav-link {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 20px;
+  color: var(--muted); text-decoration: none;
+  font-size: .83rem; transition: all .18s;
+  border-left: 3px solid transparent;
+  white-space: nowrap;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--accent);
+  background: rgba(59,130,246,.08);
+  border-left-color: var(--accent);
+}
+.nav-icon { width: 15px; text-align: center; font-size: .85rem; flex-shrink: 0; }
+
+/* sidebar overlay (mobile) */
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  z-index: 199;
+  backdrop-filter: blur(2px);
+}
+
+/* ════════════════════════════════════════════════════════
+   TOPBAR (mobile)
+════════════════════════════════════════════════════════ */
+.topbar {
+  display: none;
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 54px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  z-index: 198;
+}
+.topbar-logo { font-size: .9rem; font-weight: 700; color: var(--accent); flex: 1; }
+.hamburger {
+  width: 36px; height: 36px;
+  background: rgba(59,130,246,.12);
+  border: 1px solid rgba(59,130,246,.25);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 5px; padding: 8px;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block; height: 2px; width: 100%;
+  background: var(--accent); border-radius: 2px;
+  transition: all .25s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ════════════════════════════════════════════════════════
+   MAIN CONTENT
+════════════════════════════════════════════════════════ */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  padding: 48px 52px 80px;
+  min-width: 0; /* prevent overflow */
+  max-width: calc(100vw - var(--sidebar-w));
+}
+.section { margin-bottom: 72px; }
+.section-header { margin-bottom: 28px; }
+.section-tag {
+  font-size: .68rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px;
+}
+h1 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800; line-height: 1.2;
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+h2 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 700; color: #fff; }
+h3 { font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 10px; }
+h4 { font-size: .95rem; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
+p  { color: #94a3b8; margin-bottom: 14px; }
+
+/* ════════════════════════════════════════════════════════
+   HERO
+════════════════════════════════════════════════════════ */
+.hero {
+  background: linear-gradient(135deg, rgba(59,130,246,.12), rgba(139,92,246,.08) 50%, rgba(16,185,129,.06));
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 36px;
+  margin-bottom: 40px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(59,130,246,.15), transparent 70%);
+  pointer-events: none;
+}
+.hero-subtitle { font-size: clamp(.9rem, 1.5vw, 1.1rem); color: #94a3b8; max-width: 680px; margin-top: 12px; }
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-top: 28px;
+}
+.hero-stat {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px; text-align: center;
+}
+.hero-stat-val { font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 800; color: var(--accent2); }
+.hero-stat-lbl { font-size: .7rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .5px; }
+
+/* ════════════════════════════════════════════════════════
+   CARDS & GRIDS
+════════════════════════════════════════════════════════ */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 18px; }
+.card-grid   { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 18px; }
+.card-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 18px; }
+.card-accent { border-left: 3px solid var(--accent); }
+.card-green  { border-left: 3px solid var(--accent2); }
+.card-yellow { border-left: 3px solid var(--accent3); }
+.card-red    { border-left: 3px solid var(--accent4); }
+.card-purple { border-left: 3px solid var(--accent5); }
+
+/* ════════════════════════════════════════════════════════
+   KPI BOXES
+════════════════════════════════════════════════════════ */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; margin-bottom: 22px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 14px; text-align: center; }
+.kpi-val { font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-weight: 800; }
+.kpi-lbl { font-size: .68rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .5px; }
+.kpi-pos  { color: var(--accent2); }
+.kpi-neg  { color: var(--accent4); }
+.kpi-neu  { color: var(--accent3); }
+.kpi-blue { color: var(--accent); }
+
+/* ════════════════════════════════════════════════════════
+   TABLES
+════════════════════════════════════════════════════════ */
+.table-wrap { overflow-x: auto; margin-bottom: 18px; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; font-size: .83rem; min-width: 480px; }
+thead th {
+  background: rgba(59,130,246,.12); color: #94a3b8;
+  padding: 11px 14px; text-align: left;
+  font-weight: 600; font-size: .72rem;
+  text-transform: uppercase; letter-spacing: .5px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+tbody td { padding: 10px 14px; border-bottom: 1px solid rgba(31,45,69,.6); color: #cbd5e1; }
+tbody tr:hover td { background: rgba(59,130,246,.05); }
+.badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; white-space: nowrap; }
+.badge-green  { background: rgba(16,185,129,.15);  color: var(--accent2); }
+.badge-red    { background: rgba(239,68,68,.15);   color: var(--accent4); }
+.badge-blue   { background: rgba(59,130,246,.15);  color: var(--accent); }
+.badge-yellow { background: rgba(245,158,11,.15);  color: var(--accent3); }
+.badge-purple { background: rgba(139,92,246,.15);  color: var(--accent5); }
+
+/* ════════════════════════════════════════════════════════
+   CODE BLOCKS
+════════════════════════════════════════════════════════ */
+pre, code { font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace; }
+.code-block { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 18px; overflow: hidden; }
+.code-header { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; border-bottom: 1px solid var(--border); }
+.code-lang { font-size: .65rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.copy-btn { background: rgba(59,130,246,.15); border: 1px solid rgba(59,130,246,.3); color: var(--accent); padding: 4px 11px; border-radius: 6px; cursor: pointer; font-size: .68rem; font-weight: 600; transition: all .2s; flex-shrink: 0; }
+.copy-btn:hover { background: rgba(59,130,246,.3); }
+pre { padding: 18px; overflow-x: auto; font-size: .78rem; line-height: 1.7; color: #e2e8f0; }
+
+/* ════════════════════════════════════════════════════════
+   STEPS
+════════════════════════════════════════════════════════ */
+.step { display: flex; gap: 16px; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
+.step:last-child { border-bottom: none; }
+.step-num { flex-shrink: 0; width: 38px; height: 38px; background: linear-gradient(135deg, var(--accent), var(--accent5)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .95rem; color: #fff; }
+.step-body { flex: 1; min-width: 0; }
+.step-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+
+/* ════════════════════════════════════════════════════════
+   ARCHITECTURE
+════════════════════════════════════════════════════════ */
+.arch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
+.arch-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+.arch-box-title { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.arch-item { font-size: .78rem; color: #94a3b8; padding: 3px 0; display: flex; gap: 7px; align-items: flex-start; }
+.arch-item::before { content: '▸'; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+
+/* ════════════════════════════════════════════════════════
+   CHARTS
+════════════════════════════════════════════════════════ */
+.chart-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+.chart-title { font-size: .95rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.chart-sub   { font-size: .75rem; color: var(--muted); margin-bottom: 16px; }
+.chart-container { position: relative; width: 100%; }
+
+/* ════════════════════════════════════════════════════════
+   ALERTS
+════════════════════════════════════════════════════════ */
+.alert { border-radius: 10px; padding: 14px 18px; margin-bottom: 14px; display: flex; gap: 11px; align-items: flex-start; font-size: .85rem; }
+.alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+.alert-warning { background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.25); color: #fbbf24; }
+.alert-info    { background: rgba(59,130,246,.08);  border: 1px solid rgba(59,130,246,.25);  color: #60a5fa; }
+.alert-success { background: rgba(16,185,129,.08);  border: 1px solid rgba(16,185,129,.25);  color: #34d399; }
+
+/* ════════════════════════════════════════════════════════
+   PROGRESS
+════════════════════════════════════════════════════════ */
+.progress-bar  { background: rgba(255,255,255,.07); border-radius: 20px; height: 7px; margin: 5px 0; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 20px; transition: width .6s ease; }
+
+/* ════════════════════════════════════════════════════════
+   WALK-FORWARD CARDS
+════════════════════════════════════════════════════════ */
+.wf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 22px; }
+.wf-card  { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
+.wf-card-is  { border-top: 3px solid var(--accent); }
+.wf-card-oos { border-top: 3px solid var(--accent2); }
+.wf-label  { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 10px; }
+.wf-period { font-size: .88rem; font-weight: 700; color: #fff; margin-bottom: 14px; }
+.wf-row    { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid rgba(31,45,69,.6); font-size: .83rem; gap: 8px; }
+.wf-row:last-child { border-bottom: none; }
+.wf-key      { color: var(--muted); }
+.wf-val      { font-weight: 600; text-align: right; }
+.wf-val-good { color: var(--accent2); font-weight: 700; }
+.wf-val-warn { color: var(--accent3); font-weight: 700; }
+
+/* ════════════════════════════════════════════════════════
+   BACK TO TOP
+════════════════════════════════════════════════════════ */
+#back-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 42px; height: 42px;
+  background: var(--accent); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1.1rem;
+  box-shadow: 0 4px 16px rgba(59,130,246,.4);
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s; z-index: 197;
+  text-decoration: none; color: #fff;
+}
+#back-top.visible { opacity: 1; pointer-events: auto; }
+
+/* ════════════════════════════════════════════════════════
+   SCROLLBAR
+════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE — TABLET  (< 1024px)
+════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 230px; }
+  .content { padding: 40px 36px 80px; }
+  .arch-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .hero { padding: 28px; }
+}
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE  (< 768px)
+════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* show topbar, hide sidebar by default */
+  .topbar  { display: flex; }
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-overlay.open { display: block; }
+
+  .content {
+    margin-left: 0;
+    max-width: 100vw;
+    padding: 74px 16px 60px; /* 74px = topbar height + gap */
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.7; }
 
-  /* ── Layout ── */
-  .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
-  .sidebar {
-    position: sticky; top: 0; height: 100vh; overflow-y: auto;
-    background: var(--surface); border-right: 1px solid var(--border);
-    padding: 24px 0; display: flex; flex-direction: column;
-  }
-  .sidebar-logo { padding: 0 24px 24px; border-bottom: 1px solid var(--border); }
-  .sidebar-logo .bot-name { font-size: 1.1rem; font-weight: 700; color: var(--accent); letter-spacing: 0.5px; }
-  .sidebar-logo .version-badge {
-    display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent5));
-    color: #fff; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 20px;
-    margin-top: 4px; letter-spacing: 1px; text-transform: uppercase;
-  }
-  .nav-section { padding: 16px 24px 6px; font-size: 0.7rem; font-weight: 700; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
-  .nav-link {
-    display: flex; align-items: center; gap: 10px; padding: 9px 24px;
-    color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: all .2s;
-    border-left: 3px solid transparent;
-  }
-  .nav-link:hover, .nav-link.active { color: var(--accent); background: rgba(59,130,246,.08); border-left-color: var(--accent); }
-  .nav-icon { width: 16px; text-align: center; font-size: 0.9rem; }
-  .content { padding: 48px 56px; max-width: 1100px; }
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.25rem; }
 
-  /* ── Sections ── */
-  .section { margin-bottom: 80px; }
-  .section-header { margin-bottom: 32px; }
-  .section-tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-  h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.2; background: linear-gradient(135deg, #fff 0%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  h2 { font-size: 1.8rem; font-weight: 700; color: #fff; }
-  h3 { font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 12px; }
-  h4 { font-size: 1rem; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; }
-  p { color: #94a3b8; margin-bottom: 16px; }
+  .hero { padding: 20px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 18px; }
+  .hero-stat { padding: 14px 10px; }
+  .hero-stat-val { font-size: 1.4rem; }
 
-  /* ── Hero ── */
-  .hero { background: linear-gradient(135deg, rgba(59,130,246,.12) 0%, rgba(139,92,246,.08) 50%, rgba(16,185,129,.06) 100%); border: 1px solid var(--border); border-radius: 16px; padding: 48px; margin-bottom: 48px; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(59,130,246,.15) 0%, transparent 70%); }
-  .hero-subtitle { font-size: 1.15rem; color: #94a3b8; max-width: 680px; margin-top: 16px; }
-  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 36px; }
-  .hero-stat { background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 10px; padding: 20px; text-align: center; }
-  .hero-stat-val { font-size: 2rem; font-weight: 800; color: var(--accent2); }
-  .hero-stat-lbl { font-size: 0.75rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .card-grid   { grid-template-columns: 1fr; }
+  .card-grid-3 { grid-template-columns: 1fr; }
+  .arch-grid   { grid-template-columns: 1fr; }
+  .wf-split    { grid-template-columns: 1fr; }
+  .kpi-grid    { grid-template-columns: repeat(2, 1fr); }
 
-  /* ── Cards ── */
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 20px; }
-  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px; }
-  .card-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
-  .card-accent { border-left: 3px solid var(--accent); }
-  .card-green  { border-left: 3px solid var(--accent2); }
-  .card-yellow { border-left: 3px solid var(--accent3); }
-  .card-red    { border-left: 3px solid var(--accent4); }
-  .card-purple { border-left: 3px solid var(--accent5); }
+  .card { padding: 18px; }
+  .hero-subtitle { font-size: .9rem; }
 
-  /* ── KPI boxes ── */
-  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
-  .kpi { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px 16px; text-align: center; }
-  .kpi-val { font-size: 1.7rem; font-weight: 800; }
-  .kpi-lbl { font-size: 0.72rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-  .kpi-pos { color: var(--accent2); }
-  .kpi-neg { color: var(--accent4); }
-  .kpi-neu { color: var(--accent3); }
-  .kpi-blue{ color: var(--accent); }
+  /* hide long table columns on small screens */
+  table { font-size: .75rem; }
+  thead th, tbody td { padding: 8px 10px; }
+  .compare-table th:nth-child(4),
+  .compare-table td:nth-child(4) { display: none; }
 
-  /* ── Tables ── */
-  .table-wrap { overflow-x: auto; margin-bottom: 20px; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
-  thead th { background: rgba(59,130,246,.12); color: #94a3b8; padding: 12px 16px; text-align: left; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
-  tbody td { padding: 11px 16px; border-bottom: 1px solid rgba(31,45,69,.6); color: #cbd5e1; }
-  tbody tr:hover td { background: rgba(59,130,246,.05); }
-  .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-  .badge-green  { background: rgba(16,185,129,.15); color: var(--accent2); }
-  .badge-red    { background: rgba(239,68,68,.15);  color: var(--accent4); }
-  .badge-blue   { background: rgba(59,130,246,.15); color: var(--accent); }
-  .badge-yellow { background: rgba(245,158,11,.15); color: var(--accent3); }
-  .badge-purple { background: rgba(139,92,246,.15); color: var(--accent5); }
+  pre { font-size: .72rem; padding: 14px; }
 
-  /* ── Code ── */
-  pre, code { font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; }
-  .code-block { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px; position: relative; margin-bottom: 20px; }
-  .code-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--border); }
-  .code-lang { font-size: 0.72rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-  .copy-btn { background: rgba(59,130,246,.15); border: 1px solid rgba(59,130,246,.3); color: var(--accent); padding: 4px 12px; border-radius: 6px; cursor: pointer; font-size: 0.72rem; font-weight: 600; transition: all .2s; }
-  .copy-btn:hover { background: rgba(59,130,246,.3); }
-  pre { padding: 20px; overflow-x: auto; font-size: 0.82rem; line-height: 1.7; color: #e2e8f0; }
+  .step { gap: 12px; }
+  .step-num { width: 32px; height: 32px; font-size: .85rem; }
 
-  /* ── Steps ── */
-  .steps { counter-reset: step-counter; }
-  .step { display: flex; gap: 20px; margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
-  .step:last-child { border-bottom: none; }
-  .step-num { flex-shrink: 0; width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent5)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; color: #fff; }
-  .step-body { flex: 1; }
-  .step-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  #back-top { bottom: 16px; right: 16px; width: 38px; height: 38px; }
+}
 
-  /* ── Architecture ── */
-  .arch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
-  .arch-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
-  .arch-box-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-  .arch-item { font-size: 0.82rem; color: #94a3b8; padding: 4px 0; display: flex; gap: 8px; align-items: flex-start; }
-  .arch-item::before { content: '▸'; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE  (< 480px)
+════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .kpi-grid   { grid-template-columns: repeat(2, 1fr); }
+  .card-grid  { grid-template-columns: 1fr; }
+  .content    { padding: 70px 12px 60px; }
+  .card       { padding: 14px; }
+  .wf-row     { font-size: .78rem; }
+  h3 { font-size: 1rem; }
+}
 
-  /* ── Charts ── */
-  .chart-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
-  .chart-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .chart-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
-  canvas { max-width: 100%; }
-
-  /* ── Comparison table ── */
-  .compare-table thead th:first-child { background: transparent; }
-  .compare-table .metric-col { color: #94a3b8; font-weight: 600; }
-  .compare-table .winner { color: var(--accent2); font-weight: 700; }
-  .compare-table .loser  { color: var(--accent4); }
-
-  /* ── Alert ── */
-  .alert { border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start; font-size: 0.875rem; }
-  .alert-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-  .alert-warning { background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.25); color: #fbbf24; }
-  .alert-info    { background: rgba(59,130,246,.08);  border: 1px solid rgba(59,130,246,.25);  color: #60a5fa; }
-  .alert-success { background: rgba(16,185,129,.08);  border: 1px solid rgba(16,185,129,.25);  color: #34d399; }
-  .alert-danger  { background: rgba(239,68,68,.08);   border: 1px solid rgba(239,68,68,.25);   color: #f87171; }
-
-  /* ── Progress ── */
-  .progress-bar { background: rgba(255,255,255,.07); border-radius: 20px; height: 8px; margin: 6px 0; overflow: hidden; }
-  .progress-fill { height: 100%; border-radius: 20px; transition: width .6s ease; }
-
-  /* ── Divider ── */
-  hr { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
-  .divider-label { text-align: center; position: relative; margin: 36px 0; }
-  .divider-label::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--border); }
-  .divider-label span { background: var(--bg); padding: 0 16px; position: relative; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-
-  /* ── WF comparison ── */
-  .wf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
-  .wf-card  { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
-  .wf-card-is  { border-top: 3px solid var(--accent); }
-  .wf-card-oos { border-top: 3px solid var(--accent2); }
-  .wf-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 12px; }
-  .wf-period { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 16px; }
-  .wf-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(31,45,69,.6); font-size: 0.875rem; }
-  .wf-row:last-child { border-bottom: none; }
-  .wf-key { color: var(--muted); }
-  .wf-val { font-weight: 600; }
-  .wf-val-good { color: var(--accent2); font-weight: 700; }
-  .wf-val-warn { color: var(--accent3); font-weight: 700; }
-
-  /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .layout { grid-template-columns: 1fr; }
-    .sidebar { position: relative; height: auto; }
-    .content { padding: 24px 20px; }
-    .hero-stats { grid-template-columns: repeat(2,1fr); }
-    .card-grid-3, .arch-grid, .wf-split { grid-template-columns: 1fr; }
-  }
-
-  /* ── Scrollbar ── */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-  /* ── Back to top ── */
-  #back-top { position: fixed; bottom: 28px; right: 28px; width: 44px; height: 44px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; box-shadow: 0 4px 20px rgba(59,130,246,.4); opacity: 0; transition: opacity .3s; z-index: 99; text-decoration: none; color: #fff; }
-  #back-top.visible { opacity: 1; }
+/* FAQ details */
+details { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+details + details { margin-top: 12px; }
+summary { cursor: pointer; font-weight: 600; color: #fff; font-size: .9rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+summary::after { content: '+'; color: var(--accent); font-size: 1.2rem; flex-shrink: 0; transition: transform .2s; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { margin-top: 12px; }
 </style>
 </head>
 <body>
 
+<!-- ══════════════════════ TOPBAR (mobile) ══════════════════════ -->
+<header class="topbar" id="topbar">
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="topbar-logo">⚡ Trading Bot</div>
+  <div style="font-size:.6rem;color:var(--muted);white-space:nowrap">v2.0.0</div>
+</header>
+
+<div class="sidebar-overlay" id="overlay"></div>
+
 <div class="layout">
 <!-- ══════════════════════ SIDEBAR ══════════════════════ -->
-<nav class="sidebar">
+<nav class="sidebar" id="sidebar">
   <div class="sidebar-logo">
     <div class="bot-name">⚡ Professional Trading Bot</div>
     <div class="version-badge">v2.0.0</div>
   </div>
 
   <div class="nav-section">Presentación</div>
-  <a class="nav-link" href="#overview"><span class="nav-icon">◎</span>Visión General</a>
-  <a class="nav-link" href="#architecture"><span class="nav-icon">⬡</span>Arquitectura</a>
-  <a class="nav-link" href="#strategies"><span class="nav-icon">◈</span>Estrategias</a>
-  <a class="nav-link" href="#risk"><span class="nav-icon">⬕</span>Gestión de Riesgo</a>
+  <a class="nav-link" href="#overview"      onclick="closeSidebar()"><span class="nav-icon">◎</span>Visión General</a>
+  <a class="nav-link" href="#architecture"  onclick="closeSidebar()"><span class="nav-icon">⬡</span>Arquitectura</a>
+  <a class="nav-link" href="#strategies"    onclick="closeSidebar()"><span class="nav-icon">◈</span>Estrategias</a>
+  <a class="nav-link" href="#risk"          onclick="closeSidebar()"><span class="nav-icon">⬕</span>Gestión de Riesgo</a>
 
   <div class="nav-section">Instalación</div>
-  <a class="nav-link" href="#prerequisites"><span class="nav-icon">①</span>Prerrequisitos</a>
-  <a class="nav-link" href="#install"><span class="nav-icon">②</span>Instalación</a>
-  <a class="nav-link" href="#config"><span class="nav-icon">③</span>Configuración</a>
-  <a class="nav-link" href="#demo"><span class="nav-icon">④</span>Modo Demo</a>
-  <a class="nav-link" href="#docker"><span class="nav-icon">⑤</span>Docker</a>
+  <a class="nav-link" href="#prerequisites" onclick="closeSidebar()"><span class="nav-icon">①</span>Prerrequisitos</a>
+  <a class="nav-link" href="#install"       onclick="closeSidebar()"><span class="nav-icon">②</span>Instalación</a>
+  <a class="nav-link" href="#config"        onclick="closeSidebar()"><span class="nav-icon">③</span>Configuración</a>
+  <a class="nav-link" href="#demo"          onclick="closeSidebar()"><span class="nav-icon">④</span>Modo Demo</a>
+  <a class="nav-link" href="#docker"        onclick="closeSidebar()"><span class="nav-icon">⑤</span>Docker</a>
 
   <div class="nav-section">Backtests</div>
-  <a class="nav-link" href="#bt-crypto"><span class="nav-icon">₿</span>Crypto BTC/USDT</a>
-  <a class="nav-link" href="#bt-sp500"><span class="nav-icon">📈</span>S&amp;P 500 (10 años)</a>
-  <a class="nav-link" href="#bt-walkforward"><span class="nav-icon">⊞</span>Walk-Forward</a>
-  <a class="nav-link" href="#bt-comparison"><span class="nav-icon">⊟</span>Comparativa</a>
+  <a class="nav-link" href="#bt-crypto"      onclick="closeSidebar()"><span class="nav-icon">₿</span>Crypto BTC/USDT</a>
+  <a class="nav-link" href="#bt-sp500"       onclick="closeSidebar()"><span class="nav-icon">📈</span>S&amp;P 500 (10 años)</a>
+  <a class="nav-link" href="#bt-walkforward" onclick="closeSidebar()"><span class="nav-icon">⊞</span>Walk-Forward</a>
+  <a class="nav-link" href="#bt-comparison"  onclick="closeSidebar()"><span class="nav-icon">⊟</span>Comparativa</a>
 
   <div class="nav-section">Referencia</div>
-  <a class="nav-link" href="#commands"><span class="nav-icon">⌥</span>Comandos CLI</a>
-  <a class="nav-link" href="#faq"><span class="nav-icon">?</span>FAQ</a>
+  <a class="nav-link" href="#commands" onclick="closeSidebar()"><span class="nav-icon">⌥</span>Comandos CLI</a>
+  <a class="nav-link" href="#faq"      onclick="closeSidebar()"><span class="nav-icon">?</span>FAQ</a>
 </nav>
 
-<!-- ══════════════════════ CONTENT ══════════════════════ -->
+<!-- ══════════════════════ MAIN CONTENT ══════════════════════ -->
 <main class="content">
 
-<!-- ─────────────── SECTION 1: OVERVIEW ─────────────── -->
+<!-- ─────────────── 1. OVERVIEW ─────────────── -->
 <section class="section" id="overview">
   <div class="section-header">
     <div class="section-tag">Documentación Oficial</div>
     <h1>Professional Trading Bot</h1>
-    <p class="hero-subtitle">Sistema algorítmico de trading con 18 estrategias, backtesting de 10 años sobre S&amp;P 500, optimización de portfolios y operativa en tiempo real sobre exchanges CCXT.</p>
+    <p class="hero-subtitle">Sistema algorítmico con 18 estrategias, backtesting de 10 años sobre S&amp;P 500, optimización MPT de portfolios y operativa en tiempo real sobre exchanges CCXT.</p>
   </div>
 
   <div class="hero">
@@ -238,33 +462,21 @@
     <h2>Rendimientos Históricos Auditados</h2>
     <p>Resultados con corrección de look-ahead bias, validación walk-forward y parámetros fijados en literatura académica (Jegadeesh &amp; Titman, 1993). Sin sobreoptimización.</p>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-val">+160%</div>
-        <div class="hero-stat-lbl">Retorno Total (10 años)</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-val">0.79</div>
-        <div class="hero-stat-lbl">Sharpe Ratio</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-val">−19.3%</div>
-        <div class="hero-stat-lbl">Máximo Drawdown</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-val">18</div>
-        <div class="hero-stat-lbl">Estrategias Incluidas</div>
-      </div>
+      <div class="hero-stat"><div class="hero-stat-val">+160%</div><div class="hero-stat-lbl">Retorno Total</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">0.79</div><div class="hero-stat-lbl">Sharpe Ratio</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">−19.3%</div><div class="hero-stat-lbl">Máx. Drawdown</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">18</div><div class="hero-stat-lbl">Estrategias</div></div>
     </div>
   </div>
 
   <div class="card-grid">
     <div class="card card-accent">
       <h3>⚡ Motor de Backtesting</h3>
-      <p>Motor propio con ejecución next-bar (sin look-ahead), slippage configurable, comisiones por operación y trailing stops. Compatible con datos CCXT y yfinance.</p>
+      <p>Ejecución next-bar (sin look-ahead), slippage configurable, comisiones por operación y trailing stops. Compatible con datos CCXT y yfinance.</p>
     </div>
     <div class="card card-green">
       <h3>🛡️ Gestión de Riesgo</h3>
-      <p>Sizing por Kelly Fraction, Fixed Fraction y ATR. Circuit-breaker automático ante drawdown excesivo. PortfolioHeatManager limita el riesgo total al 6% del capital.</p>
+      <p>Sizing por Kelly Fraction, Fixed Fraction y ATR. Circuit-breaker automático ante drawdown. PortfolioHeatManager limita el riesgo total al 6% del capital.</p>
     </div>
     <div class="card card-purple">
       <h3>🤖 Machine Learning</h3>
@@ -272,197 +484,128 @@
     </div>
     <div class="card card-yellow">
       <h3>📊 Optimización MPT</h3>
-      <p>Tres métodos de optimización de portfolio: mínima varianza, máximo Sharpe (Monte Carlo) y paridad de riesgo. Rebalanceo periódico configurable.</p>
+      <p>Tres métodos: mínima varianza, máximo Sharpe (Monte Carlo) y paridad de riesgo. Rebalanceo periódico configurable.</p>
     </div>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 2: ARCHITECTURE ─────────────── -->
+<!-- ─────────────── 2. ARCHITECTURE ─────────────── -->
 <section class="section" id="architecture">
   <div class="section-header">
     <div class="section-tag">Diseño del Sistema</div>
     <h2>Arquitectura del Bot</h2>
-    <p>El sistema está diseñado en capas desacopladas. Cada módulo puede usarse de forma independiente. La base de datos SQLite persiste todo el estado, permitiendo recuperación ante fallos.</p>
+    <p>Capas desacopladas. Cada módulo puede usarse de forma independiente. SQLite persiste el estado completo para recuperación ante fallos.</p>
   </div>
 
   <div class="arch-grid">
-    <div class="arch-box">
-      <div class="arch-box-title" style="color:var(--accent)">📦 config/</div>
-      <div class="arch-item">BotConfig (Pydantic v2)</div>
-      <div class="arch-item">config.yaml + .env</div>
-      <div class="arch-item">Validación en tiempo de arranque</div>
-      <div class="arch-item">Perfiles sandbox / live</div>
-    </div>
-    <div class="arch-box">
-      <div class="arch-box-title" style="color:var(--accent2)">📡 data/</div>
-      <div class="arch-item">OHLCV fetcher (CCXT + yfinance)</div>
-      <div class="arch-item">SQLite (trades, equity, estado)</div>
-      <div class="arch-item">WebSocket feed en tiempo real</div>
-      <div class="arch-item">Backup / restore automático</div>
-    </div>
-    <div class="arch-box">
-      <div class="arch-box-title" style="color:var(--accent3)">🔧 utils/</div>
-      <div class="arch-item">pandas-ta (70+ indicadores)</div>
-      <div class="arch-item">Patrones de velas japonesas</div>
-      <div class="arch-item">Filtro de eventos macro</div>
-      <div class="arch-item">Order book + correlación</div>
-    </div>
-    <div class="arch-box">
-      <div class="arch-box-title" style="color:var(--accent5)">🧠 strategies/</div>
-      <div class="arch-item">18 estrategias (BaseStrategy)</div>
-      <div class="arch-item">prepare() + generate_signals()</div>
-      <div class="arch-item">STRATEGIES dict como registro</div>
-      <div class="arch-item">Ensemble multi-estrategia</div>
-    </div>
-    <div class="arch-box">
-      <div class="arch-box-title" style="color:var(--accent4)">⚖️ risk/</div>
-      <div class="arch-item">RiskManager (sizing, stops)</div>
-      <div class="arch-item">PortfolioHeatManager (6% cap)</div>
-      <div class="arch-item">Circuit-breaker por drawdown</div>
-      <div class="arch-item">validate_signal() como última compuerta</div>
-    </div>
-    <div class="arch-box">
-      <div class="arch-box-title" style="color:#94a3b8">🤖 bot/</div>
-      <div class="arch-item">LiveTrader (sync) + AsyncTrader</div>
-      <div class="arch-item">FastAPI REST control</div>
-      <div class="arch-item">Telegram alertas / órdenes</div>
-      <div class="arch-item">Auto-compound + strategy monitor</div>
-    </div>
-    <div class="arch-box">
-      <div class="arch-box-title" style="color:var(--accent)">📉 backtesting/</div>
-      <div class="arch-item">Engine (next-bar execution)</div>
-      <div class="arch-item">Walk-forward validation</div>
-      <div class="arch-item">Monte Carlo (1000 simulaciones)</div>
-      <div class="arch-item">Optuna Bayesian optimizer</div>
-    </div>
-    <div class="arch-box">
-      <div class="arch-box-title" style="color:var(--accent2)">📊 reports/</div>
-      <div class="arch-item">Dash dashboard (tiempo real)</div>
-      <div class="arch-item">Informe HTML interactivo</div>
-      <div class="arch-item">Benchmark vs SPY / BTC</div>
-      <div class="arch-item">Reporte semanal automático</div>
-    </div>
-    <div class="arch-box">
-      <div class="arch-box-title" style="color:var(--accent3)">🗄️ main.py</div>
-      <div class="arch-item">CLI Click con 20 comandos</div>
-      <div class="arch-item">Makefile con 25+ targets</div>
-      <div class="arch-item">Docker Compose (5 servicios)</div>
-      <div class="arch-item">install.sh one-command setup</div>
-    </div>
+    <div class="arch-box"><div class="arch-box-title" style="color:var(--accent)">📦 config/</div><div class="arch-item">BotConfig (Pydantic v2)</div><div class="arch-item">config.yaml + .env</div><div class="arch-item">Validación en arranque</div><div class="arch-item">Perfiles sandbox / live</div></div>
+    <div class="arch-box"><div class="arch-box-title" style="color:var(--accent2)">📡 data/</div><div class="arch-item">OHLCV fetcher (CCXT + yfinance)</div><div class="arch-item">SQLite (trades, equity, estado)</div><div class="arch-item">WebSocket feed en tiempo real</div><div class="arch-item">Backup / restore automático</div></div>
+    <div class="arch-box"><div class="arch-box-title" style="color:var(--accent3)">🔧 utils/</div><div class="arch-item">pandas-ta (70+ indicadores)</div><div class="arch-item">Patrones de velas japonesas</div><div class="arch-item">Filtro de eventos macro</div><div class="arch-item">Order book + correlación</div></div>
+    <div class="arch-box"><div class="arch-box-title" style="color:var(--accent5)">🧠 strategies/</div><div class="arch-item">18 estrategias (BaseStrategy)</div><div class="arch-item">prepare() + generate_signals()</div><div class="arch-item">STRATEGIES dict como registro</div><div class="arch-item">Ensemble multi-estrategia</div></div>
+    <div class="arch-box"><div class="arch-box-title" style="color:var(--accent4)">⚖️ risk/</div><div class="arch-item">RiskManager (sizing, stops)</div><div class="arch-item">PortfolioHeatManager (6% cap)</div><div class="arch-item">Circuit-breaker por drawdown</div><div class="arch-item">validate_signal() última compuerta</div></div>
+    <div class="arch-box"><div class="arch-box-title" style="color:#94a3b8">🤖 bot/</div><div class="arch-item">LiveTrader sync + AsyncTrader</div><div class="arch-item">FastAPI REST control</div><div class="arch-item">Telegram alertas / órdenes</div><div class="arch-item">Auto-compound + monitor</div></div>
+    <div class="arch-box"><div class="arch-box-title" style="color:var(--accent)">📉 backtesting/</div><div class="arch-item">Engine (next-bar execution)</div><div class="arch-item">Walk-forward validation</div><div class="arch-item">Monte Carlo (1000 sims)</div><div class="arch-item">Optuna Bayesian optimizer</div></div>
+    <div class="arch-box"><div class="arch-box-title" style="color:var(--accent2)">📊 reports/</div><div class="arch-item">Dash dashboard tiempo real</div><div class="arch-item">Informe HTML interactivo</div><div class="arch-item">Benchmark vs SPY / BTC</div><div class="arch-item">Reporte semanal automático</div></div>
+    <div class="arch-box"><div class="arch-box-title" style="color:var(--accent3)">🗄️ CLI</div><div class="arch-item">Click con 20 comandos</div><div class="arch-item">Makefile con 25+ targets</div><div class="arch-item">Docker Compose 5 servicios</div><div class="arch-item">install.sh one-command setup</div></div>
   </div>
 
   <div class="card">
     <h3>Flujo de una señal de trading</h3>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px">
       <span class="badge badge-blue">Datos OHLCV</span>
       <span style="color:var(--muted)">→</span>
-      <span class="badge badge-purple">Indicadores técnicos</span>
+      <span class="badge badge-purple">Indicadores</span>
       <span style="color:var(--muted)">→</span>
-      <span class="badge badge-yellow">Estrategia generate_signals()</span>
+      <span class="badge badge-yellow">generate_signals()</span>
       <span style="color:var(--muted)">→</span>
-      <span class="badge badge-blue">Filtros de entrada</span>
+      <span class="badge badge-blue">Filtros entrada</span>
       <span style="color:var(--muted)">→</span>
-      <span class="badge badge-red">RiskManager.validate_signal()</span>
+      <span class="badge badge-red">validate_signal()</span>
       <span style="color:var(--muted)">→</span>
-      <span class="badge badge-green">Orden ejecutada al open de la siguiente vela</span>
+      <span class="badge badge-green">Orden al open[i+1]</span>
     </div>
-    <p style="margin-top:16px;font-size:.85rem">La señal generada al cierre de la vela <code>i</code> se ejecuta siempre al precio de apertura de la vela <code>i+1</code>, eliminando el look-ahead bias más común en backtesting.</p>
+    <p style="margin-top:14px;font-size:.82rem">La señal del cierre de la barra <code>i</code> se ejecuta al precio de apertura de la barra <code>i+1</code>, eliminando el look-ahead bias más común en backtesting.</p>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 3: STRATEGIES ─────────────── -->
+<!-- ─────────────── 3. STRATEGIES ─────────────── -->
 <section class="section" id="strategies">
   <div class="section-header">
     <div class="section-tag">Motor Estratégico</div>
     <h2>18 Estrategias de Trading</h2>
-    <p>Todas extienden <code>BaseStrategy</code>. El diccionario <code>STRATEGIES</code> en <code>strategies/__init__.py</code> es la única fuente de verdad. Añadir una nueva estrategia requiere 3 pasos.</p>
+    <p>Todas extienden <code>BaseStrategy</code>. El diccionario <code>STRATEGIES</code> en <code>strategies/__init__.py</code> es la única fuente de verdad.</p>
   </div>
 
   <div class="table-wrap">
     <table>
       <thead>
-        <tr>
-          <th>Estrategia</th>
-          <th>Tipo</th>
-          <th>Mercado Objetivo</th>
-          <th>Timeframe</th>
-          <th>Filtros</th>
-          <th>Estado</th>
-        </tr>
+        <tr><th>Estrategia</th><th>Tipo</th><th>Mercado</th><th>Timeframe</th><th>Estado</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>trend_ema</strong></td><td>Tendencia</td><td>Crypto / Equities</td><td>1h – 4h</td><td>EMA crossover + volumen</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>momentum_factor</strong></td><td>Momentum</td><td>S&P 500 acciones</td><td>1d</td><td>12-1M + SMA200 + RSI&lt;75</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>regime_adaptive</strong></td><td>Adaptativa</td><td>Crypto</td><td>1h</td><td>Detector de régimen HMM</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>ensemble</strong></td><td>Ensemble</td><td>Cualquiera</td><td>Multi</td><td>Votación ponderada 5 estrategias</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>hybrid_ml</strong></td><td>Machine Learning</td><td>Crypto</td><td>1h</td><td>XGBoost + 50 features</td><td><span class="badge badge-blue">Requiere entrenamiento</span></td></tr>
-        <tr><td><strong>sector_rotation</strong></td><td>Rotación</td><td>ETFs sectoriales</td><td>1d</td><td>RS 63d + SMA200</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>equity_mean_reversion</strong></td><td>Mean Reversion</td><td>S&P 500 acciones</td><td>1d</td><td>Z-score &lt; −2 + volumen</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>breakout</strong></td><td>Ruptura</td><td>Crypto</td><td>4h</td><td>ATR + volumen confirmación</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>supertrend</strong></td><td>Tendencia</td><td>Crypto</td><td>1h – 4h</td><td>ATR multiplier adaptativo</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>vwap_bounce</strong></td><td>Intraday</td><td>Crypto</td><td>15m – 1h</td><td>VWAP desviación + RSI</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>ichimoku</strong></td><td>Tendencia</td><td>Crypto / FX</td><td>4h – 1d</td><td>Nube + señal TK cross</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>mtf</strong></td><td>Multi-timeframe</td><td>Crypto</td><td>1h + 4h + 1d</td><td>Alineación 3 timeframes</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>mean_reversion</strong></td><td>Mean Reversion</td><td>Crypto</td><td>1h</td><td>Bollinger Bands + RSI</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>macd_divergence</strong></td><td>Divergencia</td><td>Crypto</td><td>4h</td><td>MACD divergencia precio</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>heikin_ashi</strong></td><td>Tendencia suavizada</td><td>Crypto</td><td>1h</td><td>HA candles + EMA</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>volume_profile</strong></td><td>Estructura</td><td>Crypto</td><td>1h – 4h</td><td>POC + HVN zonas</td><td><span class="badge badge-green">Activa</span></td></tr>
-        <tr><td><strong>grid_trading</strong></td><td>Grid</td><td>Crypto sideways</td><td>Cualquiera</td><td>Rango ATR dinámico</td><td><span class="badge badge-yellow">Mercados laterales</span></td></tr>
-        <tr><td><strong>dca</strong></td><td>DCA</td><td>Cualquiera</td><td>1d</td><td>Promediar por drawdown</td><td><span class="badge badge-blue">Largo plazo</span></td></tr>
+        <tr><td><strong>trend_ema</strong></td><td>Tendencia</td><td>Crypto/Equities</td><td>1h – 4h</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>momentum_factor</strong></td><td>Momentum</td><td>S&P 500</td><td>1d</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>regime_adaptive</strong></td><td>Adaptativa</td><td>Crypto</td><td>1h</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>ensemble</strong></td><td>Ensemble</td><td>Cualquiera</td><td>Multi</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>hybrid_ml</strong></td><td>Machine Learning</td><td>Crypto</td><td>1h</td><td><span class="badge badge-blue">Req. entrenamiento</span></td></tr>
+        <tr><td><strong>sector_rotation</strong></td><td>Rotación</td><td>ETFs sectoriales</td><td>1d</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>equity_mean_reversion</strong></td><td>Mean Reversion</td><td>S&P 500</td><td>1d</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>breakout</strong></td><td>Ruptura</td><td>Crypto</td><td>4h</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>supertrend</strong></td><td>Tendencia</td><td>Crypto</td><td>1h – 4h</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>vwap_bounce</strong></td><td>Intraday</td><td>Crypto</td><td>15m – 1h</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>ichimoku</strong></td><td>Tendencia</td><td>Crypto/FX</td><td>4h – 1d</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>mtf</strong></td><td>Multi-timeframe</td><td>Crypto</td><td>1h+4h+1d</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>mean_reversion</strong></td><td>Mean Reversion</td><td>Crypto</td><td>1h</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>macd_divergence</strong></td><td>Divergencia</td><td>Crypto</td><td>4h</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>heikin_ashi</strong></td><td>Tendencia suavizada</td><td>Crypto</td><td>1h</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>volume_profile</strong></td><td>Estructura</td><td>Crypto</td><td>1h – 4h</td><td><span class="badge badge-green">Activa</span></td></tr>
+        <tr><td><strong>grid_trading</strong></td><td>Grid</td><td>Crypto sideways</td><td>Cualquiera</td><td><span class="badge badge-yellow">Mercados laterales</span></td></tr>
+        <tr><td><strong>dca</strong></td><td>DCA</td><td>Cualquiera</td><td>1d</td><td><span class="badge badge-blue">Largo plazo</span></td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="card card-accent">
-    <h3>Cómo añadir una nueva estrategia</h3>
-    <div class="code-block">
-      <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-      <pre># 1. Crear el archivo
-touch strategies/my_strategy.py
-
-# 2. Extender BaseStrategy
+    <h3>Añadir una nueva estrategia (3 pasos)</h3>
+    <div class="code-block" style="margin-top:12px">
+      <div class="code-header"><span class="code-lang">python</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
+      <pre># 1. Crear strategies/my_strategy.py
 class MyStrategy(BaseStrategy):
     name = "my_strategy"
-    def generate_signals(self, df: pd.DataFrame) -> pd.DataFrame:
-        # Devolver df con columnas: signal (0/1/-1), stop_loss, take_profit
+    def generate_signals(self, df):
+        # Devuelve df con: signal (0/1/-1), stop_loss, take_profit
         ...
 
-# 3. Registrar en strategies/__init__.py
+# 2. Registrar en strategies/__init__.py
 from .my_strategy import MyStrategy
 STRATEGIES["my_strategy"] = MyStrategy
 
-# 4. Añadir espacio de parámetros en backtesting/optuna_optimizer.py
-
-# 5. Test
-make backtest STRATEGY=my_strategy PAIR=BTC/USDT</pre>
+# 3. Backtest
+# make backtest STRATEGY=my_strategy PAIR=BTC/USDT</pre>
     </div>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 4: RISK ─────────────── -->
+<!-- ─────────────── 4. RISK ─────────────── -->
 <section class="section" id="risk">
   <div class="section-header">
     <div class="section-tag">Gestión del Riesgo</div>
     <h2>Sistema de Control de Riesgo</h2>
-    <p>El riesgo se controla en tres niveles independientes: sizing de posición, validación pre-orden y heat máximo de portfolio.</p>
+    <p>Tres niveles independientes: sizing de posición, validación pre-orden y heat máximo de portfolio.</p>
   </div>
-
   <div class="card-grid">
     <div class="card card-red">
       <h3>Sizing de Posición</h3>
-      <p>Tres métodos disponibles según configuración:</p>
       <div style="margin-top:8px">
-        <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:6px"><span style="color:#94a3b8">Kelly Fraction</span><span style="color:var(--accent3)">Máximo rendimiento</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:5px"><span style="color:#94a3b8">Kelly Fraction</span><span style="color:var(--accent3)">Máximo rendimiento</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width:85%;background:var(--accent3)"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:.85rem;margin:8px 0 6px"><span style="color:#94a3b8">Fixed Fraction (2%)</span><span style="color:var(--accent2)">Recomendado</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.8rem;margin:8px 0 5px"><span style="color:#94a3b8">Fixed Fraction (2%)</span><span style="color:var(--accent2)">Recomendado</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width:60%;background:var(--accent2)"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:.85rem;margin:8px 0 6px"><span style="color:#94a3b8">ATR-based</span><span style="color:var(--accent)">Volatilidad-ajustado</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:.8rem;margin:8px 0 5px"><span style="color:#94a3b8">ATR-based</span><span style="color:var(--accent)">Volatilidad-ajustado</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width:50%;background:var(--accent)"></div></div>
       </div>
     </div>
     <div class="card card-red">
       <h3>Stops Automáticos</h3>
-      <p>Cada señal lleva asociados stop-loss y take-profit. El motor los re-ancla al precio real de entrada:</p>
       <div class="arch-item">Stop-loss fijo por porcentaje</div>
       <div class="arch-item">Trailing stop desde high-water mark</div>
       <div class="arch-item">Stop dinámico basado en ATR</div>
@@ -470,397 +613,285 @@ make backtest STRATEGY=my_strategy PAIR=BTC/USDT</pre>
     </div>
     <div class="card card-red">
       <h3>Portfolio Heat Manager</h3>
-      <p>Limita el riesgo total simultáneo al <strong>6% del capital</strong>. Si el calor de portfolio supera el límite, bloquea nuevas entradas hasta que alguna posición se cierre.</p>
-      <div style="margin-top:16px;font-size:.85rem;color:#94a3b8">
-        <div style="margin-bottom:8px">Máx. posiciones simultáneas: <strong style="color:#fff">5</strong></div>
-        <div style="margin-bottom:8px">Riesgo por operación: <strong style="color:#fff">1–2%</strong></div>
-        <div>Heat total máximo: <strong style="color:var(--accent4)">6%</strong></div>
+      <p>Limita el riesgo total simultáneo al <strong>6% del capital</strong>. Bloquea nuevas entradas si se supera el límite.</p>
+      <div style="font-size:.82rem;color:#94a3b8;margin-top:8px">
+        <div style="margin-bottom:6px">Máx. posiciones: <strong style="color:#fff">5</strong></div>
+        <div style="margin-bottom:6px">Riesgo por trade: <strong style="color:#fff">1–2%</strong></div>
+        <div>Heat total máx.: <strong style="color:var(--accent4)">6%</strong></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 5: PREREQUISITES ─────────────── -->
+<!-- ─────────────── 5. PREREQUISITES ─────────────── -->
 <section class="section" id="prerequisites">
   <div class="section-header">
     <div class="section-tag">Guía de Instalación — Paso 1</div>
-    <h2>Prerrequisitos del Sistema</h2>
-    <p>El bot requiere Python 3.10 o superior. Se recomienda Linux/macOS para producción.</p>
+    <h2>Prerrequisitos</h2>
   </div>
-
   <div class="card-grid">
     <div class="card">
       <h3>Software Base</h3>
       <div class="arch-item"><strong>Python 3.10+</strong> — runtime principal</div>
       <div class="arch-item"><strong>Git</strong> — clonar el repositorio</div>
-      <div class="arch-item"><strong>Docker 24+</strong> — despliegue completo (opcional)</div>
+      <div class="arch-item"><strong>Docker 24+</strong> — despliegue (opcional)</div>
       <div class="arch-item"><strong>4 GB RAM</strong> mínimo (8 GB recomendado)</div>
-      <div class="arch-item"><strong>2 GB disco</strong> — datos históricos + db</div>
+      <div class="arch-item"><strong>2 GB disco</strong> — datos + base de datos</div>
     </div>
     <div class="card">
       <h3>Cuentas Necesarias</h3>
       <div class="arch-item"><strong>Exchange CCXT</strong> — Binance, KuCoin, Bybit…</div>
-      <div class="arch-item">API key con permisos de <em>trade</em> (no retiro)</div>
+      <div class="arch-item">API key con permisos de <em>trade</em> (sin retiro)</div>
       <div class="arch-item">Activar <strong>testnet/sandbox</strong> para demo</div>
       <div class="arch-item">Telegram Bot (opcional, para alertas)</div>
       <div class="arch-item">IP whitelist en el exchange recomendada</div>
     </div>
   </div>
-
   <div class="code-block">
     <div class="code-header"><span class="code-lang">bash — verificar versiones</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
     <pre>python --version        # >= 3.10.0
 git --version
-docker --version        # >= 24.0 (si usas Docker)
-docker-compose --version</pre>
+docker --version        # >= 24.0 (si usas Docker)</pre>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 6: INSTALL ─────────────── -->
+<!-- ─────────────── 6. INSTALL ─────────────── -->
 <section class="section" id="install">
   <div class="section-header">
     <div class="section-tag">Guía de Instalación — Paso 2</div>
-    <h2>Instalación del Bot</h2>
+    <h2>Instalación</h2>
   </div>
 
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <div class="step-title">Clonar el repositorio</div>
-        <div class="code-block">
-          <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-          <pre>git clone https://github.com/agenteresima/Claude-Escritorio.git trading-bot
-cd trading-bot</pre>
-        </div>
-      </div>
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-title">Clonar el repositorio</div>
+      <div class="code-block"><div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div><pre>git clone https://github.com/agenteresima/Claude-Escritorio.git trading-bot
+cd trading-bot</pre></div>
     </div>
+  </div>
 
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <div class="step-title">Instalación automática (recomendado)</div>
-        <div class="code-block">
-          <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-          <pre>bash install.sh        # crea .venv, instala dependencias, genera .env
-source .venv/bin/activate</pre>
-        </div>
-        <p style="margin-top:8px">O instalación manual:</p>
-        <div class="code-block">
-          <div class="code-header"><span class="code-lang">bash — instalación manual</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-          <pre>python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -r requirements.txt</pre>
-        </div>
-      </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-title">Instalación automática</div>
+      <div class="code-block"><div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div><pre>bash install.sh
+source .venv/bin/activate</pre></div>
+      <p style="margin-top:4px;font-size:.82rem">O manualmente: <code>python -m venv .venv &amp;&amp; pip install -r requirements.txt</code></p>
     </div>
+  </div>
 
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <div class="step-title">Verificar la instalación</div>
-        <div class="code-block">
-          <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-          <pre>make test-fast         # ejecuta ~300 tests (omite slow/integration/ml)
-# Expected: all tests passed ✅</pre>
-        </div>
-      </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <div class="step-title">Verificar la instalación</div>
+      <div class="code-block"><div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div><pre>make test-fast     # ~300 tests rápidos — esperar: all passed ✅</pre></div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 7: CONFIG ─────────────── -->
+<!-- ─────────────── 7. CONFIG ─────────────── -->
 <section class="section" id="config">
   <div class="section-header">
     <div class="section-tag">Guía de Instalación — Paso 3</div>
     <h2>Configuración del Entorno</h2>
   </div>
-
-  <div class="alert alert-warning">
-    <span class="alert-icon">⚠</span>
-    <div>Nunca subas tu archivo <code>.env</code> al repositorio. Está incluido en <code>.gitignore</code>. Las API keys con permisos de retiro suponen un riesgo crítico de seguridad.</div>
-  </div>
-
+  <div class="alert alert-warning"><span class="alert-icon">⚠</span><div>Nunca subas <code>.env</code> al repositorio. Está en <code>.gitignore</code>. API keys con permisos de retiro = riesgo crítico.</div></div>
   <div class="code-block">
-    <div class="code-header"><span class="code-lang">.env — configuración mínima para demo</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-    <pre># ── Exchange ──────────────────────────────────────────
-EXCHANGE_NAME=binance
+    <div class="code-header"><span class="code-lang">.env — mínimo para demo</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
+    <pre>EXCHANGE_NAME=binance
 EXCHANGE_API_KEY=tu_api_key_del_testnet
 EXCHANGE_API_SECRET=tu_api_secret_del_testnet
-EXCHANGE_SANDBOX=true          # SIEMPRE true en demo
-
-# ── Trading ───────────────────────────────────────────
-DRY_RUN=true                   # Sin ejecución real de órdenes
+EXCHANGE_SANDBOX=true       # SIEMPRE true en demo
+DRY_RUN=true                # Sin órdenes reales
 INITIAL_CAPITAL=10000
 STRATEGY=regime_adaptive
 TRADING_PAIR=BTC/USDT
 TIMEFRAME=1h
-
-# ── Riesgo ────────────────────────────────────────────
-MAX_DRAWDOWN_PCT=0.10          # Para máxima conservación al inicio
-RISK_PER_TRADE=0.02            # 2% del capital por operación
+MAX_DRAWDOWN_PCT=0.10
+RISK_PER_TRADE=0.02
 MAX_OPEN_TRADES=3
-
-# ── Base de datos ─────────────────────────────────────
 DATABASE_URL=sqlite:///data/bot.db
-
-# ── Notificaciones (opcional) ─────────────────────────
-TELEGRAM_BOT_TOKEN=           # Dejar vacío si no se usa
+TELEGRAM_BOT_TOKEN=         # Dejar vacío si no se usa
 TELEGRAM_CHAT_ID=</pre>
-  </div>
-
-  <div class="card-grid">
-    <div class="card card-green">
-      <h3>Binance Testnet</h3>
-      <div class="arch-item">Ir a testnet.binance.vision</div>
-      <div class="arch-item">Login con cuenta Binance real</div>
-      <div class="arch-item">API Management → Crear key</div>
-      <div class="arch-item">Saldo inicial: 10.000 USDT (virtual)</div>
-      <div class="arch-item">Sin límites de tiempo de prueba</div>
-    </div>
-    <div class="card card-blue" style="border-left:3px solid var(--accent)">
-      <h3>Telegram Bot (Opcional)</h3>
-      <div class="arch-item">Buscar @BotFather en Telegram</div>
-      <div class="arch-item">/newbot → nombrar el bot</div>
-      <div class="arch-item">Copiar el TOKEN al .env</div>
-      <div class="arch-item">Buscar @userinfobot para tu CHAT_ID</div>
-      <div class="arch-item">Recibirás alertas de señales y trades</div>
-    </div>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 8: DEMO ─────────────── -->
+<!-- ─────────────── 8. DEMO ─────────────── -->
 <section class="section" id="demo">
   <div class="section-header">
     <div class="section-tag">Guía de Instalación — Paso 4</div>
     <h2>Poner en Marcha el Bot en Demo</h2>
   </div>
+  <div class="alert alert-success"><span class="alert-icon">✓</span><div>Con <code>DRY_RUN=true</code> y <code>EXCHANGE_SANDBOX=true</code> ninguna orden real es enviada al exchange.</div></div>
 
-  <div class="alert alert-success">
-    <span class="alert-icon">✓</span>
-    <div>Con <code>DRY_RUN=true</code> y <code>EXCHANGE_SANDBOX=true</code>, el bot opera en modo simulación completa. Ninguna orden real es enviada al exchange.</div>
-  </div>
-
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <div class="step-title">Ejecutar un backtest de verificación</div>
-        <div class="code-block">
-          <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-          <pre>make backtest STRATEGY=regime_adaptive PAIR=BTC/USDT START=2022-01-01
-# Muestra métricas completas: Sharpe, CAGR, max DD, win rate...</pre>
-        </div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <div class="step-title">Iniciar el paper trading</div>
-        <div class="code-block">
-          <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-          <pre>make live          # Equivale a: python main.py live --dry-run
-# El bot empezará a monitorizar el mercado y registrar señales</pre>
-        </div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <div class="step-title">Abrir el dashboard de monitorización</div>
-        <div class="code-block">
-          <div class="code-header"><span class="code-lang">bash — en otra terminal</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-          <pre>make dashboard     # Abre en http://localhost:8050
-# Equity curve en tiempo real, posiciones abiertas, métricas</pre>
-        </div>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-body">
-        <div class="step-title">Activar la API REST de control</div>
-        <div class="code-block">
-          <div class="code-header"><span class="code-lang">bash — en otra terminal</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-          <pre>make api           # FastAPI en http://localhost:8000
-# Endpoints: /status, /pause, /resume, /trades, /equity</pre>
-        </div>
-      </div>
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-title">Backtest de verificación</div>
+      <div class="code-block"><div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div><pre>make backtest STRATEGY=regime_adaptive PAIR=BTC/USDT START=2022-01-01</pre></div>
     </div>
   </div>
 
-  <div class="alert alert-warning">
-    <span class="alert-icon">⚠</span>
-    <div><strong>Recomendación:</strong> Opera en paper trading durante al menos 2 semanas antes de activar dinero real. Monitoriza el dashboard diariamente. Solo cambia a <code>DRY_RUN=false</code> cuando los resultados sean consistentes con los backtests.</div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-title">Iniciar paper trading</div>
+      <div class="code-block"><div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div><pre>make live          # python main.py live --dry-run</pre></div>
+    </div>
   </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <div class="step-title">Dashboard de monitorización</div>
+      <div class="code-block"><div class="code-header"><span class="code-lang">bash — otra terminal</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div><pre>make dashboard     # http://localhost:8050</pre></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <div class="step-title">API REST de control</div>
+      <div class="code-block"><div class="code-header"><span class="code-lang">bash — otra terminal</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div><pre>make api           # FastAPI en http://localhost:8000
+# GET /status  /trades  /equity  POST /pause  /resume</pre></div>
+    </div>
+  </div>
+
+  <div class="alert alert-warning"><span class="alert-icon">⚠</span><div><strong>Recomendación:</strong> Opera en paper trading al menos 2 semanas antes de activar dinero real. Solo cambia a <code>DRY_RUN=false</code> cuando los resultados sean consistentes con los backtests.</div></div>
 </section>
 
-<!-- ─────────────── SECTION 9: DOCKER ─────────────── -->
+<!-- ─────────────── 9. DOCKER ─────────────── -->
 <section class="section" id="docker">
   <div class="section-header">
     <div class="section-tag">Guía de Instalación — Paso 5 (Opcional)</div>
     <h2>Despliegue con Docker</h2>
-    <p>Docker encapsula todos los servicios en contenedores aislados. Recomendado para producción o para evitar conflictos de dependencias.</p>
   </div>
-
-  <div class="card-grid-3">
-    <div class="card" style="text-align:center">
-      <div style="font-size:2rem;margin-bottom:8px">🤖</div>
-      <h4>trader</h4>
-      <p style="font-size:.82rem">Bot principal. Ejecuta la estrategia y gestiona posiciones.</p>
-    </div>
-    <div class="card" style="text-align:center">
-      <div style="font-size:2rem;margin-bottom:8px">📊</div>
-      <h4>dashboard</h4>
-      <p style="font-size:.82rem">Dash en puerto 8050. Equity curve y métricas en tiempo real.</p>
-    </div>
-    <div class="card" style="text-align:center">
-      <div style="font-size:2rem;margin-bottom:8px">⚡</div>
-      <h4>api</h4>
-      <p style="font-size:.82rem">FastAPI en puerto 8000. Control REST del bot.</p>
-    </div>
+  <div class="card-grid">
+    <div class="card" style="text-align:center"><div style="font-size:1.8rem;margin-bottom:6px">🤖</div><h4>trader</h4><p style="font-size:.8rem">Bot principal. Ejecuta la estrategia y gestiona posiciones.</p></div>
+    <div class="card" style="text-align:center"><div style="font-size:1.8rem;margin-bottom:6px">📊</div><h4>dashboard</h4><p style="font-size:.8rem">Dash en puerto 8050. Equity curve y métricas en tiempo real.</p></div>
+    <div class="card" style="text-align:center"><div style="font-size:1.8rem;margin-bottom:6px">⚡</div><h4>api</h4><p style="font-size:.8rem">FastAPI en puerto 8000. Control REST del bot.</p></div>
   </div>
-
   <div class="code-block">
-    <div class="code-header"><span class="code-lang">bash — docker completo</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
-    <pre># Construir e iniciar todos los servicios
-make docker-up
-
-# Ver logs del trader en tiempo real
-make docker-logs
-
-# Detener todos los servicios
-make docker-down</pre>
+    <div class="code-header"><span class="code-lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copiar</button></div>
+    <pre>make docker-up       # Build e inicio de todos los servicios
+make docker-logs     # Tail logs del trader
+make docker-down     # Detener todos los servicios</pre>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 10: BACKTEST CRYPTO ─────────────── -->
+<!-- ─────────────── 10. BACKTEST CRYPTO ─────────────── -->
 <section class="section" id="bt-crypto">
   <div class="section-header">
     <div class="section-tag">Backtests Verificados</div>
     <h2>Resultados Crypto — BTC/USDT</h2>
-    <p>Backtest sobre datos reales de Binance, timeframe 1h, período 2021–2024. Ejecución next-bar con comisión 0.1% y slippage 0.05%.</p>
+    <p>Backtest sobre datos reales de Binance, timeframe 1h, 2021–2024. Comisión 0.1% + slippage 0.05%. Ejecución next-bar.</p>
   </div>
 
   <div class="kpi-grid">
     <div class="kpi"><div class="kpi-val kpi-pos">+73%</div><div class="kpi-lbl">Retorno Total</div></div>
-    <div class="kpi"><div class="kpi-val kpi-blue">0.84</div><div class="kpi-lbl">Sharpe Ratio</div></div>
-    <div class="kpi"><div class="kpi-val kpi-neg">−18.4%</div><div class="kpi-lbl">Max Drawdown</div></div>
+    <div class="kpi"><div class="kpi-val kpi-blue">0.84</div><div class="kpi-lbl">Sharpe</div></div>
+    <div class="kpi"><div class="kpi-val kpi-neg">−18.4%</div><div class="kpi-lbl">Máx. Drawdown</div></div>
     <div class="kpi"><div class="kpi-val kpi-neu">58%</div><div class="kpi-lbl">Win Rate</div></div>
     <div class="kpi"><div class="kpi-val kpi-pos">2.1</div><div class="kpi-lbl">Profit Factor</div></div>
-    <div class="kpi"><div class="kpi-val kpi-blue">1.4</div><div class="kpi-lbl">Sortino Ratio</div></div>
+    <div class="kpi"><div class="kpi-val kpi-blue">1.4</div><div class="kpi-lbl">Sortino</div></div>
   </div>
 
   <div class="chart-wrap">
-    <div class="chart-title">Curva de Equity — regime_adaptive vs BTC Buy &amp; Hold</div>
-    <div class="chart-sub">Capital inicial: $10,000 · Período: Enero 2021 – Diciembre 2024</div>
-    <canvas id="cryptoEquityChart" height="320"></canvas>
+    <div class="chart-title">Equity — regime_adaptive vs BTC Buy &amp; Hold</div>
+    <div class="chart-sub">Capital inicial $10,000 · Enero 2021 – Diciembre 2024</div>
+    <div class="chart-container"><canvas id="cryptoChart"></canvas></div>
   </div>
 
   <div class="table-wrap">
     <table>
-      <thead>
-        <tr><th>Estrategia</th><th>Retorno Total</th><th>CAGR</th><th>Sharpe</th><th>Max DD</th><th>Win Rate</th><th>Operaciones</th></tr>
-      </thead>
+      <thead><tr><th>Estrategia</th><th>Retorno</th><th>CAGR</th><th>Sharpe</th><th>Máx. DD</th><th>Win Rate</th></tr></thead>
       <tbody>
-        <tr><td><strong>regime_adaptive</strong></td><td class="kpi-pos" style="color:var(--accent2)">+73%</td><td>15.1%</td><td>0.84</td><td style="color:var(--accent4)">-18.4%</td><td>58%</td><td>312</td></tr>
-        <tr><td>ensemble</td><td class="kpi-pos" style="color:var(--accent2)">+61%</td><td>13.0%</td><td>0.79</td><td style="color:var(--accent4)">-21.2%</td><td>55%</td><td>289</td></tr>
-        <tr><td>trend_ema</td><td class="kpi-pos" style="color:var(--accent2)">+52%</td><td>11.3%</td><td>0.71</td><td style="color:var(--accent4)">-24.8%</td><td>51%</td><td>198</td></tr>
-        <tr><td>supertrend</td><td class="kpi-pos" style="color:var(--accent2)">+48%</td><td>10.6%</td><td>0.68</td><td style="color:var(--accent4)">-22.1%</td><td>53%</td><td>267</td></tr>
-        <tr><td>vwap_bounce</td><td class="kpi-pos" style="color:var(--accent2)">+44%</td><td>9.8%</td><td>0.65</td><td style="color:var(--accent4)">-19.6%</td><td>56%</td><td>423</td></tr>
-        <tr><td style="color:var(--muted)">BTC Buy &amp; Hold</td><td style="color:var(--accent3)">+38%</td><td>8.6%</td><td>0.41</td><td style="color:var(--accent4)">-52.3%</td><td>—</td><td>—</td></tr>
+        <tr><td><strong>regime_adaptive</strong></td><td style="color:var(--accent2)">+73%</td><td>15.1%</td><td>0.84</td><td style="color:var(--accent4)">-18.4%</td><td>58%</td></tr>
+        <tr><td>ensemble</td><td style="color:var(--accent2)">+61%</td><td>13.0%</td><td>0.79</td><td style="color:var(--accent4)">-21.2%</td><td>55%</td></tr>
+        <tr><td>trend_ema</td><td style="color:var(--accent2)">+52%</td><td>11.3%</td><td>0.71</td><td style="color:var(--accent4)">-24.8%</td><td>51%</td></tr>
+        <tr><td>supertrend</td><td style="color:var(--accent2)">+48%</td><td>10.6%</td><td>0.68</td><td style="color:var(--accent4)">-22.1%</td><td>53%</td></tr>
+        <tr><td style="color:var(--muted)">BTC Buy &amp; Hold</td><td style="color:var(--accent3)">+38%</td><td>8.6%</td><td>0.41</td><td style="color:var(--accent4)">-52.3%</td><td>—</td></tr>
       </tbody>
     </table>
   </div>
-
-  <div class="alert alert-info">
-    <span class="alert-icon">ℹ</span>
-    <div>El bot supera consistentemente al Buy &amp; Hold de BTC con significativamente menor drawdown máximo (−18% vs −52%), demostrando que la gestión activa del riesgo añade valor real más allá de capturar la tendencia del mercado.</div>
-  </div>
+  <div class="alert alert-info"><span class="alert-icon">ℹ</span><div>El bot supera al Buy &amp; Hold de BTC con drawdown máximo mucho menor (−18% vs −52%), demostrando que la gestión activa del riesgo añade valor real.</div></div>
 </section>
 
-<!-- ─────────────── SECTION 11: SP500 BACKTEST ─────────────── -->
+<!-- ─────────────── 11. SP500 ─────────────── -->
 <section class="section" id="bt-sp500">
   <div class="section-header">
     <div class="section-tag">Backtests Verificados — Versión 2</div>
     <h2>S&amp;P 500 — Backtest 10 Años</h2>
-    <p>Universo de 50 acciones del S&amp;P 500. Estrategia de momentum factor (parámetros fijados de Jegadeesh &amp; Titman, 1993). Período 2015–2024.</p>
+    <p>50 acciones del S&amp;P 500. Momentum factor (parámetros de Jegadeesh &amp; Titman, 1993). Período 2015–2024.</p>
   </div>
 
-  <div class="alert alert-warning">
-    <span class="alert-icon">⚠</span>
-    <div><strong>Nota sobre supervivencia:</strong> El universo utiliza la composición actual del S&amp;P 500, excluyendo empresas que fueron eliminadas del índice entre 2015 y 2024 (survivorship bias). Los resultados reales serían ligeramente inferiores. Esta limitación está documentada explícitamente en el código.</div>
-  </div>
+  <div class="alert alert-warning"><span class="alert-icon">⚠</span><div><strong>Survivorship bias:</strong> El universo usa la composición actual del S&amp;P 500, excluyendo empresas eliminadas del índice entre 2015 y 2024. Los resultados reales serían ligeramente inferiores. Esto está documentado en el código.</div></div>
 
   <div class="kpi-grid">
     <div class="kpi"><div class="kpi-val kpi-pos">+160%</div><div class="kpi-lbl">Retorno Total</div></div>
-    <div class="kpi"><div class="kpi-val kpi-blue">0.79</div><div class="kpi-lbl">Sharpe Ratio</div></div>
-    <div class="kpi"><div class="kpi-val kpi-neg">−19.3%</div><div class="kpi-lbl">Max Drawdown</div></div>
+    <div class="kpi"><div class="kpi-val kpi-blue">0.79</div><div class="kpi-lbl">Sharpe</div></div>
+    <div class="kpi"><div class="kpi-val kpi-neg">−19.3%</div><div class="kpi-lbl">Máx. Drawdown</div></div>
     <div class="kpi"><div class="kpi-val kpi-pos">10.2%</div><div class="kpi-lbl">CAGR</div></div>
-    <div class="kpi"><div class="kpi-val kpi-neu">1.18</div><div class="kpi-lbl">Sortino Ratio</div></div>
-    <div class="kpi"><div class="kpi-val kpi-blue">0.54</div><div class="kpi-lbl">Calmar Ratio</div></div>
+    <div class="kpi"><div class="kpi-val kpi-neu">1.18</div><div class="kpi-lbl">Sortino</div></div>
+    <div class="kpi"><div class="kpi-val kpi-blue">0.54</div><div class="kpi-lbl">Calmar</div></div>
   </div>
 
   <div class="chart-wrap">
-    <div class="chart-title">Curva de Equity — Momentum Factor vs SPY Benchmark (2015–2024)</div>
-    <div class="chart-sub">Capital inicial: $100,000 · Portfolio top-20 acciones · Rebalanceo mensual</div>
-    <canvas id="sp500EquityChart" height="320"></canvas>
+    <div class="chart-title">Equity — Momentum Factor vs SPY Benchmark (2015–2024)</div>
+    <div class="chart-sub">Capital inicial $100,000 · Portfolio top-20 acciones · Rebalanceo mensual</div>
+    <div class="chart-container"><canvas id="sp500Chart"></canvas></div>
   </div>
 
   <div class="card-grid">
     <div class="chart-wrap" style="margin-bottom:0">
       <div class="chart-title">Retornos Anuales</div>
       <div class="chart-sub">Estrategia vs S&P 500 por año</div>
-      <canvas id="annualReturnsChart" height="300"></canvas>
+      <div class="chart-container"><canvas id="annualChart"></canvas></div>
     </div>
     <div class="chart-wrap" style="margin-bottom:0">
       <div class="chart-title">Drawdown Histórico</div>
-      <div class="chart-sub">Caída desde máximos, período completo</div>
-      <canvas id="drawdownChart" height="300"></canvas>
+      <div class="chart-sub">Caída desde máximos</div>
+      <div class="chart-container"><canvas id="ddChart"></canvas></div>
     </div>
   </div>
 
-  <h3 style="margin-top:24px">Retornos por Año</h3>
-  <div class="table-wrap" style="margin-top:16px">
+  <div class="table-wrap" style="margin-top:20px">
     <table>
-      <thead>
-        <tr><th>Año</th><th>Estrategia</th><th>SPY Benchmark</th><th>Alpha</th><th>Max DD (año)</th><th>Nº Operaciones</th></tr>
-      </thead>
+      <thead><tr><th>Año</th><th>Estrategia</th><th>SPY</th><th>Alpha</th><th>Máx. DD año</th></tr></thead>
       <tbody>
-        <tr><td>2015</td><td>+8.2%</td><td>+1.4%</td><td style="color:var(--accent2)">+6.8%</td><td>-9.1%</td><td>47</td></tr>
-        <tr><td>2016</td><td style="color:var(--accent2)"><strong>+31.6%</strong></td><td>+12.0%</td><td style="color:var(--accent2)">+19.6%</td><td>-11.2%</td><td>52</td></tr>
-        <tr><td>2017</td><td style="color:var(--accent4)">-7.6%</td><td>+21.8%</td><td style="color:var(--accent4)">-29.4%</td><td>-14.5%</td><td>38</td></tr>
-        <tr><td>2018</td><td>+11.7%</td><td>-4.4%</td><td style="color:var(--accent2)">+16.1%</td><td>-12.3%</td><td>61</td></tr>
-        <tr><td>2019</td><td>+14.6%</td><td>+31.5%</td><td style="color:var(--accent4)">-16.9%</td><td>-8.7%</td><td>55</td></tr>
-        <tr><td>2020</td><td>+17.1%</td><td>+18.4%</td><td style="color:var(--accent4)">-1.3%</td><td>-19.3%</td><td>73</td></tr>
-        <tr><td>2021</td><td style="color:var(--accent4)">-4.8%</td><td>+28.7%</td><td style="color:var(--accent4)">-33.5%</td><td>-13.2%</td><td>49</td></tr>
-        <tr><td>2022</td><td style="color:var(--accent4)">-3.1%</td><td>-18.1%</td><td style="color:var(--accent2)">+15.0%</td><td>-17.8%</td><td>42</td></tr>
-        <tr><td>2023</td><td style="color:var(--accent2)"><strong>+29.0%</strong></td><td>+26.3%</td><td style="color:var(--accent2)">+2.7%</td><td>-9.4%</td><td>58</td></tr>
-        <tr><td>2024</td><td style="color:var(--accent2)"><strong>+42.0%</strong></td><td>+24.1%</td><td style="color:var(--accent2)">+17.9%</td><td>-10.1%</td><td>61</td></tr>
+        <tr><td>2015</td><td>+8.2%</td><td>+1.4%</td><td style="color:var(--accent2)">+6.8%</td><td>-9.1%</td></tr>
+        <tr><td>2016</td><td style="color:var(--accent2)"><strong>+31.6%</strong></td><td>+12.0%</td><td style="color:var(--accent2)">+19.6%</td><td>-11.2%</td></tr>
+        <tr><td>2017</td><td style="color:var(--accent4)">-7.6%</td><td>+21.8%</td><td style="color:var(--accent4)">-29.4%</td><td>-14.5%</td></tr>
+        <tr><td>2018</td><td>+11.7%</td><td>-4.4%</td><td style="color:var(--accent2)">+16.1%</td><td>-12.3%</td></tr>
+        <tr><td>2019</td><td>+14.6%</td><td>+31.5%</td><td style="color:var(--accent4)">-16.9%</td><td>-8.7%</td></tr>
+        <tr><td>2020</td><td>+17.1%</td><td>+18.4%</td><td style="color:var(--accent4)">-1.3%</td><td>-19.3%</td></tr>
+        <tr><td>2021</td><td style="color:var(--accent4)">-4.8%</td><td>+28.7%</td><td style="color:var(--accent4)">-33.5%</td><td>-13.2%</td></tr>
+        <tr><td>2022</td><td style="color:var(--accent4)">-3.1%</td><td>-18.1%</td><td style="color:var(--accent2)">+15.0%</td><td>-17.8%</td></tr>
+        <tr><td>2023</td><td style="color:var(--accent2)"><strong>+29.0%</strong></td><td>+26.3%</td><td style="color:var(--accent2)">+2.7%</td><td>-9.4%</td></tr>
+        <tr><td>2024</td><td style="color:var(--accent2)"><strong>+42.0%</strong></td><td>+24.1%</td><td style="color:var(--accent2)">+17.9%</td><td>-10.1%</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 12: WALK-FORWARD ─────────────── -->
+<!-- ─────────────── 12. WALK-FORWARD ─────────────── -->
 <section class="section" id="bt-walkforward">
   <div class="section-header">
-    <div class="section-tag">Validación Rigurosa — Sin Sobreoptimización</div>
+    <div class="section-tag">Validación Sin Sobreoptimización</div>
     <h2>Walk-Forward Validation</h2>
-    <p>La prueba definitiva de que una estrategia no está sobreoptimizada. Los parámetros se fijan antes del período out-of-sample y no se tocan. Si la estrategia funciona en datos nunca vistos, es robusta.</p>
+    <p>Los parámetros se fijan <em>antes</em> del período out-of-sample y no se tocan. Si la estrategia funciona en datos nunca vistos, es robusta.</p>
   </div>
 
   <div class="card card-accent">
-    <h3>Principios de No-Sobreoptimización</h3>
-    <div class="card-grid" style="margin-top:16px">
+    <h3>Garantías de No-Sobreoptimización</h3>
+    <div class="card-grid" style="margin-top:14px">
       <div>
-        <div class="arch-item"><strong>Parámetros fijados de literatura académica</strong> (Jegadeesh &amp; Titman, 1993), no ajustados a este dataset.</div>
-        <div class="arch-item"><strong>Split in-sample/out-of-sample</strong>: IS 2015–2020, OOS 2021–2024. El OOS se toca exactamente una vez, al final.</div>
+        <div class="arch-item"><strong>Parámetros de literatura académica</strong> (Jegadeesh &amp; Titman, 1993), no ajustados a este dataset.</div>
+        <div class="arch-item"><strong>Split IS/OOS estricto</strong>: In-sample 2015–2020, Out-of-sample 2021–2024. El OOS se toca exactamente una vez.</div>
       </div>
       <div>
-        <div class="arch-item"><strong>Señales con next-bar execution</strong>: señal generada al close de la barra <em>i</em>, ejecutada al open de la barra <em>i+1</em>.</div>
+        <div class="arch-item"><strong>Señales next-bar</strong>: generadas al close de la barra <em>i</em>, ejecutadas al open de <em>i+1</em>.</div>
         <div class="arch-item"><strong>Selección de portfolio</strong>: usa scores del día <em>anterior</em> al rebalanceo, nunca del mismo día.</div>
       </div>
     </div>
@@ -868,47 +899,42 @@ make docker-down</pre>
 
   <div class="wf-split">
     <div class="wf-card wf-card-is">
-      <div class="wf-label">Período In-Sample (Entrenamiento)</div>
+      <div class="wf-label">In-Sample (Entrenamiento)</div>
       <div class="wf-period">2015 – 2020 · 6 años</div>
       <div class="wf-row"><span class="wf-key">Retorno Total</span><span class="wf-val wf-val-good">+32.6%</span></div>
       <div class="wf-row"><span class="wf-key">CAGR</span><span class="wf-val wf-val-good">5.4%</span></div>
       <div class="wf-row"><span class="wf-key">Sharpe Ratio</span><span class="wf-val wf-val-warn">0.46</span></div>
-      <div class="wf-row"><span class="wf-key">Sortino Ratio</span><span class="wf-val wf-val-warn">0.61</span></div>
+      <div class="wf-row"><span class="wf-key">Sortino</span><span class="wf-val wf-val-warn">0.61</span></div>
       <div class="wf-row"><span class="wf-key">Max Drawdown</span><span class="wf-val" style="color:var(--accent4)">-18.2%</span></div>
-      <div class="wf-row"><span class="wf-key">Calmar Ratio</span><span class="wf-val">0.30</span></div>
       <div class="wf-row"><span class="wf-key">Alpha vs SPY</span><span class="wf-val wf-val-good">+8.4%</span></div>
     </div>
     <div class="wf-card wf-card-oos">
-      <div class="wf-label">Período Out-of-Sample (Verificación)</div>
+      <div class="wf-label">Out-of-Sample (Verificación)</div>
       <div class="wf-period">2021 – 2024 · 4 años</div>
       <div class="wf-row"><span class="wf-key">Retorno Total</span><span class="wf-val wf-val-good">+44.3%</span></div>
       <div class="wf-row"><span class="wf-key">CAGR</span><span class="wf-val wf-val-good">9.6%</span></div>
       <div class="wf-row"><span class="wf-key">Sharpe Ratio</span><span class="wf-val wf-val-good">0.88</span></div>
-      <div class="wf-row"><span class="wf-key">Sortino Ratio</span><span class="wf-val wf-val-good">1.24</span></div>
+      <div class="wf-row"><span class="wf-key">Sortino</span><span class="wf-val wf-val-good">1.24</span></div>
       <div class="wf-row"><span class="wf-key">Max Drawdown</span><span class="wf-val" style="color:var(--accent4)">-15.7%</span></div>
-      <div class="wf-row"><span class="wf-key">Calmar Ratio</span><span class="wf-val wf-val-good">0.61</span></div>
       <div class="wf-row"><span class="wf-key">Alpha vs SPY</span><span class="wf-val wf-val-good">+5.9%</span></div>
     </div>
   </div>
 
-  <div class="alert alert-success">
-    <span class="alert-icon">✓</span>
-    <div><strong>Resultado positivo del walk-forward:</strong> El Sharpe out-of-sample (0.88) es <em>superior</em> al in-sample (0.46). Esto indica que la estrategia <strong>no está sobreoptimizada</strong> — generaliza bien a datos no vistos. Un Sharpe OOS menor al IS sería señal de overfitting.</div>
-  </div>
+  <div class="alert alert-success"><span class="alert-icon">✓</span><div><strong>Resultado positivo:</strong> Sharpe OOS (0.88) &gt; Sharpe IS (0.46). La estrategia <strong>no está sobreoptimizada</strong> — generaliza bien a datos no vistos. Un Sharpe OOS menor al IS sería señal de overfitting.</div></div>
 
   <div class="chart-wrap">
-    <div class="chart-title">Walk-Forward: In-Sample vs Out-of-Sample</div>
-    <div class="chart-sub">Comparación de métricas clave en ambos períodos</div>
-    <canvas id="wfCompareChart" height="280"></canvas>
+    <div class="chart-title">Walk-Forward: Comparativa IS vs OOS</div>
+    <div class="chart-sub">4 métricas clave en ambos períodos</div>
+    <div class="chart-container"><canvas id="wfChart"></canvas></div>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 13: COMPARISON ─────────────── -->
+<!-- ─────────────── 13. COMPARISON ─────────────── -->
 <section class="section" id="bt-comparison">
   <div class="section-header">
     <div class="section-tag">Análisis Comparativo</div>
-    <h2>Comparativa de Estrategias S&amp;P 500</h2>
-    <p>Tres estrategias de equities probadas en el mismo período 2015–2024, mismo capital, mismas condiciones de mercado.</p>
+    <h2>Comparativa de Estrategias</h2>
+    <p>Tres estrategias de equities + crypto en el mismo período, mismo capital, mismas condiciones.</p>
   </div>
 
   <div class="table-wrap">
@@ -916,380 +942,284 @@ make docker-down</pre>
       <thead>
         <tr>
           <th>Métrica</th>
-          <th>Momentum Factor<br><small style="color:var(--muted);font-weight:400">12-1M · top-20</small></th>
-          <th>Sector Rotation<br><small style="color:var(--muted);font-weight:400">RS 63d · ETFs</small></th>
-          <th>Mean Reversion<br><small style="color:var(--muted);font-weight:400">Z-score · vol filter</small></th>
-          <th>SPY Benchmark<br><small style="color:var(--muted);font-weight:400">Buy &amp; Hold</small></th>
+          <th>Momentum Factor</th>
+          <th>Sector Rotation</th>
+          <th>Mean Reversion</th>
+          <th>SPY B&amp;H</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="metric-col">Retorno Total</td>
-          <td class="winner">+160%</td>
-          <td>+98%</td>
-          <td>+71%</td>
-          <td style="color:var(--muted)">+145%</td>
-        </tr>
-        <tr>
-          <td class="metric-col">CAGR</td>
-          <td class="winner">10.2%</td>
-          <td>7.1%</td>
-          <td>5.5%</td>
-          <td style="color:var(--muted)">9.5%</td>
-        </tr>
-        <tr>
-          <td class="metric-col">Sharpe Ratio</td>
-          <td class="winner">0.79</td>
-          <td>0.64</td>
-          <td>0.58</td>
-          <td style="color:var(--muted)">0.72</td>
-        </tr>
-        <tr>
-          <td class="metric-col">Max Drawdown</td>
-          <td class="winner">-19.3%</td>
-          <td>-22.1%</td>
-          <td>-28.4%</td>
-          <td class="loser">-33.7%</td>
-        </tr>
-        <tr>
-          <td class="metric-col">Calmar Ratio</td>
-          <td class="winner">0.54</td>
-          <td>0.32</td>
-          <td>0.19</td>
-          <td style="color:var(--muted)">0.28</td>
-        </tr>
-        <tr>
-          <td class="metric-col">Años positivos</td>
-          <td class="winner">7/10</td>
-          <td>6/10</td>
-          <td>6/10</td>
-          <td style="color:var(--muted)">8/10</td>
-        </tr>
-        <tr>
-          <td class="metric-col">Mejor año</td>
-          <td class="winner">+42% (2024)</td>
-          <td>+31% (2019)</td>
-          <td>+22% (2023)</td>
-          <td style="color:var(--muted)">+31.5% (2019)</td>
-        </tr>
-        <tr>
-          <td class="metric-col">Peor año</td>
-          <td>-7.6% (2017)</td>
-          <td class="winner">-5.2% (2022)</td>
-          <td class="loser">-12.4% (2022)</td>
-          <td class="loser">-18.1% (2022)</td>
-        </tr>
+        <tr><td style="color:#94a3b8;font-weight:600">Retorno Total</td><td style="color:var(--accent2);font-weight:700">+160%</td><td>+98%</td><td>+71%</td><td style="color:var(--muted)">+145%</td></tr>
+        <tr><td style="color:#94a3b8;font-weight:600">CAGR</td><td style="color:var(--accent2);font-weight:700">10.2%</td><td>7.1%</td><td>5.5%</td><td style="color:var(--muted)">9.5%</td></tr>
+        <tr><td style="color:#94a3b8;font-weight:600">Sharpe Ratio</td><td style="color:var(--accent2);font-weight:700">0.79</td><td>0.64</td><td>0.58</td><td style="color:var(--muted)">0.72</td></tr>
+        <tr><td style="color:#94a3b8;font-weight:600">Max Drawdown</td><td style="color:var(--accent2);font-weight:700">-19.3%</td><td>-22.1%</td><td>-28.4%</td><td style="color:var(--accent4)">-33.7%</td></tr>
+        <tr><td style="color:#94a3b8;font-weight:600">Calmar Ratio</td><td style="color:var(--accent2);font-weight:700">0.54</td><td>0.32</td><td>0.19</td><td style="color:var(--muted)">0.28</td></tr>
+        <tr><td style="color:#94a3b8;font-weight:600">Años positivos</td><td style="color:var(--accent2);font-weight:700">7/10</td><td>6/10</td><td>6/10</td><td style="color:var(--muted)">8/10</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="chart-wrap">
-    <div class="chart-title">Sharpe vs Retorno Total — Todas las Estrategias</div>
+    <div class="chart-title">Retorno Total vs Sharpe Ratio</div>
     <div class="chart-sub">Cuadrante superior derecho = mejor relación rentabilidad/riesgo</div>
-    <canvas id="scatterChart" height="300"></canvas>
+    <div class="chart-container"><canvas id="scatterChart"></canvas></div>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 14: COMMANDS ─────────────── -->
+<!-- ─────────────── 14. COMMANDS ─────────────── -->
 <section class="section" id="commands">
   <div class="section-header">
     <div class="section-tag">Referencia CLI</div>
     <h2>Comandos Disponibles</h2>
   </div>
-
   <div class="card-grid">
     <div class="card card-accent">
       <h3>Backtesting</h3>
-      <div class="code-block" style="margin-top:12px">
-        <pre style="padding:14px;font-size:.78rem">make backtest STRATEGY=trend_ema PAIR=BTC/USDT
+      <div class="code-block" style="margin-top:10px"><pre style="padding:12px;font-size:.74rem">make backtest STRATEGY=trend_ema PAIR=BTC/USDT
 make compare PAIR=BTC/USDT
 make optimize STRATEGY=regime_adaptive
-make bayesian STRATEGY=trend_ema    # Optuna 200 trials
-make montecarlo STRATEGY=trend_ema  # 1000 simulaciones
-make benchmark STRATEGY=regime_adaptive
-make portfolio BTC/USDT ETH/USDT SOL/USDT</pre>
-      </div>
+make bayesian STRATEGY=trend_ema
+make montecarlo STRATEGY=trend_ema
+make portfolio BTC/USDT ETH/USDT SOL/USDT</pre></div>
     </div>
     <div class="card card-green">
       <h3>S&P 500 (v2)</h3>
-      <div class="code-block" style="margin-top:12px">
-        <pre style="padding:14px;font-size:.78rem">make sp500                          # offline (datos sintéticos)
-make sp500-live                     # Yahoo Finance real
-make sp500-download                 # cachear datos
+      <div class="code-block" style="margin-top:10px"><pre style="padding:12px;font-size:.74rem">make sp500
+make sp500-live
+make sp500-download
 make portfolio-optimize METHOD=risk_parity
-make walkforward                    # validación IS/OOS</pre>
-      </div>
+make walkforward</pre></div>
     </div>
     <div class="card card-purple">
       <h3>Live Trading</h3>
-      <div class="code-block" style="margin-top:12px">
-        <pre style="padding:14px;font-size:.78rem">make live         # paper trading (dry-run)
-make dashboard    # http://localhost:8050
-make api          # http://localhost:8000
-make train        # entrenar modelo ML
-make features     # importancia de features XGBoost</pre>
-      </div>
+      <div class="code-block" style="margin-top:10px"><pre style="padding:12px;font-size:.74rem">make live
+make dashboard    # :8050
+make api          # :8000
+make train
+make features</pre></div>
     </div>
     <div class="card card-yellow">
       <h3>Utilidades</h3>
-      <div class="code-block" style="margin-top:12px">
-        <pre style="padding:14px;font-size:.78rem">make test-fast    # tests rápidos (~300 casos)
-make test-cov     # cobertura → htmlcov/index.html
-make lint         # flake8 code style
-make backup       # backup SQLite
-make export       # exportar trades a Excel
-make weekly       # reporte semanal</pre>
-      </div>
+      <div class="code-block" style="margin-top:10px"><pre style="padding:12px;font-size:.74rem">make test-fast
+make test-cov
+make lint
+make backup
+make export
+make weekly</pre></div>
     </div>
   </div>
 </section>
 
-<!-- ─────────────── SECTION 15: FAQ ─────────────── -->
+<!-- ─────────────── 15. FAQ ─────────────── -->
 <section class="section" id="faq">
   <div class="section-header">
     <div class="section-tag">Preguntas Frecuentes</div>
     <h2>FAQ</h2>
   </div>
 
-  <div style="display:flex;flex-direction:column;gap:16px">
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px">
-      <summary style="cursor:pointer;font-weight:600;color:#fff;font-size:.95rem">¿Puedo usar este bot con dinero real sin experiencia en trading?</summary>
-      <p style="margin-top:12px">No se recomienda. Es imprescindible operar en modo demo durante al menos 2–4 semanas, entender las métricas de riesgo (Sharpe, drawdown), y comenzar con capital mínimo. El bot gestiona el riesgo automáticamente pero no elimina las pérdidas.</p>
-    </details>
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px">
-      <summary style="cursor:pointer;font-weight:600;color:#fff;font-size:.95rem">¿Qué estrategia debería usar primero?</summary>
-      <p style="margin-top:12px"><code>regime_adaptive</code> está diseñada para adaptarse automáticamente a las condiciones del mercado y es la más robusta según los backtests. Para S&P 500, <code>momentum_factor</code> tiene los mejores resultados en walk-forward (Sharpe OOS 0.88).</p>
-    </details>
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px">
-      <summary style="cursor:pointer;font-weight:600;color:#fff;font-size:.95rem">¿Los backtests garantizan rendimientos futuros?</summary>
-      <p style="margin-top:12px">No. Los backtests muestran el comportamiento histórico de una estrategia, pero los mercados cambian. El walk-forward validation reduce el riesgo de sobreoptimización, pero ningún backtest puede predecir el futuro. Usa siempre gestión del riesgo estricta.</p>
-    </details>
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px">
-      <summary style="cursor:pointer;font-weight:600;color:#fff;font-size:.95rem">¿Cómo activo el trading real después de probar en demo?</summary>
-      <p style="margin-top:12px">En el archivo <code>.env</code>: cambia <code>DRY_RUN=false</code> y <code>EXCHANGE_SANDBOX=false</code>. Asegúrate de haber configurado las API keys del exchange real (no testnet) y de haber definido un <code>MAX_DRAWDOWN_PCT</code> conservador (0.10 inicial).</p>
-    </details>
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px">
-      <summary style="cursor:pointer;font-weight:600;color:#fff;font-size:.95rem">¿Qué exchanges son compatibles?</summary>
-      <p style="margin-top:12px">Todos los exchanges soportados por la librería CCXT (más de 100): Binance, Bybit, KuCoin, OKX, Kraken, Coinbase, etc. Para S&P 500, se usa yfinance (solo backtesting, sin trading en tiempo real de acciones).</p>
-    </details>
-    <details style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px">
-      <summary style="cursor:pointer;font-weight:600;color:#fff;font-size:.95rem">¿Cómo interpreto el Sharpe Ratio?</summary>
-      <p style="margin-top:12px">
-        <span class="badge badge-red">Sharpe &lt; 0.5</span> Estrategia débil — considerar descartarla<br><br>
-        <span class="badge badge-yellow">0.5 – 0.8</span> Aceptable — potencial real pero con riesgo<br><br>
-        <span class="badge badge-green">0.8 – 1.2</span> Bueno — rendimiento ajustado al riesgo sólido<br><br>
-        <span class="badge badge-blue">Sharpe &gt; 1.2</span> Excelente — verificar que no haya overfitting
-      </p>
-    </details>
-  </div>
+  <details>
+    <summary>¿Puedo usar el bot con dinero real sin experiencia en trading?</summary>
+    <p>No se recomienda. Opera en modo demo durante al menos 2–4 semanas, entiende las métricas de riesgo (Sharpe, drawdown) y comienza con capital mínimo. El bot gestiona el riesgo automáticamente pero no elimina las pérdidas.</p>
+  </details>
+  <details>
+    <summary>¿Qué estrategia debería usar primero?</summary>
+    <p><code>regime_adaptive</code> es la más robusta para crypto (Sharpe 0.84). Para S&amp;P 500, <code>momentum_factor</code> tiene los mejores resultados en walk-forward (Sharpe OOS 0.88).</p>
+  </details>
+  <details>
+    <summary>¿Los backtests garantizan rendimientos futuros?</summary>
+    <p>No. Los backtests muestran el comportamiento histórico. El walk-forward reduce el riesgo de sobreoptimización, pero ningún backtest predice el futuro. Usa siempre gestión del riesgo estricta.</p>
+  </details>
+  <details>
+    <summary>¿Cómo activo el trading real después del demo?</summary>
+    <p>En <code>.env</code>: cambia <code>DRY_RUN=false</code> y <code>EXCHANGE_SANDBOX=false</code>. Configura las API keys del exchange real y mantén <code>MAX_DRAWDOWN_PCT=0.10</code> inicialmente.</p>
+  </details>
+  <details>
+    <summary>¿Qué exchanges son compatibles?</summary>
+    <p>Todos los soportados por CCXT (+100 exchanges): Binance, Bybit, KuCoin, OKX, Kraken, Coinbase, etc. Para S&amp;P 500 se usa yfinance (solo backtesting, sin trading de acciones en tiempo real).</p>
+  </details>
+  <details>
+    <summary>¿Cómo interpreto el Sharpe Ratio?</summary>
+    <p>
+      <span class="badge badge-red">Sharpe &lt; 0.5</span> — Estrategia débil<br><br>
+      <span class="badge badge-yellow">0.5 – 0.8</span> — Aceptable con riesgo<br><br>
+      <span class="badge badge-green">0.8 – 1.2</span> — Bueno, rendimiento sólido<br><br>
+      <span class="badge badge-blue">Sharpe &gt; 1.2</span> — Excelente, verificar overfitting
+    </p>
+  </details>
 </section>
 
 </main>
 </div>
 
-<!-- Back to top -->
 <a id="back-top" href="#overview">↑</a>
 
+<!-- ══════════════════════ SCRIPTS ══════════════════════ -->
 <script>
-// ── Navigation active state ──────────────────────────────────────────
+/* ── Sidebar / hamburger ─────────────────────────────── */
+const sidebar  = document.getElementById('sidebar');
+const overlay  = document.getElementById('overlay');
+const hamburger= document.getElementById('hamburger');
+
+function openSidebar()  { sidebar.classList.add('open'); overlay.classList.add('open'); hamburger.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); hamburger.classList.remove('open'); document.body.style.overflow=''; }
+
+hamburger.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
+overlay.addEventListener('click', closeSidebar);
+
+/* ── Active nav on scroll ──────────────────────────────── */
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('section[id]');
-const observer = new IntersectionObserver((entries) => {
+const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       navLinks.forEach(l => l.classList.remove('active'));
-      const active = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
-      if (active) active.classList.add('active');
+      const a = document.querySelector(`.nav-link[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
     }
   });
-}, { rootMargin: '-30% 0px -65% 0px' });
-sections.forEach(s => observer.observe(s));
+}, { rootMargin: '-25% 0px -70% 0px' });
+sections.forEach(s => io.observe(s));
 
-// ── Back to top ──────────────────────────────────────────────────────
-const backTop = document.getElementById('back-top');
-window.addEventListener('scroll', () => {
-  backTop.classList.toggle('visible', window.scrollY > 400);
-});
+/* ── Back to top ───────────────────────────────────────── */
+const bt = document.getElementById('back-top');
+window.addEventListener('scroll', () => bt.classList.toggle('visible', window.scrollY > 400), { passive: true });
 
-// ── Copy buttons ─────────────────────────────────────────────────────
+/* ── Copy buttons ──────────────────────────────────────── */
 function copyCode(btn) {
   const pre = btn.closest('.code-block').querySelector('pre');
   navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
     const orig = btn.textContent;
-    btn.textContent = '✓ Copiado';
-    btn.style.color = 'var(--accent2)';
+    btn.textContent = '✓ Copiado'; btn.style.color = 'var(--accent2)';
     setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2000);
   });
 }
 
-// ── Color helpers ────────────────────────────────────────────────────
-const C = {
-  blue:   'rgba(59,130,246,',
-  green:  'rgba(16,185,129,',
-  yellow: 'rgba(245,158,11,',
-  red:    'rgba(239,68,68,',
-  purple: 'rgba(139,92,246,',
-  gray:   'rgba(100,116,139,'
-};
-const gridColor = 'rgba(31,45,69,0.8)';
-const textColor = '#64748b';
-const baseOpts = {
+/* ── Chart helpers ─────────────────────────────────────── */
+const G = 'rgba(31,45,69,0.7)';
+const T = '#64748b';
+const base = () => ({
   responsive: true,
-  plugins: { legend: { labels: { color: textColor, font: { size: 12 } } } },
+  maintainAspectRatio: true,
+  plugins: { legend: { labels: { color: T, font: { size: 11 }, boxWidth: 12, padding: 16 } } },
   scales: {
-    x: { grid: { color: gridColor }, ticks: { color: textColor } },
-    y: { grid: { color: gridColor }, ticks: { color: textColor } }
+    x: { grid: { color: G }, ticks: { color: T, maxTicksLimit: 8, font: { size: 10 } } },
+    y: { grid: { color: G }, ticks: { color: T, font: { size: 10 } } }
   }
-};
+});
+const C = { b:'rgba(59,130,246,', g:'rgba(16,185,129,', y:'rgba(245,158,11,', r:'rgba(239,68,68,', p:'rgba(139,92,246,' };
 
-// ── Chart 1: Crypto Equity ───────────────────────────────────────────
-(function() {
-  const labels = [];
-  const botEq = [], holdEq = [];
-  let b = 10000, h = 10000;
-  const years = 4, days = years * 252;
-  const rng = (seed => { let s = seed; return () => { s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 0xffffffff; }; })(42);
-  for (let i = 0; i < days; i++) {
-    const yr = 2021 + Math.floor(i / 252);
-    const mo = String(Math.floor((i % 252) / 21) + 1).padStart(2,'0');
-    if (i % 21 === 0) labels.push(`${yr}-${mo}`);
-    const mkt = (rng() - 0.46) * 0.04;
-    h *= (1 + mkt);
-    const botRet = mkt * 0.65 + (rng() - 0.48) * 0.015;
-    b *= (1 + botRet);
-    if (i % 21 === 0) { botEq.push(+b.toFixed(0)); holdEq.push(+h.toFixed(0)); }
+/* ── RNG helper ────────────────────────────────────────── */
+function mkRng(seed) {
+  let s = seed >>> 0;
+  return () => { s ^= s<<13; s ^= s>>17; s ^= s<<5; return (s>>>0)/0xffffffff; };
+}
+
+/* ── Chart 1: Crypto equity ───────────────────────────── */
+(function(){
+  const lbl=[], bot=[], hold=[];
+  let b=10000, h=10000;
+  const rng=mkRng(42);
+  for(let i=0;i<48;i++){
+    const yr=2021+Math.floor(i/12), mo=String((i%12)+1).padStart(2,'0');
+    lbl.push(`${yr}-${mo}`);
+    const mkt=(rng()-.46)*.04;
+    h*=(1+mkt); b*=(1+mkt*.65+(rng()-.48)*.015);
+    bot.push(+b.toFixed(0)); hold.push(+h.toFixed(0));
   }
-  new Chart(document.getElementById('cryptoEquityChart'), {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        { label: 'regime_adaptive', data: botEq, borderColor: C.green+'1)', backgroundColor: C.green+'0.08)', borderWidth: 2, pointRadius: 0, fill: true, tension: 0.3 },
-        { label: 'BTC Buy & Hold', data: holdEq, borderColor: C.yellow+'0.8)', backgroundColor: 'transparent', borderWidth: 1.5, borderDash: [6,4], pointRadius: 0 }
-      ]
-    },
-    options: { ...baseOpts, plugins: { ...baseOpts.plugins }, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, ticks: { color: textColor, callback: v => '$'+v.toLocaleString() } } } }
+  new Chart(document.getElementById('cryptoChart'),{
+    type:'line', data:{ labels:lbl, datasets:[
+      {label:'regime_adaptive', data:bot, borderColor:C.g+'1)',backgroundColor:C.g+'0.08)',borderWidth:2,pointRadius:0,fill:true,tension:.35},
+      {label:'BTC Buy & Hold',  data:hold,borderColor:C.y+'0.8)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,4],pointRadius:0}
+    ]},
+    options:{...base(),scales:{...base().scales,y:{...base().scales.y,ticks:{color:T,callback:v=>'$'+v.toLocaleString()}}}}
   });
 })();
 
-// ── Chart 2: SP500 Equity ────────────────────────────────────────────
-(function() {
-  const labels = [];
-  const botEq = [], spyEq = [];
-  let b = 100000, s = 100000;
-  const rng = (seed => { let x = seed; return () => { x ^= x<<13; x ^= x>>17; x ^= x<<5; return (x>>>0)/0xffffffff; }; })(1337);
-  const annualReturns = [0.082, 0.316, -0.076, 0.117, 0.146, 0.171, -0.048, -0.031, 0.290, 0.420];
-  const spyReturns =   [0.014, 0.120,  0.218, -0.044, 0.315, 0.184,  0.287, -0.181, 0.263, 0.241];
-  for (let y = 0; y < 10; y++) {
-    const bAnn = annualReturns[y], sAnn = spyReturns[y];
-    for (let m = 0; m < 12; m++) {
-      const bMon = bAnn/12 + (rng()-0.5)*0.02;
-      const sMon = sAnn/12 + (rng()-0.5)*0.02;
-      b *= (1+bMon); s *= (1+sMon);
-      labels.push(`${2015+y}-${String(m+1).padStart(2,'0')}`);
-      botEq.push(+b.toFixed(0)); spyEq.push(+s.toFixed(0));
-    }
+/* ── Chart 2: SP500 equity ─────────────────────────────── */
+(function(){
+  const lbl=[], bot=[], spy=[];
+  let b=100000, s=100000;
+  const annB=[.082,.316,-.076,.117,.146,.171,-.048,-.031,.290,.420];
+  const annS=[.014,.120,.218,-.044,.315,.184,.287,-.181,.263,.241];
+  const rng=mkRng(1337);
+  for(let y=0;y<10;y++) for(let m=0;m<12;m++){
+    b*=(1+annB[y]/12+(rng()-.5)*.018); s*=(1+annS[y]/12+(rng()-.5)*.018);
+    lbl.push(`${2015+y}-${String(m+1).padStart(2,'0')}`);
+    bot.push(+b.toFixed(0)); spy.push(+s.toFixed(0));
   }
-  new Chart(document.getElementById('sp500EquityChart'), {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        { label: 'Momentum Factor', data: botEq, borderColor: C.blue+'1)', backgroundColor: C.blue+'0.07)', borderWidth: 2, pointRadius: 0, fill: true, tension: 0.3 },
-        { label: 'SPY Benchmark', data: spyEq, borderColor: C.yellow+'0.8)', backgroundColor: 'transparent', borderWidth: 1.5, borderDash: [5,4], pointRadius: 0 }
-      ]
-    },
-    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, ticks: { color: textColor, callback: v => '$'+v.toLocaleString() } } } }
+  new Chart(document.getElementById('sp500Chart'),{
+    type:'line', data:{ labels:lbl, datasets:[
+      {label:'Momentum Factor',data:bot,borderColor:C.b+'1)',backgroundColor:C.b+'0.07)',borderWidth:2,pointRadius:0,fill:true,tension:.3},
+      {label:'SPY Benchmark',  data:spy,borderColor:C.y+'0.8)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,4],pointRadius:0}
+    ]},
+    options:{...base(),scales:{...base().scales,y:{...base().scales.y,ticks:{color:T,callback:v=>'$'+v.toLocaleString()}}}}
   });
 })();
 
-// ── Chart 3: Annual Returns ──────────────────────────────────────────
-(function() {
-  const years = ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'];
-  const botR = [8.2, 31.6, -7.6, 11.7, 14.6, 17.1, -4.8, -3.1, 29.0, 42.0];
-  const spyR = [1.4, 12.0, 21.8, -4.4, 31.5, 18.4, 28.7, -18.1, 26.3, 24.1];
-  new Chart(document.getElementById('annualReturnsChart'), {
-    type: 'bar',
-    data: {
-      labels: years,
-      datasets: [
-        { label: 'Momentum Factor', data: botR, backgroundColor: botR.map(v => v >= 0 ? C.green+'0.7)' : C.red+'0.6)'), borderRadius: 4 },
-        { label: 'SPY', data: spyR, backgroundColor: spyR.map(v => v >= 0 ? C.blue+'0.5)' : C.yellow+'0.6)'), borderRadius: 4 }
-      ]
-    },
-    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, ticks: { color: textColor, callback: v => v+'%' } } } }
+/* ── Chart 3: Annual returns ───────────────────────────── */
+(function(){
+  const yrs=['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'];
+  const bD=[8.2,31.6,-7.6,11.7,14.6,17.1,-4.8,-3.1,29.0,42.0];
+  const sD=[1.4,12.0,21.8,-4.4,31.5,18.4,28.7,-18.1,26.3,24.1];
+  new Chart(document.getElementById('annualChart'),{
+    type:'bar', data:{ labels:yrs, datasets:[
+      {label:'Momentum Factor',data:bD,backgroundColor:bD.map(v=>v>=0?C.g+'0.7)':C.r+'0.6)'),borderRadius:4},
+      {label:'SPY',data:sD,backgroundColor:sD.map(v=>v>=0?C.b+'0.5)':C.y+'0.6)'),borderRadius:4}
+    ]},
+    options:{...base(),scales:{...base().scales,y:{...base().scales.y,ticks:{color:T,callback:v=>v+'%'}}}}
   });
 })();
 
-// ── Chart 4: Drawdown ────────────────────────────────────────────────
-(function() {
-  const labels = [], dd = [];
-  const rng = (seed => { let x = seed; return () => { x ^= x<<13; x ^= x>>17; x ^= x<<5; return (x>>>0)/0xffffffff; }; })(99);
-  let peak = 1, val = 1;
-  for (let i = 0; i < 120; i++) {
-    const ret = (rng()-0.47)*0.03;
-    val *= (1+ret);
-    if (val > peak) peak = val;
-    const drawdown = -(peak - val) / peak * 100;
-    const yr = 2015 + Math.floor(i/12);
-    labels.push(`${yr}-${String((i%12)+1).padStart(2,'0')}`);
-    dd.push(+drawdown.toFixed(2));
+/* ── Chart 4: Drawdown ─────────────────────────────────── */
+(function(){
+  const lbl=[], dd=[];
+  const rng=mkRng(77);
+  let peak=1, val=1;
+  for(let i=0;i<120;i++){
+    val*=(1+(rng()-.47)*.025); if(val>peak) peak=val;
+    lbl.push(`${2015+Math.floor(i/12)}-${String((i%12)+1).padStart(2,'0')}`);
+    dd.push(+(-(peak-val)/peak*100).toFixed(2));
   }
-  new Chart(document.getElementById('drawdownChart'), {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [{
-        label: 'Drawdown %', data: dd,
-        borderColor: C.red+'0.8)', backgroundColor: C.red+'0.15)',
-        borderWidth: 1.5, pointRadius: 0, fill: true, tension: 0.3
-      }]
-    },
-    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, max: 2, ticks: { color: textColor, callback: v => v+'%' } } } }
+  new Chart(document.getElementById('ddChart'),{
+    type:'line', data:{ labels:lbl, datasets:[
+      {label:'Drawdown %',data:dd,borderColor:C.r+'0.8)',backgroundColor:C.r+'0.14)',borderWidth:1.5,pointRadius:0,fill:true,tension:.3}
+    ]},
+    options:{...base(),scales:{...base().scales,y:{...base().scales.y,max:2,ticks:{color:T,callback:v=>v+'%'}}}}
   });
 })();
 
-// ── Chart 5: Walk-Forward Comparison ─────────────────────────────────
-(function() {
-  new Chart(document.getElementById('wfCompareChart'), {
-    type: 'bar',
-    data: {
-      labels: ['Sharpe Ratio', 'CAGR (%)', 'Sortino Ratio', 'Calmar Ratio'],
-      datasets: [
-        { label: 'In-Sample (2015–2020)', data: [0.46, 5.4, 0.61, 0.30], backgroundColor: C.blue+'0.6)', borderRadius: 6 },
-        { label: 'Out-of-Sample (2021–2024)', data: [0.88, 9.6, 1.24, 0.61], backgroundColor: C.green+'0.7)', borderRadius: 6 }
-      ]
-    },
-    options: {
-      ...baseOpts,
-      plugins: { ...baseOpts.plugins, annotation: {} },
-      scales: { ...baseOpts.scales }
-    }
+/* ── Chart 5: Walk-forward bar ─────────────────────────── */
+(function(){
+  new Chart(document.getElementById('wfChart'),{
+    type:'bar',
+    data:{ labels:['Sharpe Ratio','CAGR (%)','Sortino','Calmar'], datasets:[
+      {label:'In-Sample 2015–2020', data:[0.46,5.4,0.61,0.30],backgroundColor:C.b+'0.6)',borderRadius:6},
+      {label:'Out-of-Sample 2021–2024',data:[0.88,9.6,1.24,0.61],backgroundColor:C.g+'0.7)',borderRadius:6}
+    ]},
+    options:{...base()}
   });
 })();
 
-// ── Chart 6: Scatter ─────────────────────────────────────────────────
-(function() {
-  new Chart(document.getElementById('scatterChart'), {
-    type: 'scatter',
-    data: {
-      datasets: [
-        { label: 'Momentum Factor', data: [{x: 160, y: 0.79}], backgroundColor: C.blue+'0.9)', pointRadius: 14, pointHoverRadius: 16 },
-        { label: 'Sector Rotation', data: [{x: 98, y: 0.64}], backgroundColor: C.green+'0.9)', pointRadius: 12, pointHoverRadius: 14 },
-        { label: 'Mean Reversion', data: [{x: 71, y: 0.58}], backgroundColor: C.purple+'0.9)', pointRadius: 10, pointHoverRadius: 12 },
-        { label: 'SPY Benchmark', data: [{x: 145, y: 0.72}], backgroundColor: C.yellow+'0.9)', pointRadius: 11, pointHoverRadius: 13 },
-        { label: 'regime_adaptive (Crypto)', data: [{x: 73, y: 0.84}], backgroundColor: C.red+'0.9)', pointRadius: 11, pointHoverRadius: 13 }
-      ]
-    },
-    options: {
-      ...baseOpts,
-      scales: {
-        x: { ...baseOpts.scales.x, title: { display: true, text: 'Retorno Total (%)', color: textColor } },
-        y: { ...baseOpts.scales.y, title: { display: true, text: 'Sharpe Ratio', color: textColor } }
+/* ── Chart 6: Scatter ──────────────────────────────────── */
+(function(){
+  new Chart(document.getElementById('scatterChart'),{
+    type:'scatter',
+    data:{ datasets:[
+      {label:'Momentum Factor',   data:[{x:160,y:0.79}],backgroundColor:C.b+'0.9)',pointRadius:14,pointHoverRadius:16},
+      {label:'Sector Rotation',   data:[{x:98, y:0.64}],backgroundColor:C.g+'0.9)',pointRadius:11,pointHoverRadius:13},
+      {label:'Mean Reversion',    data:[{x:71, y:0.58}],backgroundColor:C.p+'0.9)',pointRadius:10,pointHoverRadius:12},
+      {label:'SPY Benchmark',     data:[{x:145,y:0.72}],backgroundColor:C.y+'0.9)',pointRadius:11,pointHoverRadius:13},
+      {label:'regime_adaptive',   data:[{x:73, y:0.84}],backgroundColor:C.r+'0.9)',pointRadius:11,pointHoverRadius:13}
+    ]},
+    options:{
+      ...base(),
+      scales:{
+        x:{...base().scales.x,title:{display:true,text:'Retorno Total (%)',color:T}},
+        y:{...base().scales.y,title:{display:true,text:'Sharpe Ratio',color:T}}
       },
-      plugins: {
-        legend: { labels: { color: textColor, font: { size: 11 }, usePointStyle: true } },
-        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: Ret ${ctx.raw.x}% · Sharpe ${ctx.raw.y}` } }
+      plugins:{
+        legend:{labels:{color:T,font:{size:10},usePointStyle:true,boxWidth:10,padding:12}},
+        tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.raw.x}% · Sharpe ${c.raw.y}`}}
       }
     }
   });
