@@ -3,17 +3,28 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
-// Cliente público (browser / components)
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Cliente público (browser / components) — lazy para evitar errores en build
+export function getSupabaseClient() {
+  return createClient(supabaseUrl, supabaseAnonKey)
+}
+
+// Alias para compatibilidad
+export const supabase = {
+  from: (table: string) => getSupabaseClient().from(table),
+}
 
 // Cliente servidor con service role — bypasa RLS, solo usar en API routes
 export function createServerClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!serviceKey) {
-    // Fallback al cliente anon si no hay service key (desarrollo local)
-    return createClient(supabaseUrl, supabaseAnonKey)
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!url || (!serviceKey && !anonKey)) {
+    // Durante el build sin variables, devolver cliente mock
+    return createClient('https://placeholder.supabase.co', 'placeholder-key')
   }
-  return createClient(supabaseUrl, serviceKey, {
+
+  return createClient(url, serviceKey ?? anonKey!, {
     auth: { persistSession: false },
   })
 }

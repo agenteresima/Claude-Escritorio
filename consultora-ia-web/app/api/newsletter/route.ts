@@ -5,7 +5,7 @@ import { Resend } from 'resend'
 
 const supabase = createServerClient()
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+function getResend() { return new Resend(process.env.RESEND_API_KEY ?? "") }
 
 // ─── Validación ───────────────────────────────────────────────────────────────
 
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Email de bienvenida
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'AP Automatización IA <hola@automatizacionprocesos.es>',
       to: email,
       subject: '¡Bienvenido/a a la newsletter de AP Automatización IA! 🚀',

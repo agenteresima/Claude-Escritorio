@@ -5,7 +5,7 @@ import { Resend } from 'resend'
 
 const supabase = createServerClient()
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+function getResend() { return new Resend(process.env.RESEND_API_KEY ?? "") }
 
 // ─── Validación ───────────────────────────────────────────────────────────────
 
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Email interno de notificación
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'AP Automatización IA <noreply@automatizacionprocesos.es>',
       to: 'hola@automatizacionprocesos.es',
       subject: `📬 Nuevo mensaje de contacto: ${data.name}`,
@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Email de confirmación al usuario
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'AP Automatización IA <hola@automatizacionprocesos.es>',
       to: data.email,
       subject: 'Hemos recibido tu mensaje — AP Automatización IA',

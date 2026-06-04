@@ -9,7 +9,7 @@ import {
 
 const supabase = createServerClient()
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+function getResend() { return new Resend(process.env.RESEND_API_KEY ?? "") }
 
 // ─── Validación ───────────────────────────────────────────────────────────────
 
@@ -122,7 +122,7 @@ export async function POST(request: NextRequest) {
     const lead = { ...data, id: insertedLead.id, lead_score }
 
     // Enviar email interno al equipo comercial
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'AP Automatización IA <noreply@automatizacionprocesos.es>',
       to: 'hola@automatizacionprocesos.es',
       subject: `🔔 Nuevo lead: ${data.name} — ${data.company ?? 'Sin empresa'} (Score: ${lead_score})`,
@@ -130,7 +130,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Enviar email de confirmación al cliente
-    await resend.emails.send({
+    await getResend().emails.send({
       from: 'AP Automatización IA <hola@automatizacionprocesos.es>',
       to: data.email,
       subject: 'Hemos recibido tu solicitud — AP Automatización IA',
