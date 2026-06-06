@@ -1,100 +1,100 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { MessageSquare, Users, Clock, Globe, Star, BarChart3, ArrowRight } from 'lucide-react'
+import { Target, Map, BarChart3, Shield, Lightbulb, CheckCircle, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Chatbots Inteligentes con IA para Atención al Cliente | AP Automatización IA',
+  title: 'Estrategia de IA para Empresas | Hoja de Ruta y Transformación Digital | AP Automatización IA',
   description:
-    'Chatbots con inteligencia artificial para atención al cliente en tu web, WhatsApp y redes sociales. Respuestas precisas, disponibilidad 24/7 y escala sin límite.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/servicios/chatbots-inteligentes' },
+    'Consultoría estratégica de inteligencia artificial para empresas. Definimos tu hoja de ruta de IA, priorizamos iniciativas y acompañamos la transformación digital con resultados medibles.',
+  alternates: { canonical: 'https://automatizacionprocesos.es/servicios/estrategia-ia' },
   openGraph: {
-    title: 'Chatbots Inteligentes con IA para Atención al Cliente | AP Automatización IA',
+    title: 'Estrategia de IA para Empresas | AP Automatización IA',
     description:
-      'Chatbots con IA que atienden a tus clientes 24/7 con respuestas precisas. Integración en web, WhatsApp y redes sociales.',
-    url: 'https://automatizacionprocesos.es/servicios/chatbots-inteligentes',
+      'Consultoría estratégica de IA. Hoja de ruta, priorización de iniciativas y acompañamiento en la transformación digital de tu empresa.',
+    url: 'https://automatizacionprocesos.es/servicios/estrategia-ia',
   },
 }
 
 const includes = [
   {
-    icon: MessageSquare,
-    title: 'Entrenado con tu conocimiento',
+    icon: Target,
+    title: 'Diagnóstico estratégico inicial',
     description:
-      'El chatbot aprende de tus FAQs, catálogo, políticas y documentación interna. Responde con la información exacta de tu empresa, no con respuestas genéricas.',
+      'Analizamos en profundidad tu modelo de negocio, procesos actuales, madurez digital y posición competitiva para identificar dónde la IA puede generar mayor impacto.',
   },
   {
-    icon: Users,
-    title: 'Transferencia a agente humano',
+    icon: Map,
+    title: 'Hoja de ruta de IA personalizada',
     description:
-      'Cuando la consulta lo requiere, el chatbot escala al equipo humano con todo el contexto de la conversación. La experiencia del cliente no se rompe.',
-  },
-  {
-    icon: Clock,
-    title: 'Disponible las 24 horas',
-    description:
-      'Atiende a tus clientes fuera de horario de oficina, en festivos y fines de semana. Sin coste adicional y sin tiempos de espera.',
-  },
-  {
-    icon: Globe,
-    title: 'Multiidioma y multicanal',
-    description:
-      'Funciona en web, WhatsApp Business, Telegram, Instagram y otras plataformas. Detecta el idioma del usuario y responde automáticamente.',
-  },
-  {
-    icon: Star,
-    title: 'Personalización de marca',
-    description:
-      'Nombre, tono, avatar y flujo de conversación adaptados a tu imagen de marca. Tu cliente siente que habla con alguien de tu empresa.',
+      'Diseñamos un plan de implementación por fases con iniciativas priorizadas por impacto, esfuerzo y coste. Sabes exactamente qué hacer, cuándo y en qué orden.',
   },
   {
     icon: BarChart3,
-    title: 'Analítica de conversaciones',
+    title: 'Business case y estimación de ROI',
     description:
-      'Dashboard con volumen de consultas, temas más frecuentes, tasa de resolución y satisfacción del cliente. Insights para mejorar tu producto o servicio.',
+      'Para cada iniciativa calculamos el retorno esperado, el coste de implementación y el tiempo de recuperación de la inversión. Decisiones basadas en datos, no en intuición.',
+  },
+  {
+    icon: Shield,
+    title: 'Gestión de riesgos y gobernanza',
+    description:
+      'Identificamos los riesgos de cada iniciativa e integramos principios de ética, privacidad y cumplimiento normativo desde el inicio del diseño estratégico.',
+  },
+  {
+    icon: Lightbulb,
+    title: 'Identificación de casos de uso',
+    description:
+      'Seleccionamos los casos de uso más relevantes para tu sector y tamaño de empresa, con ejemplos de empresas similares que ya los han implantado con éxito.',
+  },
+  {
+    icon: CheckCircle,
+    title: 'Acompañamiento en la ejecución',
+    description:
+      'La estrategia no queda en un documento. Te acompañamos en la implementación, validamos los avances y ajustamos el rumbo cuando el contexto cambia.',
   },
 ]
 
 const benefits = [
   {
-    title: '70% de consultas resueltas sin intervención humana',
+    title: 'Inversión enfocada donde realmente importa',
     description:
-      'La mayoría de preguntas de los clientes son repetitivas. El chatbot las resuelve al instante, liberando a tu equipo para las consultas complejas que realmente necesitan atención humana.',
-    stat: '70%',
-    label: 'consultas resueltas automáticamente',
+      'Sin una estrategia clara, las empresas malgastan recursos en herramientas de moda que no resuelven problemas reales. Con una hoja de ruta sólida, cada euro invertido tiene un propósito medible.',
+    stat: '3x',
+    label: 'mayor retorno de la inversión en IA',
   },
   {
-    title: 'Tiempo de respuesta inferior a 3 segundos',
+    title: 'Ventaja competitiva sostenible',
     description:
-      'Los clientes no esperan. Un chatbot IA responde de forma inmediata a cualquier hora, en cualquier canal, con precisión y coherencia. La satisfacción del cliente aumenta notablemente.',
-    stat: '<3s',
-    label: 'tiempo de respuesta',
+      'Las empresas que implementan IA de forma estratégica y ordenada se distancian de la competencia de manera duradera. No se trata de adoptar tecnología, sino de rediseñar cómo compites.',
+    stat: '2 años',
+    label: 'de ventaja competitiva media',
   },
   {
-    title: 'Reducción del 50% en carga del equipo de soporte',
+    title: 'Reducción del riesgo de fracaso',
     description:
-      'Tu equipo deja de responder las mismas preguntas una y otra vez. Se concentra en casos complejos, en fidelizar clientes y en tareas de mayor valor para el negocio.',
-    stat: '50%',
-    label: 'menos carga para el equipo',
+      'El 85% de los proyectos de IA fracasan por falta de estrategia, no por falta de tecnología. Un plan bien diseñado multiplica las probabilidades de éxito y reduce los costes de ensayo y error.',
+    stat: '85%',
+    label: 'de proyectos IA fallan sin estrategia',
   },
 ]
 
-export default function ChatbotsInteligentesPage() {
+export default function EstrategiaIAPage() {
   return (
     <>
       {/* Hero */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="inline-block bg-blue-600/20 border border-blue-500/30 text-blue-300 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-            Chatbots inteligentes
+            Estrategia e IA para empresas
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
-            Atención al cliente inteligente{' '}
-            <span className="text-blue-400">sin esperas y sin límite de escala</span>
+            La hoja de ruta de IA que necesita{' '}
+            <span className="text-blue-400">tu empresa para crecer</span>
           </h1>
           <p className="text-lg text-slate-300 max-w-3xl mx-auto mb-10">
-            Chatbots con inteligencia artificial entrenados con el conocimiento de tu empresa.
-            Responden con precisión, escalan a un humano cuando toca y aprenden con cada
-            conversación para ser cada vez mejores.
+            Definimos juntos qué iniciativas de inteligencia artificial tienen más sentido para tu
+            negocio, en qué orden implementarlas y cómo medir el impacto real. Estrategia concreta,
+            no visión de futuro.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -120,9 +120,9 @@ export default function ChatbotsInteligentesPage() {
           <div className="text-center mb-14">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">¿Qué incluye el servicio?</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              No es un chatbot de árbol de decisión con respuestas rígidas. Es un asistente
-              conversacional inteligente que entiende el contexto y responde como lo haría un
-              experto de tu equipo.
+              Un proceso estructurado que va desde el análisis de tu situación actual hasta una hoja
+              de ruta ejecutable, con el acompañamiento necesario para que la estrategia se convierta
+              en resultados reales.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -148,7 +148,8 @@ export default function ChatbotsInteligentesPage() {
           <div className="text-center mb-14">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Beneficios concretos</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Resultados medibles que obtienen nuestros clientes tras implantar chatbots con IA.
+              Por qué las empresas que trabajan con una estrategia de IA clara obtienen mejores
+              resultados que las que improvisan.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -168,11 +169,11 @@ export default function ChatbotsInteligentesPage() {
       <section className="bg-slate-900 text-white py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            ¿Quieres un chatbot que realmente resuelva a tus clientes?
+            ¿Quieres una estrategia de IA clara para tu empresa?
           </h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
-            En 45 minutos analizamos tu casuística de atención al cliente y te mostramos cómo
-            un chatbot IA gestionaría las consultas más frecuentes de tu negocio.
+            En 45 minutos analizamos la situación actual de tu empresa y te damos una primera
+            visión de por dónde empezar y qué impacto puedes esperar. Sin compromiso.
           </p>
           <Link
             href="/diagnostico-gratuito"

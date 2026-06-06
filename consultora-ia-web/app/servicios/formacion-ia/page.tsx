@@ -1,100 +1,100 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { MessageSquare, Users, Clock, Globe, Star, BarChart3, ArrowRight } from 'lucide-react'
+import { GraduationCap, Users, BookOpen, Award, Target, TrendingUp, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Chatbots Inteligentes con IA para Atención al Cliente | AP Automatización IA',
+  title: 'Formación en IA para Empresas | Capacitación Equipos | AP Automatización IA',
   description:
-    'Chatbots con inteligencia artificial para atención al cliente en tu web, WhatsApp y redes sociales. Respuestas precisas, disponibilidad 24/7 y escala sin límite.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/servicios/chatbots-inteligentes' },
+    'Formación práctica en inteligencia artificial para equipos empresariales. ChatGPT, Claude, Copilot y herramientas de automatización. Adaptada a tu sector y resultados inmediatos.',
+  alternates: { canonical: 'https://automatizacionprocesos.es/servicios/formacion-ia' },
   openGraph: {
-    title: 'Chatbots Inteligentes con IA para Atención al Cliente | AP Automatización IA',
+    title: 'Formación en IA para Empresas | AP Automatización IA',
     description:
-      'Chatbots con IA que atienden a tus clientes 24/7 con respuestas precisas. Integración en web, WhatsApp y redes sociales.',
-    url: 'https://automatizacionprocesos.es/servicios/chatbots-inteligentes',
+      'Capacitación práctica en IA para equipos. ChatGPT, Claude, Copilot y automatización. Adaptada a tu sector con resultados desde el primer día.',
+    url: 'https://automatizacionprocesos.es/servicios/formacion-ia',
   },
 }
 
 const includes = [
   {
-    icon: MessageSquare,
-    title: 'Entrenado con tu conocimiento',
+    icon: GraduationCap,
+    title: 'Formación adaptada a tu sector',
     description:
-      'El chatbot aprende de tus FAQs, catálogo, políticas y documentación interna. Responde con la información exacta de tu empresa, no con respuestas genéricas.',
+      'No es un curso genérico. Cada módulo se adapta al sector de tu empresa: ejemplos reales, casos prácticos y herramientas específicas para tu industria.',
   },
   {
     icon: Users,
-    title: 'Transferencia a agente humano',
+    title: 'Presencial, online o híbrida',
     description:
-      'Cuando la consulta lo requiere, el chatbot escala al equipo humano con todo el contexto de la conversación. La experiencia del cliente no se rompe.',
+      'Nos adaptamos a tu equipo. Formación en tus instalaciones, en remoto o en formato híbrido. Grupos reducidos para garantizar la atención individual.',
   },
   {
-    icon: Clock,
-    title: 'Disponible las 24 horas',
+    icon: BookOpen,
+    title: 'Materiales descargables incluidos',
     description:
-      'Atiende a tus clientes fuera de horario de oficina, en festivos y fines de semana. Sin coste adicional y sin tiempos de espera.',
+      'Guías de prompts, plantillas, checklists y recursos prácticos que el equipo puede usar desde el primer día después de la formación.',
   },
   {
-    icon: Globe,
-    title: 'Multiidioma y multicanal',
+    icon: Award,
+    title: 'Certificado de participación',
     description:
-      'Funciona en web, WhatsApp Business, Telegram, Instagram y otras plataformas. Detecta el idioma del usuario y responde automáticamente.',
+      'Cada participante recibe un certificado de formación con las competencias adquiridas, útil para el desarrollo profesional del equipo.',
   },
   {
-    icon: Star,
-    title: 'Personalización de marca',
+    icon: Target,
+    title: 'Objetivos medibles',
     description:
-      'Nombre, tono, avatar y flujo de conversación adaptados a tu imagen de marca. Tu cliente siente que habla con alguien de tu empresa.',
+      'Definimos antes de empezar qué debe saber hacer el equipo al terminar. La formación se evalúa sobre ejercicios prácticos reales, no sobre teoría.',
   },
   {
-    icon: BarChart3,
-    title: 'Analítica de conversaciones',
+    icon: TrendingUp,
+    title: 'Seguimiento post-formación',
     description:
-      'Dashboard con volumen de consultas, temas más frecuentes, tasa de resolución y satisfacción del cliente. Insights para mejorar tu producto o servicio.',
+      'Sesión de seguimiento a las 4 semanas para resolver dudas surgidas en el uso real. La formación no termina en el aula.',
   },
 ]
 
 const benefits = [
   {
-    title: '70% de consultas resueltas sin intervención humana',
+    title: 'El equipo gana 2 horas al día desde la primera semana',
     description:
-      'La mayoría de preguntas de los clientes son repetitivas. El chatbot las resuelve al instante, liberando a tu equipo para las consultas complejas que realmente necesitan atención humana.',
-    stat: '70%',
-    label: 'consultas resueltas automáticamente',
+      'Los empleados que aprenden a usar IA de forma efectiva reducen drásticamente el tiempo en redacción, búsqueda de información y tareas repetitivas. El impacto es inmediato.',
+    stat: '+2h',
+    label: 'productividad diaria por persona',
   },
   {
-    title: 'Tiempo de respuesta inferior a 3 segundos',
+    title: 'Adopción real, no solo conocimiento teórico',
     description:
-      'Los clientes no esperan. Un chatbot IA responde de forma inmediata a cualquier hora, en cualquier canal, con precisión y coherencia. La satisfacción del cliente aumenta notablemente.',
-    stat: '<3s',
-    label: 'tiempo de respuesta',
+      'Nuestra metodología es 80% práctica. Cada ejercicio se realiza con las herramientas reales que el equipo va a usar en su trabajo cotidiano. No hay teoría innecesaria.',
+    stat: '80%',
+    label: 'práctica aplicada al trabajo real',
   },
   {
-    title: 'Reducción del 50% en carga del equipo de soporte',
+    title: 'Reducción del miedo y resistencia al cambio',
     description:
-      'Tu equipo deja de responder las mismas preguntas una y otra vez. Se concentra en casos complejos, en fidelizar clientes y en tareas de mayor valor para el negocio.',
-    stat: '50%',
-    label: 'menos carga para el equipo',
+      'La mayor barrera de adopción de la IA en las empresas es el desconocimiento. Una formación bien diseñada convierte el escepticismo en entusiasmo y autonomía.',
+    stat: '9/10',
+    label: 'satisfacción media de participantes',
   },
 ]
 
-export default function ChatbotsInteligentesPage() {
+export default function FormacionIAPage() {
   return (
     <>
       {/* Hero */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="inline-block bg-blue-600/20 border border-blue-500/30 text-blue-300 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-            Chatbots inteligentes
+            Formación en IA para empresas
           </span>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-6">
-            Atención al cliente inteligente{' '}
-            <span className="text-blue-400">sin esperas y sin límite de escala</span>
+            Capacita a tu equipo en IA{' '}
+            <span className="text-blue-400">con resultados desde el primer día</span>
           </h1>
           <p className="text-lg text-slate-300 max-w-3xl mx-auto mb-10">
-            Chatbots con inteligencia artificial entrenados con el conocimiento de tu empresa.
-            Responden con precisión, escalan a un humano cuando toca y aprenden con cada
-            conversación para ser cada vez mejores.
+            Formación práctica y aplicada para que tu equipo domine ChatGPT, Claude, Copilot y las
+            principales herramientas de automatización. Adaptada a tu sector, sin teoría innecesaria
+            y con impacto real en la productividad.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -120,9 +120,8 @@ export default function ChatbotsInteligentesPage() {
           <div className="text-center mb-14">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">¿Qué incluye el servicio?</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              No es un chatbot de árbol de decisión con respuestas rígidas. Es un asistente
-              conversacional inteligente que entiende el contexto y responde como lo haría un
-              experto de tu equipo.
+              Una formación diseñada para que los conocimientos se apliquen al día siguiente en el
+              trabajo real, no para quedar guardados en una carpeta de apuntes.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -148,7 +147,7 @@ export default function ChatbotsInteligentesPage() {
           <div className="text-center mb-14">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Beneficios concretos</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Resultados medibles que obtienen nuestros clientes tras implantar chatbots con IA.
+              Lo que consiguen las empresas que forman a sus equipos en inteligencia artificial.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -168,11 +167,11 @@ export default function ChatbotsInteligentesPage() {
       <section className="bg-slate-900 text-white py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            ¿Quieres un chatbot que realmente resuelva a tus clientes?
+            ¿Quieres que tu equipo domine la IA?
           </h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
-            En 45 minutos analizamos tu casuística de atención al cliente y te mostramos cómo
-            un chatbot IA gestionaría las consultas más frecuentes de tu negocio.
+            En 45 minutos de videollamada analizamos el nivel actual de tu equipo, los objetivos
+            de la formación y diseñamos un plan adaptado a tu empresa. Sin compromiso.
           </p>
           <Link
             href="/diagnostico-gratuito"
