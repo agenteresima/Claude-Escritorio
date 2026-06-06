@@ -210,8 +210,11 @@ export default function Header() {
 
       {/* Menú mobile */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 bg-white z-40 overflow-y-auto">
-          <div className="container-main py-6 space-y-1">
+        <div
+          className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-white z-[60] overflow-y-auto"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
+          <div className="px-4 py-6 space-y-1">
             {NAV_ITEMS.map((item) => (
               <div key={item.href}>
                 {item.hijos ? (
@@ -236,7 +239,8 @@ export default function Header() {
                           <Link
                             key={hijo.href}
                             href={hijo.href}
-                            className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-navy-600 hover:text-brand-600 hover:bg-brand-50 transition-colors text-sm"
+                            className="flex items-center gap-3 px-4 py-3 rounded-lg text-navy-600 hover:text-brand-600 hover:bg-brand-50 transition-colors text-sm"
+                            onClick={() => setMobileMenuOpen(false)}
                           >
                             <span>{serviceIcons[hijo.href]}</span>
                             {hijo.label}
@@ -254,6 +258,7 @@ export default function Header() {
                         ? 'text-brand-600 bg-brand-50'
                         : 'text-navy-700 hover:bg-surface-50'
                     )}
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.label}
                   </Link>
@@ -262,7 +267,12 @@ export default function Header() {
             ))}
 
             <div className="pt-4 mt-4 border-t border-surface-200 space-y-3">
-              <Button href="/diagnostico-gratuito" variant="primary" className="w-full justify-center">
+              <Button
+                href="/diagnostico-gratuito"
+                variant="primary"
+                className="w-full justify-center"
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 Solicitar diagnóstico gratuito
               </Button>
             </div>
