@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: 'Análisis de Datos con IA | Dashboards e Insights | AP Automatización IA',
   description:
     'Análisis de datos empresariales con inteligencia artificial. Dashboards interactivos, detección de patrones, predicciones y insights accionables para tomar mejores decisiones.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/servicios/analisis-datos-ia' },
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/analisis-datos-ia' },
   openGraph: {
     title: 'Análisis de Datos con IA | AP Automatización IA',
     description:
       'Convertimos tus datos en decisiones. Dashboards inteligentes, análisis predictivo e insights automáticos con inteligencia artificial.',
-    url: 'https://automatizacionprocesos.es/servicios/analisis-datos-ia',
+    url: 'https://www.automatizacionprocesos.es/servicios/analisis-datos-ia',
   },
 }
 

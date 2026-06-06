@@ -20,12 +20,12 @@ export const metadata: Metadata = {
   title: 'Formación IA para Equipos Empresariales | AP Automatización IA',
   description:
     'Formación práctica en inteligencia artificial para equipos empresariales: ChatGPT, Claude, Microsoft Copilot, diseño de prompts y automatización. Presencial, online y grabado.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/formacion-ia' },
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/formacion-ia' },
   openGraph: {
     title: 'Formación IA para Equipos Empresariales | AP Automatización IA',
     description:
       'Formación práctica en IA adaptada al trabajo real de tu equipo. Desde medio día hasta 3 días. Presencial, online o grabado.',
-    url: 'https://automatizacionprocesos.es/formacion-ia',
+    url: 'https://www.automatizacionprocesos.es/formacion-ia',
   },
 }
 
@@ -138,7 +138,7 @@ export default function FormacionIAPage() {
             '@type': 'EducationalOrganization',
             name: 'AP Automatización IA - Formación en IA para Empresas',
             description: 'Formación práctica en inteligencia artificial para equipos empresariales.',
-            url: 'https://automatizacionprocesos.es/formacion-ia',
+            url: 'https://www.automatizacionprocesos.es/formacion-ia',
           }),
         }}
       />

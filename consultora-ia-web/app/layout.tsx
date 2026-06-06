@@ -18,7 +18,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.automatizacionprocesos.es'),
   title: {
-    default: 'AP Automatización IA | Consultoría de Inteligencia Artificial para Empresas',
+    default: 'AP Automatización IA | Consultoría de IA para Empresas',
     template: '%s | AP Automatización IA',
   },
   description:

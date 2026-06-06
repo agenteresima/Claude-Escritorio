@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     locale: 'es_ES',
   },
   alternates: {
-    canonical: 'https://www.ap-automatizacion-ia.es/sobre-nosotros',
+    canonical: 'https://www.automatizacionprocesos.es/sobre-nosotros',
   },
 }
 

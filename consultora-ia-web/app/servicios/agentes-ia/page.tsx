@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: 'Agentes IA Autónomos para Empresas | LLMs Personalizados | AP Automatización IA',
   description:
     'Desarrollamos agentes de inteligencia artificial autónomos con LLMs para tu empresa. Agentes comerciales, de atención al cliente y administrativos que trabajan 24/7 sin errores.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/servicios/agentes-ia' },
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/agentes-ia' },
   openGraph: {
     title: 'Agentes IA Autónomos para Empresas | AP Automatización IA',
     description:
       'Agentes de inteligencia artificial personalizados que trabajan 24/7 en tu nombre. Comercial, atención al cliente, administración.',
-    url: 'https://automatizacionprocesos.es/servicios/agentes-ia',
+    url: 'https://www.automatizacionprocesos.es/servicios/agentes-ia',
   },
 }
 

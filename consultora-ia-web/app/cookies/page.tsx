@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Política de Cookies | AP Automatización IA',
   description:
     'Política de cookies de AP Automatización IA conforme al Reglamento General de Protección de Datos (RGPD) y la normativa española de cookies.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/cookies' },
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/cookies' },
 }
 
 const cookieTable = [

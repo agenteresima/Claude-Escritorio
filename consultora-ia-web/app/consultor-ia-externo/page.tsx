@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: 'Consultor IA Externo para Empresas | AP Automatización IA',
   description:
     'Consultor de inteligencia artificial externo para empresas. Acompañamiento estratégico mensual: videollamadas, validación de herramientas, roadmap IA y formación del equipo. Desde 490 €/mes.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/consultor-ia-externo' },
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/consultor-ia-externo' },
   openGraph: {
     title: 'Consultor IA Externo para Empresas | AP Automatización IA',
     description:

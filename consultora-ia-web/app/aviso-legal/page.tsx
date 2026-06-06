@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Aviso Legal | AP Automatización IA',
   description:
     'Aviso legal de AP Automatización IA conforme a la Ley 34/2002, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE).',
-  alternates: { canonical: 'https://automatizacionprocesos.es/aviso-legal' },
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/aviso-legal' },
 }
 
 export default function AvisoLegalPage() {
@@ -30,7 +30,7 @@ export default function AvisoLegalPage() {
             <li><strong>Actividad:</strong> Consultoría e implementación de inteligencia artificial para empresas</li>
             <li><strong>Email:</strong> hola@automatizacionprocesos.es</li>
             <li><strong>Teléfono:</strong> +34 900 000 000</li>
-            <li><strong>Sitio web:</strong> https://automatizacionprocesos.es</li>
+            <li><strong>Sitio web:</strong> https://www.automatizacionprocesos.es</li>
           </ul>
 
           <h2>2. Objeto y ámbito de aplicación</h2>

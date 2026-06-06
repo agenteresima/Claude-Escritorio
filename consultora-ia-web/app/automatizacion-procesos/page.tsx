@@ -22,12 +22,12 @@ export const metadata: Metadata = {
   title: 'Automatización de Procesos con IA para Empresas | AP Automatización IA',
   description:
     'Automatizamos los procesos administrativos y operativos de tu empresa con inteligencia artificial: facturas, emails, informes, CRM, ERP y más. Ahorra horas cada semana.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/automatizacion-procesos' },
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/automatizacion-procesos' },
   openGraph: {
     title: 'Automatización de Procesos con IA para Empresas | AP Automatización IA',
     description:
       'Automatizamos los procesos que más tiempo consumen a tu equipo. Resultados medibles desde las primeras semanas.',
-    url: 'https://automatizacionprocesos.es/automatizacion-procesos',
+    url: 'https://www.automatizacionprocesos.es/automatizacion-procesos',
   },
 }
 
@@ -181,8 +181,8 @@ export default function AutomatizacionProcesosPage() {
             name: 'Automatización de Procesos con IA',
             description:
               'Automatización de procesos empresariales con inteligencia artificial.',
-            provider: { '@type': 'Organization', name: 'AP Automatización IA', url: 'https://automatizacionprocesos.es' },
-            url: 'https://automatizacionprocesos.es/automatizacion-procesos',
+            provider: { '@type': 'Organization', name: 'AP Automatización IA', url: 'https://www.automatizacionprocesos.es' },
+            url: 'https://www.automatizacionprocesos.es/automatizacion-procesos',
             offers: {
               '@type': 'Offer',
               price: '2500',

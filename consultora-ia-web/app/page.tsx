@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     locale: 'es_ES',
   },
   alternates: {
-    canonical: 'https://www.ap-automatizacion-ia.es',
+    canonical: 'https://www.automatizacionprocesos.es',
   },
 }
 
@@ -43,7 +43,7 @@ const jsonLdProfessionalService = {
   name: 'AP Automatización IA',
   description:
     'Consultoría de Inteligencia Artificial para empresas y pymes. Automatización de procesos, agentes IA, auditoría IA y formación.',
-  url: 'https://www.ap-automatizacion-ia.es',
+  url: 'https://www.automatizacionprocesos.es',
   telephone: '+34 900 000 000',
   areaServed: {
     '@type': 'Country',

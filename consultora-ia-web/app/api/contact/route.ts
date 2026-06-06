@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
                     <table cellpadding="0" cellspacing="0" style="margin: 0 auto 32px;">
                       <tr>
                         <td style="background-color:#1e40af; border-radius:8px; padding: 14px 28px;">
-                          <a href="https://automatizacionprocesos.es" style="color:#ffffff; text-decoration:none; font-weight:600; font-size:15px;">Visitar AP Automatización IA →</a>
+                          <a href="https://www.automatizacionprocesos.es" style="color:#ffffff; text-decoration:none; font-weight:600; font-size:15px;">Visitar AP Automatización IA →</a>
                         </td>
                       </tr>
                     </table>

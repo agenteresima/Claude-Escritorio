@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     locale: 'es_ES',
   },
   alternates: {
-    canonical: 'https://www.ap-automatizacion-ia.es/casos-de-exito',
+    canonical: 'https://www.automatizacionprocesos.es/casos-de-exito',
   },
 }
 

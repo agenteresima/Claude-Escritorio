@@ -15,12 +15,12 @@ export const metadata: Metadata = {
   title: 'Servicios de Consultoría IA para Empresas | AP Automatización IA',
   description:
     'Automatización de procesos, agentes IA, consultor externo, auditoría y formación en inteligencia artificial para empresas. Soluciones prácticas con resultados medibles.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/servicios' },
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios' },
   openGraph: {
     title: 'Servicios de Consultoría IA para Empresas | AP Automatización IA',
     description:
       'Automatización de procesos, agentes IA, consultor externo, auditoría y formación en inteligencia artificial para empresas.',
-    url: 'https://automatizacionprocesos.es/servicios',
+    url: 'https://www.automatizacionprocesos.es/servicios',
   },
 }
 
@@ -167,7 +167,7 @@ export default function ServiciosPage() {
             '@type': 'ItemList',
             name: 'Servicios de AP Automatización IA',
             description: 'Consultoría de inteligencia artificial para empresas',
-            url: 'https://automatizacionprocesos.es/servicios',
+            url: 'https://www.automatizacionprocesos.es/servicios',
             itemListElement: services.map((s, i) => ({
               '@type': 'ListItem',
               position: i + 1,
@@ -175,7 +175,7 @@ export default function ServiciosPage() {
                 '@type': 'Service',
                 name: s.title,
                 description: s.description,
-                url: `https://automatizacionprocesos.es/${s.slug}`,
+                url: `https://www.automatizacionprocesos.es/${s.slug}`,
                 provider: {
                   '@type': 'Organization',
                   name: 'AP Automatización IA',

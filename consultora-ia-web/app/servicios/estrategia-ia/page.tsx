@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: 'Estrategia de IA para Empresas | Hoja de Ruta y Transformación Digital | AP Automatización IA',
   description:
     'Consultoría estratégica de inteligencia artificial para empresas. Definimos tu hoja de ruta de IA, priorizamos iniciativas y acompañamos la transformación digital con resultados medibles.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/servicios/estrategia-ia' },
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/estrategia-ia' },
   openGraph: {
     title: 'Estrategia de IA para Empresas | AP Automatización IA',
     description:
       'Consultoría estratégica de IA. Hoja de ruta, priorización de iniciativas y acompañamiento en la transformación digital de tu empresa.',
-    url: 'https://automatizacionprocesos.es/servicios/estrategia-ia',
+    url: 'https://www.automatizacionprocesos.es/servicios/estrategia-ia',
   },
 }
 

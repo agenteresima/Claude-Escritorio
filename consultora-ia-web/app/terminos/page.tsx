@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     locale: 'es_ES',
   },
   alternates: {
-    canonical: 'https://www.ap-automatizacion-ia.es/terminos',
+    canonical: 'https://www.automatizacionprocesos.es/terminos',
   },
   robots: {
     index: false,

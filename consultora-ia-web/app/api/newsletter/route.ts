@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
                     <table cellpadding="0" cellspacing="0" style="margin: 32px auto;">
                       <tr>
                         <td style="background-color:#1e40af; border-radius:8px; padding: 14px 28px;">
-                          <a href="https://automatizacionprocesos.es/blog" style="color:#ffffff; text-decoration:none; font-weight:600; font-size:15px;">Leer el blog →</a>
+                          <a href="https://www.automatizacionprocesos.es/blog" style="color:#ffffff; text-decoration:none; font-weight:600; font-size:15px;">Leer el blog →</a>
                         </td>
                       </tr>
                     </table>
@@ -90,8 +90,8 @@ export async function POST(request: NextRequest) {
                   <td style="background-color:#f9fafb; padding: 24px 40px; border-top: 1px solid #e5e7eb;">
                     <p style="color:#9ca3af; font-size:11px; margin:0; line-height:1.6; text-align: center;">
                       AP Automatización IA · Consultora de Inteligencia Artificial<br>
-                      Has recibido este email porque te suscribiste en <a href="https://automatizacionprocesos.es" style="color:#9ca3af;">automatizacionprocesos.es</a><br><br>
-                      Si no deseas recibir más emails, <a href="https://automatizacionprocesos.es/baja-newsletter?email=${encodeURIComponent(email)}" style="color:#9ca3af;">cancela tu suscripción aquí</a>.<br>
+                      Has recibido este email porque te suscribiste en <a href="https://www.automatizacionprocesos.es" style="color:#9ca3af;">automatizacionprocesos.es</a><br><br>
+                      Si no deseas recibir más emails, <a href="https://www.automatizacionprocesos.es/baja-newsletter?email=${encodeURIComponent(email)}" style="color:#9ca3af;">cancela tu suscripción aquí</a>.<br>
                       De conformidad con el RGPD, tratamos tus datos exclusivamente para enviarte esta newsletter.
                     </p>
                   </td>

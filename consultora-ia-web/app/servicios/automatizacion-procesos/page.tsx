@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: 'Automatización de Procesos con IA | n8n, Zapier, Make | AP Automatización IA',
   description:
     'Automatizamos tus procesos empresariales repetitivos con n8n, Zapier y Make. Elimina tareas manuales, reduce errores y libera a tu equipo para lo que importa. Resultados medibles.',
-  alternates: { canonical: 'https://automatizacionprocesos.es/servicios/automatizacion-procesos' },
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/automatizacion-procesos' },
   openGraph: {
     title: 'Automatización de Procesos con IA | AP Automatización IA',
     description:
       'Automatizamos tus procesos empresariales repetitivos con n8n, Zapier y Make. Elimina tareas manuales y libera a tu equipo.',
-    url: 'https://automatizacionprocesos.es/servicios/automatizacion-procesos',
+    url: 'https://www.automatizacionprocesos.es/servicios/automatizacion-procesos',
   },
 }
 
