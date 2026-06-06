@@ -36,7 +36,7 @@ export default function Header() {
   const pathname = usePathname()
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
+    const handleScroll = () => setIsScrolled(window.scrollY > 10)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -73,7 +73,7 @@ export default function Header() {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-surface-200'
-          : 'bg-transparent'
+          : 'bg-navy-900/20 backdrop-blur-sm'
       )}
     >
       <div className="container-main">
