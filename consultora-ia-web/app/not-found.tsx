@@ -1,46 +1,73 @@
 import Link from 'next/link'
-import type { Metadata } from 'next'
+import { Home, Zap, BookOpen, MessageSquare } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'Página no encontrada | AP Automatización IA',
-  description: 'La página que buscas no existe. Vuelve a la página principal de AP Automatización IA.',
-  robots: { index: false, follow: false },
-}
+const quickLinks = [
+  {
+    label: 'Ver nuestros servicios',
+    href: '/servicios',
+    icon: Zap,
+    description: 'Automatización, agentes IA y consultoría',
+  },
+  {
+    label: 'Leer el blog de IA',
+    href: '/blog',
+    icon: BookOpen,
+    description: 'Guías y casos prácticos de IA empresarial',
+  },
+  {
+    label: 'Contactar con nosotros',
+    href: '/contacto',
+    icon: MessageSquare,
+    description: 'Resolvemos tus dudas sin compromiso',
+  },
+]
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
-      <div className="max-w-lg w-full text-center">
-        <div className="mb-8">
-          <span className="text-8xl font-bold text-blue-600">404</span>
-        </div>
-        <h1 className="text-3xl font-bold text-slate-900 mb-4">
-          Esta página no existe
-        </h1>
-        <p className="text-slate-600 text-lg mb-8">
-          La dirección que has introducido no corresponde a ninguna página de
-          AP Automatización IA. Es posible que haya sido movida o eliminada.
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex flex-col items-center justify-center text-white px-6 py-16">
+      <div className="max-w-2xl w-full text-center">
+        {/* 404 number */}
+        <div className="text-9xl font-black text-blue-400 leading-none mb-4">404</div>
+
+        {/* Heading */}
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">Esta página no existe</h1>
+
+        {/* Description */}
+        <p className="text-slate-300 text-lg mb-12 max-w-lg mx-auto">
+          Parece que la página que buscas ha sido movida, eliminada o nunca existió. No te
+          preocupes, te ayudamos a encontrar lo que necesitas.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Volver al inicio
-          </Link>
-          <Link
-            href="/servicios"
-            className="inline-flex items-center justify-center px-6 py-3 border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-100 transition-colors"
-          >
-            Ver servicios
-          </Link>
+
+        {/* Quick links grid */}
+        <div className="grid sm:grid-cols-3 gap-4 mb-10">
+          {quickLinks.map((link) => {
+            const Icon = link.icon
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="flex flex-col items-center gap-3 bg-white/10 hover:bg-white/20 border border-white/10 hover:border-white/20 rounded-xl p-5 transition-all group"
+              >
+                <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center group-hover:bg-blue-500/30 transition-colors">
+                  <Icon className="w-5 h-5 text-blue-300" />
+                </div>
+                <div>
+                  <div className="font-semibold text-sm text-white mb-1">{link.label}</div>
+                  <div className="text-xs text-slate-400">{link.description}</div>
+                </div>
+              </Link>
+            )
+          })}
         </div>
-        <p className="mt-8 text-sm text-slate-500">
-          ¿Necesitas ayuda?{' '}
-          <Link href="/contacto" className="text-blue-600 hover:underline">
-            Contáctanos
-          </Link>
-        </p>
+
+        {/* Main CTA */}
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl transition-colors text-lg"
+        >
+          <Home className="w-5 h-5" />
+          Volver al inicio
+        </Link>
       </div>
     </div>
   )

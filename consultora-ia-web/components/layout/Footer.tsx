@@ -28,6 +28,7 @@ const footerLinks = {
     { label: 'Blog de IA', href: '/blog' },
     { label: 'Casos de éxito', href: '/casos-de-exito' },
     { label: 'Diagnóstico gratuito', href: '/diagnostico-gratuito' },
+    { label: 'Precios', href: '/precios' },
     { label: 'Sobre nosotros', href: '/sobre-nosotros' },
     { label: 'FAQ', href: '/#faq' },
   ],
