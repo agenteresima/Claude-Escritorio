@@ -262,7 +262,7 @@ export default function Footer() {
         <div className="container-main py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-navy-400 text-sm text-center sm:text-left">
-              &copy; {new Date().getFullYear()} {COMPANY_INFO.nombre_legal}. Todos los derechos
+              &copy; {new Date().getFullYear()} {COMPANY_INFO.nombre}. Todos los derechos
               reservados.
             </p>
             <p className="text-navy-500 text-xs">

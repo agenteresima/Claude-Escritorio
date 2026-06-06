@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import Link from 'next/link'
-import { Mail, Phone, Clock, CheckCircle, ArrowRight, Send } from 'lucide-react'
+import { Mail, Clock, CheckCircle, ArrowRight, Send } from 'lucide-react'
 
 const schema = z.object({
   nombre: z.string().min(2, 'El nombre es obligatorio'),
@@ -99,20 +99,7 @@ export default function ContactoPage() {
                       </a>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-blue-50 rounded-lg">
-                      <Phone className="h-5 w-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-slate-500">Teléfono</div>
-                      <a
-                        href="tel:+34900000000"
-                        className="text-slate-900 font-medium hover:text-blue-600 transition-colors"
-                      >
-                        +34 900 000 000
-                      </a>
-                    </div>
-                  </div>
+
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-blue-50 rounded-lg">
                       <Clock className="h-5 w-5 text-blue-600" />
