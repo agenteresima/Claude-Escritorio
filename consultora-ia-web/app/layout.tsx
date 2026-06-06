@@ -1,10 +1,13 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import ChatBot from '@/components/bot/ChatBot'
 import CookieBanner from '@/components/ui/CookieBanner'
+
+const GA_ID = 'G-50KP99T5BP'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -185,6 +188,18 @@ export default function RootLayout({
         <meta name="theme-color" content="#0F172A" />
       </head>
       <body className="font-sans antialiased">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
         <Header />
         <main>{children}</main>
         <Footer />
