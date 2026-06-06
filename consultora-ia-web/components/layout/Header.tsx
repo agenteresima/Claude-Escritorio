@@ -56,11 +56,6 @@ export default function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Bloquear scroll cuando el menú mobile está abierto
-  useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [mobileMenuOpen])
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/'
