@@ -19,39 +19,39 @@ interface Solution {
 const solutions: Solution[] = [
   {
     icon: Search,
-    title: 'Auditoría IA',
+    title: 'Auditoría IA gratuita',
     description:
-      'Analizamos en detalle tus procesos actuales y detectamos exactamente dónde y cómo aplicar la inteligencia artificial para generar impacto real.',
+      'En una sesión de 45 minutos analizamos tus procesos clave e identificamos qué se puede automatizar de forma inmediata. Recibes un informe con las 3 oportunidades de mayor ROI para tu empresa, sin coste y sin compromiso.',
   },
   {
     icon: Map,
-    title: 'Estrategia IA',
+    title: 'Estrategia IA personalizada',
     description:
-      'Diseñamos una hoja de ruta realista, priorizada y adaptada a tu empresa: qué implementar primero, con qué herramientas y con qué inversión.',
+      'Diseñamos una hoja de ruta realista y priorizada: qué implementar primero, con qué herramientas (n8n, Make, ChatGPT, modelos LLM propios) y con qué inversión. Incluye estimación de ahorro y retorno esperado en los primeros 12 meses.',
   },
   {
     icon: Zap,
     title: 'Automatización de procesos',
     description:
-      'Convertimos tareas repetitivas en flujos automáticos que funcionan solos: facturación, informes, comunicaciones, integraciones entre sistemas.',
+      'Conectamos tus herramientas (ERP, CRM, correo, Excel, WhatsApp) y creamos flujos automáticos con n8n, Make o Zapier. Facturación, albaranes, informes y comunicaciones funcionan solos. Media de ahorro: 8–12 horas semanales por empleado.',
   },
   {
     icon: Bot,
-    title: 'Agentes IA',
+    title: 'Agentes IA con tus datos',
     description:
-      'Creamos agentes inteligentes conectados a tus sistemas que gestionan consultas, procesan información y actúan de forma autónoma las 24 horas.',
+      'Desarrollamos agentes inteligentes con tecnología RAG que acceden a tu documentación interna, CRM o base de datos y responden preguntas, resuelven incidencias o ejecutan tareas de forma autónoma. Disponibles 24/7 sin intervención humana.',
   },
   {
     icon: GraduationCap,
-    title: 'Formación IA',
+    title: 'Formación IA para equipos',
     description:
-      'Formamos a tu equipo para que sepa usar la IA en su día a día: herramientas prácticas, casos reales y sin tecnicismos innecesarios.',
+      'Talleres presenciales y online adaptados a tu sector: cómo usar ChatGPT de forma profesional, automatización básica con IA, y casos de uso concretos de tu industria. Sin tecnicismos, con ejercicios prácticos y resultados desde el primer día.',
   },
   {
     icon: UserCheck,
-    title: 'Acompañamiento mensual',
+    title: 'Consultor IA externo mensual',
     description:
-      'Te acompañamos como consultor IA externo mes a mes: supervisamos, ajustamos, resolvemos dudas y buscamos nuevas oportunidades de mejora.',
+      'Tu propio experto en inteligencia artificial para empresas disponible mes a mes, sin coste de plantilla. Supervisamos los sistemas implantados, detectamos nuevas oportunidades, formamos al equipo y garantizamos que la IA siga generando valor.',
   },
 ]
 

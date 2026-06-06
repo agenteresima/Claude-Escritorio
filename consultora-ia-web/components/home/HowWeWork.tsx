@@ -14,30 +14,30 @@ const steps: Step[] = [
   {
     number: '01',
     icon: CalendarCheck,
-    title: 'Diagnóstico inicial',
+    title: 'Diagnóstico gratuito (45 min)',
     description:
-      'Empezamos con una videollamada gratuita de 45 minutos en la que conocemos tu empresa, tus procesos y tus objetivos. Sin venta agresiva, solo escucha activa.',
+      'Empezamos con una videollamada gratuita de 45 minutos en la que conocemos tu empresa, tus procesos y tus objetivos. Analizamos dónde se pierde más tiempo y dónde la inteligencia artificial puede generar impacto real. Sin venta agresiva, sin compromiso.',
   },
   {
     number: '02',
     icon: ClipboardList,
-    title: 'Auditoría de procesos',
+    title: 'Propuesta con ROI estimado',
     description:
-      'Analizamos en detalle tus flujos de trabajo, herramientas actuales y puntos de dolor. Identificamos las oportunidades de mayor impacto con IA.',
+      'Entregamos una propuesta personalizada con la hoja de ruta de transformación digital: qué automatizar primero, qué herramientas usar (n8n, Make, ChatGPT, agentes IA), plazos concretos y una estimación realista del ahorro y el retorno esperado en los primeros 12 meses.',
   },
   {
     number: '03',
     icon: Route,
-    title: 'Plan de acción',
+    title: 'Implementación ágil (4-6 semanas)',
     description:
-      'Entregamos una hoja de ruta priorizada y realista: qué automatizar primero, qué herramientas usar, plazos estimados y retorno esperado.',
+      'Ejecutamos el plan con metodología ágil: piloto funcional en 2 semanas, despliegue completo en 4 a 6 semanas. Tu equipo forma parte del proceso desde el principio para que la adopción sea natural y sin fricciones. Medimos resultados desde el primer día.',
   },
   {
     number: '04',
     icon: Rocket,
-    title: 'Implementación y acompañamiento',
+    title: 'Soporte continuo y optimización',
     description:
-      'Ejecutamos el plan contigo, medimos los resultados y ajustamos lo necesario. Puedes contratarnos para el acompañamiento mensual o ejecutar tú mismo con nuestro soporte.',
+      'Formamos a tu equipo para que domine las herramientas implantadas y seguimos contigo como consultor IA externo: supervisamos el rendimiento, detectamos nuevas oportunidades de automatización y optimizamos los sistemas mes a mes para que el ROI siga creciendo.',
   },
 ]
 

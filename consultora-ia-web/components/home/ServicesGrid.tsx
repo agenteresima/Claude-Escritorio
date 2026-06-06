@@ -25,7 +25,7 @@ const services: Service[] = [
     icon: Lightbulb,
     title: 'Consultoría IA',
     description:
-      'Estrategia, hoja de ruta y asesoramiento experto para llevar la IA a tu empresa de forma ordenada y con resultados reales.',
+      'Diseñamos la estrategia de inteligencia artificial para tu empresa: auditoría de procesos, hoja de ruta priorizada y selección de las herramientas más adecuadas. Asesoramiento experto para que la IA genere resultados reales y medibles desde el primer proyecto.',
     href: '/servicios',
     cta: 'Saber más',
   },
@@ -33,7 +33,7 @@ const services: Service[] = [
     icon: UserCheck,
     title: 'Consultor IA Externo',
     description:
-      'Tu propio experto en IA disponible mes a mes, sin coste de plantilla. Supervisión, soporte y mejora continua.',
+      'Tu propio experto en IA disponible mes a mes, sin coste de plantilla ni proceso de selección. Supervisamos los sistemas implantados, formamos al equipo, detectamos nuevas oportunidades de automatización y garantizamos que la inversión en IA siga rentabilizándose.',
     href: '/consultor-ia-externo',
     cta: 'Ver el servicio',
   },
@@ -41,7 +41,7 @@ const services: Service[] = [
     icon: Zap,
     title: 'Automatización de Procesos',
     description:
-      'Conectamos tus herramientas y automatizamos los procesos más repetitivos para que tu equipo se centre en lo importante.',
+      'Conectamos tu ERP, CRM, correo, hojas de cálculo y aplicaciones mediante n8n, Make y Zapier para eliminar el trabajo manual. Automatizamos facturación, albaranes, informes, sincronización de datos y comunicaciones. Media de ahorro: 8-12 horas semanales por persona.',
     href: '/automatizacion-procesos',
     cta: 'Ver cómo funciona',
   },
@@ -49,7 +49,7 @@ const services: Service[] = [
     icon: Bot,
     title: 'Agentes IA',
     description:
-      'Agentes inteligentes que atienden clientes, procesan documentos o gestionan tareas de forma autónoma las 24 horas del día.',
+      'Desarrollamos agentes inteligentes basados en LLMs con arquitectura RAG conectados a tus datos internos: documentación, CRM, base de conocimiento. Atienden consultas de clientes, procesan documentos, generan respuestas y ejecutan tareas de forma autónoma 24/7.',
     href: '/agentes-ia',
     cta: 'Explorar agentes',
   },
@@ -57,15 +57,15 @@ const services: Service[] = [
     icon: Search,
     title: 'Auditoría IA',
     description:
-      'Analizamos tus procesos y sistemas actuales para identificar las oportunidades de mayor impacto con inteligencia artificial.',
+      'Analizamos en profundidad tus procesos, herramientas actuales y puntos de dolor para identificar las 3-5 oportunidades de mayor impacto con inteligencia artificial. Recibes un informe detallado con priorización, ROI estimado y recomendaciones de implementación.',
     href: '/auditoria-ia',
     cta: 'Solicitar auditoría',
   },
   {
     icon: GraduationCap,
-    title: 'Formación IA',
+    title: 'Formación IA para empresas',
     description:
-      'Talleres y programas formativos para equipos empresariales: aprende a usar la IA de forma práctica y aplicada a tu sector.',
+      'Talleres presenciales y online adaptados a tu sector y nivel: uso profesional de ChatGPT, automatización básica con IA, y creación de flujos con n8n o Make. Formación práctica con casos reales de tu industria, certificación incluida y sin conocimientos técnicos previos.',
     href: '/formacion-ia',
     cta: 'Ver formaciones',
   },

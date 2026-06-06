@@ -14,35 +14,35 @@ interface Benefit {
 const benefits: Benefit[] = [
   {
     icon: Timer,
-    metric: '60',
-    unit: '%',
-    title: 'Ahorro en tareas repetitivas',
+    metric: '20',
+    unit: 'h',
+    title: 'Horas ahorradas por empleado cada semana',
     description:
-      'De media, las empresas que implementan automatización con IA reducen a la mitad el tiempo dedicado a tareas manuales y repetitivas.',
-  },
-  {
-    icon: ShieldCheck,
-    metric: '80',
-    unit: '%',
-    title: 'Reducción de errores administrativos',
-    description:
-      'Los procesos automatizados eliminan casi por completo los errores humanos en introducción de datos, facturación y comunicaciones.',
-  },
-  {
-    icon: MessageSquare,
-    metric: '5×',
-    unit: '',
-    title: 'Mejora en tiempo de respuesta',
-    description:
-      'Los agentes IA responden de forma inmediata, las 24 horas del día, sin colas de espera ni retrasos por horario de oficina.',
+      'De media, los equipos que automatizan con IA recuperan hasta 20 horas semanales por persona. Tiempo que se puede reinvertir en tareas de mayor valor: ventas, atención al cliente o innovación.',
   },
   {
     icon: TrendingUp,
-    metric: '3×',
-    unit: '',
-    title: 'ROI en automatizaciones',
+    metric: '340',
+    unit: '%',
+    title: 'ROI medio en el primer año',
     description:
-      'La inversión en automatización se recupera habitualmente en menos de 6 meses. Después, el ahorro es beneficio directo y sostenido.',
+      'La inversión en automatización de procesos con IA se recupera en 3 a 6 meses. A partir de ahí, el ahorro es beneficio directo y sostenido mes a mes sin coste adicional.',
+  },
+  {
+    icon: ShieldCheck,
+    metric: '4-6',
+    unit: '',
+    title: 'Semanas hasta ver resultados reales',
+    description:
+      'No hacemos promesas a largo plazo. En 2 semanas tienes un piloto funcionando y en 4-6 semanas el proceso automatizado está en producción con tu equipo formado y operativo.',
+  },
+  {
+    icon: MessageSquare,
+    metric: '0',
+    unit: '',
+    title: 'Conocimientos técnicos necesarios',
+    description:
+      'Nos encargamos de toda la parte técnica: instalación, integración con tus sistemas, formación y mantenimiento. Tu equipo solo necesita saber usar las herramientas, no programarlas.',
   },
 ]
 
