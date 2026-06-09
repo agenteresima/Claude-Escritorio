@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
 
     // Email de bienvenida
     await getResend().emails.send({
-      from: 'AP Automatización IA <hola@automatizacionprocesos.es>',
+      from: 'AP Automatización IA <admin@automatizacionprocesos.es>',
       to: email,
       subject: '¡Bienvenido/a a la newsletter de AP Automatización IA! 🚀',
       html: `

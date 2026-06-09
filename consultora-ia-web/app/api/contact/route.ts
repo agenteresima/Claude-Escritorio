@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     // Email interno de notificación
     await getResend().emails.send({
       from: 'AP Automatización IA <noreply@automatizacionprocesos.es>',
-      to: 'hola@automatizacionprocesos.es',
+      to: 'admin@automatizacionprocesos.es',
       subject: `📬 Nuevo mensaje de contacto: ${data.name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
 
     // Email de confirmación al usuario
     await getResend().emails.send({
-      from: 'AP Automatización IA <hola@automatizacionprocesos.es>',
+      from: 'AP Automatización IA <admin@automatizacionprocesos.es>',
       to: data.email,
       subject: 'Hemos recibido tu mensaje — AP Automatización IA',
       html: `
@@ -118,7 +118,7 @@ export async function POST(request: NextRequest) {
                         </td>
                       </tr>
                     </table>
-                    <p style="color:#6b7280; font-size:13px; margin:0;">Si tienes alguna pregunta urgente, puedes escribirnos directamente a <a href="mailto:hola@automatizacionprocesos.es" style="color:#1e40af;">hola@automatizacionprocesos.es</a></p>
+                    <p style="color:#6b7280; font-size:13px; margin:0;">Si tienes alguna pregunta urgente, puedes escribirnos directamente a <a href="mailto:admin@automatizacionprocesos.es" style="color:#1e40af;">admin@automatizacionprocesos.es</a></p>
                   </td>
                 </tr>
                 <tr>

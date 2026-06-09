@@ -260,7 +260,7 @@ export default function TerminosPage() {
             Para la resolución de cualquier controversia o reclamación derivada de la interpretación
             o ejecución de los presentes Términos o de los servicios prestados, las partes se
             someten, con renuncia expresa a cualquier otro fuero que pudiera corresponderles, a los
-            Juzgados y Tribunales de la ciudad de Madrid.
+            Juzgados y Tribunales de la ciudad de Valencia.
           </p>
           <p>
             Sin perjuicio de lo anterior, si el cliente tiene la condición de consumidor conforme a

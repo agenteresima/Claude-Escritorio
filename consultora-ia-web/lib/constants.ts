@@ -10,11 +10,11 @@ export const COMPANY_INFO: CompanyInfo = {
   slogan: 'El experto en IA que tu empresa todavía no tiene en plantilla',
   descripcion:
     'Ayudamos a empresas de todos los sectores a implantar inteligencia artificial de forma práctica, rentable y sin complicaciones. Desde la estrategia hasta la automatización de tus primeros procesos.',
-  email: 'hola@automatizacionprocesos.es',
-  email_soporte: 'soporte@automatizacionprocesos.es',
+  email: 'admin@automatizacionprocesos.es',
+  email_soporte: 'admin@automatizacionprocesos.es',
   telefono: '+34 900 000 000',
-  direccion: 'Calle de Alcalá, 50, 1ª planta',
-  ciudad: 'Madrid',
+  direccion: '',
+  ciudad: 'Valencia',
   pais: 'España',
   redes_sociales: {
     linkedin: 'https://www.linkedin.com/company/apautomatizacion',

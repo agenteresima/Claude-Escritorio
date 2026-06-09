@@ -31,7 +31,7 @@ export default function PrivacidadPage() {
           </p>
           <ul>
             <li><strong>Denominación:</strong> AP Automatización IA</li>
-            <li><strong>Email de contacto:</strong> hola@automatizacionprocesos.es</li>
+            <li><strong>Email de contacto:</strong> admin@automatizacionprocesos.es</li>
             <li><strong>Sitio web:</strong> https://www.automatizacionprocesos.es</li>
           </ul>
 
@@ -147,7 +147,7 @@ export default function PrivacidadPage() {
           </ul>
           <p>
             Para ejercer cualquiera de estos derechos, puede dirigirse a{' '}
-            <a href="mailto:hola@automatizacionprocesos.es">hola@automatizacionprocesos.es</a>. Tiene derecho a presentar una
+            <a href="mailto:admin@automatizacionprocesos.es">admin@automatizacionprocesos.es</a>. Tiene derecho a presentar una
             reclamación ante la Agencia Española de Protección de Datos (
             <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">
               www.aepd.es

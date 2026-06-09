@@ -67,7 +67,7 @@ export default function DiagnosticoGratuitoPage() {
       if (!res.ok) throw new Error('Error')
       setSubmitted(true)
     } catch {
-      setError('Ha ocurrido un error. Por favor, inténtalo de nuevo o escríbenos a hola@automatizacionprocesos.es')
+      setError('Ha ocurrido un error. Por favor, inténtalo de nuevo o escríbenos a admin@automatizacionprocesos.es')
     } finally {
       setLoading(false)
     }

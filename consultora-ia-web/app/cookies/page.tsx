@@ -242,7 +242,7 @@ export default function CookiesPage() {
           <p>
             Puede retirar su consentimiento en cualquier momento modificando la configuración de su
             navegador o contactando con nosotros en{' '}
-            <a href="mailto:hola@automatizacionprocesos.es">hola@automatizacionprocesos.es</a>.
+            <a href="mailto:admin@automatizacionprocesos.es">admin@automatizacionprocesos.es</a>.
           </p>
 
           <h2>7. Actualizaciones de esta política</h2>
@@ -257,7 +257,7 @@ export default function CookiesPage() {
             Para más información sobre el tratamiento de sus datos personales, consulte nuestra{' '}
             <Link href="/privacidad">política de privacidad</Link>. Para cualquier consulta sobre
             esta política de cookies, puede contactarnos en{' '}
-            <a href="mailto:hola@automatizacionprocesos.es">hola@automatizacionprocesos.es</a>.
+            <a href="mailto:admin@automatizacionprocesos.es">admin@automatizacionprocesos.es</a>.
           </p>
         </div>
       </div>

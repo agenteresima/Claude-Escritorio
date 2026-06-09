@@ -108,7 +108,7 @@ export default function OGImage() {
               }}
             >
               <span style={{ color: '#93C5FD', fontSize: '16px', fontWeight: '600' }}>
-                Consultoría de IA para Empresas · Madrid, España
+                Consultoría de IA para Empresas · Valencia, España
               </span>
             </div>
 

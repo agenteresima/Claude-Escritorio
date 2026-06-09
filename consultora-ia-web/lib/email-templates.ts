@@ -43,7 +43,7 @@ const FOOTER_LEGAL = `
   <p style="${BASE_STYLES.footerText} text-align: center;">
     AP Automatización IA · Consultora de Inteligencia Artificial<br>
     <a href="https://automatizacionprocesos.es" style="color: #9ca3af;">automatizacionprocesos.es</a> · 
-    <a href="mailto:hola@automatizacionprocesos.es" style="color: #9ca3af;">hola@automatizacionprocesos.es</a><br><br>
+    <a href="mailto:admin@automatizacionprocesos.es" style="color: #9ca3af;">admin@automatizacionprocesos.es</a><br><br>
     De conformidad con el Reglamento (UE) 2016/679 (RGPD) y la LOPDGDD, tus datos personales son tratados 
     por AP Automatización IA con la finalidad de gestionar tu solicitud y contactarte comercialmente. 
     Puedes ejercer tus derechos de acceso, rectificación, supresión y oposición escribiendo a 
@@ -202,7 +202,7 @@ export function emailConfirmacionCliente(lead: Lead): string {
 
               <p style="color: #6b7280; font-size: 13px; margin: 0;">
                 ¿Tienes alguna pregunta? Escríbenos a 
-                <a href="mailto:hola@automatizacionprocesos.es" style="color: #1e40af;">hola@automatizacionprocesos.es</a>
+                <a href="mailto:admin@automatizacionprocesos.es" style="color: #1e40af;">admin@automatizacionprocesos.es</a>
               </p>
             </div>
 
@@ -350,7 +350,7 @@ export function emailPropuesta(lead: Lead): string {
               </table>
               <p style="color: #6b7280; font-size: 13px; text-align: center;">
                 Esta propuesta es válida durante 30 días. Cualquier duda, escríbenos a 
-                <a href="mailto:hola@automatizacionprocesos.es" style="color: #1e40af;">hola@automatizacionprocesos.es</a>
+                <a href="mailto:admin@automatizacionprocesos.es" style="color: #1e40af;">admin@automatizacionprocesos.es</a>
               </p>
             </div>
             <div style="${BASE_STYLES.footer}">${FOOTER_LEGAL}</div>

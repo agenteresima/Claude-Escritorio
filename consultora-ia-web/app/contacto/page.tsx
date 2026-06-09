@@ -52,7 +52,7 @@ export default function ContactoPage() {
       if (!res.ok) throw new Error('Error al enviar el formulario')
       setSubmitted(true)
     } catch {
-      setError('Ha ocurrido un error. Por favor, inténtalo de nuevo o escríbenos directamente a hola@automatizacionprocesos.es')
+      setError('Ha ocurrido un error. Por favor, inténtalo de nuevo o escríbenos directamente a admin@automatizacionprocesos.es')
     } finally {
       setLoading(false)
     }
@@ -92,10 +92,10 @@ export default function ContactoPage() {
                     <div>
                       <div className="text-xs text-slate-500">Email</div>
                       <a
-                        href="mailto:hola@automatizacionprocesos.es"
+                        href="mailto:admin@automatizacionprocesos.es"
                         className="text-slate-900 font-medium hover:text-blue-600 transition-colors"
                       >
-                        hola@automatizacionprocesos.es
+                        admin@automatizacionprocesos.es
                       </a>
                     </div>
                   </div>

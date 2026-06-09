@@ -28,7 +28,7 @@ export default function AvisoLegalPage() {
           <ul>
             <li><strong>Denominación:</strong> AP Automatización IA</li>
             <li><strong>Actividad:</strong> Consultoría e implementación de inteligencia artificial para empresas</li>
-            <li><strong>Email:</strong> hola@automatizacionprocesos.es</li>
+            <li><strong>Email:</strong> admin@automatizacionprocesos.es</li>
             <li><strong>Teléfono:</strong> +34 900 000 000</li>
             <li><strong>Sitio web:</strong> https://www.automatizacionprocesos.es</li>
           </ul>
@@ -133,7 +133,7 @@ export default function AvisoLegalPage() {
           <p>
             Para cualquier consulta relacionada con el presente Aviso Legal, puede ponerse en
             contacto con nosotros a través de:{' '}
-            <a href="mailto:hola@automatizacionprocesos.es">hola@automatizacionprocesos.es</a>
+            <a href="mailto:admin@automatizacionprocesos.es">admin@automatizacionprocesos.es</a>
           </p>
         </div>
       </div>
