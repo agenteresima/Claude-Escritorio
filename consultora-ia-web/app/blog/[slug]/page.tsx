@@ -5,7 +5,7 @@ import { blogPosts, getBlogPost, getRelatedPosts } from '@/lib/blog-data'
 import { Calendar, Clock, ArrowRight, ArrowLeft, ChevronRight } from 'lucide-react'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export function generateStaticParams() {
@@ -13,7 +13,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getBlogPost(params.slug)
+  const { slug } = await params
+  const post = getBlogPost(slug)
   if (!post) return {}
   return {
     title: `${post.title} | AP Automatización IA`,
@@ -35,11 +36,12 @@ function formatDate(dateStr: string) {
   return date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
-export default function BlogPostPage({ params }: Props) {
-  const post = getBlogPost(params.slug)
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params
+  const post = getBlogPost(slug)
   if (!post) notFound()
 
-  const related = getRelatedPosts(params.slug, 3)
+  const related = getRelatedPosts(slug, 3)
 
   const articleSchema = {
     '@context': 'https://schema.org',
