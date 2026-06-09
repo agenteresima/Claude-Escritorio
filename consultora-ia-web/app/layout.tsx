@@ -41,6 +41,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'AP Automatización IA', url: 'https://www.automatizacionprocesos.es' }],
   creator: 'AP Automatización IA',
   publisher: 'AP Automatización IA',
+  verification: {
+    google: 'TceEaWudgp_DnrexQdit-LP27Gc-UYA6bJHXq28prrE',
+  },
   robots: {
     index: true,
     follow: true,
