@@ -91,7 +91,7 @@ export default function Hero() {
             <Link
               href="/servicios"
               className="inline-flex items-center gap-2 rounded-lg border border-slate-600 bg-transparent px-7 py-3.5 text-base font-semibold text-slate-200 transition-all hover:border-slate-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-[#0F172A]"
-              aria-label="Ver todos los servicios de AP Automatización IA"
+              aria-label="Ver todos los servicios de Automatización Procesos IA"
             >
               Ver nuestros servicios
             </Link>

@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { GraduationCap, Users, BookOpen, Award, Target, TrendingUp, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Formación en IA para Empresas | Capacitación Equipos | AP Automatización IA',
+  title: 'Formación en IA para Empresas | Capacitación Equipos | Automatización Procesos IA',
   description:
     'Formación práctica en inteligencia artificial para equipos empresariales. ChatGPT, Claude, Copilot y herramientas de automatización. Adaptada a tu sector y resultados inmediatos.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/formacion-ia' },
   openGraph: {
-    title: 'Formación en IA para Empresas | AP Automatización IA',
+    title: 'Formación en IA para Empresas | Automatización Procesos IA',
     description:
       'Capacitación práctica en IA para equipos. ChatGPT, Claude, Copilot y automatización. Adaptada a tu sector con resultados desde el primer día.',
     url: 'https://www.automatizacionprocesos.es/servicios/formacion-ia',

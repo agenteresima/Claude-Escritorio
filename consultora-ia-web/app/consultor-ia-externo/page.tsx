@@ -13,12 +13,12 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Consultor IA Externo para Empresas | AP Automatización IA',
+  title: 'Consultor IA Externo para Empresas | Automatización Procesos IA',
   description:
     'Consultor de inteligencia artificial externo para empresas. Acompañamiento estratégico mensual: videollamadas, validación de herramientas, roadmap IA y formación del equipo. Desde 490 €/mes.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/consultor-ia-externo' },
   openGraph: {
-    title: 'Consultor IA Externo para Empresas | AP Automatización IA',
+    title: 'Consultor IA Externo para Empresas | Automatización Procesos IA',
     description:
       'Acompañamiento estratégico mensual en inteligencia artificial para directivos y gerentes. Sin compromiso de permanencia.',
   },
@@ -74,7 +74,7 @@ const plans = [
       'Canal de comunicación por email',
       'Revisión de hasta 2 herramientas/mes',
       'Informe mensual de progreso',
-      'Acceso a recursos y plantillas AP Automatización IA',
+      'Acceso a recursos y plantillas Automatización Procesos IA',
     ],
     cta: 'Solicitar videollamada',
     highlight: false,

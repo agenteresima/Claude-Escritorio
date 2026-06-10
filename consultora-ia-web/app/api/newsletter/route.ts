@@ -50,9 +50,9 @@ export async function POST(request: NextRequest) {
 
     // Email de bienvenida
     await getResend().emails.send({
-      from: 'AP Automatización IA <admin@automatizacionprocesos.es>',
+      from: 'Automatización Procesos IA <admin@automatizacionprocesos.es>',
       to: email,
-      subject: '¡Bienvenido/a a la newsletter de AP Automatización IA! 🚀',
+      subject: '¡Bienvenido/a a la newsletter de Automatización Procesos IA! 🚀',
       html: `
         <!DOCTYPE html>
         <html lang="es">
@@ -63,19 +63,19 @@ export async function POST(request: NextRequest) {
               <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:12px; overflow:hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.07);">
                 <tr>
                   <td style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 40px; text-align: center;">
-                    <h1 style="color:#ffffff; margin:0; font-size:28px; font-weight:700;">AP Automatización IA</h1>
+                    <h1 style="color:#ffffff; margin:0; font-size:28px; font-weight:700;">Automatización Procesos IA</h1>
                     <p style="color:#bfdbfe; margin:10px 0 0; font-size:15px;">Consultora de Inteligencia Artificial</p>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 40px;">
                     <h2 style="color:#1e40af; margin: 0 0 16px; font-size:22px;">¡Ya formas parte de nuestra comunidad! 🎉</h2>
-                    <p style="color:#374151; line-height:1.7; margin: 0 0 16px; font-size:15px;">Gracias por suscribirte a la newsletter de AP Automatización IA. Cada semana recibirás:</p>
+                    <p style="color:#374151; line-height:1.7; margin: 0 0 16px; font-size:15px;">Gracias por suscribirte a la newsletter de Automatización Procesos IA. Cada semana recibirás:</p>
                     <ul style="color:#374151; line-height:1.8; font-size:15px; padding-left: 20px;">
                       <li>Las últimas tendencias en IA para empresas</li>
                       <li>Casos de uso reales y casos de éxito</li>
                       <li>Guías prácticas de automatización</li>
-                      <li>Novedades exclusivas de AP Automatización IA</li>
+                      <li>Novedades exclusivas de Automatización Procesos IA</li>
                     </ul>
                     <table cellpadding="0" cellspacing="0" style="margin: 32px auto;">
                       <tr>
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
                 <tr>
                   <td style="background-color:#f9fafb; padding: 24px 40px; border-top: 1px solid #e5e7eb;">
                     <p style="color:#9ca3af; font-size:11px; margin:0; line-height:1.6; text-align: center;">
-                      AP Automatización IA · Consultora de Inteligencia Artificial<br>
+                      Automatización Procesos IA · Consultora de Inteligencia Artificial<br>
                       Has recibido este email porque te suscribiste en <a href="https://www.automatizacionprocesos.es" style="color:#9ca3af;">automatizacionprocesos.es</a><br><br>
                       Si no deseas recibir más emails, <a href="https://www.automatizacionprocesos.es/baja-newsletter?email=${encodeURIComponent(email)}" style="color:#9ca3af;">cancela tu suscripción aquí</a>.<br>
                       De conformidad con el RGPD, tratamos tus datos exclusivamente para enviarte esta newsletter.

@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { MessageSquare, Users, Clock, Globe, Star, BarChart3, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Chatbots Inteligentes con IA para Atención al Cliente | AP Automatización IA',
+  title: 'Chatbots Inteligentes con IA para Atención al Cliente | Automatización Procesos IA',
   description:
     'Chatbots con inteligencia artificial para atención al cliente en tu web, WhatsApp y redes sociales. Respuestas precisas, disponibilidad 24/7 y escala sin límite.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/chatbots-inteligentes' },
   openGraph: {
-    title: 'Chatbots Inteligentes con IA para Atención al Cliente | AP Automatización IA',
+    title: 'Chatbots Inteligentes con IA para Atención al Cliente | Automatización Procesos IA',
     description:
       'Chatbots con IA que atienden a tus clientes 24/7 con respuestas precisas. Integración en web, WhatsApp y redes sociales.',
     url: 'https://www.automatizacionprocesos.es/servicios/chatbots-inteligentes',

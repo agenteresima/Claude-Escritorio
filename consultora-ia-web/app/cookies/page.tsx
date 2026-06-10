@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Política de Cookies | AP Automatización IA',
+  title: 'Política de Cookies | Automatización Procesos IA',
   description:
-    'Política de cookies de AP Automatización IA conforme al Reglamento General de Protección de Datos (RGPD) y la normativa española de cookies.',
+    'Política de cookies de Automatización Procesos IA conforme al Reglamento General de Protección de Datos (RGPD) y la normativa española de cookies.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/cookies' },
 }
 
@@ -17,19 +17,19 @@ const cookieTable = [
         name: 'session',
         purpose: 'Mantiene la sesión activa del usuario durante la navegación',
         duration: 'Sesión',
-        provider: 'AP Automatización IA',
+        provider: 'Automatización Procesos IA',
       },
       {
         name: 'csrf_token',
         purpose: 'Protección contra ataques de falsificación de solicitudes entre sitios',
         duration: 'Sesión',
-        provider: 'AP Automatización IA',
+        provider: 'Automatización Procesos IA',
       },
       {
         name: 'cookie_consent',
         purpose: 'Almacena las preferencias de cookies del usuario',
         duration: '12 meses',
-        provider: 'AP Automatización IA',
+        provider: 'Automatización Procesos IA',
       },
     ],
   },

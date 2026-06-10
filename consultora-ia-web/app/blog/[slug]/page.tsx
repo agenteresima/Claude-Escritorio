@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getBlogPost(slug)
   if (!post) return {}
   return {
-    title: `${post.title} | AP Automatización IA`,
+    title: `${post.title} | Automatización Procesos IA`,
     description: post.description,
     alternates: { canonical: `https://www.automatizacionprocesos.es/blog/${post.slug}` },
     openGraph: {
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://www.automatizacionprocesos.es/blog/${post.slug}`,
       type: 'article',
       publishedTime: post.date,
-      authors: ['AP Automatización IA'],
+      authors: ['Automatización Procesos IA'],
     },
   }
 }
@@ -51,12 +51,12 @@ export default async function BlogPostPage({ params }: Props) {
     datePublished: post.date,
     author: {
       '@type': 'Organization',
-      name: 'AP Automatización IA',
+      name: 'Automatización Procesos IA',
       url: 'https://www.automatizacionprocesos.es',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'AP Automatización IA',
+      name: 'Automatización Procesos IA',
       url: 'https://www.automatizacionprocesos.es',
     },
     url: `https://www.automatizacionprocesos.es/blog/${post.slug}`,

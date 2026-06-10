@@ -171,16 +171,16 @@ export async function POST(request: NextRequest) {
         }
 
         await getResend().emails.send({
-          from: 'AP Automatización IA <noreply@automatizacionprocesos.es>',
+          from: 'Automatización Procesos IA <noreply@automatizacionprocesos.es>',
           to: 'admin@automatizacionprocesos.es',
           subject: `🤖 Lead del chatbot: ${data.name} — ${data.company ?? 'Sin empresa'} (Score: ${qualification_score})`,
           html: emailNuevoLead(lead),
         })
 
         await getResend().emails.send({
-          from: 'AP Automatización IA <admin@automatizacionprocesos.es>',
+          from: 'Automatización Procesos IA <admin@automatizacionprocesos.es>',
           to: data.email,
-          subject: 'Tu solicitud de consultoría ha sido recibida — AP Automatización IA',
+          subject: 'Tu solicitud de consultoría ha sido recibida — Automatización Procesos IA',
           html: emailConfirmacionCliente(lead),
         })
       }

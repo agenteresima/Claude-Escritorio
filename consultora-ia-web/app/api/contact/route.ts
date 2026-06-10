@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
     // Email interno de notificación
     await getResend().emails.send({
-      from: 'AP Automatización IA <noreply@automatizacionprocesos.es>',
+      from: 'Automatización Procesos IA <noreply@automatizacionprocesos.es>',
       to: 'admin@automatizacionprocesos.es',
       subject: `📬 Nuevo mensaje de contacto: ${data.name}`,
       html: `
@@ -85,9 +85,9 @@ export async function POST(request: NextRequest) {
 
     // Email de confirmación al usuario
     await getResend().emails.send({
-      from: 'AP Automatización IA <admin@automatizacionprocesos.es>',
+      from: 'Automatización Procesos IA <admin@automatizacionprocesos.es>',
       to: data.email,
-      subject: 'Hemos recibido tu mensaje — AP Automatización IA',
+      subject: 'Hemos recibido tu mensaje — Automatización Procesos IA',
       html: `
         <!DOCTYPE html>
         <html lang="es">
@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
               <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:12px; overflow:hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.07);">
                 <tr>
                   <td style="background-color:#1e40af; padding: 32px 40px; text-align: center;">
-                    <h1 style="color:#ffffff; margin:0; font-size:24px; font-weight:700;">AP Automatización IA</h1>
+                    <h1 style="color:#ffffff; margin:0; font-size:24px; font-weight:700;">Automatización Procesos IA</h1>
                     <p style="color:#93c5fd; margin:8px 0 0; font-size:14px;">Consultora de Inteligencia Artificial</p>
                   </td>
                 </tr>
@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
                   <td style="padding: 40px;">
                     <h2 style="color:#1e40af; margin: 0 0 16px; font-size:20px;">Hola, ${data.name} 👋</h2>
                     <p style="color:#374151; line-height:1.6; margin: 0 0 16px;">Hemos recibido tu mensaje y te responderemos en un plazo máximo de <strong>24 horas laborables</strong>.</p>
-                    <p style="color:#374151; line-height:1.6; margin: 0 0 24px;">En AP Automatización IA estamos comprometidos a ayudarte a transformar tu empresa con inteligencia artificial. Tu consulta es importante para nosotros.</p>
+                    <p style="color:#374151; line-height:1.6; margin: 0 0 24px;">En Automatización Procesos IA estamos comprometidos a ayudarte a transformar tu empresa con inteligencia artificial. Tu consulta es importante para nosotros.</p>
                     <div style="background:#eff6ff; border-left: 4px solid #1e40af; padding: 16px; border-radius: 0 8px 8px 0; margin-bottom: 32px;">
                       <p style="margin:0; color:#1e40af; font-weight:bold; font-size:14px;">Tu mensaje:</p>
                       <p style="margin: 8px 0 0; color:#374151; font-size:14px;">${data.mensaje}</p>
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
                     <table cellpadding="0" cellspacing="0" style="margin: 0 auto 32px;">
                       <tr>
                         <td style="background-color:#1e40af; border-radius:8px; padding: 14px 28px;">
-                          <a href="https://www.automatizacionprocesos.es" style="color:#ffffff; text-decoration:none; font-weight:600; font-size:15px;">Visitar AP Automatización IA →</a>
+                          <a href="https://www.automatizacionprocesos.es" style="color:#ffffff; text-decoration:none; font-weight:600; font-size:15px;">Visitar Automatización Procesos IA →</a>
                         </td>
                       </tr>
                     </table>
@@ -124,9 +124,9 @@ export async function POST(request: NextRequest) {
                 <tr>
                   <td style="background-color:#f9fafb; padding: 24px 40px; border-top: 1px solid #e5e7eb;">
                     <p style="color:#9ca3af; font-size:11px; margin:0; line-height:1.6;">
-                      AP Automatización IA · Consultora de Inteligencia Artificial<br>
+                      Automatización Procesos IA · Consultora de Inteligencia Artificial<br>
                       Enviado a: ${data.email}<br><br>
-                      De conformidad con el Reglamento (UE) 2016/679 (RGPD) y la LOPDGDD, tus datos personales son tratados por AP Automatización IA con la finalidad de gestionar tu solicitud. Puedes ejercer tus derechos de acceso, rectificación, supresión y oposición escribiendo a <a href="mailto:privacidad@automatizacionprocesos.es" style="color:#9ca3af;">privacidad@automatizacionprocesos.es</a>.
+                      De conformidad con el Reglamento (UE) 2016/679 (RGPD) y la LOPDGDD, tus datos personales son tratados por Automatización Procesos IA con la finalidad de gestionar tu solicitud. Puedes ejercer tus derechos de acceso, rectificación, supresión y oposición escribiendo a <a href="mailto:privacidad@automatizacionprocesos.es" style="color:#9ca3af;">privacidad@automatizacionprocesos.es</a>.
                     </p>
                   </td>
                 </tr>

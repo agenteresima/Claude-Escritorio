@@ -19,12 +19,12 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Automatización de Procesos con IA para Empresas | AP Automatización IA',
+  title: 'Automatización de Procesos con IA para Empresas | Automatización Procesos IA',
   description:
     'Automatizamos los procesos administrativos y operativos de tu empresa con inteligencia artificial: facturas, emails, informes, CRM, ERP y más. Ahorra horas cada semana.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/automatizacion-procesos' },
   openGraph: {
-    title: 'Automatización de Procesos con IA para Empresas | AP Automatización IA',
+    title: 'Automatización de Procesos con IA para Empresas | Automatización Procesos IA',
     description:
       'Automatizamos los procesos que más tiempo consumen a tu equipo. Resultados medibles desde las primeras semanas.',
     url: 'https://www.automatizacionprocesos.es/automatizacion-procesos',
@@ -181,7 +181,7 @@ export default function AutomatizacionProcesosPage() {
             name: 'Automatización de Procesos con IA',
             description:
               'Automatización de procesos empresariales con inteligencia artificial.',
-            provider: { '@type': 'Organization', name: 'AP Automatización IA', url: 'https://www.automatizacionprocesos.es' },
+            provider: { '@type': 'Organization', name: 'Automatización Procesos IA', url: 'https://www.automatizacionprocesos.es' },
             url: 'https://www.automatizacionprocesos.es/automatizacion-procesos',
             offers: {
               '@type': 'Offer',

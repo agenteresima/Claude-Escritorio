@@ -53,7 +53,7 @@ interface CollectedData {
 const STEPS: Record<StepId, BotStep> = {
   welcome: {
     id: 'welcome',
-    message: '¡Hola! 👋 Soy el asistente de AP Automatización IA. ¿En qué puedo ayudarte hoy?',
+    message: '¡Hola! 👋 Soy el asistente de Automatización Procesos IA. ¿En qué puedo ayudarte hoy?',
     options: [
       'Quiero saber qué procesos puedo automatizar',
       'Necesito un agente IA',
@@ -97,7 +97,7 @@ const STEPS: Record<StepId, BotStep> = {
   qualification: {
     id: 'qualification',
     message:
-      'Gracias, esto me ayuda mucho a entenderte mejor. ¿Te gustaría que un consultor de AP Automatización IA te contactara para una videollamada gratuita de 45 minutos?',
+      'Gracias, esto me ayuda mucho a entenderte mejor. ¿Te gustaría que un consultor de Automatización Procesos IA te contactara para una videollamada gratuita de 45 minutos?',
     options: ['Sí, me interesa', 'Prefiero más información primero'],
   },
   collect_name: {
@@ -139,7 +139,7 @@ const STEPS: Record<StepId, BotStep> = {
   confirmed: {
     id: 'confirmed',
     message:
-      '¡Listo! 🎉 He registrado tu solicitud. Un consultor de AP Automatización IA se pondrá en contacto contigo en menos de 24 horas laborables. Mientras tanto, puedes explorar nuestros servicios o leer nuestro blog.',
+      '¡Listo! 🎉 He registrado tu solicitud. Un consultor de Automatización Procesos IA se pondrá en contacto contigo en menos de 24 horas laborables. Mientras tanto, puedes explorar nuestros servicios o leer nuestro blog.',
     options: ['Ver servicios', 'Ir al blog', 'Cerrar chat'],
   },
   more_info: {
@@ -493,7 +493,7 @@ export default function ChatBot() {
                     <Bot className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold text-sm leading-tight">AP Automatización IA · Asistente</p>
+                    <p className="font-semibold text-sm leading-tight">Automatización Procesos IA · Asistente</p>
                     <span className="flex items-center gap-1 text-xs text-blue-100">
                       <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
                       Online
@@ -606,7 +606,7 @@ export default function ChatBot() {
 
                 {/* Texto legal */}
                 <p className="text-center text-xs text-gray-400 mt-2">
-                  AP Automatización IA · Tus datos están protegidos según el RGPD
+                  Automatización Procesos IA · Tus datos están protegidos según el RGPD
                 </p>
               </div>
             </motion.div>

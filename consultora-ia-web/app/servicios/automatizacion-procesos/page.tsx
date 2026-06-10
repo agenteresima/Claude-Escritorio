@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { Zap, GitBranch, Clock, CheckCircle, BarChart3, Settings, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Automatización de Procesos con IA | n8n, Zapier, Make | AP Automatización IA',
+  title: 'Automatización de Procesos con IA | n8n, Zapier, Make | Automatización Procesos IA',
   description:
     'Automatizamos tus procesos empresariales repetitivos con n8n, Zapier y Make. Elimina tareas manuales, reduce errores y libera a tu equipo para lo que importa. Resultados medibles.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/automatizacion-procesos' },
   openGraph: {
-    title: 'Automatización de Procesos con IA | AP Automatización IA',
+    title: 'Automatización de Procesos con IA | Automatización Procesos IA',
     description:
       'Automatizamos tus procesos empresariales repetitivos con n8n, Zapier y Make. Elimina tareas manuales y libera a tu equipo.',
     url: 'https://www.automatizacionprocesos.es/servicios/automatizacion-procesos',

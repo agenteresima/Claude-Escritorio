@@ -12,9 +12,9 @@ import FAQ from '@/components/home/FAQ'
 import CTAFinal from '@/components/home/CTAFinal'
 
 export const metadata: Metadata = {
-  title: 'AP Automatización IA | Consultoría de Inteligencia Artificial para Empresas | IA Práctica para Pymes',
+  title: 'Automatización Procesos IA | Consultoría de Inteligencia Artificial para Empresas | IA Práctica para Pymes',
   description:
-    'AP Automatización IA ayuda a empresas y pymes a implementar inteligencia artificial de forma práctica: automatización de procesos, agentes IA, auditoría IA y formación. Sin tecnicismos, con resultados medibles.',
+    'Automatización Procesos IA ayuda a empresas y pymes a implementar inteligencia artificial de forma práctica: automatización de procesos, agentes IA, auditoría IA y formación. Sin tecnicismos, con resultados medibles.',
   keywords: [
     'consultoría IA',
     'inteligencia artificial para empresas',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     'IA para pymes España',
   ],
   openGraph: {
-    title: 'AP Automatización IA | Consultoría de Inteligencia Artificial para Empresas',
+    title: 'Automatización Procesos IA | Consultoría de Inteligencia Artificial para Empresas',
     description:
       'El experto en IA que tu empresa todavía no tiene en plantilla. Ayudamos a pymes a implementar IA de forma práctica y con resultados medibles.',
     type: 'website',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 const jsonLdProfessionalService = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'AP Automatización IA',
+  name: 'Automatización Procesos IA',
   description:
     'Consultoría de Inteligencia Artificial para empresas y pymes. Automatización de procesos, agentes IA, auditoría IA y formación.',
   url: 'https://www.automatizacionprocesos.es',
@@ -111,7 +111,7 @@ const jsonLdFAQ = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: '¿Necesito conocimientos técnicos para trabajar con AP Automatización IA?',
+      name: '¿Necesito conocimientos técnicos para trabajar con Automatización Procesos IA?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'En absoluto. Nos adaptamos a vuestro lenguaje y explicamos todo sin tecnicismos. Vosotros nos contáis vuestros problemas de negocio y nosotros nos encargamos de la parte técnica.',

@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Política de Privacidad | AP Automatización IA',
+  title: 'Política de Privacidad | Automatización Procesos IA',
   description:
-    'Política de privacidad de AP Automatización IA conforme al Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica de Protección de Datos (LOPDGDD).',
+    'Política de privacidad de Automatización Procesos IA conforme al Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica de Protección de Datos (LOPDGDD).',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/privacidad' },
 }
 
@@ -30,7 +30,7 @@ export default function PrivacidadPage() {
             (LOPDGDD), le informamos que el responsable del tratamiento de sus datos personales es:
           </p>
           <ul>
-            <li><strong>Denominación:</strong> AP Automatización IA</li>
+            <li><strong>Denominación:</strong> Automatización Procesos IA</li>
             <li><strong>Email de contacto:</strong> admin@automatizacionprocesos.es</li>
             <li><strong>Sitio web:</strong> https://www.automatizacionprocesos.es</li>
           </ul>
@@ -171,7 +171,7 @@ export default function PrivacidadPage() {
 
           <h2>10. Modificaciones de esta política</h2>
           <p>
-            AP Automatización IA se reserva el derecho a modificar la presente política de privacidad para
+            Automatización Procesos IA se reserva el derecho a modificar la presente política de privacidad para
             adaptarla a novedades legislativas o jurisprudenciales. Le notificaremos cualquier
             cambio significativo por los medios adecuados. La continuación en el uso del sitio web
             tras la publicación de los cambios implica la aceptación de los mismos.

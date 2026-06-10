@@ -18,11 +18,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.automatizacionprocesos.es'),
   title: {
-    default: 'AP Automatización IA | Consultoría de IA para Empresas',
-    template: '%s | AP Automatización IA',
+    default: 'Automatización Procesos IA | Consultoría de IA para Empresas',
+    template: '%s | Automatización Procesos IA',
   },
   description:
-    'AP Automatización IA es la consultoría de inteligencia artificial que tu empresa necesita. Automatizamos procesos, implantamos agentes IA y formamos a tus equipos. El experto en IA que todavía no tienes en plantilla.',
+    'Automatización Procesos IA es la consultoría de inteligencia artificial que tu empresa necesita. Automatizamos procesos, implantamos agentes IA y formamos a tus equipos. El experto en IA que todavía no tienes en plantilla.',
   keywords: [
     'consultoría inteligencia artificial',
     'IA para empresas',
@@ -36,11 +36,11 @@ export const metadata: Metadata = {
     'consultoría IA España',
     'implementación IA',
     'estrategia de IA',
-    'AP Automatización IA',
+    'Automatización Procesos IA',
   ],
-  authors: [{ name: 'AP Automatización IA', url: 'https://www.automatizacionprocesos.es' }],
-  creator: 'AP Automatización IA',
-  publisher: 'AP Automatización IA',
+  authors: [{ name: 'Automatización Procesos IA', url: 'https://www.automatizacionprocesos.es' }],
+  creator: 'Automatización Procesos IA',
+  publisher: 'Automatización Procesos IA',
   verification: {
     google: 'TceEaWudgp_DnrexQdit-LP27Gc-UYA6bJHXq28prrE',
   },
@@ -59,8 +59,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'es_ES',
     url: 'https://www.automatizacionprocesos.es',
-    siteName: 'AP Automatización IA',
-    title: 'AP Automatización IA | Consultoría de Inteligencia Artificial para Empresas',
+    siteName: 'Automatización Procesos IA',
+    title: 'Automatización Procesos IA | Consultoría de Inteligencia Artificial para Empresas',
     description:
       'El experto en IA que tu empresa todavía no tiene en plantilla. Automatizamos procesos, implantamos agentes IA y formamos a tus equipos.',
     images: [
@@ -68,13 +68,13 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'AP Automatización IA — Consultoría de Inteligencia Artificial para Empresas',
+        alt: 'Automatización Procesos IA — Consultoría de Inteligencia Artificial para Empresas',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AP Automatización IA | Consultoría de Inteligencia Artificial para Empresas',
+    title: 'Automatización Procesos IA | Consultoría de Inteligencia Artificial para Empresas',
     description:
       'El experto en IA que tu empresa todavía no tiene en plantilla. Automatizamos, implantamos y formamos.',
     images: ['/og-image.jpg'],
@@ -87,16 +87,13 @@ export const metadata: Metadata = {
       'es-ES': 'https://www.automatizacionprocesos.es',
     },
   },
-  verification: {
-    google: 'google-site-verification-token',
-  },
   category: 'technology',
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': ['ProfessionalService', 'LocalBusiness'],
-  name: 'AP Automatización IA',
+  name: 'Automatización Procesos IA',
   description:
     'Consultoría de Inteligencia Artificial para empresas. Automatización de procesos, agentes IA, formación y estrategia de IA.',
   slogan: 'El experto en IA que tu empresa todavía no tiene en plantilla',

@@ -15,12 +15,12 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Agentes IA para Empresas | AP Automatización IA',
+  title: 'Agentes IA para Empresas | Automatización Procesos IA',
   description:
     'Desarrollamos agentes de inteligencia artificial personalizados para tu empresa: comercial, atención al cliente, administración, finanzas y reporting. Trabajan 24/7 integrados en tus sistemas.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/agentes-ia' },
   openGraph: {
-    title: 'Agentes IA para Empresas | AP Automatización IA',
+    title: 'Agentes IA para Empresas | Automatización Procesos IA',
     description:
       'Agentes de inteligencia artificial que trabajan 24/7 integrados en tus sistemas: CRM, ERP, email, WhatsApp Business.',
     url: 'https://www.automatizacionprocesos.es/agentes-ia',
@@ -179,7 +179,7 @@ export default function AgentesIAPage() {
             name: 'Agentes IA para Empresas',
             description:
               'Desarrollo de agentes de inteligencia artificial personalizados para empresas.',
-            provider: { '@type': 'Organization', name: 'AP Automatización IA', url: 'https://www.automatizacionprocesos.es' },
+            provider: { '@type': 'Organization', name: 'Automatización Procesos IA', url: 'https://www.automatizacionprocesos.es' },
             url: 'https://www.automatizacionprocesos.es/agentes-ia',
             offers: {
               '@type': 'Offer',

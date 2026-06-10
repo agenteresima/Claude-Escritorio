@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { BarChart3, Database, TrendingUp, Zap, Eye, PieChart, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Análisis de Datos con IA | Dashboards e Insights | AP Automatización IA',
+  title: 'Análisis de Datos con IA | Dashboards e Insights | Automatización Procesos IA',
   description:
     'Análisis de datos empresariales con inteligencia artificial. Dashboards interactivos, detección de patrones, predicciones y insights accionables para tomar mejores decisiones.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/analisis-datos-ia' },
   openGraph: {
-    title: 'Análisis de Datos con IA | AP Automatización IA',
+    title: 'Análisis de Datos con IA | Automatización Procesos IA',
     description:
       'Convertimos tus datos en decisiones. Dashboards inteligentes, análisis predictivo e insights automáticos con inteligencia artificial.',
     url: 'https://www.automatizacionprocesos.es/servicios/analisis-datos-ia',

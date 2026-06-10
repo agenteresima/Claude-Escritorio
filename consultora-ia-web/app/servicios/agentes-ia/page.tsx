@@ -3,12 +3,12 @@ import Link from 'next/link'
 import { Bot, Brain, MessageSquare, Zap, Shield, TrendingUp, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Agentes IA Autónomos para Empresas | LLMs Personalizados | AP Automatización IA',
+  title: 'Agentes IA Autónomos para Empresas | LLMs Personalizados | Automatización Procesos IA',
   description:
     'Desarrollamos agentes de inteligencia artificial autónomos con LLMs para tu empresa. Agentes comerciales, de atención al cliente y administrativos que trabajan 24/7 sin errores.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/agentes-ia' },
   openGraph: {
-    title: 'Agentes IA Autónomos para Empresas | AP Automatización IA',
+    title: 'Agentes IA Autónomos para Empresas | Automatización Procesos IA',
     description:
       'Agentes de inteligencia artificial personalizados que trabajan 24/7 en tu nombre. Comercial, atención al cliente, administración.',
     url: 'https://www.automatizacionprocesos.es/servicios/agentes-ia',

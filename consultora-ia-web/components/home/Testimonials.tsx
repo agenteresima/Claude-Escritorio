@@ -15,7 +15,7 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     quote:
-      'Llevábamos años queriendo modernizar nuestros procesos pero nunca encontrábamos el momento ni sabíamos por dónde empezar. En tres meses con AP Automatización IA automatizamos la gestión de expedientes y la comunicación con clientes. Ahorramos más de 15 horas semanales y el equipo puede dedicarse a asesorar de verdad, no a picar datos.',
+      'Llevábamos años queriendo modernizar nuestros procesos pero nunca encontrábamos el momento ni sabíamos por dónde empezar. En tres meses con Automatización Procesos IA automatizamos la gestión de expedientes y la comunicación con clientes. Ahorramos más de 15 horas semanales y el equipo puede dedicarse a asesorar de verdad, no a picar datos.',
     name: 'María Dolores Fuentes',
     role: 'Socia directora',
     company: 'Fuentes & Asociados',
@@ -24,7 +24,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      'Éramos escépticos con todo lo de la IA. Pensábamos que era para grandes corporaciones o que era muy cara. AP Automatización IA nos demostró lo contrario: en pocas semanas teníamos automatizada la gestión de pedidos y un agente IA respondiendo a nuestros transportistas fuera de horario. El ROI fue evidente desde el primer mes.',
+      'Éramos escépticos con todo lo de la IA. Pensábamos que era para grandes corporaciones o que era muy cara. Automatización Procesos IA nos demostró lo contrario: en pocas semanas teníamos automatizada la gestión de pedidos y un agente IA respondiendo a nuestros transportistas fuera de horario. El ROI fue evidente desde el primer mes.',
     name: 'Jordi Puigdomènech',
     role: 'Director de operaciones',
     company: 'Translogix Barcelona',
@@ -42,7 +42,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      'Nuestro equipo comercial dedicaba horas a preparar propuestas y actualizar el CRM a mano. Ahora los agentes IA de AP Automatización IA lo hacen automáticamente. Las propuestas se generan en minutos y los datos del CRM siempre están al día. Hemos aumentado la capacidad de ventas sin contratar a nadie más.',
+      'Nuestro equipo comercial dedicaba horas a preparar propuestas y actualizar el CRM a mano. Ahora los agentes IA de Automatización Procesos IA lo hacen automáticamente. Las propuestas se generan en minutos y los datos del CRM siempre están al día. Hemos aumentado la capacidad de ventas sin contratar a nadie más.',
     name: 'Carolina Vega Ruiz',
     role: 'Directora comercial',
     company: 'Grupo Distribución Norte',

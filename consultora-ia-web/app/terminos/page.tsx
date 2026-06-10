@@ -3,18 +3,18 @@ import Link from 'next/link'
 import { COMPANY_INFO } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Términos y condiciones — AP Automatización IA',
+  title: 'Términos y condiciones — Automatización Procesos IA',
   description:
-    'Términos y condiciones de contratación y uso del sitio web de AP Automatización IA. Información sobre objeto, condiciones de uso, propiedad intelectual y responsabilidad.',
+    'Términos y condiciones de contratación y uso del sitio web de Automatización Procesos IA. Información sobre objeto, condiciones de uso, propiedad intelectual y responsabilidad.',
   keywords: [
-    'términos y condiciones AP Automatización IA',
+    'términos y condiciones Automatización Procesos IA',
     'condiciones de uso consultoría IA',
     'contrato servicios inteligencia artificial',
   ],
   openGraph: {
-    title: 'Términos y condiciones — AP Automatización IA',
+    title: 'Términos y condiciones — Automatización Procesos IA',
     description:
-      'Términos y condiciones de contratación y uso del sitio web de AP Automatización IA.',
+      'Términos y condiciones de contratación y uso del sitio web de Automatización Procesos IA.',
     type: 'website',
     locale: 'es_ES',
   },

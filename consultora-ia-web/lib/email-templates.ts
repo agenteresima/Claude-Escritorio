@@ -41,11 +41,11 @@ const BASE_STYLES = {
 
 const FOOTER_LEGAL = `
   <p style="${BASE_STYLES.footerText} text-align: center;">
-    AP Automatización IA · Consultora de Inteligencia Artificial<br>
+    Automatización Procesos IA · Consultora de Inteligencia Artificial<br>
     <a href="https://automatizacionprocesos.es" style="color: #9ca3af;">automatizacionprocesos.es</a> · 
     <a href="mailto:admin@automatizacionprocesos.es" style="color: #9ca3af;">admin@automatizacionprocesos.es</a><br><br>
     De conformidad con el Reglamento (UE) 2016/679 (RGPD) y la LOPDGDD, tus datos personales son tratados 
-    por AP Automatización IA con la finalidad de gestionar tu solicitud y contactarte comercialmente. 
+    por Automatización Procesos IA con la finalidad de gestionar tu solicitud y contactarte comercialmente. 
     Puedes ejercer tus derechos de acceso, rectificación, supresión y oposición escribiendo a 
     <a href="mailto:privacidad@automatizacionprocesos.es" style="color: #9ca3af;">privacidad@automatizacionprocesos.es</a>.
   </p>
@@ -90,7 +90,7 @@ export function emailNuevoLead(lead: Lead): string {
           <div style="${BASE_STYLES.card}">
             <!-- Header -->
             <div style="${BASE_STYLES.header}">
-              <h1 style="${BASE_STYLES.h1}">🔔 Nuevo Lead — AP Automatización IA</h1>
+              <h1 style="${BASE_STYLES.h1}">🔔 Nuevo Lead — Automatización Procesos IA</h1>
               <p style="${BASE_STYLES.subtitle}">Solicitud recibida desde ${lead.source ?? 'web'}</p>
             </div>
 
@@ -134,7 +134,7 @@ export function emailNuevoLead(lead: Lead): string {
               <table cellpadding="0" cellspacing="0" style="margin: 0 auto;">
                 <tr>
                   <td style="${BASE_STYLES.cta}">
-                    <a href="mailto:${lead.email}?subject=Tu solicitud en AP Automatización IA" style="${BASE_STYLES.ctaLink}">
+                    <a href="mailto:${lead.email}?subject=Tu solicitud en Automatización Procesos IA" style="${BASE_STYLES.ctaLink}">
                       Contactar a ${lead.name?.split(' ')[0] ?? 'este lead'} →
                     </a>
                   </td>
@@ -167,7 +167,7 @@ export function emailConfirmacionCliente(lead: Lead): string {
         <tr><td>
           <div style="${BASE_STYLES.card}">
             <div style="${BASE_STYLES.header}">
-              <h1 style="${BASE_STYLES.h1}">AP Automatización IA</h1>
+              <h1 style="${BASE_STYLES.h1}">Automatización Procesos IA</h1>
               <p style="${BASE_STYLES.subtitle}">Consultora de Inteligencia Artificial</p>
             </div>
 
@@ -177,7 +177,7 @@ export function emailConfirmacionCliente(lead: Lead): string {
                 Hemos recibido tu solicitud y nos pondremos en contacto contigo en <strong>menos de 24 horas laborables</strong> para confirmar la videollamada gratuita de 45 minutos.
               </p>
               <p style="${BASE_STYLES.p}">
-                En esa llamada, un consultor de AP Automatización IA analizará junto a ti:
+                En esa llamada, un consultor de Automatización Procesos IA analizará junto a ti:
               </p>
               <ul style="color: #374151; line-height: 1.8; font-size: 15px; padding-left: 20px; margin-bottom: 24px;">
                 <li>Qué procesos de tu empresa tienen mayor potencial de automatización</li>
@@ -229,7 +229,7 @@ export function emailSeguimiento(lead: Lead): string {
         <tr><td>
           <div style="${BASE_STYLES.card}">
             <div style="${BASE_STYLES.header}">
-              <h1 style="${BASE_STYLES.h1}">AP Automatización IA</h1>
+              <h1 style="${BASE_STYLES.h1}">Automatización Procesos IA</h1>
               <p style="${BASE_STYLES.subtitle}">Consultora de Inteligencia Artificial</p>
             </div>
             <div style="${BASE_STYLES.body}">
@@ -272,7 +272,7 @@ export function emailPostReunion(lead: Lead): string {
         <tr><td>
           <div style="${BASE_STYLES.card}">
             <div style="${BASE_STYLES.header}">
-              <h1 style="${BASE_STYLES.h1}">AP Automatización IA</h1>
+              <h1 style="${BASE_STYLES.h1}">Automatización Procesos IA</h1>
               <p style="${BASE_STYLES.subtitle}">Consultora de Inteligencia Artificial</p>
             </div>
             <div style="${BASE_STYLES.body}">
@@ -320,7 +320,7 @@ export function emailPropuesta(lead: Lead): string {
         <tr><td>
           <div style="${BASE_STYLES.card}">
             <div style="${BASE_STYLES.header}">
-              <h1 style="${BASE_STYLES.h1}">AP Automatización IA</h1>
+              <h1 style="${BASE_STYLES.h1}">Automatización Procesos IA</h1>
               <p style="${BASE_STYLES.subtitle}">Propuesta Personalizada</p>
             </div>
             <div style="${BASE_STYLES.body}">

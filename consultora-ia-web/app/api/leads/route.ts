@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
 
     // Enviar email interno al equipo comercial
     await getResend().emails.send({
-      from: 'AP Automatización IA <noreply@automatizacionprocesos.es>',
+      from: 'Automatización Procesos IA <noreply@automatizacionprocesos.es>',
       to: 'admin@automatizacionprocesos.es',
       subject: `🔔 Nuevo lead: ${data.name} — ${data.company ?? 'Sin empresa'} (Score: ${lead_score})`,
       html: emailNuevoLead(lead),
@@ -131,9 +131,9 @@ export async function POST(request: NextRequest) {
 
     // Enviar email de confirmación al cliente
     await getResend().emails.send({
-      from: 'AP Automatización IA <admin@automatizacionprocesos.es>',
+      from: 'Automatización Procesos IA <admin@automatizacionprocesos.es>',
       to: data.email,
-      subject: 'Hemos recibido tu solicitud — AP Automatización IA',
+      subject: 'Hemos recibido tu solicitud — Automatización Procesos IA',
       html: emailConfirmacionCliente(lead),
     })
 

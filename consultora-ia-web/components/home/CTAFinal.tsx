@@ -51,7 +51,7 @@ export default function CTAFinal() {
               <Link
                 href="/contacto"
                 className="inline-flex items-center gap-2 rounded-lg border border-slate-500 bg-transparent px-8 py-4 text-base font-semibold text-slate-200 transition-all hover:border-slate-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-[#0F172A]"
-                aria-label="Contactar con AP Automatización IA"
+                aria-label="Contactar con Automatización Procesos IA"
               >
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
                 Hablar con nosotros

@@ -1,5 +1,5 @@
 // ============================================================
-// AP Automatización IA — TypeScript Types
+// Automatización Procesos IA — TypeScript Types
 // ============================================================
 
 // --- Enums ---

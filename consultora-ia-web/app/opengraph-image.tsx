@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'AP Automatización IA — Consultoría de Inteligencia Artificial para Empresas'
+export const alt = 'Automatización Procesos IA — Consultoría de Inteligencia Artificial para Empresas'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -91,7 +91,7 @@ export default function OGImage() {
                 letterSpacing: '-0.5px',
               }}
             >
-              AP Automatización IA
+              Automatización Procesos IA
             </span>
           </div>
 

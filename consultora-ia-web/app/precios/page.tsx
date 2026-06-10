@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { CheckCircle, Zap, Bot, GraduationCap, ArrowRight, Star } from 'lucide-react'
 
 export const metadata = {
-  title: 'Precios y tarifas — AP Automatización IA',
+  title: 'Precios y tarifas — Automatización Procesos IA',
   description:
     'Consulta nuestros precios orientativos para servicios de IA empresarial. Automatización de procesos, agentes IA, formación y consultoría estratégica. Presupuesto personalizado sin compromiso.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/precios' },

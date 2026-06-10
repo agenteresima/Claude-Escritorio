@@ -16,12 +16,12 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Auditoría IA para Empresas | Diagnóstico de Procesos | AP Automatización IA',
+  title: 'Auditoría IA para Empresas | Diagnóstico de Procesos | Automatización Procesos IA',
   description:
     'Auditoría de inteligencia artificial para empresas: analizamos tus procesos, identificamos oportunidades de automatización y te entregamos un plan de acción con estimación de ahorro. Desde 790 €.',
   alternates: { canonical: 'https://www.automatizacionprocesos.es/auditoria-ia' },
   openGraph: {
-    title: 'Auditoría IA para Empresas | Diagnóstico de Procesos | AP Automatización IA',
+    title: 'Auditoría IA para Empresas | Diagnóstico de Procesos | Automatización Procesos IA',
     description:
       'Diagnóstico profesional de IA para empresas. Mapa completo de automatizaciones, priorización y estimación de ahorro. Desde 790 €.',
     url: 'https://www.automatizacionprocesos.es/auditoria-ia',
@@ -125,7 +125,7 @@ export default function AuditoriaIAPage() {
             name: 'Auditoría IA para Empresas',
             description:
               'Diagnóstico profesional de inteligencia artificial para empresas. Mapa de automatizaciones, priorización y estimación de ahorro.',
-            provider: { '@type': 'Organization', name: 'AP Automatización IA', url: 'https://www.automatizacionprocesos.es' },
+            provider: { '@type': 'Organization', name: 'Automatización Procesos IA', url: 'https://www.automatizacionprocesos.es' },
             url: 'https://www.automatizacionprocesos.es/auditoria-ia',
             offers: {
               '@type': 'Offer',

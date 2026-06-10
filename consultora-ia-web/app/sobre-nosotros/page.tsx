@@ -3,17 +3,17 @@ import Link from 'next/link'
 import { Target, Eye, BarChart3, GraduationCap, ArrowRight, CheckCircle2 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Sobre nosotros — AP Automatización IA',
+  title: 'Sobre nosotros — Automatización Procesos IA',
   description:
-    'Conoce al equipo de AP Automatización IA: profesionales especializados en inteligencia artificial que ayudan a empresas a implementar IA de forma práctica y con resultados reales.',
+    'Conoce al equipo de Automatización Procesos IA: profesionales especializados en inteligencia artificial que ayudan a empresas a implementar IA de forma práctica y con resultados reales.',
   keywords: [
-    'equipo AP Automatización IA',
+    'equipo Automatización Procesos IA',
     'consultoría inteligencia artificial Madrid',
     'expertos IA para empresas',
     'sobre nosotros IA',
   ],
   openGraph: {
-    title: 'Sobre nosotros — AP Automatización IA',
+    title: 'Sobre nosotros — Automatización Procesos IA',
     description:
       'El equipo que convierte la IA en resultados reales para tu empresa. Conoce quiénes somos y por qué más de 50 empresas confían en nosotros.',
     type: 'website',
@@ -112,7 +112,7 @@ export default function SobreNosotrosPage() {
             </div>
             <div className="space-y-5 text-navy-600 leading-relaxed">
               <p>
-                En AP Automatización IA ayudamos a empresas de todos los sectores a implementar
+                En Automatización Procesos IA ayudamos a empresas de todos los sectores a implementar
                 inteligencia artificial de forma práctica, asequible y sin fricciones. Creemos que
                 la IA no debería ser patrimonio exclusivo de las grandes corporaciones.
               </p>

@@ -138,7 +138,7 @@ export default function ContactoPage() {
                     Mensaje recibido
                   </h2>
                   <p className="text-slate-600 mb-6">
-                    Gracias por contactar con AP Automatización IA. Te responderemos en menos de 24 horas en
+                    Gracias por contactar con Automatización Procesos IA. Te responderemos en menos de 24 horas en
                     días laborables.
                   </p>
                   <Link

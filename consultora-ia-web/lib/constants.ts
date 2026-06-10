@@ -5,7 +5,7 @@ import type { CompanyInfo, NavItem, Service, FAQItem, UseCase } from './types'
 // ============================================================
 
 export const COMPANY_INFO: CompanyInfo = {
-  nombre: 'AP Automatización IA',
+  nombre: 'Automatización Procesos IA',
   nombre_legal: 'Nexus Inteligencia Artificial S.L.',
   slogan: 'El experto en IA que tu empresa todavía no tiene en plantilla',
   descripcion:

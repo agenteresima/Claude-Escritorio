@@ -12,9 +12,9 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Casos de éxito — AP Automatización IA',
+  title: 'Casos de éxito — Automatización Procesos IA',
   description:
-    'Descubre cómo empresas de sectores muy diferentes han implementado inteligencia artificial con AP Automatización IA y han obtenido resultados reales y medibles.',
+    'Descubre cómo empresas de sectores muy diferentes han implementado inteligencia artificial con Automatización Procesos IA y han obtenido resultados reales y medibles.',
   keywords: [
     'casos de éxito IA empresas',
     'automatización IA resultados',
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     'IA aplicada sectores',
   ],
   openGraph: {
-    title: 'Casos de éxito — AP Automatización IA',
+    title: 'Casos de éxito — Automatización Procesos IA',
     description:
       'Empresas reales, resultados reales. Descubre cómo la IA ya está transformando sectores como industria, salud, marketing, e-commerce y hostelería.',
     type: 'website',
