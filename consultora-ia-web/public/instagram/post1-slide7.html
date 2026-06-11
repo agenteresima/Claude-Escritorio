@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  body { width: 1080px; height: 1080px; overflow: hidden; font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 50%, #1D4ED8 100%); display: flex; align-items: center; justify-content: center; position: relative; }
+  .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 40px 40px; }
+  .circle { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .content { position: relative; z-index: 10; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 36px; padding: 80px; }
+  .question { font-size: 20px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 2px; text-transform: uppercase; }
+  h2 { font-size: 72px; font-weight: 900; color: #FFFFFF; line-height: 1.1; letter-spacing: -2px; }
+  .sub { font-size: 26px; color: rgba(255,255,255,0.75); line-height: 1.5; max-width: 700px; }
+  .cta-box {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 20px;
+    padding: 28px 56px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .cta-label { font-size: 18px; color: rgba(255,255,255,0.8); font-weight: 500; }
+  .cta-url { font-size: 28px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.5px; }
+  .logo { position: absolute; bottom: 48px; right: 56px; display: flex; align-items: center; gap: 10px; }
+  .logo-icon { width: 36px; height: 36px; background: rgba(255,255,255,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .logo-text { font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.8); }
+  .slide-num { position: absolute; bottom: 52px; left: 56px; font-size: 16px; color: rgba(255,255,255,0.4); }
+  .bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+  <div class="dots"></div>
+  <div class="circle"></div>
+  <div class="content">
+    <div class="question">¿Y en tu empresa?</div>
+    <h2>¿Cuál de estos<br>procesos tienes? 🤔</h2>
+    <div class="sub">Cuéntanoslo en comentarios y te decimos cómo automatizarlo</div>
+    <div class="cta-box">
+      <div class="cta-label">👉 Diagnóstico gratuito en</div>
+      <div class="cta-url">automatizacionprocesos.es</div>
+    </div>
+  </div>
+  <div class="logo"><div class="logo-icon">✦</div><div class="logo-text">Automatización Procesos IA</div></div>
+  <div class="slide-num">7 / 7</div>
+  <div class="bar"></div>
+</body>
+</html>
