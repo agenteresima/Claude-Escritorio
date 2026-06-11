@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { blogPosts, getBlogPost, getRelatedPosts } from '@/lib/blog-data'
-import { Calendar, Clock, ArrowRight, ArrowLeft, ChevronRight } from 'lucide-react'
+import { Calendar, Clock, ArrowRight, ArrowLeft, ChevronRight, Tag } from 'lucide-react'
+import ReadingProgress from '@/components/blog/ReadingProgress'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -64,6 +65,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -93,45 +95,84 @@ export default async function BlogPostPage({ params }: Props) {
             {/* Article */}
             <article className="lg:col-span-2">
               <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
-                <div className="p-8 border-b border-slate-100">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-full">
+                {/* Cabecera del artículo */}
+                <div className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 p-8 sm:p-10 rounded-t-2xl">
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30 px-3 py-1 rounded-full uppercase tracking-wide">
                       {post.category}
                     </span>
-                    <div className="flex items-center gap-1 text-xs text-slate-400">
+                    <div className="flex items-center gap-1.5 text-xs text-slate-400">
                       <Clock className="h-3 w-3" />
                       {post.readTime} min de lectura
                     </div>
                   </div>
-                  <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4 leading-tight">
+                  <h1 className="text-3xl sm:text-4xl font-bold text-white mb-5 leading-tight tracking-tight">
                     {post.title}
                   </h1>
-                  <p className="text-lg text-slate-600 leading-relaxed mb-4">
+                  <p className="text-lg text-slate-300 leading-relaxed mb-6 max-w-2xl">
                     {post.description}
                   </p>
-                  <div className="flex items-center gap-2 text-sm text-slate-400">
-                    <Calendar className="h-4 w-4" />
-                    {formatDate(post.date)} · Por {post.author}
+                  <div className="flex items-center gap-3 pt-4 border-t border-white/10">
+                    <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                      AI
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-white">{post.author}</p>
+                      <div className="flex items-center gap-1 text-xs text-slate-400">
+                        <Calendar className="h-3 w-3" />
+                        {formatDate(post.date)}
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="p-8">
+                <div className="p-8 sm:p-10">
                   <div
-                    className="prose prose-lg prose-slate max-w-none
-                      prose-headings:font-bold prose-headings:text-slate-900
-                      prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
-                      prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
-                      prose-p:text-slate-600 prose-p:leading-relaxed
-                      prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
-                      prose-strong:text-slate-900
+                    className="prose prose-lg max-w-none
+                      prose-headings:font-bold prose-headings:tracking-tight
+                      prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-5
+                      prose-h2:text-blue-700 prose-h2:border-l-4 prose-h2:border-blue-500 prose-h2:pl-4
+                      prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-slate-800
+                      prose-p:text-slate-600 prose-p:leading-[1.85] prose-p:text-[1.05rem]
+                      prose-a:text-blue-600 prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+                      prose-strong:text-slate-800 prose-strong:font-semibold
                       prose-ul:text-slate-600 prose-ol:text-slate-600
-                      prose-li:my-1"
+                      prose-li:my-2 prose-li:leading-relaxed
+                      prose-blockquote:border-l-4 prose-blockquote:border-blue-400
+                      prose-blockquote:bg-blue-50 prose-blockquote:rounded-r-xl
+                      prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:not-italic
+                      prose-blockquote:text-slate-700
+                      prose-code:bg-slate-100 prose-code:text-blue-700 prose-code:px-1.5
+                      prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-medium
+                      prose-pre:bg-slate-900 prose-pre:rounded-xl
+                      prose-img:rounded-xl prose-img:shadow-md
+                      prose-hr:border-slate-200 prose-hr:my-10"
                     dangerouslySetInnerHTML={{ __html: post.content }}
                   />
                 </div>
               </div>
 
+              {/* Tags */}
+              {post.tags && post.tags.length > 0 && (
+                <div className="mt-6 bg-white border border-slate-200 rounded-2xl p-6">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Tag className="h-4 w-4 text-slate-400" />
+                    <span className="text-sm font-medium text-slate-600">Temas</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {post.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-full hover:bg-blue-50 hover:text-blue-700 transition-colors cursor-default"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Back to blog */}
-              <div className="mt-6">
+              <div className="mt-4">
                 <Link
                   href="/blog"
                   className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 font-medium text-sm transition-colors"

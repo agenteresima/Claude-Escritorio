@@ -90,12 +90,21 @@ export default function BlogPage() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-blue-300 hover:shadow-md transition-all flex flex-col"
+                className="group bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-blue-300 hover:shadow-lg transition-all duration-300 flex flex-col"
               >
+                {/* Franja superior de color por categoría */}
+                <div className={`h-1.5 w-full ${
+                  post.category === 'Estrategia IA' ? 'bg-blue-500' :
+                  post.category === 'Automatización' ? 'bg-violet-500' :
+                  post.category === 'Herramientas IA' ? 'bg-emerald-500' :
+                  post.category === 'Agentes IA' ? 'bg-orange-500' :
+                  post.category === 'Chatbots' ? 'bg-cyan-500' :
+                  'bg-blue-500'
+                }`} />
                 <div className="p-6 flex flex-col flex-grow">
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between mb-4">
                     <span
-                      className={`text-xs font-medium px-2.5 py-1 rounded-full border ${
+                      className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${
                         categoryColors[post.category] ?? 'bg-slate-100 text-slate-600 border-slate-200'
                       }`}
                     >
@@ -106,19 +115,19 @@ export default function BlogPage() {
                       {post.readTime} min
                     </div>
                   </div>
-                  <h2 className="font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors leading-snug">
+                  <h2 className="font-bold text-slate-900 text-base mb-3 group-hover:text-blue-700 transition-colors leading-snug">
                     {post.title}
                   </h2>
-                  <p className="text-sm text-slate-600 leading-relaxed flex-grow">
+                  <p className="text-sm text-slate-500 leading-relaxed flex-grow line-clamp-3">
                     {post.description}
                   </p>
-                  <div className="mt-4 flex items-center justify-between">
+                  <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
                     <div className="flex items-center gap-1.5 text-xs text-slate-400">
                       <Calendar className="h-3 w-3" />
                       {formatDate(post.date)}
                     </div>
-                    <span className="text-xs text-blue-600 font-medium group-hover:gap-2 flex items-center gap-1 transition-all">
-                      Leer
+                    <span className="text-xs text-blue-600 font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Leer artículo
                       <ArrowRight className="h-3 w-3" />
                     </span>
                   </div>
