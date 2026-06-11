@@ -6,144 +6,256 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
   body {
-    width: 1080px;
-    height: 1080px;
-    overflow: hidden;
+    width: 1080px; height: 1080px; overflow: hidden;
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #0F172A 0%, #0f2952 50%, #0F172A 100%);
+    background: #060D1A;
+    position: relative;
+  }
+
+  /* Fondo con gradiente dramático */
+  .bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(99,102,241,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 90%, rgba(6,182,212,0.1) 0%, transparent 60%),
+      #060D1A;
+  }
+
+  /* Grid de puntos */
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(37,99,235,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37,99,235,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Líneas de circuito decorativas */
+  .circuits {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    opacity: 0.3;
+  }
+  .circuit-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, #2563EB, transparent);
+    height: 1px;
+  }
+  .circuit-v {
+    position: absolute;
+    background: linear-gradient(180deg, transparent, #2563EB, transparent);
+    width: 1px;
+  }
+  .circuit-dot {
+    position: absolute;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #60A5FA;
+    box-shadow: 0 0 12px #2563EB;
+  }
+
+  /* Orbe central */
+  .orb {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #3B82F6 0%, #1D4ED8 40%, #0F172A 100%);
+    box-shadow:
+      0 0 80px rgba(37,99,235,0.6),
+      0 0 160px rgba(37,99,235,0.3),
+      inset 0 0 60px rgba(255,255,255,0.05);
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+  }
+  .orb-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(96,165,250,0.3);
+  }
+  .orb-ring-1 { width: 380px; height: 380px; top: calc(50% - 190px); left: calc(50% - 190px + 15px); }
+  .orb-ring-2 { width: 440px; height: 440px; top: calc(50% - 220px); left: calc(50% - 220px + 15px); border-color: rgba(96,165,250,0.15); }
+  .orb-ring-3 { width: 520px; height: 520px; top: calc(50% - 260px); left: calc(50% - 260px + 15px); border-color: rgba(96,165,250,0.08); }
+
+  .orb-icon {
+    font-size: 100px;
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
     position: relative;
+    z-index: 2;
   }
-  .circle1 {
-    position: absolute;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
-    top: -100px; right: -100px;
-  }
-  .circle2 {
-    position: absolute;
-    width: 400px; height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(37,99,235,0.10) 0%, transparent 70%);
-    bottom: -100px; left: -50px;
-  }
-  .dots {
+  .orb-inner {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 60%);
   }
+
+  /* Nodos flotantes */
+  .node {
+    position: absolute;
+    background: rgba(37,99,235,0.2);
+    border: 1px solid rgba(96,165,250,0.4);
+    border-radius: 12px;
+    padding: 12px 20px;
+    display: flex; align-items: center; gap: 10px;
+    backdrop-filter: blur(10px);
+  }
+  .node-icon { font-size: 22px; }
+  .node-text { font-size: 16px; font-weight: 600; color: #93C5FD; white-space: nowrap; }
+  .node-dot { width: 8px; height: 8px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; flex-shrink: 0; }
+
+  /* Contenido principal */
   .content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    padding: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-  }
-  .badge {
-    background: rgba(37,99,235,0.25);
-    border: 1px solid rgba(37,99,235,0.5);
-    color: #93C5FD;
-    font-size: 18px;
-    font-weight: 600;
-    padding: 10px 28px;
-    border-radius: 100px;
-    letter-spacing: 0.5px;
-  }
-  .number {
-    font-size: 200px;
-    font-weight: 900;
-    color: rgba(37,99,235,0.12);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    line-height: 1;
-    user-select: none;
-  }
-  h1 {
-    font-size: 72px;
-    font-weight: 900;
-    color: #FFFFFF;
-    line-height: 1.1;
-    letter-spacing: -2px;
-    max-width: 800px;
-  }
-  h1 span { color: #60A5FA; }
-  .sub {
-    font-size: 26px;
-    color: rgba(255,255,255,0.5);
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-  .arrow {
-    font-size: 22px;
-    color: #60A5FA;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .logo {
-    position: absolute;
-    bottom: 48px;
-    right: 56px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .logo-icon {
-    width: 36px; height: 36px;
-    background: #2563EB;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .logo-text {
-    font-size: 18px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.7);
-  }
-  .slide-num {
-    position: absolute;
-    bottom: 52px;
-    left: 56px;
-    font-size: 16px;
-    color: rgba(255,255,255,0.3);
-    font-weight: 500;
-  }
-  .bar {
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #2563EB, #60A5FA, #2563EB);
+    padding: 0 72px 72px;
+    background: linear-gradient(0deg, rgba(6,13,26,0.98) 0%, rgba(6,13,26,0.85) 60%, transparent 100%);
+    padding-top: 120px;
   }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(37,99,235,0.2);
+    border: 1px solid rgba(37,99,235,0.5);
+    color: #93C5FD;
+    font-size: 18px; font-weight: 600;
+    padding: 10px 24px; border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; }
+
+  h1 {
+    font-size: 76px; font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.0;
+    letter-spacing: -3px;
+    margin-bottom: 20px;
+  }
+  h1 .blue { color: #60A5FA; }
+  h1 .white { color: #FFFFFF; }
+
+  .sub {
+    font-size: 24px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+    margin-bottom: 36px;
+    letter-spacing: 0.3px;
+  }
+
+  .pills {
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .pill {
+    font-size: 15px; font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* Logo */
+  .logo {
+    position: absolute; top: 40px; left: 56px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .logo-icon {
+    width: 42px; height: 42px; background: #2563EB;
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-size: 20px; box-shadow: 0 0 20px rgba(37,99,235,0.5);
+  }
+  .logo-text { font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.8); }
+
+  /* Swipe indicator */
+  .swipe {
+    position: absolute; top: 44px; right: 56px;
+    display: flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.4); font-size: 16px; font-weight: 500;
+  }
+
+  .bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #1D4ED8, #60A5FA, #06B6D4); }
 </style>
 </head>
 <body>
-  <div class="circle1"></div>
-  <div class="circle2"></div>
-  <div class="dots"></div>
-  <div class="number">5</div>
-  <div class="content">
-    <div class="badge">🤖 Automatización con IA</div>
-    <h1><span>5 procesos</span> que puedes automatizar esta semana</h1>
-    <div class="sub">Sin programar · Sin inversión enorme</div>
-    <div class="arrow">Desliza para descubrirlos →</div>
+  <div class="bg"></div>
+  <div class="grid"></div>
+
+  <!-- Circuits decorativos -->
+  <div class="circuits">
+    <div class="circuit-line" style="top:200px; left:0; width:300px;"></div>
+    <div class="circuit-v" style="left:300px; top:100px; height:200px;"></div>
+    <div class="circuit-dot" style="left:296px; top:96px;"></div>
+    <div class="circuit-line" style="top:300px; right:0; width:250px;"></div>
+    <div class="circuit-v" style="right:250px; top:200px; height:200px;"></div>
+    <div class="circuit-dot" style="right:246px; top:196px;"></div>
+    <div class="circuit-line" style="top:500px; left:50px; width:180px;"></div>
+    <div class="circuit-dot" style="left:226px; top:496px;"></div>
   </div>
+
+  <!-- Orbe central -->
+  <div style="position:absolute; top:80px; left:50%; transform:translateX(-50%);">
+    <div class="orb-ring orb-ring-3"></div>
+    <div class="orb-ring orb-ring-2"></div>
+    <div class="orb-ring orb-ring-1"></div>
+    <div class="orb">
+      <div class="orb-inner"></div>
+      <div class="orb-icon">🤖</div>
+    </div>
+  </div>
+
+  <!-- Nodos flotantes -->
+  <div class="node" style="top: 190px; left: 56px;">
+    <div class="node-dot"></div>
+    <div class="node-icon">🧾</div>
+    <div class="node-text">Facturas automáticas</div>
+  </div>
+  <div class="node" style="top: 190px; right: 56px;">
+    <div class="node-dot"></div>
+    <div class="node-icon">📊</div>
+    <div class="node-text">Informes solos</div>
+  </div>
+  <div class="node" style="top: 360px; left: 40px;">
+    <div class="node-dot"></div>
+    <div class="node-icon">💬</div>
+    <div class="node-text">Atención 24/7</div>
+  </div>
+  <div class="node" style="top: 360px; right: 40px;">
+    <div class="node-dot"></div>
+    <div class="node-icon">📧</div>
+    <div class="node-text">Emails automáticos</div>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="content">
+    <div class="badge">
+      <div class="badge-dot"></div>
+      Automatización con IA · Para pymes
+    </div>
+    <h1>
+      <span class="blue">5 procesos</span><br>
+      <span class="white">que puedes automatizar</span><br>
+      <span class="white">esta semana</span>
+    </h1>
+    <div class="sub">Sin programar · Sin inversión enorme · Con resultados reales</div>
+    <div class="pills">
+      <div class="pill">👉 Desliza para descubrirlos</div>
+    </div>
+  </div>
+
+  <!-- Logo -->
   <div class="logo">
     <div class="logo-icon">✦</div>
     <div class="logo-text">Automatización Procesos IA</div>
   </div>
-  <div class="slide-num">1 / 7</div>
+
+  <!-- Swipe -->
+  <div class="swipe">1 / 7 →</div>
+
   <div class="bar"></div>
 </body>
 </html>
