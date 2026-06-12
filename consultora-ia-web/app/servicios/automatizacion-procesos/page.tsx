@@ -169,7 +169,7 @@ export default function AutomatizacionProcesosPage() {
             ¿Listo para dejar de hacer trabajo manual?
           </h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
-            En una videollamada de 45 minutos identificamos qué procesos de tu empresa se pueden
+            En una videollamada de 30 minutos identificamos qué procesos de tu empresa se pueden
             automatizar y te damos una estimación del ahorro real. Sin coste y sin compromiso.
           </p>
           <Link

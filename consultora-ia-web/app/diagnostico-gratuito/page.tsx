@@ -87,13 +87,13 @@ export default function DiagnosticoGratuitoPage() {
               <span className="text-blue-400">para tu empresa</span>
             </h1>
             <p className="text-lg text-slate-300 mb-8 leading-relaxed">
-              Una videollamada de 45 minutos en la que analizamos tu empresa, identificamos las
+              Una videollamada de 30 minutos en la que analizamos tu empresa, identificamos las
               mejores oportunidades de automatización con IA y te damos una hoja de ruta inicial.
               Sin coste. Sin compromiso de compra.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               {[
-                { icon: Video, text: 'Videollamada 45 min' },
+                { icon: Video, text: 'Videollamada 30 min' },
                 { icon: Clock, text: 'Respuesta en 24h' },
                 { icon: Shield, text: 'Sin compromiso' },
               ].map(({ icon: Icon, text }) => (
@@ -162,7 +162,7 @@ export default function DiagnosticoGratuitoPage() {
                     'Recibirás un email de confirmación en los próximos minutos',
                     'En menos de 24h te contactaremos para agendar la videollamada',
                     'Antes de la llamada te enviaremos un breve cuestionario preparatorio',
-                    'La videollamada dura 45 minutos y es totalmente gratuita',
+                    'La videollamada dura 30 minutos y es totalmente gratuita',
                   ].map((step) => (
                     <li key={step} className="flex items-start gap-2 text-sm text-slate-700">
                       <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />

@@ -170,7 +170,7 @@ export default function AnalisisDatosIAPage() {
             ¿Quieres ver qué esconden los datos de tu empresa?
           </h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
-            En 45 minutos analizamos qué datos tienes disponibles y te mostramos qué tipo de
+            En 30 minutos analizamos qué datos tienes disponibles y te mostramos qué tipo de
             insights y predicciones podríamos generar para mejorar tus decisiones de negocio.
           </p>
           <Link

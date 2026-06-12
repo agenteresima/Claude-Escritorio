@@ -21,7 +21,7 @@ const solutions: Solution[] = [
     icon: Search,
     title: 'Auditoría IA gratuita',
     description:
-      'En una sesión de 45 minutos analizamos tus procesos clave e identificamos qué se puede automatizar de forma inmediata. Recibes un informe con las 3 oportunidades de mayor ROI para tu empresa, sin coste y sin compromiso.',
+      'En una sesión de 30 minutos analizamos tus procesos clave e identificamos qué se puede automatizar de forma inmediata. Recibes un informe con las 3 oportunidades de mayor ROI para tu empresa, sin coste y sin compromiso.',
   },
   {
     icon: Map,

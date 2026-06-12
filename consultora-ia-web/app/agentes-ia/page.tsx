@@ -378,7 +378,7 @@ export default function AgentesIAPage() {
             ¿Qué proceso de tu empresa podría gestionar un agente?
           </h2>
           <p className="text-blue-100 mb-8 text-lg">
-            En 45 minutos de videollamada gratuita identificamos el agente que más impacto tendría
+            En 30 minutos de videollamada gratuita identificamos el agente que más impacto tendría
             en tu empresa y te explicamos cómo lo construiríamos. Sin compromiso.
           </p>
           <Link
@@ -389,7 +389,7 @@ export default function AgentesIAPage() {
             <ArrowRight className="h-5 w-5" />
           </Link>
           <p className="text-blue-200 text-sm mt-4">
-            Videollamada de 45 minutos · Sin coste · Sin compromiso
+            Videollamada de 30 minutos · Sin coste · Sin compromiso
           </p>
         </div>
       </section>

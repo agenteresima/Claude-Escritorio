@@ -20,7 +20,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 const services = [
-  'Diagnóstico gratuito (videollamada 45 min)',
+  'Diagnóstico gratuito (videollamada 30 min)',
   'Auditoría IA',
   'Automatización de procesos',
   'Agentes IA',
@@ -115,7 +115,7 @@ export default function ContactoPage() {
               <div className="bg-blue-600 rounded-2xl p-5 text-white">
                 <h3 className="font-bold mb-2">¿Prefieres empezar con una llamada?</h3>
                 <p className="text-blue-100 text-sm mb-4">
-                  El diagnóstico gratuito es una videollamada de 45 minutos sin coste ni compromiso.
+                  El diagnóstico gratuito es una videollamada de 30 minutos sin coste ni compromiso.
                 </p>
                 <Link
                   href="/diagnostico-gratuito"

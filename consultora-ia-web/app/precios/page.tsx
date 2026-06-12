@@ -17,7 +17,7 @@ const plans = [
     featured: true,
     icon: Zap,
     features: [
-      'Diagnóstico y auditoría de procesos (45 min)',
+      'Diagnóstico y auditoría de procesos (30 min)',
       'Automatización de 1-2 procesos con n8n o Make',
       'Integración con tus herramientas actuales (CRM, ERP, email)',
       'Formación al equipo (2h)',
@@ -228,7 +228,7 @@ export default function PreciosPage() {
             ¿No sabes qué plan necesitas?
           </h2>
           <p className="text-blue-100 text-lg mb-8">
-            En 45 minutos analizamos tu empresa y te decimos exactamente qué automatizar primero
+            En 30 minutos analizamos tu empresa y te decimos exactamente qué automatizar primero
             y cuánto te va a costar.
           </p>
           <Link

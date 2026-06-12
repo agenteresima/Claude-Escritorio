@@ -170,7 +170,7 @@ export default function AgentesIAPage() {
             ¿Quieres un agente IA trabajando para tu empresa?
           </h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
-            Cuéntanos qué tarea quieres automatizar y te explicamos en 45 minutos cómo lo
+            Cuéntanos qué tarea quieres automatizar y te explicamos en 30 minutos cómo lo
             construiríamos, qué resultados puedes esperar y cuánto costaría. Sin compromiso.
           </p>
           <Link

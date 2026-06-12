@@ -171,7 +171,7 @@ export default function ChatbotsInteligentesPage() {
             ¿Quieres un chatbot que realmente resuelva a tus clientes?
           </h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
-            En 45 minutos analizamos tu casuística de atención al cliente y te mostramos cómo
+            En 30 minutos analizamos tu casuística de atención al cliente y te mostramos cómo
             un chatbot IA gestionaría las consultas más frecuentes de tu negocio.
           </p>
           <Link

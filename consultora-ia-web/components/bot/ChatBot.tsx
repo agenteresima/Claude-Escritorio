@@ -97,7 +97,7 @@ const STEPS: Record<StepId, BotStep> = {
   qualification: {
     id: 'qualification',
     message:
-      'Gracias, esto me ayuda mucho a entenderte mejor. ¿Te gustaría que un consultor de Automatización Procesos IA te contactara para una videollamada gratuita de 45 minutos?',
+      'Gracias, esto me ayuda mucho a entenderte mejor. ¿Te gustaría que un consultor de Automatización Procesos IA te contactara para una videollamada gratuita de 30 minutos?',
     options: ['Sí, me interesa', 'Prefiero más información primero'],
   },
   collect_name: {

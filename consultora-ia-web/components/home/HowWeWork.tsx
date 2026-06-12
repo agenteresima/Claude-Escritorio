@@ -14,9 +14,9 @@ const steps: Step[] = [
   {
     number: '01',
     icon: CalendarCheck,
-    title: 'Diagnóstico gratuito (45 min)',
+    title: 'Diagnóstico gratuito (30 min)',
     description:
-      'Empezamos con una videollamada gratuita de 45 minutos en la que conocemos tu empresa, tus procesos y tus objetivos. Analizamos dónde se pierde más tiempo y dónde la inteligencia artificial puede generar impacto real. Sin venta agresiva, sin compromiso.',
+      'Empezamos con una videollamada gratuita de 30 minutos en la que conocemos tu empresa, tus procesos y tus objetivos. Analizamos dónde se pierde más tiempo y dónde la inteligencia artificial puede generar impacto real. Sin venta agresiva, sin compromiso.',
   },
   {
     number: '02',

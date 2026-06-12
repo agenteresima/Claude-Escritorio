@@ -20,7 +20,7 @@ const cases = [
     solution:
       'Agente IA basado en Claude que analiza contratos en PDF, extrae las cláusulas clave, identifica cláusulas atípicas o de riesgo, genera un resumen ejecutivo por contrato y crea alertas automáticas para vencimientos.',
     technologies: ['Claude API', 'n8n', 'Google Drive API'],
-    result: '70% menos tiempo de revisión por contrato. Un análisis que tardaba 4 horas se completa en 45 minutos.',
+    result: '70% menos tiempo de revisión por contrato. Un análisis que tardaba 4 horas se completa en 30 minutos.',
     resultValue: '70% menos tiempo',
     highlight: true,
   },
@@ -240,7 +240,7 @@ export default function CasosUsoPage() {
             ¿Ves algo parecido a lo que necesitas?
           </h2>
           <p className="text-blue-100 mb-8 text-lg">
-            En 45 minutos analizamos tu empresa y te decimos exactamente qué solución tendría más
+            En 30 minutos analizamos tu empresa y te decimos exactamente qué solución tendría más
             impacto en tu caso concreto. Sin compromiso.
           </p>
           <Link
@@ -251,7 +251,7 @@ export default function CasosUsoPage() {
             <ArrowRight className="h-5 w-5" />
           </Link>
           <p className="text-blue-200 text-sm mt-4">
-            Videollamada de 45 minutos · Sin coste · Sin compromiso
+            Videollamada de 30 minutos · Sin coste · Sin compromiso
           </p>
         </div>
       </section>

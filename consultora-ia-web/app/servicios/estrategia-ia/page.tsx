@@ -172,7 +172,7 @@ export default function EstrategiaIAPage() {
             ¿Quieres una estrategia de IA clara para tu empresa?
           </h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
-            En 45 minutos analizamos la situación actual de tu empresa y te damos una primera
+            En 30 minutos analizamos la situación actual de tu empresa y te damos una primera
             visión de por dónde empezar y qué impacto puedes esperar. Sin compromiso.
           </p>
           <Link

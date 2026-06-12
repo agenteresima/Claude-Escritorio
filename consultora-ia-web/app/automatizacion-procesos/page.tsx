@@ -391,7 +391,7 @@ export default function AutomatizacionProcesosPage() {
             ¿Cuánto tiempo pierde tu equipo en tareas repetitivas?
           </h2>
           <p className="text-blue-100 mb-8 text-lg">
-            En 45 minutos de diagnóstico gratuito identificamos exactamente qué puedes automatizar,
+            En 30 minutos de diagnóstico gratuito identificamos exactamente qué puedes automatizar,
             cuánto ahorrarías y cuánto costaría la implementación. Sin compromiso.
           </p>
           <Link
@@ -402,7 +402,7 @@ export default function AutomatizacionProcesosPage() {
             <ArrowRight className="h-5 w-5" />
           </Link>
           <p className="text-blue-200 text-sm mt-4">
-            Videollamada de 45 minutos · Sin coste · Sin compromiso
+            Videollamada de 30 minutos · Sin coste · Sin compromiso
           </p>
         </div>
       </section>

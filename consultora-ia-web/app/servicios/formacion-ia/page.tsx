@@ -170,7 +170,7 @@ export default function FormacionIAPage() {
             ¿Quieres que tu equipo domine la IA?
           </h2>
           <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-8">
-            En 45 minutos de videollamada analizamos el nivel actual de tu equipo, los objetivos
+            En 30 minutos de videollamada analizamos el nivel actual de tu equipo, los objetivos
             de la formación y diseñamos un plan adaptado a tu empresa. Sin compromiso.
           </p>
           <Link

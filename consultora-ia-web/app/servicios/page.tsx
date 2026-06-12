@@ -330,7 +330,7 @@ export default function ServiciosPage() {
             ¿No estás seguro por dónde empezar?
           </h2>
           <p className="text-blue-100 mb-8 text-lg">
-            En 45 minutos de videollamada gratuita analizamos tu empresa y te decimos exactamente
+            En 30 minutos de videollamada gratuita analizamos tu empresa y te decimos exactamente
             qué tiene sentido hacer, por dónde empezar y cuánto costaría. Sin compromiso.
           </p>
           <Link

@@ -189,7 +189,7 @@ export default async function BlogPostPage({ params }: Props) {
               <div className="bg-blue-600 rounded-2xl p-6 text-white">
                 <h3 className="font-bold text-lg mb-2">¿Quieres aplicar esto en tu empresa?</h3>
                 <p className="text-blue-100 text-sm mb-4">
-                  Solicita un diagnóstico gratuito de 45 minutos y te diremos exactamente qué
+                  Solicita un diagnóstico gratuito de 30 minutos y te diremos exactamente qué
                   tiene sentido implementar en tu caso concreto.
                 </p>
                 <Link

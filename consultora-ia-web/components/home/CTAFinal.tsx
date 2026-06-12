@@ -35,7 +35,7 @@ export default function CTAFinal() {
               ¿Listo para dar el primer paso con la IA?
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-lg text-slate-300">
-              Reserva una videollamada de diagnóstico gratuita de 45 minutos.
+              Reserva una videollamada de diagnóstico gratuita de 30 minutos.
               Sin compromiso, sin tecnicismos, sin presión.
             </p>
 
