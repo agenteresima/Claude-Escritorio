@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Logo — Automatización Procesos IA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0A0F1A;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    padding: 60px 40px;
+  }
+
+  .label {
+    color: rgba(255,255,255,0.3);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* ══════════════════════════════
+     VERSIÓN HORIZONTAL (header)
+  ══════════════════════════════ */
+  .logo-h {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: #060D1A;
+    padding: 28px 48px;
+    border-radius: 20px;
+    border: 1px solid rgba(37,99,235,0.2);
+  }
+
+  .icon-box {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 60%, #1e3a8a 100%);
+    box-shadow: 0 0 24px rgba(37,99,235,0.5), 0 0 60px rgba(37,99,235,0.2);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .icon-box::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 60%);
+  }
+  .icon-symbol {
+    font-size: 26px;
+    position: relative; z-index: 1;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
+  }
+
+  .logo-text-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .logo-main {
+    font-size: 22px;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .logo-main .blue { color: #60A5FA; }
+  .logo-sub {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ══════════════════════════════
+     VERSIÓN FONDO BLANCO
+  ══════════════════════════════ */
+  .logo-h-light {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: #FFFFFF;
+    padding: 28px 48px;
+    border-radius: 20px;
+    border: 1px solid #E2E8F0;
+  }
+  .logo-main-light {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .logo-main-light .blue { color: #2563EB; }
+  .logo-sub-light {
+    font-size: 11px;
+    font-weight: 500;
+    color: #94A3B8;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ══════════════════════════════
+     VERSIÓN CUADRADA (icono app / favicon)
+  ══════════════════════════════ */
+  .logo-sq {
+    width: 200px; height: 200px;
+    border-radius: 44px;
+    background: linear-gradient(145deg, #1a3a8f 0%, #1D4ED8 40%, #0f2952 100%);
+    box-shadow: 0 0 60px rgba(37,99,235,0.5), 0 0 120px rgba(37,99,235,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-sq::before {
+    content: '';
+    position: absolute;
+    top: -30%; left: -30%;
+    width: 80%; height: 80%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+  }
+  .logo-sq::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .sq-icon {
+    font-size: 72px;
+    position: relative; z-index: 1;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
+    line-height: 1;
+  }
+  .sq-letters {
+    font-size: 18px; font-weight: 900;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 3px;
+    position: relative; z-index: 1;
+  }
+  .sq-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #60A5FA, #06B6D4);
+    z-index: 2;
+  }
+
+  /* ══════════════════════════════
+     VERSIÓN SOLO ICONO (pequeño)
+  ══════════════════════════════ */
+  .logo-mini {
+    width: 80px; height: 80px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 60%, #1e3a8a 100%);
+    box-shadow: 0 0 30px rgba(37,99,235,0.6);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-mini::before {
+    content: '';
+    position: absolute;
+    top: 5%; left: 5%;
+    width: 50%; height: 50%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 70%);
+  }
+
+  .row { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; justify-content: center; }
+</style>
+</head>
+<body>
+
+  <!-- FONDO OSCURO -->
+  <div>
+    <div class="label">Versión oscura — para web y redes</div>
+    <div class="logo-h">
+      <div class="icon-box">
+        <div class="icon-symbol">✦</div>
+      </div>
+      <div class="logo-text-wrap">
+        <div class="logo-main">Automatización <span class="blue">Procesos IA</span></div>
+        <div class="logo-sub">Consultoría · Valencia</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FONDO BLANCO -->
+  <div>
+    <div class="label">Versión clara — para documentos y email</div>
+    <div class="logo-h-light">
+      <div class="icon-box">
+        <div class="icon-symbol">✦</div>
+      </div>
+      <div class="logo-text-wrap">
+        <div class="logo-main-light">Automatización <span class="blue">Procesos IA</span></div>
+        <div class="logo-sub-light">Consultoría · Valencia</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ICONO APP + MINI -->
+  <div>
+    <div class="label">Icono app (200×200) · Favicon (80×80)</div>
+    <div class="row">
+      <div class="logo-sq">
+        <div class="sq-icon">✦</div>
+        <div class="sq-letters">AP·IA</div>
+        <div class="sq-bar"></div>
+      </div>
+      <div class="logo-mini">✦</div>
+    </div>
+  </div>
+
+</body>
+</html>
