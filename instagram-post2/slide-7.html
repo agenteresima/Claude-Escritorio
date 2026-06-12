@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Slide 7 — CTA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1080px; height: 1080px; overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+  }
+
+  /* Fondo gradiente diagonal azul-morado */
+  .bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #0f2878 0%, #1D4ED8 35%, #6D28D9 70%, #4C1D95 100%);
+  }
+
+  /* Patrón de puntos */
+  .dots {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.08) 1.5px, transparent 1.5px);
+    background-size: 36px 36px;
+  }
+
+  /* Brillo central */
+  .glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  }
+
+  /* Anillos decorativos */
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .r1 { width: 500px; height: 500px; }
+  .r2 { width: 700px; height: 700px; border-color: rgba(255,255,255,0.05); }
+  .r3 { width: 900px; height: 900px; border-color: rgba(255,255,255,0.03); }
+
+  .counter {
+    position: absolute; top: 40px; right: 48px;
+    color: rgba(255,255,255,0.5); font-size: 18px; font-weight: 600;
+  }
+
+  .content {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 80px;
+    gap: 0;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-size: 18px; font-weight: 700;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-size: 70px; font-weight: 900;
+    color: #fff; line-height: 1.05;
+    letter-spacing: -2.5px;
+    margin-bottom: 24px;
+  }
+
+  .sub {
+    font-size: 26px; color: rgba(255,255,255,0.65);
+    font-weight: 400; margin-bottom: 60px;
+    line-height: 1.4;
+  }
+
+  /* CTA box */
+  .cta-box {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 24px;
+    padding: 44px 64px;
+    margin-bottom: 36px;
+    width: 100%;
+    max-width: 780px;
+  }
+  .cta-label {
+    font-size: 22px; font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+  }
+  .cta-url {
+    font-size: 48px; font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+    text-shadow: 0 0 40px rgba(255,255,255,0.3);
+  }
+
+  .pills {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  }
+  .pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.7);
+    font-size: 16px; font-weight: 600;
+    padding: 10px 22px; border-radius: 100px;
+  }
+
+  .logo { position: absolute; bottom: 36px; left: 48px; display: flex; align-items: center; gap: 12px; }
+  .logo-text { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.7); }
+  .bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, rgba(255,255,255,0.4), rgba(255,255,255,0.8), rgba(255,255,255,0.4)); }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="dots"></div>
+  <div class="glow"></div>
+  <div class="ring r3"></div>
+  <div class="ring r2"></div>
+  <div class="ring r1"></div>
+  <div class="counter">7 / 7</div>
+
+  <div class="content">
+    <div class="eyebrow">La pregunta del millón</div>
+    <h1>¿Cuántas horas pierdes<br>tú cada semana?</h1>
+    <div class="sub">Descúbrelo gratis en 30 minutos.<br>Sin compromiso. Sin código.</div>
+
+    <div class="cta-box">
+      <div class="cta-label">🎯 Diagnóstico Gratuito en</div>
+      <div class="cta-url">automatizacionprocesos.es</div>
+    </div>
+
+    <div class="pills">
+      <div class="pill">✅ Sin compromiso</div>
+      <div class="pill">⚡ Resultados en 30 días</div>
+      <div class="pill">🇪🇸 Valencia · España</div>
+    </div>
+  </div>
+
+  <div class="logo">
+    <svg width="32" height="20" viewBox="0 0 120 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#93C5FD"/>
+          <stop offset="100%" stop-color="#E9D5FF"/>
+        </linearGradient>
+      </defs>
+      <path d="M38 37C38 27 46 19 55 19C64 19 71 26 80 33C71 40 64 47 55 47C46 47 38 47 38 37Z" stroke="url(#lg)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+      <path d="M80 37C80 27 88 19 97 19C106 19 114 27 114 37C114 47 106 55 97 55C88 55 80 47 80 37Z" stroke="url(#lg)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+      <path d="M38 37C38 47 30 55 21 55C12 55 4 47 4 37C4 27 12 19 21 19C30 19 38 27 38 37Z" stroke="url(#lg)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+      <circle cx="21" cy="37" r="3" fill="#93C5FD"/>
+      <line x1="24" y1="33" x2="34" y2="28" stroke="#93C5FD" stroke-width="2" stroke-linecap="round"/>
+      <line x1="24" y1="37" x2="36" y2="37" stroke="#93C5FD" stroke-width="2" stroke-linecap="round"/>
+      <line x1="24" y1="41" x2="34" y2="46" stroke="#93C5FD" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="97" cy="37" r="3" fill="#E9D5FF"/>
+      <line x1="94" y1="33" x2="84" y2="28" stroke="#E9D5FF" stroke-width="2" stroke-linecap="round"/>
+      <line x1="94" y1="37" x2="82" y2="37" stroke="#E9D5FF" stroke-width="2" stroke-linecap="round"/>
+      <line x1="94" y1="41" x2="84" y2="46" stroke="#E9D5FF" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <div class="logo-text">Automatización Procesos IA</div>
+  </div>
+  <div class="bar"></div>
+</body>
+</html>

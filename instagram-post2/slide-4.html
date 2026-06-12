@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Slide 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1080px; height: 1080px; overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #060D1A;
+    position: relative;
+  }
+  /* Glow top-left */
+  .glow-tl {
+    position: absolute; top: -200px; left: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse at center, rgba(16,185,129,0.12) 0%, rgba(6,182,212,0.06) 40%, transparent 70%);
+    border-radius: 50%;
+  }
+  /* Slide counter */
+  .counter {
+    position: absolute; top: 40px; right: 48px;
+    color: rgba(255,255,255,0.5); font-size: 18px; font-weight: 600;
+  }
+  .title {
+    position: absolute; top: 72px; left: 64px;
+    color: white; font-size: 52px; font-weight: 800; line-height: 1.1;
+    max-width: 920px;
+  }
+  .items {
+    position: absolute; top: 200px; left: 64px; right: 64px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .item {
+    background: rgba(16,185,129,0.06);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-left: 4px solid #10B981;
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex; align-items: center; gap: 20px;
+    font-size: 22px; color: white; font-weight: 500;
+  }
+  .item-icon { font-size: 24px; flex-shrink: 0; }
+  /* Bottom highlight */
+  .highlight {
+    position: absolute; bottom: 80px; left: 64px; right: 64px;
+    background: rgba(16,185,129,0.08);
+    border: 1.5px solid rgba(16,185,129,0.35);
+    border-radius: 16px;
+    padding: 22px 32px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(16,185,129,0.08);
+  }
+  .highlight-text {
+    font-size: 40px; font-weight: 800;
+    background: linear-gradient(90deg, #10B981, #06B6D4);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .bottom-bar {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #1D4ED8, #60A5FA, #06B6D4);
+  }
+  .logo { position: absolute; bottom: 36px; left: 48px; }
+</style>
+</head>
+<body>
+<div class="glow-tl"></div>
+<div class="counter">4/7</div>
+<div class="title">Las empresas con IA hacen esto ✅</div>
+<div class="items">
+  <div class="item"><span class="item-icon">✅</span>Emails respondidos en segundos</div>
+  <div class="item"><span class="item-icon">✅</span>Informes generados solos</div>
+  <div class="item"><span class="item-icon">✅</span>Datos sincronizados en tiempo real</div>
+  <div class="item"><span class="item-icon">✅</span>Chatbot 24/7 sin coste extra</div>
+  <div class="item"><span class="item-icon">✅</span>Facturas enviadas al instante</div>
+</div>
+<div class="highlight">
+  <span class="highlight-text">Tiempo recuperado: +15h/semana</span>
+</div>
+<div class="logo">
+<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#A855F7"/>
+    </linearGradient>
+  </defs>
+  <path d="M8,20 C8,14 13,10 18,10 C23,10 26,14 28,17 C26,20 23,24 18,24 C13,24 8,26 8,20 Z M28,17 C30,14 33,10 38,10 C43,10 48,14 48,20 C48,26 43,30 38,30 C33,30 30,26 28,23 C26,20 28,17 28,17 Z" stroke="url(#logoGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="8" cy="20" r="2.5" fill="#3B82F6"/>
+  <circle cx="48" cy="20" r="2.5" fill="#A855F7"/>
+  <circle cx="28" cy="17" r="2" fill="url(#logoGrad)"/>
+  <circle cx="18" cy="10" r="1.5" fill="#3B82F6"/>
+  <circle cx="38" cy="30" r="1.5" fill="#A855F7"/>
+  <text x="56" y="16" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="white">Automatización</text>
+  <text x="56" y="27" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="white">Procesos IA</text>
+</svg>
+</div>
+<div class="bottom-bar"></div>
+</body>
+</html>
