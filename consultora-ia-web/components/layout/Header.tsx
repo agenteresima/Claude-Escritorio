@@ -13,8 +13,8 @@ import {
   GraduationCap,
   Target,
   BarChart3,
-  Sparkles,
 } from 'lucide-react'
+import LogoIcon from '@/components/ui/LogoIcon'
 import { cn } from '@/lib/utils'
 import { NAV_ITEMS } from '@/lib/constants'
 import Button from '@/components/ui/Button'
@@ -80,16 +80,7 @@ export default function Header() {
             className="flex items-center gap-2 flex-shrink-0 group"
             aria-label="Automatización Procesos IA — Inicio"
           >
-            <div
-              className={cn(
-                'flex items-center justify-center w-9 h-9 rounded-xl transition-all duration-300',
-                isScrolled
-                  ? 'bg-brand-600 shadow-brand-sm'
-                  : 'bg-brand-600/90 shadow-brand'
-              )}
-            >
-              <Sparkles className="w-5 h-5 text-white" />
-            </div>
+            <LogoIcon size={40} />
             <span
               className={cn(
                 'font-bold text-xl tracking-tight transition-colors duration-300',

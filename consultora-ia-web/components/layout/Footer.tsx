@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import {
-  Sparkles,
   Linkedin,
   Twitter,
   Youtube,
@@ -12,6 +11,7 @@ import {
   ArrowRight,
   CheckCircle,
 } from 'lucide-react'
+import LogoIcon from '@/components/ui/LogoIcon'
 import { cn } from '@/lib/utils'
 import { COMPANY_INFO } from '@/lib/constants'
 
@@ -125,9 +125,7 @@ export default function Footer() {
           {/* Columna empresa */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="flex items-center justify-center w-9 h-9 bg-brand-600 rounded-xl">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
+              <LogoIcon size={40} />
               <span className="font-bold text-xl text-white">Automatización Procesos IA</span>
             </Link>
             <p className="text-navy-300 text-sm leading-relaxed mb-6 max-w-sm">
