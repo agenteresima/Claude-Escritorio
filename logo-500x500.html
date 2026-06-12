@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Logo 500×500 — Automatización Procesos IA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0A0F1A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .logo {
+    width: 500px;
+    height: 500px;
+    border-radius: 110px;
+    background: linear-gradient(145deg, #1a3a8f 0%, #1D4ED8 45%, #0f2952 100%);
+    box-shadow:
+      0 0 80px rgba(37,99,235,0.6),
+      0 0 200px rgba(37,99,235,0.25),
+      inset 0 1px 0 rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Brillo superior izquierdo */
+  .logo::before {
+    content: '';
+    position: absolute;
+    top: -10%; left: -10%;
+    width: 65%; height: 65%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Grid de puntos */
+  .logo::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+  }
+
+  /* Anillo decorativo */
+  .ring {
+    position: absolute;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    border: 1px solid rgba(96,165,250,0.15);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .ring2 {
+    width: 460px; height: 460px;
+    border-color: rgba(96,165,250,0.07);
+  }
+
+  /* Orbe / icono central */
+  .orb {
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 28%, #60A5FA 0%, #2563EB 40%, #0f2254 100%);
+    box-shadow:
+      0 0 60px rgba(37,99,235,0.8),
+      0 0 120px rgba(37,99,235,0.4),
+      inset 0 0 40px rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .orb::before {
+    content: '';
+    position: absolute;
+    top: 8%; left: 8%;
+    width: 45%; height: 45%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 70%);
+  }
+  .orb-symbol {
+    font-size: 90px;
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: -4px;
+    position: relative; z-index: 1;
+    text-shadow: 0 0 30px rgba(255,255,255,0.5);
+    line-height: 1;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Texto inferior */
+  .name {
+    font-size: 32px;
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: -0.5px;
+    text-align: center;
+    line-height: 1.15;
+    position: relative; z-index: 2;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+  .name span { color: #60A5FA; }
+
+  .sub {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.38);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    position: relative; z-index: 2;
+    margin-top: -6px;
+  }
+
+  /* Barra inferior */
+  .bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #1D4ED8, #60A5FA, #06B6D4);
+    z-index: 3;
+  }
+
+  /* Puntos de luz */
+  .dot {
+    position: absolute;
+    border-radius: 50%;
+    background: #60A5FA;
+    box-shadow: 0 0 12px #2563EB;
+    z-index: 2;
+  }
+</style>
+</head>
+<body>
+  <div class="logo">
+    <div class="ring"></div>
+    <div class="ring ring2"></div>
+
+    <div class="dot" style="width:7px;height:7px;top:12%;left:18%;opacity:0.7;"></div>
+    <div class="dot" style="width:5px;height:5px;top:16%;right:20%;opacity:0.5;"></div>
+    <div class="dot" style="width:6px;height:6px;bottom:22%;left:15%;opacity:0.5;"></div>
+    <div class="dot" style="width:4px;height:4px;bottom:25%;right:16%;opacity:0.4;"></div>
+
+    <div class="orb">
+      <div class="orb-symbol">✦</div>
+    </div>
+
+    <div class="name">Automatización<br><span>Procesos IA</span></div>
+    <div class="sub">Consultoría · Valencia</div>
+
+    <div class="bar"></div>
+  </div>
+</body>
+</html>
