@@ -12,7 +12,9 @@
     display: flex; gap: 10px; z-index: 9999;
     background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 50px;
     border: 1px solid rgba(255,255,255,0.15);
+    opacity: 0; transition: opacity 0.3s;
   }
+  .controls:hover { opacity: 1; }
   .controls button {
     background: #2563EB; color: white; border: none; padding: 8px 20px;
     border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer;
