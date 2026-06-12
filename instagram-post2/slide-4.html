@@ -2,105 +2,104 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1080">
-<title>Slide 4</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Slide 4 – Automatización Procesos IA</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; }
   body {
     width: 1080px; height: 1080px; overflow: hidden;
+    margin: 0; padding: 0;
     font-family: 'Inter', sans-serif;
     background: #060D1A;
     position: relative;
   }
-  /* Glow top-left */
-  .glow-tl {
-    position: absolute; top: -200px; left: -100px;
-    width: 600px; height: 600px;
-    background: radial-gradient(ellipse at center, rgba(16,185,129,0.12) 0%, rgba(6,182,212,0.06) 40%, transparent 70%);
-    border-radius: 50%;
+  /* Green/teal glow accent */
+  .glow-tr {
+    position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse at center, rgba(20,184,166,0.14) 0%, rgba(34,197,94,0.08) 40%, transparent 70%);
+    pointer-events: none; z-index: 0;
   }
-  /* Slide counter */
+  .glow-bl {
+    position: absolute; bottom: 100px; left: -80px;
+    width: 350px; height: 350px;
+    background: radial-gradient(ellipse at center, rgba(16,185,129,0.09) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
   .counter {
     position: absolute; top: 40px; right: 48px;
-    color: rgba(255,255,255,0.5); font-size: 18px; font-weight: 600;
+    color: rgba(255,255,255,0.5); font-size: 18px; font-weight: 600; z-index: 10;
+  }
+  .content {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 60px 64px;
+    z-index: 5;
   }
   .title {
-    position: absolute; top: 72px; left: 64px;
-    color: white; font-size: 52px; font-weight: 800; line-height: 1.1;
-    max-width: 920px;
-  }
-  .items {
-    position: absolute; top: 200px; left: 64px; right: 64px;
-    display: flex; flex-direction: column; gap: 14px;
+    font-size: 50px; font-weight: 800; color: #fff;
+    margin: 0 0 32px 0; line-height: 1.2;
   }
   .item {
-    background: rgba(16,185,129,0.06);
-    border: 1px solid rgba(16,185,129,0.2);
-    border-left: 4px solid #10B981;
-    border-radius: 12px;
-    padding: 16px 24px;
-    display: flex; align-items: center; gap: 20px;
-    font-size: 22px; color: white; font-weight: 500;
+    display: flex; align-items: center;
+    background: rgba(255,255,255,0.04);
+    border-left: 3px solid rgba(34,197,94,0.6);
+    border-radius: 0 12px 12px 0;
+    padding: 17px 24px;
+    margin-bottom: 11px;
+    font-size: 21px; font-weight: 600; color: rgba(255,255,255,0.88);
+    gap: 16px;
   }
-  .item-icon { font-size: 24px; flex-shrink: 0; }
-  /* Bottom highlight */
-  .highlight {
-    position: absolute; bottom: 80px; left: 64px; right: 64px;
-    background: rgba(16,185,129,0.08);
-    border: 1.5px solid rgba(16,185,129,0.35);
-    border-radius: 16px;
-    padding: 22px 32px;
+  .item .auto-tag {
+    margin-left: auto;
+    font-size: 12px; font-weight: 700; color: #4ADE80;
+    background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3);
+    padding: 4px 10px; border-radius: 50px; white-space: nowrap;
+    letter-spacing: 0.3px;
+  }
+  .highlight-green {
+    background: linear-gradient(135deg, rgba(16,185,129,0.18), rgba(34,197,94,0.10));
+    border: 1px solid rgba(74,222,128,0.3);
+    border-radius: 14px;
+    padding: 22px 28px;
+    margin-top: 20px;
+    font-size: 26px; font-weight: 800; color: #4ADE80;
     text-align: center;
-    box-shadow: 0 0 40px rgba(16,185,129,0.08);
-  }
-  .highlight-text {
-    font-size: 40px; font-weight: 800;
-    background: linear-gradient(90deg, #10B981, #06B6D4);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
   .bottom-bar {
     position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(90deg, #1D4ED8, #60A5FA, #06B6D4);
+    background: linear-gradient(90deg, #1D4ED8, #60A5FA, #06B6D4); z-index: 20;
   }
-  .logo { position: absolute; bottom: 36px; left: 48px; }
 </style>
 </head>
 <body>
-<div class="glow-tl"></div>
-<div class="counter">4/7</div>
-<div class="title">Las empresas con IA hacen esto ✅</div>
-<div class="items">
-  <div class="item"><span class="item-icon">✅</span>Emails respondidos en segundos</div>
-  <div class="item"><span class="item-icon">✅</span>Informes generados solos</div>
-  <div class="item"><span class="item-icon">✅</span>Datos sincronizados en tiempo real</div>
-  <div class="item"><span class="item-icon">✅</span>Chatbot 24/7 sin coste extra</div>
-  <div class="item"><span class="item-icon">✅</span>Facturas enviadas al instante</div>
-</div>
-<div class="highlight">
-  <span class="highlight-text">Tiempo recuperado: +15h/semana</span>
-</div>
-<div class="logo">
-<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#3B82F6"/>
-      <stop offset="100%" style="stop-color:#A855F7"/>
-    </linearGradient>
-  </defs>
-  <path d="M8,20 C8,14 13,10 18,10 C23,10 26,14 28,17 C26,20 23,24 18,24 C13,24 8,26 8,20 Z M28,17 C30,14 33,10 38,10 C43,10 48,14 48,20 C48,26 43,30 38,30 C33,30 30,26 28,23 C26,20 28,17 28,17 Z" stroke="url(#logoGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-  <circle cx="8" cy="20" r="2.5" fill="#3B82F6"/>
-  <circle cx="48" cy="20" r="2.5" fill="#A855F7"/>
-  <circle cx="28" cy="17" r="2" fill="url(#logoGrad)"/>
-  <circle cx="18" cy="10" r="1.5" fill="#3B82F6"/>
-  <circle cx="38" cy="30" r="1.5" fill="#A855F7"/>
-  <text x="56" y="16" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="white">Automatización</text>
-  <text x="56" y="27" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="white">Procesos IA</text>
-</svg>
-</div>
-<div class="bottom-bar"></div>
+  <div class="glow-tr"></div>
+  <div class="glow-bl"></div>
+  <div class="counter">4 / 7</div>
+
+  <div class="content">
+    <h1 class="title">Las empresas con IA hacen esto ✅</h1>
+
+    <div class="item"><span>✅ Emails respondidos en segundos</span><span class="auto-tag">automático</span></div>
+    <div class="item"><span>✅ Informes generados solos</span><span class="auto-tag">automático</span></div>
+    <div class="item"><span>✅ Datos sincronizados en tiempo real</span><span class="auto-tag">automático</span></div>
+    <div class="item"><span>✅ Chatbot 24/7 sin coste extra</span><span class="auto-tag">automático</span></div>
+    <div class="item"><span>✅ Facturas enviadas al instante</span><span class="auto-tag">automático</span></div>
+
+    <div class="highlight-green">⚡ Tiempo recuperado: +15h/semana</div>
+  </div>
+
+  <div style="position:absolute;bottom:36px;left:48px;display:flex;align-items:center;gap:10px;z-index:10;">
+    <svg width="44" height="26" viewBox="0 0 44 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="44" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#A855F7"/></linearGradient></defs>
+      <path d="M14 13C14 9.13 17.13 6 21 6C24.87 6 27.5 8.5 29 11C30.5 8.5 33.13 6 37 6C40.87 6 44 9.13 44 13C44 16.87 40.87 20 37 20C33.13 20 30.5 17.5 29 15C27.5 17.5 24.87 20 21 20C17.13 20 14 16.87 14 13Z" stroke="url(#logoGrad)" stroke-width="2.5" fill="none"/>
+      <circle cx="21" cy="6" r="2" fill="#3B82F6"/><circle cx="37" cy="6" r="2" fill="#A855F7"/>
+      <circle cx="21" cy="20" r="2" fill="#60A5FA"/><circle cx="37" cy="20" r="2" fill="#C084FC"/>
+      <circle cx="29" cy="13" r="2.5" fill="url(#logoGrad)"/>
+    </svg>
+    <span style="color:rgba(255,255,255,0.85);font-size:11px;font-weight:600;letter-spacing:0.3px;line-height:1.3;">Automatización<br>Procesos IA</span>
+  </div>
+  <div class="bottom-bar"></div>
 </body>
 </html>

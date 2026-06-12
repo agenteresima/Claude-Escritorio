@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1080">
-<title>Slide 6 — Resultado real</title>
+<title>Slide 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -13,151 +15,107 @@
     background: #060D1A;
     position: relative;
   }
-
-  .bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 20% 50%, rgba(37,99,235,0.22) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 60% at 80% 20%, rgba(168,85,247,0.18) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(6,182,212,0.12) 0%, transparent 50%),
-      #060D1A;
+  /* Center blue glow */
+  .glow {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse at center, rgba(37,99,235,0.18) 0%, rgba(168,85,247,0.08) 40%, transparent 70%);
+    border-radius: 50%;
   }
-  .grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px);
-    background-size: 54px 54px;
-  }
-
   .counter {
     position: absolute; top: 40px; right: 48px;
-    color: rgba(255,255,255,0.4); font-size: 18px; font-weight: 600;
+    color: rgba(255,255,255,0.5); font-size: 18px; font-weight: 600;
   }
-
-  .content {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    padding: 80px 80px 100px;
-    justify-content: center;
-    gap: 0;
+  .title {
+    position: absolute; top: 72px; left: 50%; transform: translateX(-50%);
+    color: white; font-size: 52px; font-weight: 800;
+    white-space: nowrap; text-align: center;
   }
-
-  .tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(52,211,153,0.12);
-    border: 1px solid rgba(52,211,153,0.35);
-    color: #34D399; font-size: 16px; font-weight: 700;
-    padding: 8px 20px; border-radius: 100px;
-    margin-bottom: 32px; width: fit-content;
+  /* Big metric */
+  .metric {
+    position: absolute; top: 185px; left: 50%; transform: translateX(-50%);
+    text-align: center; width: 950px;
   }
-
-  h1 {
-    font-size: 58px; font-weight: 900;
-    color: #fff; line-height: 1.1;
-    letter-spacing: -2px;
-    margin-bottom: 48px;
-  }
-
-  /* Métrica principal */
-  .metric-box {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 24px;
-    padding: 44px 52px;
-    margin-bottom: 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .metric-box::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #34D399, #3B82F6);
-  }
-  .metric-row {
-    display: flex; align-items: center; justify-content: center;
-    gap: 32px; margin-bottom: 16px;
-  }
-  .metric-val {
-    font-size: 80px; font-weight: 900;
-    line-height: 1;
-    letter-spacing: -3px;
-  }
-  .metric-before { color: rgba(255,255,255,0.3); text-decoration: line-through; text-decoration-color: rgba(255,100,100,0.5); }
-  .metric-arrow { font-size: 44px; color: #34D399; }
-  .metric-after {
-    background: linear-gradient(90deg, #34D399, #3B82F6);
+  .metric-text {
+    font-size: 56px; font-weight: 900; letter-spacing: -1px;
+    background: linear-gradient(90deg, #60A5FA, #A855F7);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; white-space: nowrap;
   }
-  .metric-label { font-size: 20px; color: rgba(255,255,255,0.5); text-align: center; font-weight: 500; }
-
-  /* Quote */
-  .quote {
-    background: rgba(37,99,235,0.1);
-    border: 1px solid rgba(37,99,235,0.25);
-    border-left: 4px solid #3B82F6;
-    border-radius: 0 16px 16px 0;
-    padding: 28px 32px;
+  .metric-sub {
+    color: rgba(148,163,184,0.8); font-size: 22px; font-weight: 500; margin-top: 10px;
+  }
+  /* Quote card */
+  .quote-card {
+    position: absolute; top: 390px; left: 64px; right: 64px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(96,165,250,0.2);
+    border-left: 5px solid transparent;
+    border-image: linear-gradient(180deg, #3B82F6, #A855F7) 1;
+    border-radius: 16px;
+    padding: 36px 40px;
   }
   .quote-text {
-    font-size: 20px; font-style: italic;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.6; margin-bottom: 14px;
+    color: white; font-size: 24px; font-style: italic; line-height: 1.5; font-weight: 500;
   }
-  .quote-author { font-size: 15px; color: #60A5FA; font-weight: 600; }
-
-  .logo { position: absolute; bottom: 36px; left: 48px; display: flex; align-items: center; gap: 12px; }
-  .logo-text { font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.6); }
-  .bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #34D399, #3B82F6, #A855F7); }
+  .quote-text::before { content: '"'; font-size: 40px; color: #60A5FA; line-height: 0; vertical-align: -14px; margin-right: 4px; }
+  .quote-text::after { content: '"'; font-size: 40px; color: #A855F7; line-height: 0; vertical-align: -14px; margin-left: 4px; }
+  .attribution {
+    color: rgba(148,163,184,0.6); font-size: 18px; font-weight: 500;
+    margin-top: 20px;
+  }
+  /* Stars */
+  .stars {
+    position: absolute; top: 360px; left: 64px;
+    font-size: 28px; letter-spacing: 4px;
+  }
+  /* Verified badge */
+  .verified {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3);
+    border-radius: 999px; padding: 6px 16px;
+    color: #60A5FA; font-size: 15px; font-weight: 600;
+    margin-top: 14px;
+  }
+  .bottom-bar {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #1D4ED8, #60A5FA, #06B6D4);
+  }
+  .logo { position: absolute; bottom: 36px; left: 48px; }
 </style>
 </head>
 <body>
-  <div class="bg"></div>
-  <div class="grid"></div>
-  <div class="counter">6 / 7</div>
-
-  <div class="content">
-    <div class="tag">✅ Caso real · Cliente Valencia</div>
-    <h1>Resultado real<br>de un cliente nuestro</h1>
-
-    <div class="metric-box">
-      <div class="metric-row">
-        <div class="metric-val metric-before">8h</div>
-        <div class="metric-arrow">→</div>
-        <div class="metric-val metric-after">45min</div>
-      </div>
-      <div class="metric-label">Gestión de pedidos y facturación automatizada · cada día</div>
-    </div>
-
-    <div class="quote">
-      <div class="quote-text">"Ahorramos 35 horas semanales. El sistema trabaja solo mientras nosotros atendemos a los clientes. No puedo imaginar volver a hacerlo a mano."</div>
-      <div class="quote-author">— Empresa de distribución · Valencia · Implementado en 3 semanas</div>
-    </div>
-  </div>
-
-  <div class="logo">
-    <svg width="32" height="20" viewBox="0 0 120 75" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#3B82F6"/>
-          <stop offset="100%" stop-color="#A855F7"/>
-        </linearGradient>
-      </defs>
-      <path d="M38 37C38 27 46 19 55 19C64 19 71 26 80 33C71 40 64 47 55 47C46 47 38 47 38 37Z" stroke="url(#lg)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
-      <path d="M80 37C80 27 88 19 97 19C106 19 114 27 114 37C114 47 106 55 97 55C88 55 80 47 80 37Z" stroke="url(#lg)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
-      <path d="M38 37C38 47 30 55 21 55C12 55 4 47 4 37C4 27 12 19 21 19C30 19 38 27 38 37Z" stroke="url(#lg)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
-      <circle cx="21" cy="37" r="3" fill="#60A5FA"/>
-      <line x1="24" y1="33" x2="34" y2="28" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
-      <line x1="24" y1="37" x2="36" y2="37" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
-      <line x1="24" y1="41" x2="34" y2="46" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="97" cy="37" r="3" fill="#C084FC"/>
-      <line x1="94" y1="33" x2="84" y2="28" stroke="#C084FC" stroke-width="2" stroke-linecap="round"/>
-      <line x1="94" y1="37" x2="82" y2="37" stroke="#C084FC" stroke-width="2" stroke-linecap="round"/>
-      <line x1="94" y1="41" x2="84" y2="46" stroke="#C084FC" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    <div class="logo-text">Automatización Procesos IA</div>
-  </div>
-  <div class="bar"></div>
+<div class="glow"></div>
+<div class="counter">6/7</div>
+<div class="title">Resultado real de un cliente</div>
+<div class="metric">
+  <div class="metric-text">De 8 horas → 45 minutos</div>
+  <div class="metric-sub">Gestión de pedidos y facturación automatizada</div>
+</div>
+<div class="stars">⭐⭐⭐⭐⭐</div>
+<div class="quote-card">
+  <div class="quote-text">Ahorramos 35 horas semanales. El sistema trabaja solo mientras nosotros atendemos a los clientes.</div>
+  <div class="attribution">— Empresa distribución · Valencia</div>
+  <div><span class="verified">✓ Caso verificado · 2025</span></div>
+</div>
+<div class="logo">
+<svg width="140" height="40" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#A855F7"/>
+    </linearGradient>
+  </defs>
+  <path d="M8,20 C8,14 13,10 18,10 C23,10 26,14 28,17 C26,20 23,24 18,24 C13,24 8,26 8,20 Z M28,17 C30,14 33,10 38,10 C43,10 48,14 48,20 C48,26 43,30 38,30 C33,30 30,26 28,23 C26,20 28,17 28,17 Z" stroke="url(#logoGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="8" cy="20" r="2.5" fill="#3B82F6"/>
+  <circle cx="48" cy="20" r="2.5" fill="#A855F7"/>
+  <circle cx="28" cy="17" r="2" fill="url(#logoGrad)"/>
+  <circle cx="18" cy="10" r="1.5" fill="#3B82F6"/>
+  <circle cx="38" cy="30" r="1.5" fill="#A855F7"/>
+  <text x="56" y="16" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="white">Automatización</text>
+  <text x="56" y="27" font-family="Inter, sans-serif" font-size="8" font-weight="700" fill="white">Procesos IA</text>
+</svg>
+</div>
+<div class="bottom-bar"></div>
 </body>
 </html>
