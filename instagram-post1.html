@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Instagram Post 1 — Automatización Procesos IA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; gap: 20px; }
+  .controls {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; z-index: 9999;
+    background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .controls button {
+    background: #2563EB; color: white; border: none; padding: 8px 20px;
+    border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .controls button:hover { background: #1D4ED8; }
+  .controls button.active { background: #60A5FA; color: #0F172A; }
+  .controls span { color: rgba(255,255,255,0.6); font-size: 14px; display: flex; align-items: center; }
+  .instructions {
+    color: rgba(255,255,255,0.5); font-size: 13px; text-align: center;
+    background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 10px;
+    margin-top: 60px;
+  }
+  .slide-wrapper {
+    width: 1080px; height: 1080px;
+    display: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide-wrapper.visible { display: block; }
+
+  /* ── SLIDE BASE ── */
+  .slide {
+    width: 1080px; height: 1080px;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+  }
+  .bg-dark {
+    background: #060D1A;
+  }
+  .bg-grad {
+    background: linear-gradient(135deg, #0F172A 0%, #0f2952 50%, #0F172A 100%);
+  }
+  .bg-blue {
+    background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 50%, #1D4ED8 100%);
+  }
+  .overlay-radial {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(99,102,241,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 90%, rgba(6,182,212,0.1) 0%, transparent 60%);
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(37,99,235,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .dots {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── SLIDE 1 ── */
+  .orb {
+    position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+    width: 340px; height: 340px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #3B82F6 0%, #1D4ED8 40%, #0F172A 100%);
+    box-shadow: 0 0 80px rgba(37,99,235,0.6), 0 0 160px rgba(37,99,235,0.3), inset 0 0 60px rgba(255,255,255,0.05);
+    display: flex; align-items: center; justify-content: center; z-index: 5;
+  }
+  .orb-inner { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 60%); }
+  .orb-emoji { font-size: 110px; position: relative; z-index: 2; }
+  .ring {
+    position: absolute; border-radius: 50%; border: 1px solid rgba(96,165,250,0.25);
+    top: 80px; left: 50%; z-index: 3;
+  }
+  .r1 { width: 410px; height: 410px; margin-left: -205px; margin-top: -35px; }
+  .r2 { width: 500px; height: 500px; margin-left: -250px; margin-top: -80px; border-color: rgba(96,165,250,0.12); }
+  .node {
+    position: absolute; background: rgba(15,23,42,0.9);
+    border: 1px solid rgba(96,165,250,0.4); border-radius: 14px;
+    padding: 14px 22px; display: flex; align-items: center; gap: 10px; z-index: 10;
+  }
+  .ndot { width: 8px; height: 8px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; flex-shrink: 0; }
+  .ntext { font-size: 17px; font-weight: 600; color: #93C5FD; white-space: nowrap; }
+  .content1 {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 130px 72px 72px;
+    background: linear-gradient(0deg, rgba(6,13,26,0.98) 0%, rgba(6,13,26,0.88) 60%, transparent 100%);
+  }
+  .badge1 {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(37,99,235,0.2); border: 1px solid rgba(37,99,235,0.5);
+    color: #93C5FD; font-size: 18px; font-weight: 600;
+    padding: 10px 24px; border-radius: 100px; margin-bottom: 24px;
+  }
+  .bdot { width: 8px; height: 8px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; }
+  .h1-big { font-size: 76px; font-weight: 900; color: #fff; line-height: 1.0; letter-spacing: -3px; margin-bottom: 20px; }
+  .h1-big .bl { color: #60A5FA; }
+  .sub1 { font-size: 24px; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+  .pill { display: inline-block; font-size: 16px; font-weight: 600; padding: 10px 22px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); }
+
+  /* ── SLIDES 2-6 BASE ── */
+  .inner {
+    position: relative; z-index: 10;
+    width: 880px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 40px;
+    padding-top: 200px;
+  }
+  .nbadge {
+    font-size: 22px; font-weight: 800; color: #2563EB;
+    background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.4);
+    width: 64px; height: 64px; border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .irow { display: flex; align-items: center; gap: 20px; }
+  .ibig { font-size: 80px; }
+  .aline { width: 80px; height: 5px; background: #2563EB; border-radius: 3px; }
+  .h2s { font-size: 68px; font-weight: 900; color: #fff; line-height: 1.05; letter-spacing: -2px; }
+  .h2s span { color: #60A5FA; }
+  .desc { font-size: 28px; color: rgba(255,255,255,0.6); line-height: 1.5; max-width: 750px; }
+  .saving {
+    display: flex; align-items: center; gap: 16px;
+    background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3);
+    border-radius: 16px; padding: 20px 28px; width: fit-content;
+  }
+  .si { font-size: 28px; }
+  .st { font-size: 24px; font-weight: 700; color: #93C5FD; }
+
+  /* ── SLIDE 7 ── */
+  .s7content {
+    position: relative; z-index: 10; text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 36px; padding: 80px; height: 100%;
+    justify-content: center;
+  }
+  .s7circle {
+    position: absolute; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .question { font-size: 20px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 2px; text-transform: uppercase; }
+  .h2-7 { font-size: 72px; font-weight: 900; color: #fff; line-height: 1.1; letter-spacing: -2px; }
+  .sub7 { font-size: 26px; color: rgba(255,255,255,0.75); line-height: 1.5; max-width: 700px; }
+  .ctabox {
+    background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 20px; padding: 28px 56px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .ctalabel { font-size: 18px; color: rgba(255,255,255,0.8); font-weight: 500; }
+  .ctaurl { font-size: 28px; font-weight: 800; color: #fff; }
+
+  /* ── COMMON ── */
+  .logo {
+    position: absolute; bottom: 48px; right: 56px;
+    display: flex; align-items: center; gap: 10px; z-index: 20;
+  }
+  .li { width: 36px; height: 36px; background: #2563EB; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .li-white { background: rgba(255,255,255,0.2); }
+  .lt { font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.7); }
+  .sn { position: absolute; bottom: 52px; left: 56px; font-size: 16px; color: rgba(255,255,255,0.3); z-index: 20; }
+  .bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #1D4ED8, #60A5FA, #06B6D4); }
+  .bar-white { background: rgba(255,255,255,0.3); }
+  .logo-top { position: absolute; top: 40px; left: 56px; display: flex; align-items: center; gap: 12px; z-index: 20; }
+  .li-top { width: 42px; height: 42px; background: #2563EB; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 20px rgba(37,99,235,0.5); }
+  .lt-top { font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.8); }
+  .num-top { position: absolute; top: 48px; right: 56px; font-size: 16px; color: rgba(255,255,255,0.35); z-index: 20; }
+</style>
+</head>
+<body>
+
+<div class="instructions">
+  💡 Selecciona la diapositiva · Haz zoom 100% en el navegador · Captura de pantalla exacta 1080×1080px
+</div>
+
+<!-- CONTROLES -->
+<div class="controls">
+  <span>Post 1 — "5 procesos que puedes automatizar"</span>
+  <button class="active" onclick="show(1)">1</button>
+  <button onclick="show(2)">2</button>
+  <button onclick="show(3)">3</button>
+  <button onclick="show(4)">4</button>
+  <button onclick="show(5)">5</button>
+  <button onclick="show(6)">6</button>
+  <button onclick="show(7)">7</button>
+</div>
+
+<!-- SLIDE 1 -->
+<div class="slide-wrapper visible" id="s1">
+<div class="slide bg-dark">
+  <div class="overlay-radial"></div>
+  <div class="grid"></div>
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+  <div class="orb">
+    <div class="orb-inner"></div>
+    <div class="orb-emoji">🤖</div>
+  </div>
+  <div class="node" style="top:200px;left:60px"><div class="ndot"></div><span style="font-size:22px">🧾</span><div class="ntext">Facturas automáticas</div></div>
+  <div class="node" style="top:200px;right:60px"><div class="ndot"></div><span style="font-size:22px">📊</span><div class="ntext">Informes solos</div></div>
+  <div class="node" style="top:380px;left:44px"><div class="ndot"></div><span style="font-size:22px">💬</span><div class="ntext">Atención 24/7</div></div>
+  <div class="node" style="top:380px;right:44px"><div class="ndot"></div><span style="font-size:22px">📧</span><div class="ntext">Emails automáticos</div></div>
+  <div class="content1">
+    <div class="badge1"><div class="bdot"></div>Automatización con IA · Para pymes</div>
+    <div class="h1-big"><span class="bl">5 procesos</span><br>que puedes automatizar<br>esta semana</div>
+    <div class="sub1">Sin programar · Sin inversión enorme · Con resultados reales</div>
+    <div class="pill">👉 Desliza para descubrirlos</div>
+  </div>
+  <div class="logo-top"><div class="li-top">✦</div><div class="lt-top">Automatización Procesos IA</div></div>
+  <div class="num-top">1 / 7 →</div>
+  <div class="bar"></div>
+</div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide-wrapper" id="s2">
+<div class="slide bg-grad">
+  <div class="dots"></div>
+  <div class="inner">
+    <div class="irow"><div class="nbadge">01</div><div class="ibig">🧾</div></div>
+    <div class="aline"></div>
+    <div class="h2s">Procesamiento<br>de <span>Facturas</span></div>
+    <div class="desc">Extrae datos, valida y registra en tu ERP automáticamente. Sin tocar nada.</div>
+    <div class="saving"><div class="si">⏱</div><div class="st">3 horas/día → 5 minutos</div></div>
+  </div>
+  <div class="logo"><div class="li">✦</div><div class="lt">Automatización Procesos IA</div></div>
+  <div class="sn">2 / 7</div><div class="bar"></div>
+</div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide-wrapper" id="s3">
+<div class="slide bg-grad">
+  <div class="dots"></div>
+  <div class="inner">
+    <div class="irow"><div class="nbadge">02</div><div class="ibig">📧</div></div>
+    <div class="aline"></div>
+    <div class="h2s">Emails de<br><span>Seguimiento</span></div>
+    <div class="desc">Detecta leads sin responder y envía follow-up personalizado automáticamente.</div>
+    <div class="saving"><div class="si">⏱</div><div class="st">1 hora/día → 0 minutos</div></div>
+  </div>
+  <div class="logo"><div class="li">✦</div><div class="lt">Automatización Procesos IA</div></div>
+  <div class="sn">3 / 7</div><div class="bar"></div>
+</div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide-wrapper" id="s4">
+<div class="slide bg-grad">
+  <div class="dots"></div>
+  <div class="inner">
+    <div class="irow"><div class="nbadge">03</div><div class="ibig">📊</div></div>
+    <div class="aline"></div>
+    <div class="h2s">Informes<br><span>Semanales</span></div>
+    <div class="desc">Recoge datos de tus sistemas y genera el informe automáticamente cada lunes.</div>
+    <div class="saving"><div class="si">⏱</div><div class="st">4 horas → llega solo al correo</div></div>
+  </div>
+  <div class="logo"><div class="li">✦</div><div class="lt">Automatización Procesos IA</div></div>
+  <div class="sn">4 / 7</div><div class="bar"></div>
+</div>
+</div>
+
+<!-- SLIDE 5 -->
+<div class="slide-wrapper" id="s5">
+<div class="slide bg-grad">
+  <div class="dots"></div>
+  <div class="inner">
+    <div class="irow"><div class="nbadge">04</div><div class="ibig">💬</div></div>
+    <div class="aline"></div>
+    <div class="h2s">Atención<br>al <span>Cliente</span></div>
+    <div class="desc">Responde el 70% de consultas sin intervención humana. Disponible 24/7.</div>
+    <div class="saving"><div class="si">🕐</div><div class="st">24/7 sin coste extra por hora</div></div>
+  </div>
+  <div class="logo"><div class="li">✦</div><div class="lt">Automatización Procesos IA</div></div>
+  <div class="sn">5 / 7</div><div class="bar"></div>
+</div>
+</div>
+
+<!-- SLIDE 6 -->
+<div class="slide-wrapper" id="s6">
+<div class="slide bg-grad">
+  <div class="dots"></div>
+  <div class="inner">
+    <div class="irow"><div class="nbadge">05</div><div class="ibig">👥</div></div>
+    <div class="aline"></div>
+    <div class="h2s">Cribado<br>de <span>CVs</span></div>
+    <div class="desc">Analiza, puntúa y resume candidaturas automáticamente. Sin leer uno a uno.</div>
+    <div class="saving"><div class="si">⚡</div><div class="st">4 horas → 10 minutos</div></div>
+  </div>
+  <div class="logo"><div class="li">✦</div><div class="lt">Automatización Procesos IA</div></div>
+  <div class="sn">6 / 7</div><div class="bar"></div>
+</div>
+</div>
+
+<!-- SLIDE 7 -->
+<div class="slide-wrapper" id="s7">
+<div class="slide bg-blue">
+  <div class="dots" style="background-image:radial-gradient(rgba(255,255,255,0.06) 1px,transparent 1px);background-size:40px 40px;"></div>
+  <div class="s7circle"></div>
+  <div class="s7content">
+    <div class="question">¿Y en tu empresa?</div>
+    <div class="h2-7">¿Cuál de estos<br>procesos tienes? 🤔</div>
+    <div class="sub7">Cuéntanoslo en comentarios y te decimos cómo automatizarlo</div>
+    <div class="ctabox">
+      <div class="ctalabel">👉 Diagnóstico gratuito en</div>
+      <div class="ctaurl">automatizacionprocesos.es</div>
+    </div>
+  </div>
+  <div class="logo"><div class="li li-white">✦</div><div class="lt" style="color:rgba(255,255,255,0.8)">Automatización Procesos IA</div></div>
+  <div class="sn" style="color:rgba(255,255,255,0.4)">7 / 7</div>
+  <div class="bar bar-white"></div>
+</div>
+</div>
+
+<script>
+function show(n) {
+  document.querySelectorAll('.slide-wrapper').forEach(el => el.classList.remove('visible'));
+  document.querySelectorAll('.controls button').forEach(el => el.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('visible');
+  document.querySelectorAll('.controls button')[n-1].classList.add('active');
+}
+</script>
+</body>
+</html>
