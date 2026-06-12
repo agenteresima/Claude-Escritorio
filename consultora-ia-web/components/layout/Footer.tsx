@@ -265,7 +265,7 @@ export default function Footer() {
               reservados.
             </p>
             <p className="text-navy-500 text-xs">
-              Hecho con IA en Madrid, España
+              Hecho con IA en Valencia, España
             </p>
           </div>
         </div>
