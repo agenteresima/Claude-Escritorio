@@ -318,6 +318,35 @@ export default function ServiciosPage() {
         </div>
       </section>
 
+      {/* Related Blog Articles */}
+      <section className="py-16 bg-slate-50">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold text-slate-900 mb-3">Aprende más sobre automatización con IA</h2>
+            <p className="text-slate-600">Guías prácticas para entender cómo aplicar la IA en tu empresa</p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-4">
+            {[
+              { href: '/blog/procesos-automatizar-pyme-ia', title: 'Qué procesos puede automatizar una pyme con IA', category: 'Automatización' },
+              { href: '/blog/que-es-agente-ia-empresa', title: 'Qué es un agente IA y cómo puede transformar tu empresa', category: 'Agentes IA' },
+              { href: '/blog/como-empezar-ia-empresa', title: 'Cómo empezar con IA en tu empresa sin perder dinero', category: 'Estrategia IA' },
+            ].map((article) => (
+              <Link
+                key={article.href}
+                href={article.href}
+                className="bg-white border border-slate-200 rounded-xl p-5 hover:border-blue-400 hover:shadow-md transition-all group"
+              >
+                <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">{article.category}</span>
+                <p className="mt-3 text-sm font-semibold text-slate-900 group-hover:text-blue-700 transition-colors leading-snug">{article.title}</p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs text-blue-600 font-medium">
+                  Leer artículo <ArrowRight className="h-3 w-3" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Selection Guide */}
       <section className="py-20 bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">

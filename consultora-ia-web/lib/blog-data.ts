@@ -88,6 +88,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 7,
     author: 'Automatización Procesos IA',
     tags: ['automatizacion pymes', 'procesos empresariales', 'ahorro tiempo', 'ia para pymes', 'eficiencia'],
+    metaTitle: 'Qué Procesos Puede Automatizar una Pyme con IA',
+    metaDescription: 'Los 8 procesos más rentables para automatizar en pymes españolas con IA: facturas, emails, informes y más. Ejemplos reales y tiempo ahorrado.',
     content: `<h2>La automatización con IA ya no es solo para grandes empresas</h2>
 <p>Hace cinco años, implementar inteligencia artificial en una empresa era un proyecto que requería un equipo de ingenieros, meses de desarrollo y un presupuesto de seis cifras. Hoy, gracias a herramientas como n8n, Make, Zapier y las APIs de los modelos de lenguaje más avanzados, una pyme con 10 empleados puede automatizar procesos completos por unos cientos de euros al año.</p>
 <p>El problema no es ya la tecnología ni el coste. El problema es saber qué automatizar primero. En este artículo te explicamos los ocho procesos que más habitualmente automatizamos en pymes españolas, con ejemplos concretos y una estimación realista del tiempo que se puede ahorrar.</p>
@@ -143,6 +145,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 9,
     author: 'Automatización Procesos IA',
     tags: ['chatgpt empresa', 'claude ia', 'microsoft copilot', 'gemini google', 'comparativa ia'],
+    metaTitle: 'ChatGPT vs Claude vs Copilot vs Gemini para Empresas',
+    metaDescription: 'Comparativa honesta de ChatGPT, Claude, Copilot y Gemini para uso empresarial. Precios, fortalezas y recomendación práctica según tu empresa.',
     content: `<h2>La pregunta que nos hacen casi todas las semanas</h2>
 <p>"¿Qué herramienta de IA debería usar mi empresa?" es probablemente la consulta que más recibimos. Y la respuesta honesta es que no existe una única herramienta correcta: depende de lo que hagas, de los sistemas que ya usas y de qué tipo de tareas quieres automatizar o potenciar.</p>
 <p>En este artículo hacemos una comparativa real basada en nuestra experiencia implementando estas herramientas en empresas españolas. Sin afiliaciones, sin publicidad. Solo lo que hemos visto funcionar en la práctica.</p>
@@ -243,6 +247,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 6,
     author: 'Automatización Procesos IA',
     tags: ['agentes ia', 'automatizacion inteligente', 'chatbot vs agente', 'ia empresarial', 'transformacion digital'],
+    metaTitle: 'Qué es un Agente de IA y Cómo Puede Ayudar a tu Empresa',
+    metaDescription: 'Explicación clara de qué es un agente IA, diferencias con chatbots, ejemplos reales en empresa y cuándo tiene sentido implementar uno.',
     content: `<h2>La diferencia fundamental entre un chatbot y un agente de IA</h2>
 <p>Cuando la mayoría de empresas piensa en IA, piensa en chatbots. Y tiene sentido: fueron la primera forma de IA conversacional que se popularizó en los negocios. Pero los agentes de IA son algo sustancialmente diferente y mucho más potente.</p>
 <p>La diferencia fundamental es esta: <strong>un chatbot responde preguntas. Un agente de IA toma acciones.</strong></p>
@@ -296,6 +302,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 7,
     author: 'Automatización Procesos IA',
     tags: ['automatizacion facturas', 'gestion documental ia', 'ocr ia', 'n8n automatizacion', 'roi automatizacion'],
+    metaTitle: 'Automatizar Facturas con IA: Guía Paso a Paso con ROI Real',
+    metaDescription: 'Cómo automatizar facturas y gestión documental con OCR e IA. Flujo completo, herramientas recomendadas y cálculo de ROI real para pymes.',
     content: `<h2>El problema que nadie quiere admitir</h2>
 <p>En la mayoría de pymes españolas, el procesamiento de facturas y documentos funciona así: alguien recibe un email con una factura adjunta, la descarga, la abre, lee los datos manualmente, los introduce en el software de contabilidad o en una hoja de Excel, la archiva en la carpeta correcta, y lo registra en el sistema de seguimiento de pagos. Este proceso, multiplicado por decenas o cientos de documentos al mes, consume horas de trabajo cualificado en tareas que no aportan ningún valor al negocio.</p>
 <p>Peor aún: la introducción manual de datos tiene una tasa de error del 1-4% en entornos de oficina normales. En un volumen de 200 facturas al mes, eso son entre 2 y 8 errores mensuales, algunos de los cuales no se detectan hasta que hay un problema con proveedores, con el flujo de caja o con hacienda.</p>
@@ -352,6 +360,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 6,
     author: 'Automatización Procesos IA',
     tags: ['administracion ia', 'tareas repetitivas', 'automatizacion administrativa', 'productividad empresa', 'pymes españa'],
+    metaTitle: 'Reducir Tareas Administrativas con IA en tu Empresa',
+    metaDescription: 'Cómo la IA puede automatizar las tareas administrativas más comunes en pymes: altas de clientes, presupuestos, cobros y documentación.',
     content: `<h2>El coste oculto de las tareas administrativas</h2>
 <p>En una pyme española media, el equipo administrativo dedica entre el 40% y el 60% de su tiempo a tareas completamente repetitivas: copiar datos de un sistema a otro, enviar emails con la misma estructura una y otra vez, archivar documentos en carpetas, generar informes copiando números de una hoja a otra. Ese porcentaje, traducido a coste anual, suele superar los 20.000 euros en empresas de 10 personas.</p>
 <p>No es un problema de eficiencia personal de los empleados. Es un problema de diseño de procesos. Esas tareas están ahí porque alguien las diseñó cuando no había mejor opción. Hoy existe una alternativa mucho más eficiente.</p>
@@ -392,6 +402,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 8,
     author: 'Automatización Procesos IA',
     tags: ['ia para directivos', 'gerentes ia', 'inversion ia empresa', 'estrategia ia', 'proveedores ia'],
+    metaTitle: 'IA para Gerentes: Lo que Debes Saber Antes de Invertir',
+    metaDescription: 'Guía para directivos sobre mitos de la IA, señales de alerta en proveedores y preguntas clave antes de invertir. Sin tecnicismos.',
     content: `<h2>Lo que nadie te cuenta sobre la IA empresarial</h2>
 <p>Si eres gerente o director de una empresa, en los últimos meses te habrán llegado propuestas de proveedores de IA, artículos sobre empresas que han "transformado su negocio con IA" y presión implícita o explícita de competidores que aparentemente están avanzando más rápido. Este artículo está escrito para ti: sin tecnicismos, sin hype, con la información que necesitas para tomar decisiones inteligentes sobre dónde y cuánto invertir.</p>
 
@@ -463,6 +475,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 6,
     author: 'Automatización Procesos IA',
     tags: ['automatizacion email', 'email marketing ia', 'n8n email', 'seguimiento automatico', 'crm automatizacion'],
+    metaTitle: 'Automatización de Emails con IA: Guía Práctica para Empresas',
+    metaDescription: 'Cómo automatizar emails de empresa con IA: bienvenida, seguimiento comercial, facturas y notificaciones. Herramientas y métricas de referencia.',
     content: `<h2>Por qué la automatización de emails es el primer proyecto de IA de muchas empresas</h2>
 <p>Si tuvieras que elegir un solo proceso para automatizar en tu empresa este año, la automatización de emails sería una candidata muy seria para empezar. Las razones son claras: casi todas las empresas usan email intensamente en sus operaciones diarias, el impacto en ventas y en servicio al cliente es directo y fácilmente medible, las herramientas para implementarlo son maduras y accesibles, y el retorno es rápido y visible para toda la organización.</p>
 
@@ -520,6 +534,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 7,
     author: 'Automatización Procesos IA',
     tags: ['rag empresarial', 'ia datos empresa', 'base de datos ia', 'privacidad ia', 'agentes ia datos'],
+    metaTitle: 'Conectar IA con los Datos de tu Empresa: Guía RAG',
+    metaDescription: 'Qué es RAG explicado sin tecnicismos y cómo conectar la IA con la base de datos de tu empresa. Casos prácticos, privacidad y herramientas.',
     content: `<h2>El límite de la IA genérica en las empresas</h2>
 <p>ChatGPT es muy útil para muchas cosas. Pero tiene un límite fundamental para el uso empresarial serio: no conoce tu empresa. No sabe cuánto stock tienes de cada producto, no conoce el historial de tu cliente número 4521, no tiene acceso a tus contratos actuales ni a tus tarifas vigentes. Responde con conocimiento general, no con el conocimiento específico de tu negocio.</p>
 <p>Para que la IA sea realmente útil en el contexto concreto de tu empresa, necesita acceso a tus datos propios. Y eso requiere una arquitectura específica que se conoce como RAG.</p>
@@ -573,6 +589,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 8,
     author: 'Automatización Procesos IA',
     tags: ['errores ia empresa', 'implementacion ia', 'estrategia ia', 'fallos ia empresarial', 'buenas practicas ia'],
+    metaTitle: 'Los 10 Errores al Implementar IA en una Empresa',
+    metaDescription: 'Los errores más comunes en proyectos de IA empresarial, con ejemplos reales de cómo evitarlos desde el principio para no perder dinero.',
     content: `<h2>Por qué los proyectos de IA fracasan</h2>
 <p>Según datos de Gartner, más del 85% de los proyectos de IA empresarial no llegan a producción o no alcanzan los resultados esperados en el plazo previsto. En nuestra experiencia trabajando con empresas españolas de distintos sectores y tamaños, esa cifra nos parece creíble. Y en casi todos los casos que hemos visto, el fracaso no se debe a que la tecnología no funcione. Se debe a errores evitables que se cometen en las primeras fases del proyecto.</p>
 <p>Aquí están los diez errores que vemos con más frecuencia, con ejemplos reales anonimizados de cada uno.</p>
