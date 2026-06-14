@@ -31,6 +31,7 @@ from utils.correlation import CorrelationFilter
 from utils.sentiment import get_current_fng, get_funding_rate, sentiment_gate
 from utils.events_filter import EventsFilter
 from utils.candle_patterns import add_candle_patterns
+from utils.macro_filter import get_macro_gate
 
 
 class LiveTrader:
@@ -60,6 +61,10 @@ class LiveTrader:
         # Sentiment refresh every 4h
         self._last_sentiment_ts = 0.0
         self._sentiment_gate    = {"allow_long": True, "allow_short": True, "reason": "ok"}
+
+        # Macro prediction filter refresh every 1h
+        self._last_macro_ts  = 0.0
+        self._macro_gate     = None   # MacroGate populated on first tick
 
         # Restore open positions from DB (survives restarts)
         self._restore_positions()
@@ -110,6 +115,20 @@ class LiveTrader:
         self._sentiment_gate    = sentiment_gate(fng["value"] if fng else None, fr)
         self._last_sentiment_ts = time.time()
         logger.info(f"Sentiment gate: {self._sentiment_gate}")
+
+    def _refresh_macro_gate(self, symbol: str):
+        """Refresh macro prediction market filter (Polymarket + WSB) every 1h."""
+        if time.time() - self._last_macro_ts < 3600:
+            return
+        try:
+            self._macro_gate    = get_macro_gate(ticker=symbol.split("/")[0])
+            self._last_macro_ts = time.time()
+            logger.info(f"Macro gate: score={self._macro_gate.macro_score:.1f} "
+                        f"wsb={self._macro_gate.wsb_mood} "
+                        f"allow_long={self._macro_gate.allow_long} "
+                        f"size_factor={self._macro_gate.size_factor:.0%}")
+        except Exception as e:
+            logger.warning(f"Macro gate refresh failed: {e}")
 
     def fetch_latest(self, symbol: str) -> pd.DataFrame:
         df = fetch_ohlcv_ccxt(
@@ -195,6 +214,15 @@ class LiveTrader:
                 logger.debug(f"Candle patterns negative ({candle_score}) — skipping {symbol}")
                 return
 
+            # ── Macro prediction filter (Polymarket + WSB) ──
+            self._refresh_macro_gate(symbol)
+            if self._macro_gate:
+                if not self._macro_gate.allow_long:
+                    logger.info(
+                        f"Macro gate blocked long on {symbol}: {self._macro_gate.reason}"
+                    )
+                    return
+
             self._refresh_sentiment()
             gate = self._sentiment_gate
 
@@ -219,6 +247,14 @@ class LiveTrader:
             size   = self.risk.atr_size(price, atr)
             bal    = self.get_balance()
             amount = min(size, bal * self.cfg.risk.max_position_size_pct / price)
+
+            # Apply macro size factor (Polymarket + WSB overcrowding)
+            if self._macro_gate and self._macro_gate.size_factor < 1.0:
+                amount *= self._macro_gate.size_factor
+                logger.info(
+                    f"Macro gate reduced size to {self._macro_gate.size_factor:.0%} "
+                    f"for {symbol}: {self._macro_gate.reason}"
+                )
 
             if amount * price < 10:   # minimum order size guard
                 return

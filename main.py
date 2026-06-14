@@ -593,5 +593,112 @@ def sp500_download(start, end, tickers):
         click.echo(f"  ... and {len(universe)-5} more")
 
 
+# ─────────────────────────────────────────────────────────────────────
+# Prediction markets / macro filter commands
+# ─────────────────────────────────────────────────────────────────────
+
+@cli.command("polymarket")
+@click.option("--ticker", "-t", default=None,
+              help="Optional ticker to check WSB overcrowding (e.g. BTC, NVDA)")
+@click.option("--json", "as_json", is_flag=True, default=False,
+              help="Output raw JSON instead of formatted table")
+def polymarket_cmd(ticker, as_json):
+    """Show Polymarket macro risk + Reddit WSB sentiment in real time."""
+    import json as _json
+    from utils.polymarket import get_macro_risk, search_markets
+    from utils.wsb_sentiment import get_market_mood, get_ticker_signal
+    from utils.macro_filter import get_macro_gate
+
+    click.echo("\n⏳ Fetching Polymarket + Reddit WSB data…\n")
+
+    gate   = get_macro_gate(ticker=ticker)
+    mood   = gate  # already populated
+
+    if as_json:
+        out = {
+            "macro_gate": {
+                "allow_long":  gate.allow_long,
+                "size_factor": gate.size_factor,
+                "macro_score": gate.macro_score,
+                "wsb_score":   gate.wsb_score,
+                "wsb_mood":    gate.wsb_mood,
+                "reason":      gate.reason,
+            }
+        }
+        if gate.macro_report:
+            out["macro_gate"]["polymarket"] = gate.macro_report.as_dict()
+        if gate.ticker_signal and ticker:
+            out["wsb_ticker"] = {
+                "ticker":       gate.ticker_signal.ticker,
+                "mentions":     gate.ticker_signal.mentions,
+                "signal":       gate.ticker_signal.signal,
+                "bias":         gate.ticker_signal.bias,
+                "size_factor":  gate.ticker_signal.size_factor,
+            }
+        click.echo(_json.dumps(out, indent=2))
+        return
+
+    click.echo(gate.summary())
+    click.echo()
+
+    # Top Polymarket markets
+    if gate.macro_report and gate.macro_report.top_markets:
+        click.echo("📊 Top Polymarket Markets:")
+        click.echo(f"  {'Question':<55} {'YES%':>6}  {'Volume':>10}")
+        click.echo("  " + "─" * 76)
+        for m in gate.macro_report.top_markets[:8]:
+            click.echo(f"  {m.question[:55]:<55} {m.yes_prob*100:5.1f}%  ${m.volume:>10,.0f}")
+        click.echo()
+
+    # WSB ticker signal
+    if ticker and gate.ticker_signal:
+        sig = gate.ticker_signal
+        icon = "🔴" if sig.signal == "overcrowded" else "🟢" if sig.signal == "momentum" else "⚪"
+        click.echo(f"💬 WSB signal for {ticker}: {icon} {sig.signal.upper()}")
+        click.echo(f"   Mentions in hot: {sig.mentions}  |  Bias: {sig.bias}  |  Size factor: {sig.size_factor:.0%}")
+        click.echo()
+
+
+@cli.command("wsb")
+@click.option("--tickers", "-t", multiple=True,
+              help="Tickers to check (repeatable, e.g. -t NVDA -t TSLA)")
+@click.option("--top", default=20, show_default=True,
+              help="Show top N most mentioned tickers")
+def wsb_cmd(tickers, top):
+    """Show Reddit WallStreetBets trending tickers and market mood."""
+    from utils.wsb_sentiment import get_market_mood, get_ticker_mentions, get_ticker_signal
+
+    click.echo("\n⏳ Fetching Reddit WSB data…\n")
+    mood = get_market_mood()
+
+    mood_icon = {"euphoric": "🚀", "bullish": "📈", "neutral": "⚖️",
+                 "bearish": "📉", "fearful": "😱", "unknown": "❓"}.get(mood.mood, "❓")
+
+    click.echo(f"╔══ Reddit WallStreetBets Sentiment ═════════════════╗")
+    click.echo(f"║  Mood    : {mood_icon} {mood.mood.upper():<10}  (score: {mood.score}/100)")
+    click.echo(f"║  Bullish keywords: {mood.bull_count:4}  |  Bearish: {mood.bear_count:4}")
+    click.echo(f"╚════════════════════════════════════════════════════╝\n")
+
+    # Specific tickers requested
+    if tickers:
+        click.echo(f"{'Ticker':<8} {'Mentions':>9} {'Signal':<14} {'Bias':<22} {'Size Factor':>12}")
+        click.echo("─" * 70)
+        for t in tickers:
+            sig = get_ticker_signal(t)
+            icon = "🔴" if sig.signal == "overcrowded" else "🟢" if sig.signal == "momentum" else "⚪"
+            click.echo(f"{t:<8} {sig.mentions:>9}  {icon} {sig.signal:<12} {sig.bias:<22} {sig.size_factor*100:.0f}%")
+        click.echo()
+
+    # Top trending tickers
+    click.echo(f"Top {top} Trending Tickers on WSB (hot feed):")
+    click.echo(f"  {'#':<4} {'Ticker':<8} {'Mentions':>9}  Signal")
+    click.echo("  " + "─" * 40)
+    mentions = get_ticker_mentions()
+    for i, (t, count) in enumerate(list(mentions.items())[:top], 1):
+        sig  = "🔴 overcrowded" if count > 20 else "🟢 momentum" if count > 5 else "⚪ low"
+        click.echo(f"  {i:<4} {t:<8} {count:>9}  {sig}")
+    click.echo()
+
+
 if __name__ == "__main__":
     cli()

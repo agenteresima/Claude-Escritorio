@@ -7,7 +7,7 @@ PAIR       ?= BTC/USDT
 STRATEGY   ?= regime_adaptive
 START      ?= 2021-01-01
 
-.PHONY: help install test test-fast test-cov backtest compare optimize train live dashboard api benchmark backup restore export weekly lint clean sp500 sp500-download portfolio-optimize v2
+.PHONY: help install test test-fast test-cov backtest compare optimize train live dashboard api benchmark backup restore export weekly lint clean sp500 sp500-download portfolio-optimize v2 polymarket wsb
 
 help:
 	@echo ""
@@ -38,6 +38,10 @@ help:
 	@echo "  Data:"
 	@echo "    make backup        Backup database"
 	@echo "    make export        Export trades to Excel"
+	@echo ""
+	@echo "  Prediction Markets:"
+	@echo "    make polymarket    Polymarket macro risk + WSB  (TICKER=BTC optional)"
+	@echo "    make wsb           Reddit WSB trending tickers  (TICKER=NVDA optional)"
 	@echo ""
 	@echo "  Dev:"
 	@echo "    make test          Run all tests"
@@ -126,6 +130,12 @@ api:
 
 sentiment:
 	$(PYTHON) main.py sentiment
+
+polymarket:
+	$(PYTHON) main.py polymarket $(if $(TICKER),--ticker $(TICKER),)
+
+wsb:
+	$(PYTHON) main.py wsb $(if $(TICKER),--ticker $(TICKER),) --top 25
 
 events:
 	$(PYTHON) main.py events
