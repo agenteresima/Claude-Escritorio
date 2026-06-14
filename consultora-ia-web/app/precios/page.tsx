@@ -1,10 +1,35 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CheckCircle, Zap, Bot, GraduationCap, ArrowRight, Star } from 'lucide-react'
 
-export const metadata = {
-  title: 'Precios y tarifas — Automatización Procesos IA',
+export const metadata: Metadata = {
+  title: 'Precios Consultoría IA para Empresas | Automatización Procesos IA',
   description:
-    'Consulta nuestros precios orientativos para servicios de IA empresarial. Automatización de procesos, agentes IA, formación y consultoría estratégica. Presupuesto personalizado sin compromiso.',
+    'Precios orientativos para servicios de IA empresarial en España: automatización de procesos desde 1.500 €, agentes IA desde 5.000 € y formación desde 800 €. Presupuesto personalizado sin compromiso.',
+  keywords: [
+    'precios consultoría IA',
+    'coste automatización procesos IA',
+    'tarifas agentes IA',
+    'precio formación inteligencia artificial',
+    'presupuesto IA empresa',
+    'consultoría IA coste',
+  ],
+  openGraph: {
+    title: 'Precios Consultoría IA para Empresas | Automatización Procesos IA',
+    description:
+      'Precios orientativos de automatización IA, agentes IA y formación para empresas en España. Solicita presupuesto personalizado sin compromiso.',
+    url: 'https://www.automatizacionprocesos.es/precios',
+    type: 'website',
+    locale: 'es_ES',
+    siteName: 'Automatización Procesos IA',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Precios consultoría IA para empresas' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Precios Consultoría IA para Empresas',
+    description: 'Consulta nuestros precios de automatización IA, agentes IA y formación para empresas en España.',
+    images: ['/og-image.png'],
+  },
   alternates: { canonical: 'https://www.automatizacionprocesos.es/precios' },
 }
 

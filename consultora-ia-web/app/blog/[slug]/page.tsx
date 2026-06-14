@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getBlogPost(slug)
   if (!post) return {}
-  const metaTitle = (post as any).metaTitle || `${post.title} | Automatización Procesos IA`
-  const metaDescription = (post as any).metaDescription || post.description
+  const metaTitle = post.metaTitle || `${post.title} | Automatización Procesos IA`
+  const metaDescription = post.metaDescription || post.description
   return {
     title: metaTitle,
     description: metaDescription,
