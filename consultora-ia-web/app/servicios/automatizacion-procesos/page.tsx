@@ -3,15 +3,29 @@ import Link from 'next/link'
 import { Zap, GitBranch, Clock, CheckCircle, BarChart3, Settings, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Automatización de Procesos con IA | n8n, Zapier, Make | Automatización Procesos IA',
+  title: 'Automatización de Procesos Empresariales con IA | n8n, Make',
   description:
-    'Automatizamos tus procesos empresariales repetitivos con n8n, Zapier y Make. Elimina tareas manuales, reduce errores y libera a tu equipo para lo que importa. Resultados medibles.',
+    'Automatizamos tus procesos empresariales con n8n, Zapier y Make. Elimina tareas manuales repetitivas, reduce errores y libera a tu equipo. ROI positivo en menos de 3 meses.',
+  keywords: [
+    'automatización procesos empresariales IA',
+    'n8n automatización',
+    'automatización make zapier',
+    'eliminar tareas repetitivas empresa',
+    'automatización flujos trabajo',
+  ],
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/automatizacion-procesos' },
   openGraph: {
-    title: 'Automatización de Procesos con IA | Automatización Procesos IA',
+    title: 'Automatización de Procesos Empresariales con IA | n8n, Make',
     description:
-      'Automatizamos tus procesos empresariales repetitivos con n8n, Zapier y Make. Elimina tareas manuales y libera a tu equipo.',
+      'Automatizamos tus procesos empresariales repetitivos con n8n, Zapier y Make. ROI positivo en menos de 3 meses.',
     url: 'https://www.automatizacionprocesos.es/servicios/automatizacion-procesos',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Automatización de procesos con IA' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Automatización de Procesos Empresariales con IA',
+    description: 'Automatizamos procesos con n8n, Zapier y Make. ROI positivo en menos de 3 meses.',
+    images: ['/og-image.png'],
   },
 }
 
@@ -81,6 +95,24 @@ const benefits = [
 export default function AutomatizacionProcesosPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Automatización de Procesos con IA',
+            description: 'Automatizamos procesos empresariales repetitivos con n8n, Zapier y Make. Eliminamos tareas manuales y liberamos al equipo para tareas de valor.',
+            provider: {
+              '@type': 'Organization',
+              name: 'Automatización Procesos IA',
+              url: 'https://www.automatizacionprocesos.es',
+            },
+            areaServed: { '@type': 'Country', name: 'España' },
+            url: 'https://www.automatizacionprocesos.es/servicios/automatizacion-procesos',
+          }),
+        }}
+      />
       {/* Hero */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -158,6 +190,23 @@ export default function AutomatizacionProcesosPage() {
                 <p className="text-slate-600 text-sm leading-relaxed">{b.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Artículos relacionados */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Aprende más sobre automatización</h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <Link href="/blog/procesos-automatizar-pyme-ia" className="block border border-slate-200 rounded-xl p-4 hover:border-blue-400 hover:shadow-md transition-all">
+              <p className="font-semibold text-slate-900 text-sm mb-1 hover:text-blue-700">Qué procesos puede automatizar una pyme con inteligencia artificial</p>
+              <p className="text-xs text-slate-500">Automatización · 7 min</p>
+            </Link>
+            <Link href="/blog/automatizar-facturas-documentos-ia" className="block border border-slate-200 rounded-xl p-4 hover:border-blue-400 hover:shadow-md transition-all">
+              <p className="font-semibold text-slate-900 text-sm mb-1 hover:text-blue-700">Cómo automatizar el proceso de facturas y documentos con IA</p>
+              <p className="text-xs text-slate-500">Automatización · 7 min</p>
+            </Link>
           </div>
         </div>
       </section>

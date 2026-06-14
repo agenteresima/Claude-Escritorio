@@ -1,35 +1,29 @@
-export const metadata = {
-  title: 'Contacto Consultoría IA Valencia | Automatización Procesos',
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Consultoría IA Valencia | Contacto Automatización Procesos IA',
   description:
-    'Contacta con nuestra consultoría de IA en Valencia. Expertos en automatización de procesos para pymes. Respuesta en menos de 24 horas. Sin compromiso.',
+    'Contacta con nuestra consultoría IA en Valencia. Resolvemos tus dudas sobre automatización de procesos, agentes IA y transformación digital para empresas. Respuesta en 24h.',
   keywords: [
     'consultoría IA Valencia',
     'automatización procesos Valencia',
     'contacto consultor IA',
-    'expertos IA España',
+    'contacto automatización IA',
+    'expertos IA Valencia',
   ],
+  alternates: { canonical: 'https://www.automatizacionprocesos.es/contacto' },
   openGraph: {
-    title: 'Contacto Consultoría IA Valencia | Automatización Procesos',
-    description:
-      'Contacta con nuestra consultoría de IA en Valencia. Expertos en automatización de procesos para pymes. Respuesta en menos de 24 horas. Sin compromiso.',
+    title: 'Consultoría IA Valencia | Contacto Automatización Procesos IA',
+    description: 'Contacta con nuestra consultoría IA en Valencia. Respondemos en menos de 24 horas.',
     url: 'https://www.automatizacionprocesos.es/contacto',
-    images: [
-      {
-        url: 'https://www.automatizacionprocesos.es/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Contacto Consultoría IA Valencia',
-      },
-    ],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Contacto Automatización Procesos IA' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contacto Consultoría IA Valencia | Automatización Procesos',
-    description:
-      'Contacta con nuestra consultoría de IA en Valencia. Expertos en automatización de procesos para pymes. Respuesta en menos de 24 horas.',
-    images: ['https://www.automatizacionprocesos.es/og-image.jpg'],
+    title: 'Consultoría IA Valencia | Contacto',
+    description: 'Contacta con nuestra consultoría IA en Valencia. Respondemos en 24h.',
+    images: ['/og-image.png'],
   },
-  alternates: { canonical: 'https://www.automatizacionprocesos.es/contacto' },
 }
 
 export default function ContactoLayout({ children }: { children: React.ReactNode }) {

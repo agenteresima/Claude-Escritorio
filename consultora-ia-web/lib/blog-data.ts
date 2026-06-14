@@ -7,6 +7,8 @@ export interface BlogPost {
   readTime: number
   author: string
   tags: string[]
+  metaTitle?: string
+  metaDescription?: string
   content: string
 }
 
@@ -21,6 +23,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 8,
     author: 'Automatización Procesos IA',
     tags: ['estrategia ia', 'pymes', 'implementacion ia', 'presupuesto ia', 'roi ia'],
+    metaTitle: 'Cómo Empezar con IA en tu Empresa sin Perder Dinero',
+    metaDescription: 'Guía práctica para implementar inteligencia artificial en tu empresa de forma ordenada, con resultados reales y sin malgastar el presupuesto en España.',
     content: `<h2>Por qué tantas empresas fracasan al implementar IA</h2>
 <p>Cada semana aparece una nueva herramienta de inteligencia artificial que promete revolucionar tu empresa. El resultado, en demasiadas ocasiones, es una factura considerable y un equipo que no sabe cómo usar lo que acaba de contratar. En Automatización Procesos IA llevamos años acompañando a empresas españolas en su transformación digital con IA, y lo que hemos aprendido es que el fracaso casi nunca tiene que ver con la tecnología. Tiene que ver con el orden en que se hacen las cosas.</p>
 <p>Según datos del INE, el 62% de las pymes españolas que han invertido en digitalización en los últimos dos años no pueden cuantificar el retorno obtenido. En el caso específico de la inteligencia artificial, ese porcentaje sube al 71%. No porque la IA no funcione, sino porque se implementa sin metodología.</p>
@@ -84,6 +88,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 7,
     author: 'Automatización Procesos IA',
     tags: ['automatizacion pymes', 'procesos empresariales', 'ahorro tiempo', 'ia para pymes', 'eficiencia'],
+    metaTitle: 'Procesos que puede Automatizar una Pyme con IA en España',
+    metaDescription: 'Listado de procesos en pymes automatizables con IA: facturación, emails, informes y atención al cliente. Ejemplos reales y tiempo ahorrado.',
     content: `<h2>La automatización con IA ya no es solo para grandes empresas</h2>
 <p>Hace cinco años, implementar inteligencia artificial en una empresa era un proyecto que requería un equipo de ingenieros, meses de desarrollo y un presupuesto de seis cifras. Hoy, gracias a herramientas como n8n, Make, Zapier y las APIs de los modelos de lenguaje más avanzados, una pyme con 10 empleados puede automatizar procesos completos por unos cientos de euros al año.</p>
 <p>El problema no es ya la tecnología ni el coste. El problema es saber qué automatizar primero. En este artículo te explicamos los ocho procesos que más habitualmente automatizamos en pymes españolas, con ejemplos concretos y una estimación realista del tiempo que se puede ahorrar.</p>
@@ -139,6 +145,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 9,
     author: 'Automatización Procesos IA',
     tags: ['chatgpt empresa', 'claude ia', 'microsoft copilot', 'gemini google', 'comparativa ia'],
+    metaTitle: 'ChatGPT vs Claude vs Copilot vs Gemini para tu Empresa',
+    metaDescription: 'Comparativa honesta de ChatGPT, Claude, Copilot y Gemini para empresas en España. Precios, fortalezas reales y recomendación práctica por caso de uso.',
     content: `<h2>La pregunta que nos hacen casi todas las semanas</h2>
 <p>"¿Qué herramienta de IA debería usar mi empresa?" es probablemente la consulta que más recibimos. Y la respuesta honesta es que no existe una única herramienta correcta: depende de lo que hagas, de los sistemas que ya usas y de qué tipo de tareas quieres automatizar o potenciar.</p>
 <p>En este artículo hacemos una comparativa real basada en nuestra experiencia implementando estas herramientas en empresas españolas. Sin afiliaciones, sin publicidad. Solo lo que hemos visto funcionar en la práctica.</p>
@@ -239,6 +247,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 6,
     author: 'Automatización Procesos IA',
     tags: ['agentes ia', 'automatizacion inteligente', 'chatbot vs agente', 'ia empresarial', 'transformacion digital'],
+    metaTitle: 'Qué es un Agente IA y Cómo Transforma tu Empresa',
+    metaDescription: 'Explicación clara de qué es un agente de inteligencia artificial, en qué se diferencia de un chatbot y ejemplos concretos en empresas españolas.',
     content: `<h2>La diferencia fundamental entre un chatbot y un agente de IA</h2>
 <p>Cuando la mayoría de empresas piensa en IA, piensa en chatbots. Y tiene sentido: fueron la primera forma de IA conversacional que se popularizó en los negocios. Pero los agentes de IA son algo sustancialmente diferente y mucho más potente.</p>
 <p>La diferencia fundamental es esta: <strong>un chatbot responde preguntas. Un agente de IA toma acciones.</strong></p>
@@ -292,6 +302,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 7,
     author: 'Automatización Procesos IA',
     tags: ['automatizacion facturas', 'gestion documental ia', 'ocr ia', 'n8n automatizacion', 'roi automatizacion'],
+    metaTitle: 'Automatizar Facturas y Documentos con IA: Guía 2026',
+    metaDescription: 'Cómo automatizar la gestión de facturas y documentos con OCR e IA. Herramientas recomendadas, flujo paso a paso y cálculo de ROI real para pymes.',
     content: `<h2>El problema que nadie quiere admitir</h2>
 <p>En la mayoría de pymes españolas, el procesamiento de facturas y documentos funciona así: alguien recibe un email con una factura adjunta, la descarga, la abre, lee los datos manualmente, los introduce en el software de contabilidad o en una hoja de Excel, la archiva en la carpeta correcta, y lo registra en el sistema de seguimiento de pagos. Este proceso, multiplicado por decenas o cientos de documentos al mes, consume horas de trabajo cualificado en tareas que no aportan ningún valor al negocio.</p>
 <p>Peor aún: la introducción manual de datos tiene una tasa de error del 1-4% en entornos de oficina normales. En un volumen de 200 facturas al mes, eso son entre 2 y 8 errores mensuales, algunos de los cuales no se detectan hasta que hay un problema con proveedores, con el flujo de caja o con hacienda.</p>

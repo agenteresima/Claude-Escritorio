@@ -17,7 +17,7 @@ export const metadata = {
     url: 'https://www.automatizacionprocesos.es/blog',
     images: [
       {
-        url: 'https://www.automatizacionprocesos.es/og-image.jpg',
+        url: 'https://www.automatizacionprocesos.es/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Blog IA para Empresas',
@@ -29,7 +29,7 @@ export const metadata = {
     title: 'Blog IA para Empresas | Automatización Procesos IA',
     description:
       'Blog de inteligencia artificial para empresas: automatización de procesos, agentes IA, estrategia IA para pymes. Guías prácticas y casos reales.',
-    images: ['https://www.automatizacionprocesos.es/og-image.jpg'],
+    images: ['https://www.automatizacionprocesos.es/og-image.png'],
   },
   alternates: { canonical: 'https://www.automatizacionprocesos.es/blog' },
 }

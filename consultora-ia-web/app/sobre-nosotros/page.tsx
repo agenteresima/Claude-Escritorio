@@ -3,37 +3,30 @@ import Link from 'next/link'
 import { Target, Eye, BarChart3, GraduationCap, ArrowRight, CheckCircle2 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Quiénes Somos | Consultoría IA Valencia | Automatización Procesos',
+  title: 'Sobre Nosotros | Consultoría IA para Empresas Valencia',
   description:
-    'Equipo de consultores IA en Valencia especializados en automatización de procesos para pymes. Más de 50 empresas acompañadas. Expertos en inteligencia artificial aplicada.',
+    'Conoce al equipo de Automatización Procesos IA en Valencia: especialistas en inteligencia artificial que ayudan a pymes a implementar IA de forma práctica y con resultados reales.',
   keywords: [
     'equipo Automatización Procesos IA',
     'consultoría inteligencia artificial Valencia',
     'expertos IA para empresas',
-    'consultores IA Valencia',
+    'consultoría IA España',
     'sobre nosotros IA',
   ],
   openGraph: {
-    title: 'Quiénes Somos | Consultoría IA Valencia | Automatización Procesos',
+    title: 'Sobre Nosotros | Consultoría IA para Empresas Valencia',
     description:
-      'Equipo de consultores IA en Valencia especializados en automatización de procesos para pymes. Más de 50 empresas acompañadas. Expertos en inteligencia artificial aplicada.',
+      'El equipo que convierte la IA en resultados reales para tu empresa. Más de 50 empresas confían en nosotros.',
     type: 'website',
     locale: 'es_ES',
-    images: [
-      {
-        url: 'https://www.automatizacionprocesos.es/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Equipo Consultoría IA Valencia',
-      },
-    ],
+    url: 'https://www.automatizacionprocesos.es/sobre-nosotros',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Sobre Automatización Procesos IA' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Quiénes Somos | Consultoría IA Valencia | Automatización Procesos',
-    description:
-      'Equipo de consultores IA en Valencia especializados en automatización de procesos para pymes. Más de 50 empresas acompañadas.',
-    images: ['https://www.automatizacionprocesos.es/og-image.jpg'],
+    title: 'Sobre Nosotros | Consultoría IA Valencia',
+    description: 'El equipo que convierte la IA en resultados reales para tu empresa.',
+    images: ['/og-image.png'],
   },
   alternates: {
     canonical: 'https://www.automatizacionprocesos.es/sobre-nosotros',

@@ -3,15 +3,30 @@ import Link from 'next/link'
 import { Bot, Brain, MessageSquare, Zap, Shield, TrendingUp, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Agentes IA Autónomos para Empresas | LLMs Personalizados | Automatización Procesos IA',
+  title: 'Agentes IA Autónomos para Empresas | LLMs Personalizados',
   description:
-    'Desarrollamos agentes de inteligencia artificial autónomos con LLMs para tu empresa. Agentes comerciales, de atención al cliente y administrativos que trabajan 24/7 sin errores.',
+    'Desarrollamos agentes de inteligencia artificial autónomos para empresas. Agentes comerciales, de atención al cliente y administrativos que trabajan 24/7. Integración con tus sistemas.',
+  keywords: [
+    'agentes IA autónomos empresas',
+    'agentes inteligencia artificial',
+    'LLM personalizado empresa',
+    'asistente IA empresarial',
+    'agente IA atención cliente',
+    'agente IA comercial',
+  ],
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/agentes-ia' },
   openGraph: {
-    title: 'Agentes IA Autónomos para Empresas | Automatización Procesos IA',
+    title: 'Agentes IA Autónomos para Empresas | LLMs Personalizados',
     description:
       'Agentes de inteligencia artificial personalizados que trabajan 24/7 en tu nombre. Comercial, atención al cliente, administración.',
     url: 'https://www.automatizacionprocesos.es/servicios/agentes-ia',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Agentes IA para empresas' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Agentes IA Autónomos para Empresas',
+    description: 'Agentes IA personalizados que trabajan 24/7. Comercial, atención al cliente, administración.',
+    images: ['/og-image.png'],
   },
 }
 
@@ -81,6 +96,24 @@ const benefits = [
 export default function AgentesIAPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Agentes de Inteligencia Artificial para Empresas',
+            description: 'Desarrollo de agentes IA autónomos personalizados para empresas. Agentes comerciales, de atención al cliente y administrativos que trabajan 24/7.',
+            provider: {
+              '@type': 'Organization',
+              name: 'Automatización Procesos IA',
+              url: 'https://www.automatizacionprocesos.es',
+            },
+            areaServed: { '@type': 'Country', name: 'España' },
+            url: 'https://www.automatizacionprocesos.es/servicios/agentes-ia',
+          }),
+        }}
+      />
       {/* Hero */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 text-white py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -159,6 +192,23 @@ export default function AgentesIAPage() {
                 <p className="text-slate-600 text-sm leading-relaxed">{b.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Artículos relacionados */}
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Aprende más sobre agentes IA</h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <Link href="/blog/que-es-agente-ia-empresa" className="block border border-slate-200 rounded-xl p-4 hover:border-blue-400 hover:shadow-md transition-all">
+              <p className="font-semibold text-slate-900 text-sm mb-1 hover:text-blue-700">Qué es un agente de inteligencia artificial y cómo transforma tu empresa</p>
+              <p className="text-xs text-slate-500">Agentes IA · 6 min</p>
+            </Link>
+            <Link href="/blog/conectar-ia-base-datos" className="block border border-slate-200 rounded-xl p-4 hover:border-blue-400 hover:shadow-md transition-all">
+              <p className="font-semibold text-slate-900 text-sm mb-1 hover:text-blue-700">Cómo conectar la inteligencia artificial con la base de datos de tu empresa</p>
+              <p className="text-xs text-slate-500">Tecnología · 7 min</p>
+            </Link>
           </div>
         </div>
       </section>
