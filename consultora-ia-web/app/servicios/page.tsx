@@ -194,6 +194,30 @@ export default function ServiciosPage() {
         }}
       />
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Consultoría de Inteligencia Artificial para Empresas',
+            description:
+              'Servicios de automatización de procesos, agentes IA, auditoría, formación y consultor IA externo para pymes en España',
+            provider: {
+              '@type': 'LocalBusiness',
+              name: 'Automatización Procesos IA',
+              url: 'https://www.automatizacionprocesos.es',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Valencia',
+                addressCountry: 'ES',
+              },
+            },
+            areaServed: { '@type': 'Country', name: 'España' },
+          }),
+        }}
+      />
+
       {/* Hero */}
       <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 pt-24 pb-16 text-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
@@ -327,6 +351,24 @@ export default function ServiciosPage() {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Internal Blog Links */}
+      <section className="py-12 bg-white border-t border-slate-100">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-xl font-bold text-slate-900 mb-4">Artículos relacionados</h2>
+          <div className="grid sm:grid-cols-3 gap-4">
+            <Link href="/blog/como-empezar-ia-empresa" className="block p-4 border border-slate-200 rounded-xl hover:border-blue-400 hover:text-blue-700 transition-colors text-sm font-medium text-slate-700">
+              Cómo empezar con IA en tu empresa sin perder dinero →
+            </Link>
+            <Link href="/blog/procesos-automatizar-pyme-ia" className="block p-4 border border-slate-200 rounded-xl hover:border-blue-400 hover:text-blue-700 transition-colors text-sm font-medium text-slate-700">
+              Qué procesos puede automatizar una pyme con IA →
+            </Link>
+            <Link href="/blog/que-es-agente-ia-empresa" className="block p-4 border border-slate-200 rounded-xl hover:border-blue-400 hover:text-blue-700 transition-colors text-sm font-medium text-slate-700">
+              Qué es un agente IA y cómo puede transformar tu empresa →
+            </Link>
           </div>
         </div>
       </section>
