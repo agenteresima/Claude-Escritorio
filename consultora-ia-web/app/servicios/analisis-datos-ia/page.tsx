@@ -6,12 +6,26 @@ export const metadata: Metadata = {
   title: 'Análisis de Datos con IA | Dashboards e Insights | Automatización Procesos IA',
   description:
     'Análisis de datos empresariales con inteligencia artificial. Dashboards interactivos, detección de patrones, predicciones y insights accionables para tomar mejores decisiones.',
+  keywords: [
+    'análisis datos IA empresa',
+    'dashboard inteligencia artificial',
+    'análisis predictivo pymes',
+    'insights automáticos IA',
+    'business intelligence IA',
+  ],
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/analisis-datos-ia' },
   openGraph: {
     title: 'Análisis de Datos con IA | Automatización Procesos IA',
     description:
       'Convertimos tus datos en decisiones. Dashboards inteligentes, análisis predictivo e insights automáticos con inteligencia artificial.',
     url: 'https://www.automatizacionprocesos.es/servicios/analisis-datos-ia',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Análisis de datos con IA' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Análisis de Datos con IA | Automatización Procesos IA',
+    description: 'Dashboards inteligentes, análisis predictivo e insights automáticos con IA.',
+    images: ['/og-image.png'],
   },
 }
 

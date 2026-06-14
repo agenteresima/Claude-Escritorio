@@ -6,12 +6,26 @@ export const metadata: Metadata = {
   title: 'Estrategia de IA para Empresas | Hoja de Ruta y Transformación Digital | Automatización Procesos IA',
   description:
     'Consultoría estratégica de inteligencia artificial para empresas. Definimos tu hoja de ruta de IA, priorizamos iniciativas y acompañamos la transformación digital con resultados medibles.',
+  keywords: [
+    'estrategia IA empresa',
+    'hoja de ruta inteligencia artificial',
+    'consultoría estratégica IA',
+    'transformación digital IA',
+    'plan de IA empresas',
+  ],
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/estrategia-ia' },
   openGraph: {
     title: 'Estrategia de IA para Empresas | Automatización Procesos IA',
     description:
       'Consultoría estratégica de IA. Hoja de ruta, priorización de iniciativas y acompañamiento en la transformación digital de tu empresa.',
     url: 'https://www.automatizacionprocesos.es/servicios/estrategia-ia',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Estrategia IA para empresas' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Estrategia de IA para Empresas | Automatización Procesos IA',
+    description: 'Consultoría estratégica de IA. Hoja de ruta, priorización e implementación.',
+    images: ['/og-image.png'],
   },
 }
 

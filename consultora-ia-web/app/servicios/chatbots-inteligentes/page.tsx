@@ -6,12 +6,26 @@ export const metadata: Metadata = {
   title: 'Chatbots Inteligentes con IA para Atención al Cliente | Automatización Procesos IA',
   description:
     'Chatbots con inteligencia artificial para atención al cliente en tu web, WhatsApp y redes sociales. Respuestas precisas, disponibilidad 24/7 y escala sin límite.',
+  keywords: [
+    'chatbot inteligente IA empresa',
+    'chatbot atención cliente IA',
+    'chatbot WhatsApp empresa',
+    'asistente virtual IA',
+    'chatbot 24 horas empresa',
+  ],
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/chatbots-inteligentes' },
   openGraph: {
     title: 'Chatbots Inteligentes con IA para Atención al Cliente | Automatización Procesos IA',
     description:
       'Chatbots con IA que atienden a tus clientes 24/7 con respuestas precisas. Integración en web, WhatsApp y redes sociales.',
     url: 'https://www.automatizacionprocesos.es/servicios/chatbots-inteligentes',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Chatbots inteligentes con IA' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Chatbots Inteligentes con IA | Automatización Procesos IA',
+    description: 'Chatbots IA para atención al cliente 24/7. Web, WhatsApp y redes sociales.',
+    images: ['/og-image.png'],
   },
 }
 

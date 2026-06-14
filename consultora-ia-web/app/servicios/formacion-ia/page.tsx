@@ -6,12 +6,26 @@ export const metadata: Metadata = {
   title: 'Formación en IA para Empresas | Capacitación Equipos | Automatización Procesos IA',
   description:
     'Formación práctica en inteligencia artificial para equipos empresariales. ChatGPT, Claude, Copilot y herramientas de automatización. Adaptada a tu sector y resultados inmediatos.',
+  keywords: [
+    'formación IA empresas',
+    'capacitación inteligencia artificial equipos',
+    'curso ChatGPT empresa',
+    'formación Claude Copilot',
+    'formación automatización empresas',
+  ],
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios/formacion-ia' },
   openGraph: {
     title: 'Formación en IA para Empresas | Automatización Procesos IA',
     description:
       'Capacitación práctica en IA para equipos. ChatGPT, Claude, Copilot y automatización. Adaptada a tu sector con resultados desde el primer día.',
     url: 'https://www.automatizacionprocesos.es/servicios/formacion-ia',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Formación IA para empresas' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Formación en IA para Empresas | Automatización Procesos IA',
+    description: 'Capacitación práctica en IA para equipos empresariales. ChatGPT, Claude, Copilot.',
+    images: ['/og-image.png'],
   },
 }
 
