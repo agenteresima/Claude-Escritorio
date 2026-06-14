@@ -102,7 +102,9 @@ const jsonLd = {
   logo: 'https://www.automatizacionprocesos.es/logo.png',
   image: 'https://www.automatizacionprocesos.es/og-image.jpg',
   email: 'admin@automatizacionprocesos.es',
-  telephone: '+34-900-000-000',
+  telephone: '+34-963-000-000',
+  foundingDate: '2023',
+  knowsAbout: ['Inteligencia Artificial', 'Automatización de Procesos', 'Agentes IA', 'Machine Learning', 'Consultoría Tecnológica'],
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'ES',

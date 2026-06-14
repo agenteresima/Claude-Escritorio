@@ -61,7 +61,12 @@ export default async function BlogPostPage({ params }: Props) {
     description: post.description,
     datePublished: post.date,
     dateModified: post.date,
+    wordCount: Math.floor(post.readTime * 200),
     image: 'https://www.automatizacionprocesos.es/og-image.png',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://www.automatizacionprocesos.es/blog/${post.slug}`,
+    },
     author: {
       '@type': 'Organization',
       name: 'Automatización Procesos IA',
@@ -70,16 +75,13 @@ export default async function BlogPostPage({ params }: Props) {
     publisher: {
       '@type': 'Organization',
       name: 'Automatización Procesos IA',
+      url: 'https://www.automatizacionprocesos.es',
       logo: {
         '@type': 'ImageObject',
         url: 'https://www.automatizacionprocesos.es/logo.png',
       },
     },
     url: `https://www.automatizacionprocesos.es/blog/${post.slug}`,
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://www.automatizacionprocesos.es/blog/${post.slug}`,
-    },
   }
 
   return (

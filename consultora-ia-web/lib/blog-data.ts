@@ -7,6 +7,8 @@ export interface BlogPost {
   readTime: number
   author: string
   tags: string[]
+  metaTitle?: string
+  metaDescription?: string
   content: string
 }
 
@@ -21,6 +23,8 @@ export const blogPosts: BlogPost[] = [
     readTime: 8,
     author: 'Automatización Procesos IA',
     tags: ['estrategia ia', 'pymes', 'implementacion ia', 'presupuesto ia', 'roi ia'],
+    metaTitle: 'Cómo Empezar con IA en tu Empresa sin Perder Dinero',
+    metaDescription: 'Guía práctica para implementar IA en tu empresa: 5 pasos ordenados, presupuesto real y métricas de éxito. Sin tecnicismos, con resultados medibles.',
     content: `<h2>Por qué tantas empresas fracasan al implementar IA</h2>
 <p>Cada semana aparece una nueva herramienta de inteligencia artificial que promete revolucionar tu empresa. El resultado, en demasiadas ocasiones, es una factura considerable y un equipo que no sabe cómo usar lo que acaba de contratar. En Automatización Procesos IA llevamos años acompañando a empresas españolas en su transformación digital con IA, y lo que hemos aprendido es que el fracaso casi nunca tiene que ver con la tecnología. Tiene que ver con el orden en que se hacen las cosas.</p>
 <p>Según datos del INE, el 62% de las pymes españolas que han invertido en digitalización en los últimos dos años no pueden cuantificar el retorno obtenido. En el caso específico de la inteligencia artificial, ese porcentaje sube al 71%. No porque la IA no funcione, sino porque se implementa sin metodología.</p>
