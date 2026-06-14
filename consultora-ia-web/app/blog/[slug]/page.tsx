@@ -17,17 +17,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getBlogPost(slug)
   if (!post) return {}
+  const metaTitle = (post as any).metaTitle || `${post.title} | Automatización Procesos IA`
+  const metaDescription = (post as any).metaDescription || post.description
   return {
-    title: `${post.title} | Automatización Procesos IA`,
-    description: post.description,
+    title: metaTitle,
+    description: metaDescription,
+    keywords: post.tags,
     alternates: { canonical: `https://www.automatizacionprocesos.es/blog/${post.slug}` },
     openGraph: {
-      title: post.title,
-      description: post.description,
+      title: metaTitle,
+      description: metaDescription,
       url: `https://www.automatizacionprocesos.es/blog/${post.slug}`,
       type: 'article',
       publishedTime: post.date,
       authors: ['Automatización Procesos IA'],
+      images: [{ url: '/og-image.png', width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: metaTitle,
+      description: metaDescription,
+      images: ['/og-image.png'],
     },
   }
 }
@@ -50,6 +60,8 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.title,
     description: post.description,
     datePublished: post.date,
+    dateModified: post.date,
+    image: 'https://www.automatizacionprocesos.es/og-image.png',
     author: {
       '@type': 'Organization',
       name: 'Automatización Procesos IA',
@@ -58,9 +70,16 @@ export default async function BlogPostPage({ params }: Props) {
     publisher: {
       '@type': 'Organization',
       name: 'Automatización Procesos IA',
-      url: 'https://www.automatizacionprocesos.es',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.automatizacionprocesos.es/logo.png',
+      },
     },
     url: `https://www.automatizacionprocesos.es/blog/${post.slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://www.automatizacionprocesos.es/blog/${post.slug}`,
+    },
   }
 
   return (

@@ -12,15 +12,23 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Servicios de Consultoría IA para Empresas | Automatización Procesos IA',
+  title: 'Automatización Empresarial IA | Agentes IA para Empresas',
   description:
-    'Automatización de procesos, agentes IA, consultor externo, auditoría y formación en inteligencia artificial para empresas. Soluciones prácticas con resultados medibles.',
+    'Automatización de procesos, agentes IA, auditoría, formación y consultor externo para empresas en España. Soluciones prácticas de inteligencia artificial con resultados medibles.',
+  keywords: ['automatización empresarial IA', 'agentes IA empresas', 'consultoría IA servicios', 'automatización procesos España'],
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios' },
   openGraph: {
-    title: 'Servicios de Consultoría IA para Empresas | Automatización Procesos IA',
+    title: 'Automatización Empresarial IA | Agentes IA para Empresas',
     description:
-      'Automatización de procesos, agentes IA, consultor externo, auditoría y formación en inteligencia artificial para empresas.',
+      'Automatización de procesos, agentes IA, auditoría y formación en inteligencia artificial para empresas. Resultados medibles.',
     url: 'https://www.automatizacionprocesos.es/servicios',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Servicios IA para empresas' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Automatización Empresarial IA | Agentes IA para Empresas',
+    description: 'Automatización de procesos, agentes IA y formación para empresas en España.',
+    images: ['/og-image.png'],
   },
 }
 

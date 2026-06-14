@@ -93,6 +93,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': ['ProfessionalService', 'LocalBusiness'],
+  '@id': 'https://www.automatizacionprocesos.es/#organization',
   name: 'Automatización Procesos IA',
   description:
     'Consultoría de Inteligencia Artificial para empresas. Automatización de procesos, agentes IA, formación y estrategia de IA.',

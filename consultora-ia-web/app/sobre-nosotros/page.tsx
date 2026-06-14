@@ -3,21 +3,29 @@ import Link from 'next/link'
 import { Target, Eye, BarChart3, GraduationCap, ArrowRight, CheckCircle2 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Sobre nosotros — Automatización Procesos IA',
+  title: 'Quiénes Somos | Consultoría IA Valencia | Automatización Procesos IA',
   description:
-    'Conoce al equipo de Automatización Procesos IA: profesionales especializados en inteligencia artificial que ayudan a empresas a implementar IA de forma práctica y con resultados reales.',
+    'Somos la consultoría de inteligencia artificial para pymes en Valencia y España. Conoce al equipo que convierte la IA en ventajas competitivas reales: +50 empresas acompañadas.',
   keywords: [
     'equipo Automatización Procesos IA',
-    'consultoría inteligencia artificial Madrid',
+    'consultoría inteligencia artificial Valencia',
     'expertos IA para empresas',
+    'consultora IA España',
     'sobre nosotros IA',
   ],
   openGraph: {
-    title: 'Sobre nosotros — Automatización Procesos IA',
+    title: 'Quiénes Somos | Consultoría IA Valencia | Automatización Procesos IA',
     description:
       'El equipo que convierte la IA en resultados reales para tu empresa. Conoce quiénes somos y por qué más de 50 empresas confían en nosotros.',
     type: 'website',
     locale: 'es_ES',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Equipo Automatización Procesos IA Valencia' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Quiénes Somos | Consultoría IA Valencia',
+    description: 'Equipo de expertos en IA para empresas en Valencia y España. +50 pymes acompañadas.',
+    images: ['/og-image.png'],
   },
   alternates: {
     canonical: 'https://www.automatizacionprocesos.es/sobre-nosotros',
