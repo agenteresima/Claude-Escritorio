@@ -12,15 +12,39 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Servicios de Consultoría IA para Empresas | Automatización Procesos IA',
+  title: 'Servicios de Automatización Empresarial IA | Agentes IA',
   description:
-    'Automatización de procesos, agentes IA, consultor externo, auditoría y formación en inteligencia artificial para empresas. Soluciones prácticas con resultados medibles.',
+    'Automatización empresarial con IA, agentes IA para empresas, consultor IA externo, auditoría y formación. Soluciones prácticas con resultados medibles para pymes.',
+  keywords: [
+    'automatización empresarial IA',
+    'agentes IA empresas',
+    'consultor IA externo',
+    'auditoría IA empresas',
+    'formación inteligencia artificial',
+    'consultoría IA pymes',
+    'automatización procesos empresas',
+  ],
   alternates: { canonical: 'https://www.automatizacionprocesos.es/servicios' },
   openGraph: {
-    title: 'Servicios de Consultoría IA para Empresas | Automatización Procesos IA',
+    title: 'Servicios de Automatización Empresarial IA | Agentes IA',
     description:
-      'Automatización de procesos, agentes IA, consultor externo, auditoría y formación en inteligencia artificial para empresas.',
+      'Automatización empresarial con IA, agentes IA para empresas, consultor IA externo, auditoría y formación. Soluciones prácticas con resultados medibles para pymes.',
     url: 'https://www.automatizacionprocesos.es/servicios',
+    images: [
+      {
+        url: 'https://www.automatizacionprocesos.es/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Servicios de Automatización Empresarial IA',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Servicios de Automatización Empresarial IA | Agentes IA',
+    description:
+      'Automatización empresarial con IA, agentes IA para empresas, consultor IA externo, auditoría y formación. Soluciones prácticas para pymes.',
+    images: ['https://www.automatizacionprocesos.es/og-image.jpg'],
   },
 }
 
@@ -159,6 +183,25 @@ const selectionGuide = [
 export default function ServiciosPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Consultoría de Automatización Empresarial con IA',
+            description:
+              'Servicios de automatización empresarial con inteligencia artificial: agentes IA, automatización de procesos, auditoría IA, formación y consultor externo para pymes.',
+            provider: {
+              '@type': 'Organization',
+              name: 'Automatización Procesos IA',
+              url: 'https://www.automatizacionprocesos.es',
+            },
+            areaServed: { '@type': 'Country', name: 'España' },
+            url: 'https://www.automatizacionprocesos.es/servicios',
+          }),
+        }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -319,6 +362,42 @@ export default function ServiciosPage() {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Internal Links to Blog */}
+      <section className="py-16 bg-white border-t border-slate-100">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-xl font-bold text-slate-900 mb-6">Aprende más sobre automatización con IA</h2>
+          <div className="grid sm:grid-cols-3 gap-4">
+            <Link
+              href="/blog/que-es-agente-ia-empresa"
+              className="block border border-slate-200 rounded-xl p-4 hover:border-blue-400 hover:shadow-md transition-all group"
+            >
+              <p className="font-medium text-slate-900 group-hover:text-blue-700 transition-colors text-sm">
+                ¿Qué es un agente IA y cómo puede ayudar a tu empresa?
+              </p>
+              <span className="text-xs text-blue-500 mt-2 inline-block">Leer artículo →</span>
+            </Link>
+            <Link
+              href="/blog/procesos-automatizar-pyme-ia"
+              className="block border border-slate-200 rounded-xl p-4 hover:border-blue-400 hover:shadow-md transition-all group"
+            >
+              <p className="font-medium text-slate-900 group-hover:text-blue-700 transition-colors text-sm">
+                Los 10 procesos que toda pyme debería automatizar con IA
+              </p>
+              <span className="text-xs text-blue-500 mt-2 inline-block">Leer artículo →</span>
+            </Link>
+            <Link
+              href="/blog/automatizar-facturas-documentos-ia"
+              className="block border border-slate-200 rounded-xl p-4 hover:border-blue-400 hover:shadow-md transition-all group"
+            >
+              <p className="font-medium text-slate-900 group-hover:text-blue-700 transition-colors text-sm">
+                Cómo automatizar facturas y documentos con IA
+              </p>
+              <span className="text-xs text-blue-500 mt-2 inline-block">Leer artículo →</span>
+            </Link>
           </div>
         </div>
       </section>

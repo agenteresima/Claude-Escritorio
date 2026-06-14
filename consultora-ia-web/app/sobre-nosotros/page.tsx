@@ -3,21 +3,37 @@ import Link from 'next/link'
 import { Target, Eye, BarChart3, GraduationCap, ArrowRight, CheckCircle2 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Sobre nosotros — Automatización Procesos IA',
+  title: 'Quiénes Somos | Consultoría IA Valencia | Automatización Procesos',
   description:
-    'Conoce al equipo de Automatización Procesos IA: profesionales especializados en inteligencia artificial que ayudan a empresas a implementar IA de forma práctica y con resultados reales.',
+    'Equipo de consultores IA en Valencia especializados en automatización de procesos para pymes. Más de 50 empresas acompañadas. Expertos en inteligencia artificial aplicada.',
   keywords: [
     'equipo Automatización Procesos IA',
-    'consultoría inteligencia artificial Madrid',
+    'consultoría inteligencia artificial Valencia',
     'expertos IA para empresas',
+    'consultores IA Valencia',
     'sobre nosotros IA',
   ],
   openGraph: {
-    title: 'Sobre nosotros — Automatización Procesos IA',
+    title: 'Quiénes Somos | Consultoría IA Valencia | Automatización Procesos',
     description:
-      'El equipo que convierte la IA en resultados reales para tu empresa. Conoce quiénes somos y por qué más de 50 empresas confían en nosotros.',
+      'Equipo de consultores IA en Valencia especializados en automatización de procesos para pymes. Más de 50 empresas acompañadas. Expertos en inteligencia artificial aplicada.',
     type: 'website',
     locale: 'es_ES',
+    images: [
+      {
+        url: 'https://www.automatizacionprocesos.es/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Equipo Consultoría IA Valencia',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Quiénes Somos | Consultoría IA Valencia | Automatización Procesos',
+    description:
+      'Equipo de consultores IA en Valencia especializados en automatización de procesos para pymes. Más de 50 empresas acompañadas.',
+    images: ['https://www.automatizacionprocesos.es/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://www.automatizacionprocesos.es/sobre-nosotros',

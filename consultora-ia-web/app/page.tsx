@@ -12,10 +12,12 @@ import FAQ from '@/components/home/FAQ'
 import CTAFinal from '@/components/home/CTAFinal'
 
 export const metadata: Metadata = {
-  title: 'Automatización Procesos IA | Consultoría de Inteligencia Artificial para Empresas | IA Práctica para Pymes',
+  title: 'Automatización Procesos IA | Consultoría IA para Pymes España',
   description:
-    'Automatización Procesos IA ayuda a empresas y pymes a implementar inteligencia artificial de forma práctica: automatización de procesos, agentes IA, auditoría IA y formación. Sin tecnicismos, con resultados medibles.',
+    'Consultoría de inteligencia artificial para pymes en España. Automatizamos procesos, implantamos agentes IA y formamos equipos. Resultados medibles sin tecnicismos. Diagnóstico gratuito.',
   keywords: [
+    'automatización procesos IA España',
+    'consultoría inteligencia artificial pymes',
     'consultoría IA',
     'inteligencia artificial para empresas',
     'automatización procesos IA',
@@ -26,11 +28,27 @@ export const metadata: Metadata = {
     'IA para pymes España',
   ],
   openGraph: {
-    title: 'Automatización Procesos IA | Consultoría de Inteligencia Artificial para Empresas',
+    title: 'Automatización Procesos IA | Consultoría IA para Pymes España',
     description:
-      'El experto en IA que tu empresa todavía no tiene en plantilla. Ayudamos a pymes a implementar IA de forma práctica y con resultados medibles.',
+      'Consultoría de inteligencia artificial para pymes en España. Automatizamos procesos, implantamos agentes IA y formamos equipos. Resultados medibles sin tecnicismos. Diagnóstico gratuito.',
     type: 'website',
     locale: 'es_ES',
+    url: 'https://www.automatizacionprocesos.es',
+    images: [
+      {
+        url: 'https://www.automatizacionprocesos.es/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Automatización Procesos IA — Consultoría IA para Pymes España',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Automatización Procesos IA | Consultoría IA para Pymes España',
+    description:
+      'Consultoría de inteligencia artificial para pymes en España. Automatizamos procesos, implantamos agentes IA y formamos equipos. Diagnóstico gratuito.',
+    images: ['https://www.automatizacionprocesos.es/og-image.jpg'],
   },
   alternates: {
     canonical: 'https://www.automatizacionprocesos.es',
