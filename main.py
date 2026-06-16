@@ -700,5 +700,113 @@ def wsb_cmd(tickers, top):
     click.echo()
 
 
+# ─────────────────────────────────────────────────────────────────────
+# AI Trading Advisor
+# ─────────────────────────────────────────────────────────────────────
+
+@cli.command("advisor")
+@click.option("--question", "-q", default=None,
+              help="One-shot question (omit for interactive mode)")
+@click.option("--watchlist", "-w", multiple=True,
+              help="Pre-scan watchlist before starting (e.g. -w BTC/USDT -w ETH/USDT)")
+def advisor_cmd(question, watchlist):
+    """AI trading advisor — ask which assets are ready to enter, check filters, macro outlook.
+
+    \b
+    Examples:
+      python main.py advisor -q "¿BTC pasa los filtros para invertir?"
+      python main.py advisor -q "Which assets on my watchlist are ready?"
+      python main.py advisor -w BTC/USDT -w ETH/USDT -w SOL/USDT
+      python main.py advisor          # interactive REPL
+    """
+    import os
+    from bot.trading_advisor import ask
+
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        click.echo(
+            "Error: ANTHROPIC_API_KEY not set.\n"
+            "Add it to your .env file: ANTHROPIC_API_KEY=sk-ant-...",
+            err=True,
+        )
+        raise SystemExit(1)
+
+    # Pre-scan watchlist and inject as first question
+    history = []
+    if watchlist:
+        wl_str = ", ".join(watchlist)
+        click.echo(f"\nEscaneando watchlist: {wl_str} ...\n")
+        _, history = ask(
+            f"Scan this watchlist and tell me which ones are ready to enter: {wl_str}",
+            history=history,
+        )
+        # Print the pre-scan result
+        last_answer = next(
+            (b.text for b in history[-1]["content"] if hasattr(b, "text")), ""
+        ) if history and isinstance(history[-1].get("content"), list) else ""
+        if last_answer:
+            click.echo(f"Advisor: {last_answer}\n")
+
+    # One-shot mode
+    if question:
+        answer, _ = ask(question, history=history)
+        click.echo(f"\n{answer}\n")
+        return
+
+    # Interactive REPL
+    click.echo(
+        "\n┌─────────────────────────────────────────────────────────┐\n"
+        "│  Trading Advisor — AI con acceso a datos en tiempo real  │\n"
+        "│  Escribe 'exit' o Ctrl-C para salir                       │\n"
+        "└─────────────────────────────────────────────────────────┘\n"
+    )
+
+    while True:
+        try:
+            q = click.prompt("Tú", prompt_suffix=" > ")
+        except (EOFError, KeyboardInterrupt):
+            click.echo("\nHasta luego.")
+            break
+
+        if q.strip().lower() in ("exit", "quit", "salir", "q", "bye"):
+            click.echo("Hasta luego.")
+            break
+        if not q.strip():
+            continue
+
+        try:
+            click.echo("\nAdvisor: ", nl=False)
+            answer, history = ask(q, history=history)
+            click.echo(answer + "\n")
+        except Exception as e:
+            click.echo(f"\nError: {e}\n", err=True)
+
+
+@cli.command("ask")
+@click.argument("question")
+@click.option("--ticker", "-t", default=None, help="Specific asset to check (e.g. BTC/USDT)")
+def ask_cmd(question, ticker):
+    """Quick one-shot question to the trading advisor.
+
+    \b
+    Examples:
+      python main.py ask "¿Cuál es el riesgo macro ahora mismo?"
+      python main.py ask "Is NVDA a good entry?" --ticker NVDA
+      python main.py ask "¿Qué dice el mercado de predicción sobre la recesión?"
+    """
+    import os
+    from bot.trading_advisor import ask
+
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        click.echo("Error: ANTHROPIC_API_KEY not set.", err=True)
+        raise SystemExit(1)
+
+    full_q = f"{question} (ticker: {ticker})" if ticker else question
+
+    click.echo()
+    answer, _ = ask(full_q)
+    click.echo(answer)
+    click.echo()
+
+
 if __name__ == "__main__":
     cli()

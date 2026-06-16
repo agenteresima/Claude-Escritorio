@@ -7,7 +7,7 @@ PAIR       ?= BTC/USDT
 STRATEGY   ?= regime_adaptive
 START      ?= 2021-01-01
 
-.PHONY: help install test test-fast test-cov backtest compare optimize train live dashboard api benchmark backup restore export weekly lint clean sp500 sp500-download portfolio-optimize v2 polymarket wsb
+.PHONY: help install test test-fast test-cov backtest compare optimize train live dashboard api benchmark backup restore export weekly lint clean sp500 sp500-download portfolio-optimize v2 polymarket wsb advisor ask
 
 help:
 	@echo ""
@@ -42,6 +42,13 @@ help:
 	@echo "  Prediction Markets:"
 	@echo "    make polymarket    Polymarket macro risk + WSB  (TICKER=BTC optional)"
 	@echo "    make wsb           Reddit WSB trending tickers  (TICKER=NVDA optional)"
+	@echo ""
+	@echo "  AI Advisor:"
+	@echo "    make advisor       Interactive AI trading advisor (REPL)"
+	@echo "    make ask Q='...'   One-shot question  (TICKER=BTC/USDT optional)"
+	@echo "    Examples:"
+	@echo "      make ask Q='¿BTC está listo para entrar?'"
+	@echo "      make ask Q='Scan my watchlist' WATCHLIST='BTC/USDT ETH/USDT'"
 	@echo ""
 	@echo "  Dev:"
 	@echo "    make test          Run all tests"
@@ -136,6 +143,12 @@ polymarket:
 
 wsb:
 	$(PYTHON) main.py wsb $(if $(TICKER),--ticker $(TICKER),) --top 25
+
+advisor:
+	$(PYTHON) main.py advisor $(if $(WATCHLIST),$(foreach w,$(WATCHLIST),-w $(w)),)
+
+ask:
+	$(PYTHON) main.py ask "$(Q)" $(if $(TICKER),--ticker $(TICKER),)
 
 events:
 	$(PYTHON) main.py events
