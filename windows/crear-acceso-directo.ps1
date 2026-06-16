@@ -49,10 +49,10 @@ $Lnk.Save()
 
 if (Test-Path $Shortcut) {
     Write-Host ""
-    Write-Host "  Acceso directo creado." -ForegroundColor Green
+    Write-Host "  Acceso directo creado correctamente." -ForegroundColor Green
     Write-Host ""
-    Write-Host "  -> Ve al Escritorio y haz DOBLE CLIC en:" -ForegroundColor Yellow
-    Write-Host "     'Asesor de Inversion IA'" -ForegroundColor White
+    Write-Host "  Ve al Escritorio y haz DOBLE CLIC en:" -ForegroundColor Yellow
+    Write-Host "  Asesor de Inversion IA" -ForegroundColor White
     Write-Host ""
 } else {
     Write-Host ""
