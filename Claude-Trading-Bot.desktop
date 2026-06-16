@@ -1,0 +1,37 @@
+[Desktop Entry]
+Version=1.1
+Type=Application
+Name=Claude Trading Bot
+GenericName=Bot de Trading Profesional
+Comment=Panel de control: Advisor AI, backtests, trading en vivo, Polymarket + WSB
+Icon=/home/user/Claude-Escritorio/assets/icon.svg
+Path=/home/user/Claude-Escritorio
+
+# Intenta con varios terminales en orden de preferencia
+Exec=bash -c 'cd /home/user/Claude-Escritorio && for term in gnome-terminal konsole xfce4-terminal lxterminal xterm; do if command -v "$term" &>/dev/null; then case "$term" in gnome-terminal) gnome-terminal -- bash launch.sh ;; konsole) konsole -e bash launch.sh ;; *) "$term" -e bash launch.sh ;; esac; exit 0; fi; done; bash launch.sh'
+
+Terminal=false
+StartupNotify=true
+StartupWMClass=trading-bot
+
+Categories=Finance;Office;
+
+Keywords=trading;bot;crypto;stocks;backtest;advisor;polymarket;
+
+Actions=Advisor;Live;Backtest;Dashboard;
+
+[Desktop Action Advisor]
+Name=AI Advisor — Preguntar al bot
+Exec=bash -c 'cd /home/user/Claude-Escritorio && gnome-terminal -- bash launch.sh advisor 2>/dev/null || xterm -e bash launch.sh advisor'
+
+[Desktop Action Live]
+Name=Paper Trading (iniciar bot)
+Exec=bash -c 'cd /home/user/Claude-Escritorio && gnome-terminal -- bash -c "source .venv/bin/activate 2>/dev/null; python main.py live --dry-run; read" 2>/dev/null || xterm -e bash -c "source .venv/bin/activate 2>/dev/null; python main.py live --dry-run; read"'
+
+[Desktop Action Backtest]
+Name=Backtest BTC/USDT
+Exec=bash -c 'cd /home/user/Claude-Escritorio && gnome-terminal -- bash -c "source .venv/bin/activate 2>/dev/null; python main.py backtest --strategy trend_ema --pair BTC/USDT; read" 2>/dev/null || xterm -e bash -c "python main.py backtest --strategy trend_ema --pair BTC/USDT; read"'
+
+[Desktop Action Dashboard]
+Name=Dashboard (abre navegador)
+Exec=bash -c 'cd /home/user/Claude-Escritorio && source .venv/bin/activate 2>/dev/null; python main.py dashboard & sleep 2 && xdg-open http://localhost:8050'

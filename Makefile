@@ -7,7 +7,7 @@ PAIR       ?= BTC/USDT
 STRATEGY   ?= regime_adaptive
 START      ?= 2021-01-01
 
-.PHONY: help install test test-fast test-cov backtest compare optimize train live dashboard api benchmark backup restore export weekly lint clean sp500 sp500-download portfolio-optimize v2 polymarket wsb advisor ask
+.PHONY: help install test test-fast test-cov backtest compare optimize train live dashboard api benchmark backup restore export weekly lint clean sp500 sp500-download portfolio-optimize v2 polymarket wsb advisor ask launch install-desktop
 
 help:
 	@echo ""
@@ -44,11 +44,10 @@ help:
 	@echo "    make wsb           Reddit WSB trending tickers  (TICKER=NVDA optional)"
 	@echo ""
 	@echo "  AI Advisor:"
-	@echo "    make advisor       Interactive AI trading advisor (REPL)"
-	@echo "    make ask Q='...'   One-shot question  (TICKER=BTC/USDT optional)"
-	@echo "    Examples:"
-	@echo "      make ask Q='¿BTC está listo para entrar?'"
-	@echo "      make ask Q='Scan my watchlist' WATCHLIST='BTC/USDT ETH/USDT'"
+	@echo "    make advisor           Interactive AI trading advisor (REPL)"
+	@echo "    make ask Q='...'       One-shot question  (TICKER=BTC/USDT optional)"
+	@echo "    make launch            Menú TUI completo (sin recordar comandos)"
+	@echo "    make install-desktop   Instala icono en el escritorio Linux"
 	@echo ""
 	@echo "  Dev:"
 	@echo "    make test          Run all tests"
@@ -149,6 +148,23 @@ advisor:
 
 ask:
 	$(PYTHON) main.py ask "$(Q)" $(if $(TICKER),--ticker $(TICKER),)
+
+launch:
+	bash launch.sh
+
+install-desktop:
+	@echo "Instalando icono en el escritorio..."
+	@DESKTOP_DIR="$${HOME}/Desktop"; \
+	[ -d "$${HOME}/Escritorio" ] && DESKTOP_DIR="$${HOME}/Escritorio"; \
+	cp Claude-Trading-Bot.desktop "$$DESKTOP_DIR/Claude-Trading-Bot.desktop" && \
+	chmod +x "$$DESKTOP_DIR/Claude-Trading-Bot.desktop" && \
+	echo "✅ Icono instalado en $$DESKTOP_DIR" || \
+	echo "❌ No se encontró carpeta Desktop/Escritorio — copia manualmente Claude-Trading-Bot.desktop"
+	@# También instalar en aplicaciones del sistema
+	@mkdir -p $${HOME}/.local/share/applications
+	@cp Claude-Trading-Bot.desktop $${HOME}/.local/share/applications/
+	@update-desktop-database $${HOME}/.local/share/applications/ 2>/dev/null || true
+	@echo "✅ Registrado en aplicaciones del sistema"
 
 events:
 	$(PYTHON) main.py events
