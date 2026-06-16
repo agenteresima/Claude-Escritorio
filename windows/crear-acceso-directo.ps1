@@ -1,46 +1,47 @@
 # ─────────────────────────────────────────────────────────────────────
 #  Crea el acceso directo "Asesor de Inversion IA" en el Escritorio
-#  Ejecutar UNA VEZ desde la carpeta del proyecto:
+#  Compatible con PowerShell 5 y PowerShell 7 (Windows).
 #
-#    cd C:\ruta\al\Claude-Escritorio\windows
+#  Ejecutar desde CUALQUIER carpeta del proyecto:
 #    PowerShell -ExecutionPolicy Bypass -File crear-acceso-directo.ps1
 # ─────────────────────────────────────────────────────────────────────
 
-# Ruta del proyecto (carpeta padre de este script)
-$ScriptDir   = Split-Path -Parent $MyInvocation.MyCommand.Path
-$ProjectDir  = Split-Path -Parent $ScriptDir
-$BatFile     = Join-Path $ScriptDir "Asesor-Inversion.bat"
+# Detectar la ruta de este script aunque se llame desde otro directorio
+$ScriptDir  = Split-Path -Parent (Resolve-Path $MyInvocation.MyCommand.Path)
+$ProjectDir = Split-Path -Parent $ScriptDir
+$BatFile    = Join-Path $ScriptDir "Asesor-Inversion.bat"
 
-# También copiar el .bat a la raíz para facilitar el acceso
-$BatRoot     = Join-Path $ProjectDir "Asesor-Inversion.bat"
+# Copiar el .bat a la raíz del proyecto para que el acceso directo lo encuentre
+$BatRoot = Join-Path $ProjectDir "Asesor-Inversion.bat"
 if (-not (Test-Path $BatRoot)) {
     Copy-Item $BatFile $BatRoot
 }
 
-# Escritorio del usuario
-$Desktop = [Environment]::GetFolderPath("Desktop")
+# Escritorio del usuario actual
+$Desktop  = [Environment]::GetFolderPath("Desktop")
 $Shortcut = Join-Path $Desktop "Asesor de Inversion IA.lnk"
 
 Write-Host ""
-Write-Host "  Creando acceso directo en: $Shortcut" -ForegroundColor Cyan
+Write-Host "  Proyecto : $ProjectDir" -ForegroundColor DarkGray
+Write-Host "  Creando  : $Shortcut"  -ForegroundColor Cyan
 
-# Crear el .lnk usando WScript.Shell
-$WshShell = New-Object -ComObject WScript.Shell
-$Lnk = $WshShell.CreateShortcut($Shortcut)
-
+# Crear el .lnk con WScript.Shell (PowerShell 5 compatible)
+$WshShell             = New-Object -ComObject WScript.Shell
+$Lnk                  = $WshShell.CreateShortcut($Shortcut)
 $Lnk.TargetPath       = $BatRoot
 $Lnk.WorkingDirectory = $ProjectDir
 $Lnk.Description      = "Asesor de Inversion IA - Trading Bot"
-$Lnk.WindowStyle      = 1   # ventana normal
+$Lnk.WindowStyle      = 1
 
-# Intentar usar el icono del proyecto (requiere .ico en Windows)
+# Icono: usar .ico del proyecto si existe, si no el de Python
 $IcoPath = Join-Path $ProjectDir "assets\advisor-icon.ico"
 if (Test-Path $IcoPath) {
     $Lnk.IconLocation = $IcoPath
 } else {
-    # Usar icono de Python como fallback
-    $PyExe = (Get-Command python -ErrorAction SilentlyContinue)?.Source
-    if ($PyExe) { $Lnk.IconLocation = "$PyExe,0" }
+    $PyCmd = Get-Command python -ErrorAction SilentlyContinue
+    if ($PyCmd -ne $null) {
+        $Lnk.IconLocation = $PyCmd.Source + ",0"
+    }
 }
 
 $Lnk.Save()
@@ -48,13 +49,15 @@ $Lnk.Save()
 
 if (Test-Path $Shortcut) {
     Write-Host ""
-    Write-Host "  Acceso directo creado correctamente." -ForegroundColor Green
+    Write-Host "  Acceso directo creado." -ForegroundColor Green
     Write-Host ""
-    Write-Host "  Haz DOBLE CLIC en el icono del Escritorio:" -ForegroundColor Yellow
-    Write-Host "  'Asesor de Inversion IA'" -ForegroundColor White
+    Write-Host "  -> Ve al Escritorio y haz DOBLE CLIC en:" -ForegroundColor Yellow
+    Write-Host "     'Asesor de Inversion IA'" -ForegroundColor White
     Write-Host ""
 } else {
+    Write-Host ""
     Write-Host "  ERROR: No se pudo crear el acceso directo." -ForegroundColor Red
+    Write-Host "  Intenta ejecutar PowerShell como Administrador." -ForegroundColor Red
 }
 
 Write-Host "  Pulsa Enter para cerrar..."
