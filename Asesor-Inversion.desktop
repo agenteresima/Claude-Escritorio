@@ -1,0 +1,45 @@
+[Desktop Entry]
+Version=1.1
+Type=Application
+Name=Asesor de Inversión IA
+GenericName=AI Trading Advisor
+Comment=Pregunta al agente IA: qué acciones entrar, análisis macro, filtros de inversión
+Icon=/home/user/Claude-Escritorio/assets/advisor-icon.svg
+Path=/home/user/Claude-Escritorio
+
+Exec=bash -c '\
+  cd /home/user/Claude-Escritorio; \
+  for term in gnome-terminal konsole xfce4-terminal lxterminal mate-terminal tilix xterm; do \
+    if command -v "$term" &>/dev/null; then \
+      case "$term" in \
+        gnome-terminal) gnome-terminal --title="Asesor de Inversión IA" -- bash advisor.sh ;; \
+        konsole)        konsole --title "Asesor de Inversión IA" -e bash advisor.sh ;; \
+        xterm)          xterm -title "Asesor de Inversión IA" -fa "Monospace" -fs 12 -bg "#0a0d14" -fg "#00e5c0" -e bash advisor.sh ;; \
+        *)              "$term" -e bash advisor.sh ;; \
+      esac; \
+      exit 0; \
+    fi; \
+  done; \
+  bash advisor.sh'
+
+Terminal=false
+StartupNotify=true
+StartupWMClass=advisor-ia
+
+Categories=Finance;
+
+Keywords=trading;inversión;advisor;IA;acciones;crypto;bolsa;análisis;
+
+Actions=PreguntaRapida;VerMacro;EscanearActivos;
+
+[Desktop Action PreguntaRapida]
+Name=💬 Hacer una pregunta rápida
+Exec=bash -c 'cd /home/user/Claude-Escritorio; [ -f .venv/bin/activate ] && source .venv/bin/activate; read -p "Tu pregunta: " Q; python main.py ask "$Q"; read -p "Pulsa Enter..."'
+
+[Desktop Action VerMacro]
+Name=🌍 Ver entorno macro (Polymarket)
+Exec=bash -c 'cd /home/user/Claude-Escritorio; [ -f .venv/bin/activate ] && source .venv/bin/activate; python main.py ask "¿Cuál es el entorno macro actual? Recesión, Fed, inflación. ¿Debo estar largo?"; read -p "Pulsa Enter..."'
+
+[Desktop Action EscanearActivos]
+Name=📊 Escanear activos ahora
+Exec=bash -c 'cd /home/user/Claude-Escritorio; [ -f .venv/bin/activate ] && source .venv/bin/activate; python main.py advisor -w BTC/USDT -w ETH/USDT -w SOL/USDT; read -p "Pulsa Enter..."'
