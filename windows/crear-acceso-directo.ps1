@@ -1,17 +1,17 @@
-# ─────────────────────────────────────────────────────────────────────
+# =======================================================================
 #  Crea el acceso directo "Asesor de Inversion IA" en el Escritorio
 #  Compatible con PowerShell 5 y PowerShell 7 (Windows).
 #
 #  Ejecutar desde CUALQUIER carpeta del proyecto:
 #    PowerShell -ExecutionPolicy Bypass -File crear-acceso-directo.ps1
-# ─────────────────────────────────────────────────────────────────────
+# =======================================================================
 
 # Detectar la ruta de este script aunque se llame desde otro directorio
 $ScriptDir  = Split-Path -Parent (Resolve-Path $MyInvocation.MyCommand.Path)
 $ProjectDir = Split-Path -Parent $ScriptDir
 $BatFile    = Join-Path $ScriptDir "Asesor-Inversion.bat"
 
-# Copiar el .bat a la raíz del proyecto para que el acceso directo lo encuentre
+# Copiar el .bat a la raiz del proyecto para que el acceso directo lo encuentre
 $BatRoot = Join-Path $ProjectDir "Asesor-Inversion.bat"
 if (-not (Test-Path $BatRoot)) {
     Copy-Item $BatFile $BatRoot
