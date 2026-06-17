@@ -25,14 +25,17 @@ echo        Asesor de Inversion IA  -  Iniciando...
 echo   =========================================================
 echo.
 
-:: -- Intentar WSL primero (experiencia optima) --
+:: -- Intentar WSL primero, solo si tiene una distro instalada --
 where wsl >nul 2>&1
 if %ERRORLEVEL% == 0 (
-    echo   Usando WSL ^(recomendado^)...
-    echo.
-    for /f "tokens=*" %%p in ('wsl wslpath -u "%BOT_DIR%"') do set "WSL_PATH=%%p"
-    wsl bash -c "cd '%WSL_PATH%' && [ -f .venv/bin/activate ] && source .venv/bin/activate; python main.py advisor"
-    goto :end
+    wsl true >nul 2>&1
+    if %ERRORLEVEL% == 0 (
+        echo   Usando WSL ^(recomendado^)...
+        echo.
+        for /f "tokens=*" %%p in ('wsl wslpath -u "%BOT_DIR%"') do set "WSL_PATH=%%p"
+        wsl bash -c "cd '%WSL_PATH%' && [ -f .venv/bin/activate ] && source .venv/bin/activate; python main.py advisor"
+        goto :end
+    )
 )
 
 :: -- Python local --
