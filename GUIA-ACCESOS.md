@@ -47,8 +47,20 @@
 | Herramienta | URL | Acceso |
 |-------------|-----|--------|
 | **n8n** | tu instalación local/servidor | — |
-| **Supabase** (pendiente) | https://supabase.com | pendiente configurar |
-| **Resend email** (pendiente) | https://resend.com | pendiente configurar |
+| **Supabase (web)** | https://supabase.com/dashboard/project/kgmookumxhkbkohwkxim | Proyecto "automatizacionprocesos-web" · org Resima SL · agente.resima@gmail.com |
+| **Supabase (otro proyecto)** | https://supabase.com/dashboard/project/achgrrqncnhacewluata | Proyecto "Automatización y Agente N8N" (datos de contabilidad, NO usar para la web) |
+| **Resend email** (pendiente) | https://resend.com | pendiente crear cuenta + verificar dominio |
+
+### Variables de entorno en Vercel (formulario web)
+
+| Variable | Valor |
+|----------|-------|
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://kgmookumxhkbkohwkxim.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ver dashboard Supabase → API Keys → "anon" |
+| `SUPABASE_SERVICE_ROLE_KEY` | ver dashboard Supabase → API Keys → "service_role" (pendiente copiar) |
+| `RESEND_API_KEY` | pendiente crear cuenta Resend |
+
+Tablas creadas en Supabase: `contact_requests`, `leads`, `newsletter_subscribers`, `bot_conversations` (RLS activado, solo accesibles con la service_role key).
 
 ---
 
@@ -79,8 +91,9 @@
 
 ## 📋 PENDIENTE CONFIGURAR
 
-- [ ] Supabase → añadir variables en Vercel (formulario de contacto)
-- [ ] Resend → añadir API key en Vercel (emails automáticos)
+- [x] Supabase → proyecto creado y tablas listas (contact_requests, leads, newsletter_subscribers, bot_conversations)
+- [ ] Supabase → copiar `service_role` key y añadir las 3 variables de Supabase en Vercel
+- [ ] Resend → crear cuenta, verificar dominio, añadir API key en Vercel
 - [ ] Instagram Business → convertir cuenta a profesional
 - [ ] LinkedIn → crear página de empresa
 - [ ] n8n → flujo de captura de leads automático
