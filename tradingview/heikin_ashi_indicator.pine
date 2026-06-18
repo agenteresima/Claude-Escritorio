@@ -1,0 +1,79 @@
+//@version=5
+// Pine Script port of strategies/heikin_ashi.py (HeikinAshiStrategy)
+// Best performer in reports/BTC_USDT_strategy_comparison.csv (highest trade
+// count with consistently positive Sharpe/Sortino — see caveat in chat).
+indicator("Heikin Ashi Trend Bot", shorttitle="HA Trend Bot", overlay=true)
+
+// ── Inputs — mirror HeikinAshiStrategy.__init__() params ───────────────────
+confirmBars   = input.int(2, "Confirm Bars (streak length)", minval=1)
+requireNoWick = input.bool(true, "Require No Opposing Wick")
+emaLen        = input.int(50, "Trend EMA Length")
+atrLen        = input.int(14, "ATR Length")
+atrStopMult   = input.float(0.5, "ATR Stop-Loss Multiplier")
+atrTpMult     = input.float(3.0, "ATR Take-Profit Multiplier")
+
+// ── Webhook settings — payload matches bot/webhook.py:TVAlert exactly ──────
+webhookSecret  = input.string("CHANGE_ME", "Webhook Secret (= WEBHOOK_SECRET env var)")
+symbolOverride = input.string("", "Webhook Symbol Override (blank = chart ticker, e.g. BTCUSDT)")
+
+// ── Heikin Ashi candles — same recursive formula as compute_heikin_ashi() ──
+haClose = (open + high + low + close) / 4
+var float haOpen = na
+haOpen := na(haOpen[1]) ? (open + close) / 2 : (haOpen[1] + haClose[1]) / 2
+haHigh = math.max(high, math.max(haOpen, haClose))
+haLow  = math.min(low,  math.min(haOpen, haClose))
+
+haBull      = haClose > haOpen
+haNoLowWick = haLow  == math.min(haOpen, haClose)
+haNoUpWick  = haHigh == math.max(haOpen, haClose)
+
+// ── Streak of current HA color — mirrors bull_streak/bear_streak in Python ─
+var int streak = 1
+streak := bar_index == 0 ? 1 : (haBull == haBull[1] ? streak[1] + 1 : 1)
+
+flipUp   = (streak == confirmBars) and haBull
+flipDown = (streak == confirmBars) and not haBull
+
+if requireNoWick
+    flipUp   := flipUp   and haNoLowWick
+    flipDown := flipDown and haNoUpWick
+
+// ── Trend filter — same as df["close"] > df["ema_50"] in the bot ───────────
+emaTrend  = ta.ema(close, emaLen)
+trendUp   = close > emaTrend
+trendDown = close < emaTrend
+
+longSignal  = flipUp   and trendUp
+shortSignal = flipDown and trendDown
+
+// ── Stop / take-profit — identical formula to the bot (both directions) ───
+atrVal     = ta.atr(atrLen)
+stopLoss   = haLow - atrVal * atrStopMult
+takeProfit = close + atrVal * atrTpMult
+
+// ── Plotting ─────────────────────────────────────────────────────────────
+haColor = haBull ? color.new(color.lime, 60) : color.new(color.red, 60)
+plotcandle(haOpen, haHigh, haLow, haClose, title="Heikin Ashi", color=haColor, wickcolor=haColor, bordercolor=haColor)
+
+plot(emaTrend, title="Trend EMA", color=color.orange, linewidth=2)
+
+plotshape(longSignal,  title="Long",  location=location.belowbar, style=shape.triangleup,   color=color.green, size=size.small)
+plotshape(shortSignal, title="Short", location=location.abovebar, style=shape.triangledown, color=color.red,   size=size.small)
+
+plot(longSignal ? stopLoss   : na, title="Stop Loss (long)",   style=plot.style_circles, color=color.red,   linewidth=2)
+plot(longSignal ? takeProfit : na, title="Take Profit (long)", style=plot.style_circles, color=color.green, linewidth=2)
+
+// ── Webhook alerts — fire straight into bot/webhook.py:/webhook/tradingview ─
+webhookSymbol = symbolOverride == "" ? syminfo.ticker : symbolOverride
+
+buyMsg  = '{"symbol":"' + webhookSymbol + '","action":"buy","price":' + str.tostring(close) +
+          ',"strategy":"heikin_ashi","timeframe":"' + timeframe.period + '","secret":"' + webhookSecret +
+          '","stop_loss":' + str.tostring(stopLoss) + ',"take_profit":' + str.tostring(takeProfit) + '}'
+
+sellMsg = '{"symbol":"' + webhookSymbol + '","action":"sell","price":' + str.tostring(close) +
+          ',"strategy":"heikin_ashi","timeframe":"' + timeframe.period + '","secret":"' + webhookSecret + '"}'
+
+if longSignal
+    alert(buyMsg, alert.freq_once_per_bar_close)
+if shortSignal
+    alert(sellMsg, alert.freq_once_per_bar_close)
