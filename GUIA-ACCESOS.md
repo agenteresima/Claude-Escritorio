@@ -94,6 +94,7 @@ Tablas creadas en Supabase: `contact_requests`, `leads`, `newsletter_subscribers
 - [x] Supabase → proyecto creado y tablas listas (contact_requests, leads, newsletter_subscribers, bot_conversations)
 - [ ] Supabase → copiar `service_role` key y añadir las 3 variables de Supabase en Vercel
 - [ ] Resend → crear cuenta, verificar dominio, añadir API key en Vercel
+- [ ] Supabase → valorar transferir el proyecto "automatizacionprocesos-web" a otra cuenta de email
 - [ ] Instagram Business → convertir cuenta a profesional
 - [ ] LinkedIn → crear página de empresa
 - [ ] n8n → flujo de captura de leads automático
