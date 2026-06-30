@@ -14,6 +14,78 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'cuando-no-usar-ia-en-tu-empresa',
+    title: 'No todo necesita IA: saber cuándo NO automatizar es la habilidad más valiosa de 2026',
+    description:
+      'Hay algo más difícil que implementar IA en tu empresa: saber cuándo no hacerlo. Los directivos que entienden esto están tomando mejores decisiones que los que automatizan todo sin criterio.',
+    metaTitle: 'Cuándo NO Usar IA en tu Empresa | Automatización Procesos IA',
+    metaDescription: 'Saber cuándo NO usar inteligencia artificial es tan importante como saber usarla. Aprende a distinguir qué automatizar y qué no para tomar mejores decisiones en 2026.',
+    date: '2026-06-30',
+    category: 'Estrategia IA',
+    readTime: 7,
+    author: 'Automatización Procesos IA',
+    tags: ['estrategia ia', 'automatización', 'toma de decisiones', 'pymes', 'criterio ia'],
+    content: `<h2>El error que nadie te va a contar en una keynote de tecnología</h2>
+<p>Llevas meses escuchando que la IA lo va a cambiar todo. Que si no automatizas, tu competencia te adelanta. Que el futuro pertenece a quienes adopten inteligencia artificial antes. Y en parte es verdad. Pero hay una cara de esa moneda que casi nadie menciona en los titulares de Expansión ni en las conferencias de tecnología: <strong>saber cuándo NO usar IA es exactamente igual de importante que saber cuándo usarla.</strong></p>
+<p>En Automatización Procesos IA llevamos años ayudando a empresas españolas a implementar inteligencia artificial. Y si hay algo que hemos aprendido es que los directivos que toman mejores decisiones no son los que automatizan más. Son los que automatizan <em>con criterio</em>.</p>
+
+<h2>Por qué la presión de "hacerlo todo con IA" es un problema real</h2>
+<p>El contexto importa. Estamos en un momento de euforia tecnológica. Cada semana aparece una nueva herramienta, un nuevo caso de uso, un nuevo competidor que anuncia que "ya usa IA en todos sus procesos". El resultado para muchos directivos es una presión constante por actuar, por digitalizar, por no quedarse atrás.</p>
+<p>Esa presión lleva a decisiones precipitadas: contratar plataformas sin tener claro el problema que resuelven, automatizar procesos que aún no están bien definidos, o sustituir con IA interacciones humanas que son precisamente el diferencial de la empresa.</p>
+<p>Según un informe de McKinsey de 2025, el 58% de las iniciativas de IA en pymes europeas no generan retorno medible en los primeros 18 meses. La razón principal no es la tecnología. Es la ausencia de criterio en la selección de qué automatizar.</p>
+
+<h2>Las señales de que algo NO debería automatizarse</h2>
+<p>Hay un test rápido que aplicamos en nuestras auditorías. Si un proceso cumple alguna de estas condiciones, la IA no es (todavía) la respuesta:</p>
+
+<h3>1. El proceso en sí está roto</h3>
+<p>Si el proceso manual ya genera fricciones, retrasos y errores, automatizarlo solo conseguirá que esos problemas ocurran más rápido y a mayor escala. La IA amplifica lo que hay. Si lo que hay es un proceso mal diseñado, primero rediseña el proceso. Después, si tiene sentido, automatízalo.</p>
+
+<h3>2. La decisión requiere empatía o juicio complejo</h3>
+<p>Una reclamación de un cliente insatisfecho, una negociación delicada con un proveedor estratégico, una conversación sobre el rendimiento de un empleado. Estas situaciones requieren inteligencia emocional, contexto relacional y criterio humano. Ningún modelo de lenguaje, por avanzado que sea, puede reemplazar eso. Y un cliente que recibe una respuesta automatizada en un momento de frustración no se convierte en cliente fiel.</p>
+
+<h3>3. El volumen no justifica la inversión</h3>
+<p>Si una tarea ocurre tres veces al mes y tarda veinte minutos cada vez, automatizarla no tiene sentido económico. El tiempo de implementación, configuración y mantenimiento de esa automatización superará con creces el tiempo ahorrado en los próximos dos años. El criterio correcto no es "¿se puede automatizar?" sino "¿cuánto tiempo recupero realmente y qué coste tiene ese tiempo?".</p>
+
+<h3>4. La variabilidad es demasiado alta</h3>
+<p>La IA funciona especialmente bien con procesos predecibles, con patrones claros y con datos estructurados. Cuando la casuística es muy amplia, las excepciones son constantes y las reglas cambian con frecuencia, la automatización se convierte en un sistema frágil que genera más problemas de mantenimiento que soluciones.</p>
+
+<h3>5. Es el corazón de tu propuesta de valor</h3>
+<p>Si tu empresa se diferencia precisamente por el trato personalizado, por la atención al detalle o por la relación cercana con el cliente, automatizar esa parte es cargarte tu ventaja competitiva. La IA debe liberarte para dedicar más tiempo a lo que te hace único, no sustituirlo.</p>
+
+<h2>Un ejemplo real: la gestoría que automatizó lo que no debía</h2>
+<p>Una gestoría mediana con la que trabajamos llegó a nosotros con un problema: habían implementado un chatbot para gestionar todas las consultas de sus clientes. La intención era buena: liberar a su equipo para tareas de mayor valor. El resultado fue el contrario.</p>
+<p>Sus clientes, en su mayoría empresarios y autónomos con dudas fiscales específicas, encontraban respuestas genéricas a preguntas que requerían contexto. La confianza bajó. La tasa de renovación de contratos cayó un 14% en seis meses. El chatbot estaba automatizando exactamente lo que los diferenciaba: la atención personalizada de calidad.</p>
+<p>La solución no fue quitar la IA. Fue redirigirla. Automatizamos las tareas administrativas (recordatorios, documentación, seguimiento de plazos, generación de informes) y liberamos a su equipo para dedicar más tiempo a esas conversaciones estratégicas con el cliente. En doce meses, la tasa de renovación recuperó niveles anteriores y el equipo ganó seis horas semanales por persona.</p>
+
+<h2>Qué sí tiene sentido automatizar (y qué no)</h2>
+
+<h3>Candidatos perfectos para la IA:</h3>
+<ul>
+  <li>Tareas repetitivas con reglas claras: introducción de datos, generación de informes, clasificación de documentos.</li>
+  <li>Procesos de alto volumen y baja variabilidad: procesamiento de facturas, respuestas a preguntas frecuentes estándar, seguimiento de pedidos.</li>
+  <li>Análisis de datos para toma de decisiones: identificar patrones en ventas, detectar anomalías en costes, predecir demanda.</li>
+  <li>Comunicación masiva pero personalizable: emails de seguimiento, newsletters segmentadas, recordatorios automáticos.</li>
+</ul>
+
+<h3>Lo que conviene mantener humano:</h3>
+<ul>
+  <li>La relación con clientes estratégicos o en momentos críticos (reclamaciones, renovaciones, onboarding).</li>
+  <li>Decisiones que afectan a personas: contrataciones, evaluaciones de rendimiento, reestructuraciones.</li>
+  <li>La creatividad y el criterio estratégico: definición de propuesta de valor, posicionamiento, cultura de empresa.</li>
+  <li>Situaciones de alta incertidumbre donde el contexto importa más que los datos.</li>
+</ul>
+
+<h2>La pregunta que deberías hacerte antes de cualquier proyecto de IA</h2>
+<p>Antes de contratar cualquier herramienta, antes de lanzar cualquier proyecto de automatización, hazte esta pregunta con honestidad: <strong>¿Estoy automatizando esto porque tiene sentido para el negocio, o porque siento la presión de hacer algo con IA?</strong></p>
+<p>Si la respuesta honesta es la segunda, para. Respira. Y empieza por un diagnóstico riguroso de tus procesos reales.</p>
+<p>Los directivos que están ganando en 2026 no son los que tienen más herramientas de IA. Son los que saben exactamente dónde la IA les ayuda, dónde no les ayuda, y han tomado decisiones conscientes en consecuencia.</p>
+
+<h2>Cómo encontrar ese criterio si no lo tienes claro</h2>
+<p>La buena noticia es que no tienes que resolver esto solo. En Automatización Procesos IA hacemos diagnósticos gratuitos de 30 minutos donde analizamos contigo qué procesos de tu empresa tienen potencial real de automatización y cuáles es mejor no tocar (todavía). Sin venderte nada que no necesites. Sin presión.</p>
+<p>Porque saber cuándo no usar IA también es parte de nuestro trabajo. Y creemos que es la parte más honesta.</p>
+<p><a href="/diagnostico-gratuito">Solicita tu diagnóstico gratuito aquí</a> — 30 minutos que pueden ahorrarte meses de decisiones equivocadas.</p>`,
+  },
+  {
     slug: 'como-empezar-ia-empresa',
     title: 'Cómo empezar con inteligencia artificial en tu empresa sin perder dinero',
     description:
